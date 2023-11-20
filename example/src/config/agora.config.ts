@@ -6,7 +6,7 @@ try {
 } catch (error) {
   console.warn(error);
 }
-
+console.log(env);
 const config = {
   // Get your own App ID at https://dashboard.agora.io/
   appId: localAppId || env.appId,

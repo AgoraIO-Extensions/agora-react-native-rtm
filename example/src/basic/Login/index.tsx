@@ -18,6 +18,7 @@ import {
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
+console.log(Config);
 
 export default function Login() {
   const [uid, setUid] = useState(Config.uid);
