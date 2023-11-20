@@ -64,7 +64,7 @@ jobs:
 
       - name: Modify APP ID
         run: |
-          sed "s/localAppId = '\(.*\)'/localAppId = '33'/g" agora.config.ts > tmp
+          sed "s/localAppId = '\(.*\)'/localAppId = '${{ secrets.APP_ID }}'/g" agora.config.ts > tmp
           mv tmp agora.config.ts
         working-directory: example/src/config
 

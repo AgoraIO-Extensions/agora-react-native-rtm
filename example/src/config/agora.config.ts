@@ -1,5 +1,3 @@
-import * as log from '../utils/log';
-
 let env: any = '';
 let localAppId = '';
 try {
@@ -7,8 +5,6 @@ try {
 } catch (error) {
   console.warn(error);
 }
-log.alert(JSON.stringify(env));
-log.alert(localAppId);
 
 const config = {
   // Get your own App ID at https://dashboard.agora.io/
