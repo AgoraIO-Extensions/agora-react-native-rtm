@@ -82,6 +82,7 @@ lib/
 ios/AgoraRtmWrapper.podspec
 env_local.*
 docs/
+example/ios/*.dSYM.zip
 
 
 .terra
