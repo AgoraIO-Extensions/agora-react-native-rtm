@@ -64,7 +64,7 @@ jobs:
 
       - name: Modify APP ID
         run: |
-          sed "s/localAppId = '\(.*\)'/localAppId = '${{ secrets.APP_ID }}'/g" agora.config.ts > tmp
+          sed "s/localAppId = '\(.*\)'/localAppId = '33'/g" agora.config.ts > tmp
           mv tmp agora.config.ts
         working-directory: example/src/config
 
@@ -81,7 +81,7 @@ jobs:
           if-no-files-found: error
 
   build-ios:
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'ci:dep-update') }}
+    # if: ${{ contains(github.event.pull_request.labels.*.name, 'ci:dep-update') }}
     runs-on: macos-latest
     env:
       TURBO_CACHE_DIR: .turbo/ios
