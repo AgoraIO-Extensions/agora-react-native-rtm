@@ -6,14 +6,14 @@ on:
       terra-ref:
         description: The terra repo ref
         required: true
-        default: "main"
+        default: 'main'
 
 jobs:
   generate-codes:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup
         uses: ./.github/actions/setup
