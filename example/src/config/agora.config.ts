@@ -1,12 +1,15 @@
+import * as log from '../utils/log';
+
 let env: any = '';
 let localAppId = '';
 try {
   env = require('./env_local').default;
-  console.log('appID', localAppId);
 } catch (error) {
   console.warn(error);
 }
-console.log(env);
+log.alert(JSON.stringify(env));
+log.alert(localAppId);
+
 const config = {
   // Get your own App ID at https://dashboard.agora.io/
   appId: localAppId || env.appId,
