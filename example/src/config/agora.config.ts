@@ -2,6 +2,7 @@ let env: any = '';
 let localAppId = '';
 try {
   env = require('./env_local').default;
+  console.log('appID', localAppId);
 } catch (error) {
   console.warn(error);
 }

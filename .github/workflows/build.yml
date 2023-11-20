@@ -66,7 +66,6 @@ jobs:
         run: |
           sed "s/localAppId = '\(.*\)'/localAppId = '${{ secrets.APP_ID }}'/g" agora.config.ts > tmp
           mv tmp agora.config.ts
-          cat agora.config.ts
         working-directory: example/src/config
 
       - name: Build example for Android
