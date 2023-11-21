@@ -1,15 +1,19 @@
 import { IRtmEventHandler } from '../IAgoraRtmClient';
+import { IRtmLock } from '../IAgoraRtmLock';
 import { IRtmPresence } from '../IAgoraRtmPresence';
+import { IRtmStorage } from '../IAgoraRtmStorage';
 import { IStreamChannel } from '../IAgoraStreamChannel';
 import { IRtmClientEvent } from '../extensions/IAgoraRtmClientExtension';
 import { IRtmClientImpl } from '../impl/IAgoraRtmClientImpl';
-import { IRtmPresenceImpl } from '../impl/IAgoraRtmPresenceImpl';
 
 import {
   DeviceEventEmitter,
   EVENT_TYPE,
   EventProcessor,
 } from './IrisRtmEngine';
+import { RtmLockInternal } from './RtmLockInternal';
+import { RtmPresenceInternal } from './RtmPresenceInternal';
+import { RtmStorageInternal } from './RtmStorageInternal';
 import { StreamChannelInternal } from './StreamChannelInternal';
 
 export class RtmClientInternal extends IRtmClientImpl {
@@ -25,7 +29,15 @@ export class RtmClientInternal extends IRtmClientImpl {
   }
 
   override getPresence(): IRtmPresence {
-    return new IRtmPresenceImpl();
+    return new RtmPresenceInternal();
+  }
+
+  override getStorage(): IRtmStorage {
+    return new RtmStorageInternal();
+  }
+
+  override getLock(): IRtmLock {
+    return new RtmLockInternal();
   }
 
   override release(): number {

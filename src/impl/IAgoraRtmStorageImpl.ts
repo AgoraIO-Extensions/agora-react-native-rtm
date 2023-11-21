@@ -117,7 +117,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   setChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: IMetadata[],
+    data: IMetadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -152,7 +152,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   updateChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: IMetadata[],
+    data: IMetadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -187,7 +187,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   removeChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: IMetadata[],
+    data: IMetadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -247,7 +247,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   setUserMetadata(
     userId: string,
-    data: IMetadata[],
+    data: IMetadata,
     options: MetadataOptions,
     requestId?: number
   ): number {
@@ -276,7 +276,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   updateUserMetadata(
     userId: string,
-    data: IMetadata[],
+    data: IMetadata,
     options: MetadataOptions,
     requestId?: number
   ): number {
@@ -305,7 +305,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   removeUserMetadata(
     userId: string,
-    data: IMetadata[],
+    data: IMetadata,
     options: MetadataOptions,
     requestId?: number
   ): number {

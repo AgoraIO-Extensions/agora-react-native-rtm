@@ -1,3 +1,4 @@
+import ChannelMetadata from './ChannelMetadata';
 import Presence from './Presence';
 import PublishMessage from './publishMessage';
 import PublishTopicMessage from './publishTopicMessage';
@@ -16,6 +17,10 @@ const Advanced = {
     {
       name: 'Presence',
       component: Presence,
+    },
+    {
+      name: 'ChannelMetadata',
+      component: ChannelMetadata,
     },
   ],
 };

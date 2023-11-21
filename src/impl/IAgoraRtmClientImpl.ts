@@ -414,7 +414,7 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_logout';
   }
 
-  getStorage(): IRtmStorage[] {
+  getStorage(): IRtmStorage {
     const apiType = this.getApiTypeFromGetStorage();
     const jsonParams = {};
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
@@ -425,7 +425,7 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_getStorage';
   }
 
-  getLock(): IRtmLock[] {
+  getLock(): IRtmLock {
     const apiType = this.getApiTypeFromGetLock();
     const jsonParams = {};
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);

@@ -413,8 +413,8 @@ export abstract class IRtmClient {
   abstract release(): number;
   abstract login(token: string): number;
   abstract logout(): number;
-  abstract getStorage(): IRtmStorage[];
-  abstract getLock(): IRtmLock[];
+  abstract getStorage(): IRtmStorage;
+  abstract getLock(): IRtmLock;
   abstract getPresence(): IRtmPresence;
   abstract renewToken(token: string): number;
   abstract publish(

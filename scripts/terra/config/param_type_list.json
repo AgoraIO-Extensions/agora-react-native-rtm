@@ -1,8 +1,6 @@
 {
   "agora::rtm::IMetadata.getMetadataItems.items@type": "MetadataItem*",
   "agora::rtm::IChannelMember\\*": "IChannelMember",
-  "agora::rtm::IRtmClient.createStreamChannel@return_type": "IStreamChannel",
-  "agora::rtm::IRtmClient.getPresence@return_type": "IRtmPresence",
   "^Optional<(.*)>": "$1",
   "^util::(.*)": "$1",
   "^agora::(.*)": "$1",
@@ -15,11 +13,11 @@
   "^(.*)&": "$1",
   "^(.*)\\[(.*)\\]": "$1",
 
+  "^view_t\\*$": "any[]",
+  "^uid_t\\*$": "number",
   "^AString$": "string",
   "^user_id_t$": "string",
   "^view_t$": "any",
-  "^view_t\\*$": "any[]",
-  "^uid_t\\*$": "number",
   "^uid_t$": "number",
   "^track_id_t$": "number",
   "^conn_id_t$": "number",
@@ -47,20 +45,14 @@
 
   "^uint8_t const\\*$": "Uint8Array",
   "^uint8_t\\*$": "Uint8Array",
-  "^uint8_t$": "number",
-  "^uint32_t const$": "number",
-  "^uint32_t$": "number",
-  "^uint64_t$": "number",
-  "^uint64_t const$": "number",
-  "^uint16_t$": "number",
+  "^uint(.*)_t const$": "number",
+  "^uint(.*)_t$": "number",
   "^uint\\*$": "number",
   "^uint$": "number",
 
-  "^int64_t$": "number",
   "^int64_t const$": "number",
   "^int32_t\\*$": "number[]",
-  "^int32_t$": "number",
-  "^int16_t$": "number",
+  "^int(.*)_t$": "number",
 
   "^int const\\*$": "number[]",
   "^int\\*$": "number[]",
@@ -73,10 +65,16 @@
   "^bool\\*$": "boolean",
   "^bool const$": "boolean",
   "^bool$": "boolean",
-  "^(.*)const\\*": "$1[]",
 
   "^(.*)Sink\\*": "$1Sink",
   "^(.*)EventHandler\\*": "$1EventHandler",
+
+  "^IStreamChannel\\*": "IStreamChannel",
+  "^IRtmPresence\\*": "IRtmPresence",
+  "^IRtmStorage\\*": "IRtmStorage",
+  "^IRtmLock\\*": "IRtmLock",
+  "^IMetadata const\\*": "IMetadata",
+  "^(.*)const\\*": "$1[]",
 
   "^(.*)\\*": "$1[]"
 }
