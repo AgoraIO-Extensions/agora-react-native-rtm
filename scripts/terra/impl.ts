@@ -12,6 +12,7 @@ import {
   isMatch,
 } from './utils';
 
+const implSpecialReturnList = require('./config/impl_special_return_list.json');
 const paramOptionalList = require('./config/param_optional_list.json');
 
 interface CXXFileUserData {
@@ -31,6 +32,7 @@ interface ClazzMethodUserData {
   hasParameters: boolean;
   bindingFunctionName?: string;
   bindingIrisKey?: string;
+  returnParamName?: string;
 }
 
 export function impl(parseResult: ParseResult) {
@@ -65,6 +67,12 @@ export function impl(parseResult: ParseResult) {
           bindingFunctionName: `getApiTypeFrom${
             method.name.charAt(0).toUpperCase() + method.name.slice(1)
           }`,
+          returnParamName:
+            method.parameters.filter((param) => {
+              return param.name === implSpecialReturnList[method.fullName];
+            }).length > 0
+              ? implSpecialReturnList[method.fullName]
+              : 'result',
           bindingIrisKey: `${node.asClazz().name.slice(1)}_${method.name}`,
         };
         method.user_data = clazzMethodUserData;

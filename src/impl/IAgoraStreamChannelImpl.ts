@@ -24,7 +24,7 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromJoin(): string {
@@ -60,7 +60,7 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromLeave(): string {
@@ -97,7 +97,7 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromJoinTopic(): string {
@@ -146,7 +146,7 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromLeaveTopic(): string {

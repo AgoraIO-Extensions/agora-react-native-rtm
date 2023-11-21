@@ -66,7 +66,7 @@ export const AgoraButton = (props: ButtonProps) => {
 export const AgoraDivider = (props: DividerProps) => {
   return (
     <>
-      <Divider width={1} color={'grey'} {...props} />
+      <Divider width={10} color={'transparent'} {...props} />
     </>
   );
 };
@@ -197,7 +197,8 @@ export const AgoraCard = (
 export interface AgoraDropdownItem extends Item {}
 
 export const AgoraDropdown = (
-  props: PickerSelectProps & PickerProps & { title: string }
+  props: PickerSelectProps &
+    PickerProps & { title: string; titleStyle?: TextProps['style'] }
 ) => {
   const [value, setValue] = useState(props.value);
 
@@ -207,7 +208,7 @@ export const AgoraDropdown = (
 
   return (
     <AgoraView style={AgoraStyle.fullWidth}>
-      <AgoraText children={props.title} />
+      <AgoraText style={props.titleStyle} children={props.title} />
       <PickerSelect
         {...props}
         pickerProps={{
@@ -289,5 +290,12 @@ export const AgoraStyle = StyleSheet.create({
   picker: {
     width: '100%',
     height: 200,
+  },
+  dropdownTitle: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#86939e',
+    paddingHorizontal: 10,
+    marginVertical: 10,
   },
 });

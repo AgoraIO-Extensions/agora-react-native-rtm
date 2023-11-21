@@ -43,7 +43,7 @@ export class {{name}}Impl implements {{name}}{
       {{/user_data.hasParameters}}
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.{{user_data.returnParamName}};
   }
 
   protected {{user_data.bindingFunctionName}}(): string {

@@ -31,7 +31,7 @@ export class IRtmLockImpl implements IRtmLock {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromSetLock(): string {
@@ -57,7 +57,7 @@ export class IRtmLockImpl implements IRtmLock {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromGetLocks(): string {
@@ -86,7 +86,7 @@ export class IRtmLockImpl implements IRtmLock {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromRemoveLock(): string {
@@ -118,7 +118,7 @@ export class IRtmLockImpl implements IRtmLock {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromAcquireLock(): string {
@@ -147,7 +147,7 @@ export class IRtmLockImpl implements IRtmLock {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromReleaseLock(): string {
@@ -179,7 +179,7 @@ export class IRtmLockImpl implements IRtmLock {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromRevokeLock(): string {

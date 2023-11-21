@@ -1,3 +1,4 @@
+import Presence from './Presence';
 import PublishMessage from './publishMessage';
 import PublishTopicMessage from './publishTopicMessage';
 
@@ -11,6 +12,10 @@ const Advanced = {
     {
       name: 'PublishTopicMessage',
       component: PublishTopicMessage,
+    },
+    {
+      name: 'Presence',
+      component: Presence,
     },
   ],
 };

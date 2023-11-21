@@ -6,14 +6,13 @@ import {
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
 import {
   AgoraButton,
   AgoraStyle,
   AgoraText,
   AgoraTextInput,
-  AgoraView,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
@@ -110,7 +109,7 @@ export default function Login() {
       style={AgoraStyle.fullSize}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <AgoraView style={AgoraStyle.fullWidth}>
+      <ScrollView style={AgoraStyle.fullSize}>
         {loginSuccess ? (
           <AgoraText>{`current login userId:\n${uid}`}</AgoraText>
         ) : (
@@ -129,7 +128,7 @@ export default function Login() {
             loginSuccess ? logout() : login();
           }}
         />
-      </AgoraView>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }

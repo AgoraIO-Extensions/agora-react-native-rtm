@@ -2,6 +2,7 @@
   "agora::rtm::IMetadata.getMetadataItems.items@type": "MetadataItem*",
   "agora::rtm::IChannelMember\\*": "IChannelMember",
   "agora::rtm::IRtmClient.createStreamChannel@return_type": "IStreamChannel",
+  "agora::rtm::IRtmClient.getPresence@return_type": "IRtmPresence",
   "^Optional<(.*)>": "$1",
   "^util::(.*)": "$1",
   "^agora::(.*)": "$1",

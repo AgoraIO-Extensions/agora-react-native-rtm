@@ -33,7 +33,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromWhoNow(): string {
@@ -53,7 +53,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromWhereNow(): string {
@@ -85,7 +85,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromSetState(): string {
@@ -117,7 +117,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromRemoveState(): string {
@@ -146,7 +146,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromGetState(): string {

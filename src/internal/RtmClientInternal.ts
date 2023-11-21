@@ -1,7 +1,9 @@
 import { IRtmEventHandler } from '../IAgoraRtmClient';
+import { IRtmPresence } from '../IAgoraRtmPresence';
 import { IStreamChannel } from '../IAgoraStreamChannel';
 import { IRtmClientEvent } from '../extensions/IAgoraRtmClientExtension';
 import { IRtmClientImpl } from '../impl/IAgoraRtmClientImpl';
+import { IRtmPresenceImpl } from '../impl/IAgoraRtmPresenceImpl';
 
 import {
   DeviceEventEmitter,
@@ -20,6 +22,10 @@ export class RtmClientInternal extends IRtmClientImpl {
   override createStreamChannel(channelName: string): IStreamChannel {
     super.createStreamChannel(channelName);
     return new StreamChannelInternal(channelName);
+  }
+
+  override getPresence(): IRtmPresence {
+    return new IRtmPresenceImpl();
   }
 
   override release(): number {

@@ -436,7 +436,7 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_getLock';
   }
 
-  getPresence(): IRtmPresence[] {
+  getPresence(): IRtmPresence {
     const apiType = this.getApiTypeFromGetPresence();
     const jsonParams = {};
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
@@ -490,7 +490,7 @@ export class IRtmClientImpl implements IRtmClient {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromPublish(): string {
@@ -516,7 +516,7 @@ export class IRtmClientImpl implements IRtmClient {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromSubscribe(): string {

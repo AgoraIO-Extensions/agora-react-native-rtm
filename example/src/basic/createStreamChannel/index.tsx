@@ -7,7 +7,7 @@ import {
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
 import { AgoraButton, AgoraStyle, AgoraView } from '../../components/ui';
@@ -178,7 +178,7 @@ export default function CreateStreamChannel() {
       style={AgoraStyle.fullSize}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <AgoraView style={AgoraStyle.fullWidth}>
+      <ScrollView style={AgoraStyle.fullSize}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onUidChanged={(v) => setUid(v)}
@@ -208,7 +208,7 @@ export default function CreateStreamChannel() {
             }
           }}
         />
-      </AgoraView>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }

@@ -415,7 +415,7 @@ export abstract class IRtmClient {
   abstract logout(): number;
   abstract getStorage(): IRtmStorage[];
   abstract getLock(): IRtmLock[];
-  abstract getPresence(): IRtmPresence[];
+  abstract getPresence(): IRtmPresence;
   abstract renewToken(token: string): number;
   abstract publish(
     channelName: string,

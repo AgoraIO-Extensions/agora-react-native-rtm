@@ -1,35 +1,43 @@
-import { Buffer } from 'buffer';
-
 import {
-  MessageEvent,
+  ChannelInfo,
   PresenceEvent,
-  PublishOptions,
+  PresenceOptions,
+  RTM_CHANNEL_TYPE,
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
-  RTM_MESSAGE_TYPE,
-  StorageEvent,
+  StateItem,
+  UserState,
 } from 'agora-react-native-rtm';
-import React, { useCallback, useEffect, useState } from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
-import { AgoraButton, AgoraStyle, AgoraView } from '../../components/ui';
+import {
+  AgoraButton,
+  AgoraDropdown,
+  AgoraStyle,
+  AgoraTextInput,
+} from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
+import { arrayToItems } from '../../utils';
 import * as log from '../../utils/log';
 
-export default function PublishMessage() {
+export default function Presence() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
-  const [publishMessageByBuffer, setPublishMessageByBuffer] = useState(false);
+  const whoNowRequestId = useRef<number>();
+  const whereNowRequestId = useRef<number>();
+  const setStateRequestId = useRef<number>();
+  const getStateRequestId = useRef<number>();
+  const removeStateRequestId = useRef<number>();
   const [cName, setCName] = useState<string>(Config.channelName);
   const [uid, setUid] = useState<string>(Config.uid);
-  const [messages, setMessages] = useState<any[]>([]);
-
-  const onStorageEvent = useCallback((event: StorageEvent) => {
-    log.log('onStorageEvent', 'event', event);
-  }, []);
+  const [searchUid, setSearchUid] = useState<string>(Config.uid);
+  const [feeling, setFeeling] = useState<string>('happy');
+  const [location, setLocation] = useState<string>('tokyo');
 
   const onSubscribeResult = useCallback(
     (requestId: number, channelName: string, errorCode: RTM_ERROR_CODE) => {
@@ -47,14 +55,113 @@ export default function PublishMessage() {
     []
   );
 
-  const onPresenceEvent = useCallback((event: PresenceEvent) => {
-    log.log('onPresenceEvent', 'event', event);
-  }, []);
+  const onWhoNowResult = useCallback(
+    (
+      requestId: number,
+      userStateList: UserState[],
+      count: number,
+      nextPage: string,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.log(
+        'onWhoNowResult',
+        'requestId',
+        requestId,
+        'userStateList',
+        userStateList,
+        'count',
+        count,
+        'nextPage',
+        nextPage,
+        'errorCode',
+        errorCode
+      );
+      if (
+        requestId === whoNowRequestId.current &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        log.alert(
+          `channel: ${cName} status`,
+          `${JSON.stringify(userStateList)}`
+        );
+      }
+    },
+    [cName]
+  );
 
-  const onPublishResult = useCallback(
+  const onWhereNowResult = useCallback(
+    (
+      requestId: number,
+      channels: ChannelInfo[],
+      count: number,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.log(
+        'onWhereNowResult',
+        'requestId',
+        requestId,
+        'channels',
+        channels,
+        'count',
+        count,
+        'errorCode',
+        errorCode
+      );
+      if (
+        requestId === whereNowRequestId.current &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        log.alert(`${searchUid} is at`, `${JSON.stringify(channels)}`);
+      }
+    },
+    [searchUid]
+  );
+
+  const onPresenceSetStateResult = useCallback(
     (requestId: number, errorCode: RTM_ERROR_CODE) => {
       log.log(
-        'onPublishResult',
+        'onPresenceSetStateResult',
+        'requestId',
+        requestId,
+        'errorCode',
+        errorCode
+      );
+      if (
+        requestId === setStateRequestId.current &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        // log.alert(`${uid} state:`, `${JSON.stringify(state)}`);
+        // setUserState(state);
+      }
+    },
+    []
+  );
+
+  const onPresenceGetStateResult = useCallback(
+    (requestId: number, state: UserState, errorCode: RTM_ERROR_CODE) => {
+      log.log(
+        'onPresenceGetStateResult',
+        'requestId',
+        requestId,
+        'state',
+        state,
+        'errorCode',
+        errorCode
+      );
+      if (
+        requestId === getStateRequestId.current &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        log.alert(`${uid} state:`, `${JSON.stringify(state)}`);
+      }
+    },
+    [uid]
+  );
+
+  const onPresenceRemoveStateResult = useCallback(
+    (requestId: number, errorCode: RTM_ERROR_CODE) => {
+      log.log(
+        'onPresenceRemoveStateResult',
         'requestId',
         requestId,
         'errorCode',
@@ -64,25 +171,9 @@ export default function PublishMessage() {
     []
   );
 
-  const onMessageEvent = useCallback(
-    (event: MessageEvent) => {
-      log.log('onMessageEvent', 'event', event);
-      setMessages((prevState) =>
-        GiftedChat.append(prevState, [
-          {
-            _id: +new Date(),
-            text: event.message,
-            user: {
-              _id: +new Date(),
-              name: event.publisher || uid.slice(-1),
-            },
-            createdAt: new Date(),
-          },
-        ])
-      );
-    },
-    [uid]
-  );
+  const onPresenceEvent = useCallback((event: PresenceEvent) => {
+    log.log('onPresenceEvent', 'event', event);
+  }, []);
 
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
@@ -90,58 +181,7 @@ export default function PublishMessage() {
   const client = useRtmClient();
 
   /**
-   * Step 2 : publish message to message channel
-   */
-  const publish = useCallback(
-    (msg: string, msgs: any) => {
-      let result: number | undefined;
-      if (publishMessageByBuffer) {
-        result = client.publishWithBuffer(
-          cName,
-          Buffer.from(msg),
-          msg.length,
-          new PublishOptions({
-            type: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
-          })
-        );
-      } else {
-        result = client.publish(
-          cName,
-          msg,
-          msg.length,
-          new PublishOptions({
-            type: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
-          })
-        );
-      }
-
-      if (result !== RTM_ERROR_CODE.RTM_ERROR_OK) {
-        log.error('CHANNEL_INVALID_MESSAGE', result);
-      } else {
-        setMessages((previousMessages) =>
-          GiftedChat.append(previousMessages, msgs)
-        );
-      }
-    },
-    [cName, client, publishMessageByBuffer]
-  );
-
-  const onSend = useCallback(
-    (msgs = []) => {
-      if (!loginSuccess) {
-        log.error('please login first');
-        return;
-      }
-
-      msgs.forEach((message: any) => {
-        publish(message.text, msgs);
-      });
-    },
-    [loginSuccess, publish]
-  );
-
-  /**
-   * Step 3(optional) : subscribe message channel
+   * Step 1-1(optional) : subscribe message channel
    */
   const subscribe = () => {
     client.subscribe(Config.channelName, {
@@ -152,35 +192,119 @@ export default function PublishMessage() {
   };
 
   /**
-   * Step 4 : unsubscribe message channel
+   * Step 1-1 : unsubscribe message channel
    */
   const unsubscribe = () => {
     client.unsubscribe(Config.channelName);
     setSubscribeSuccess(false);
   };
 
+  /**
+   * Step 2 : whoNow
+   */
+  const whoNow = () => {
+    whoNowRequestId.current = client
+      .getPresence()
+      .whoNow(
+        cName,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
+        new PresenceOptions({ includeState: true, includeUserId: true })
+      );
+  };
+
+  /**
+   * Step 3 : whereNow
+   */
+  const whereNow = () => {
+    whereNowRequestId.current = client.getPresence().whereNow(searchUid);
+  };
+
+  /**
+   * Step 4 : setState
+   */
+  const setState = () => {
+    setStateRequestId.current = client
+      .getPresence()
+      .setState(
+        cName,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
+        [
+          new StateItem({ key: 'feeling', value: feeling }),
+          new StateItem({ key: 'location', value: location }),
+        ],
+        1
+      );
+  };
+
+  /**
+   * Step 5 : getState
+   */
+  const getState = () => {
+    getStateRequestId.current = client
+      .getPresence()
+      .getState(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE, uid);
+  };
+
+  /**
+   * Step 6 : removeState
+   */
+  const removeState = () => {
+    removeStateRequestId.current = client
+      .getPresence()
+      .removeState(
+        cName,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
+        ['feeling', 'location'],
+        1
+      );
+  };
+
   useEffect(() => {
-    client.addEventListener('onStorageEvent', onStorageEvent);
     client.addEventListener('onSubscribeResult', onSubscribeResult);
+    client.addEventListener('onWhoNowResult', onWhoNowResult);
+    client.addEventListener('onWhereNowResult', onWhereNowResult);
+    client.addEventListener(
+      'onPresenceSetStateResult',
+      onPresenceSetStateResult
+    );
+    client.addEventListener(
+      'onPresenceGetStateResult',
+      onPresenceGetStateResult
+    );
+    client.addEventListener(
+      'onPresenceRemoveStateResult',
+      onPresenceRemoveStateResult
+    );
     client.addEventListener('onPresenceEvent', onPresenceEvent);
-    client.addEventListener('onMessageEvent', onMessageEvent);
-    client.addEventListener('onPublishResult', onPublishResult);
 
     return () => {
-      client.removeEventListener('onStorageEvent', onStorageEvent);
       client.removeEventListener('onSubscribeResult', onSubscribeResult);
+      client.removeEventListener('onWhoNowResult', onWhoNowResult);
+      client.removeEventListener('onWhereNowResult', onWhereNowResult);
+      client.removeEventListener(
+        'onPresenceSetStateResult',
+        onPresenceSetStateResult
+      );
+      client.removeEventListener(
+        'onPresenceGetStateResult',
+        onPresenceGetStateResult
+      );
+      client.removeEventListener(
+        'onPresenceRemoveStateResult',
+        onPresenceRemoveStateResult
+      );
       client.removeEventListener('onPresenceEvent', onPresenceEvent);
-      client.removeEventListener('onMessageEvent', onMessageEvent);
-      client.removeEventListener('onPublishResult', onPublishResult);
     };
   }, [
     client,
     uid,
-    onStorageEvent,
     onSubscribeResult,
+    onWhoNowResult,
+    onWhereNowResult,
+    onPresenceSetStateResult,
+    onPresenceGetStateResult,
+    onPresenceRemoveStateResult,
     onPresenceEvent,
-    onMessageEvent,
-    onPublishResult,
   ]);
 
   const onConnectionStateChanged = useCallback(
@@ -230,7 +354,7 @@ export default function PublishMessage() {
 
   return (
     <>
-      <AgoraView style={AgoraStyle.fullWidth}>
+      <ScrollView style={AgoraStyle.fullSize}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onUidChanged={(v) => setUid(v)}
@@ -242,23 +366,61 @@ export default function PublishMessage() {
             subscribeSuccess ? unsubscribe() : subscribe();
           }}
         />
-      </AgoraView>
-      <AgoraButton
-        title={`current: publish${
-          publishMessageByBuffer ? 'ByBuffer' : 'ByString'
-        }`}
-        onPress={() => {
-          setPublishMessageByBuffer((v) => !v);
-        }}
-      />
-      <GiftedChat
-        wrapInSafeArea={false}
-        messages={messages}
-        onSend={(v) => onSend(v)}
-        user={{
-          _id: uid,
-        }}
-      />
+        <AgoraButton
+          title={`whoNow`}
+          onPress={() => {
+            whoNow();
+          }}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
+            setSearchUid(text);
+          }}
+          label="what uid you want to find"
+          value={searchUid}
+        />
+        <AgoraButton
+          title={`whereNow`}
+          onPress={() => {
+            whereNow();
+          }}
+        />
+
+        <AgoraDropdown
+          titleStyle={AgoraStyle.dropdownTitle}
+          title={'what is your location?'}
+          items={arrayToItems(['tokyo', 'shanghai', 'beijing'])}
+          value={location}
+          onValueChange={(value) => {
+            setLocation(value);
+          }}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
+            setFeeling(text);
+          }}
+          label="How do you feel now?"
+          value={feeling}
+        />
+        <AgoraButton
+          title={`setState`}
+          onPress={() => {
+            setState();
+          }}
+        />
+        <AgoraButton
+          title={`getState`}
+          onPress={() => {
+            getState();
+          }}
+        />
+        <AgoraButton
+          title={`removeState`}
+          onPress={() => {
+            removeState();
+          }}
+        />
+      </ScrollView>
     </>
   );
 }

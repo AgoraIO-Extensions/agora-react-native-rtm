@@ -1,4 +1,4 @@
-import { RTM_ERROR_CODE } from 'agora-react-native-rtm';
+import { RTM_ERROR_CODE, RtmConfig } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import Config from '../config/agora.config';
@@ -37,10 +37,12 @@ export default function BaseComponent({
     if (!uid || uid.length === 0) {
       return;
     }
-    client.initialize({
-      userId: uid,
-      appId: Config.appId,
-    });
+    client.initialize(
+      new RtmConfig({
+        userId: uid,
+        appId: Config.appId,
+      })
+    );
 
     return () => {
       setLoginSuccess(false);
