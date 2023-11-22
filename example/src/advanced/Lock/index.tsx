@@ -1,6 +1,7 @@
 import {
   IStreamChannel,
   JoinChannelOptions,
+  LockDetail,
   MetadataItem,
   MetadataOptions,
   RTM_CHANNEL_TYPE,
@@ -15,31 +16,36 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
-import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
+import {
+  AgoraButton,
+  AgoraCard,
+  AgoraList,
+  AgoraStyle,
+  AgoraText,
+  AgoraTextInput,
+  AgoraView,
+} from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
-export default function ChannelMetadata() {
+export default function Lock() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [joinSuccess, setJoinSuccess] = useState(false);
+  const [acquireLockSuccess, setAcquireLockSuccess] = useState(false);
   const [streamChannel, setStreamChannel] = useState<IStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
-  const getChannelMetadataRequestId = useRef<number>();
-  const setChannelMetadataRequestId = useRef<number>();
-  const removeChannelMetadataRequestId = useRef<number>();
-  const updateChannelMetadataRequestId = useRef<number>();
+  const acquireLockRequestId = useRef<number>();
+  const setLockRequestId = useRef<number>();
+  const getLocksRequestId = useRef<number>();
+  const releaseLockRequestId = useRef<number>();
+  const revokeLockRequestId = useRef<number>();
+  const removeLockRequestId = useRef<number>();
   const [uid, setUid] = useState<string>(Config.uid);
-  const [metadataKey, setMetadataKey] = useState<string>('channel notice');
-  const [metadataValue, setMetadataValue] = useState<string>('rtm test');
+  const [lockDetailList, setLockDetailList] = useState<LockDetail[]>([]);
 
-  const metadata = useRef<RtmMetadata>(
-    new RtmMetadata({
-      majorRevision: -1,
-      metadataItems: [],
-      metadataItemsSize: 0,
-    })
-  );
+  const [lockName, setLockName] = useState<string>('lock-test');
+  const [ttl, setTtl] = useState<number>(10);
 
   const onJoinResult = useCallback(
     (
@@ -64,75 +70,53 @@ export default function ChannelMetadata() {
     []
   );
 
-  const onGetChannelMetadataResult = useCallback(
+  const onAcquireLockResult = useCallback(
     (
       requestId: number,
       channelName: string,
       channelType: RTM_CHANNEL_TYPE,
-      data: RtmMetadata,
-      errorCode: RTM_ERROR_CODE
+      _lockName: string,
+      errorCode: RTM_ERROR_CODE,
+      errorDetails: string
     ) => {
       log.info(
-        'onGetChannelMetadataResult',
+        'onAcquireLockResult',
         'requestId',
         requestId,
         'channelName',
         channelName,
         'channelType',
         channelType,
-        'data',
-        data,
+        'lockName',
+        _lockName,
         'errorCode',
-        errorCode
+        errorCode,
+        'errorDetails',
+        errorDetails
       );
+      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
+        log.error(`acquire lock failed`, `errorCode: ${errorCode}`);
+      }
       if (
-        requestId === getChannelMetadataRequestId.current &&
+        requestId === acquireLockRequestId.current &&
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
-        log.alert(`${channelName} metadata:`, `${JSON.stringify(data)}`);
-        metadata.current = data;
+        setAcquireLockSuccess(true);
       }
     },
     []
   );
 
-  const onSetChannelMetadataResult = useCallback(
+  const onSetLockResult = useCallback(
     (
       requestId: number,
       channelName: string,
       channelType: RTM_CHANNEL_TYPE,
+      _lockName: string,
       errorCode: RTM_ERROR_CODE
     ) => {
       log.info(
-        'onSetChannelMetadataResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'errorCode',
-        errorCode
-      );
-      if (
-        requestId === setChannelMetadataRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        log.alert(`setChannelMetadata success`, `channelName: ${channelName}`);
-      }
-    },
-    []
-  );
-
-  const onRemoveChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onRemoveChannelMetadataResult',
+        'onSetLockResult',
         'requestId',
         requestId,
         'channelName',
@@ -140,55 +124,107 @@ export default function ChannelMetadata() {
         'channelType',
         channelType,
         'errorCode',
+        'lockName',
+        _lockName,
+        'errorCode',
         errorCode
       );
-      if (
-        requestId === removeChannelMetadataRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        log.alert(
-          `removeChannelMetadata success`,
-          `channelName: ${channelName}`
-        );
+      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
+        log.error(`setLock failed`, `errorCode: ${errorCode}`);
       }
     },
     []
   );
 
-  const onUpdateChannelMetadataResult = useCallback(
+  const onRevokeLockResult = useCallback(
     (
       requestId: number,
       channelName: string,
       channelType: RTM_CHANNEL_TYPE,
+      _lockName: string,
       errorCode: RTM_ERROR_CODE
     ) => {
       log.info(
-        'onUpdateChannelMetadataResult',
+        'onRevokeLockResult',
         'requestId',
         requestId,
         'channelName',
         channelName,
         'channelType',
         channelType,
+        'lockName',
+        _lockName,
         'errorCode',
         errorCode
       );
-      if (
-        requestId === updateChannelMetadataRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        log.alert(
-          `updateChannelMetadata success`,
-          `channelName: ${channelName}`
-        );
+      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
+        log.error(`revokeLock failed`, `errorCode: ${errorCode}`);
       }
     },
     []
   );
 
-  const onStorageEvent = useCallback((event: StorageEvent) => {
-    log.log('onStorageEvent', 'event', event);
-  }, []);
+  const onRemoveLockResult = useCallback(
+    (
+      requestId: number,
+      channelName: string,
+      channelType: RTM_CHANNEL_TYPE,
+      _lockName: string,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.info(
+        'onRemoveLockResult',
+        'requestId',
+        requestId,
+        'channelName',
+        channelName,
+        'channelType',
+        channelType,
+        'lockName',
+        _lockName,
+        'errorCode',
+        errorCode
+      );
+      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
+        log.error(`removeLock failed`, `errorCode: ${errorCode}`);
+      }
+    },
+    []
+  );
+
+  const onGetLocksResult = useCallback(
+    (
+      requestId: number,
+      channelName: string,
+      channelType: RTM_CHANNEL_TYPE,
+      _lockDetailList: LockDetail[],
+      count: number,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.log(
+        'onGetLocksResult',
+        'requestId',
+        requestId,
+        'channelName',
+        channelName,
+        'channelType',
+        channelType,
+        'lockDetailList',
+        _lockDetailList,
+        'count',
+        count,
+        'errorCode',
+        errorCode
+      );
+      if (
+        requestId === getLocksRequestId.current &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        setLockDetailList(_lockDetailList);
+      }
+    },
+    []
+  );
 
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
@@ -238,132 +274,94 @@ export default function ChannelMetadata() {
   }, [streamChannel]);
 
   /**
-   * Step 2 : setChannelMetadata
+   * Step 1-4 : getLocks
    */
-  const setChannelMetadata = () => {
-    metadata.current.metadataItems = [
-      new MetadataItem({
-        key: metadataKey,
-        value: metadataValue,
-        authorUserId: Config.uid,
-      }),
-    ];
-    metadata.current.metadataItemsSize = 1;
-    setChannelMetadataRequestId.current = client
-      .getStorage()
-      .setChannelMetadata(
+  const getLocks = () => {
+    getLocksRequestId.current = client
+      .getLock()
+      .getLocks(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM);
+  };
+
+  /**
+   * Step 2 : setLock
+   */
+  const setLock = () => {
+    setLockRequestId.current = client
+      .getLock()
+      .setLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM, lockName, ttl);
+  };
+
+  /**
+   * Step 3 : acquireLock
+   */
+  const acquireLock = () => {
+    acquireLockRequestId.current = client
+      .getLock()
+      .acquireLock(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
-        metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName,
+        false
       );
   };
 
   /**
-   * Step 3 : getChannelMetadata
+   * Step 4 : releaseLock
    */
-  const getChannelMetadata = () => {
-    getChannelMetadataRequestId.current = client
-      .getStorage()
-      .getChannelMetadata(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM);
+  const releaseLock = () => {
+    releaseLockRequestId.current = client
+      .getLock()
+      .releaseLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM, lockName);
   };
 
   /**
-   * Step 4 : updateChannelMetadata
+   * Step 5 : revokeLock
    */
-  const updateChannelMetadata = () => {
-    metadata.current.metadataItems = [
-      new MetadataItem({
-        key: metadataKey,
-        value: metadataValue,
-        authorUserId: Config.uid,
-      }),
-    ];
-    metadata.current.metadataItemsSize = 1;
-    updateChannelMetadataRequestId.current = client
-      .getStorage()
-      .updateChannelMetadata(
+  const revokeLock = () => {
+    revokeLockRequestId.current = client
+      .getLock()
+      .revokeLock(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
-        metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName,
+        Config.uid
       );
   };
 
   /**
-   * Step 5 : removeChannelMetadata
+   * Step 5 : removeLock
    */
-  const removeChannelMetadata = () => {
-    metadata.current.metadataItems = [
-      new MetadataItem({
-        key: metadataKey,
-        value: metadataValue,
-        authorUserId: Config.uid,
-      }),
-    ];
-    metadata.current.metadataItemsSize = 1;
-    removeChannelMetadataRequestId.current = client
-      .getStorage()
-      .removeChannelMetadata(
-        cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
-        metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        ''
-      );
+  const removeLock = () => {
+    removeLockRequestId.current = client
+      .getLock()
+      .removeLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM, lockName);
   };
 
   useEffect(() => {
     client.addEventListener('onJoinResult', onJoinResult);
-    client.addEventListener(
-      'onSetChannelMetadataResult',
-      onSetChannelMetadataResult
-    );
-    client?.addEventListener(
-      'onGetChannelMetadataResult',
-      onGetChannelMetadataResult
-    );
-    client?.addEventListener(
-      'onRemoveChannelMetadataResult',
-      onRemoveChannelMetadataResult
-    );
-    client?.addEventListener(
-      'onUpdateChannelMetadataResult',
-      onUpdateChannelMetadataResult
-    );
-    client?.addEventListener('onStorageEvent', onStorageEvent);
+    client.addEventListener('onSetLockResult', onSetLockResult);
+    client?.addEventListener('onAcquireLockResult', onAcquireLockResult);
+    client?.addEventListener('onRevokeLockResult', onRevokeLockResult);
+    client?.addEventListener('onRemoveLockResult', onRemoveLockResult);
+    client?.addEventListener('onGetLocksResult', onGetLocksResult);
 
     return () => {
       client.removeEventListener('onJoinResult', onJoinResult);
-      client.removeEventListener(
-        'onSetChannelMetadataResult',
-        onSetChannelMetadataResult
-      );
-      client?.removeEventListener(
-        'onGetChannelMetadataResult',
-        onGetChannelMetadataResult
-      );
-      client?.removeEventListener(
-        'onRemoveChannelMetadataResult',
-        onRemoveChannelMetadataResult
-      );
-      client?.removeEventListener(
-        'onUpdateChannelMetadataResult',
-        onUpdateChannelMetadataResult
-      );
-      client?.removeEventListener('onStorageEvent', onStorageEvent);
+      client.removeEventListener('onSetLockResult', onSetLockResult);
+      client?.removeEventListener('onAcquireLockResult', onAcquireLockResult);
+      client?.removeEventListener('onRevokeLockResult', onRevokeLockResult);
+      client?.removeEventListener('onRemoveLockResult', onRemoveLockResult);
+      client?.removeEventListener('onGetLocksResult', onGetLocksResult);
     };
   }, [
     client,
     uid,
     onJoinResult,
-    onSetChannelMetadataResult,
-    onGetChannelMetadataResult,
-    onRemoveChannelMetadataResult,
-    onUpdateChannelMetadataResult,
-    onStorageEvent,
+    onSetLockResult,
+    onAcquireLockResult,
+    onRevokeLockResult,
+    onRemoveLockResult,
+    onGetLocksResult,
   ]);
 
   const onConnectionStateChanged = useCallback(
@@ -391,6 +389,7 @@ export default function ChannelMetadata() {
             RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
           ) {
             setLoginSuccess(false);
+            setAcquireLockSuccess(false);
             destroyStreamChannel();
           }
           setJoinSuccess(false);
@@ -438,46 +437,70 @@ export default function ChannelMetadata() {
         />
         <AgoraTextInput
           onChangeText={(text) => {
-            setMetadataKey(text);
+            setLockName(text);
           }}
-          label="metadata key"
-          value={metadataKey}
+          label="lock name"
+          value={lockName}
         />
         <AgoraTextInput
           onChangeText={(text) => {
-            setMetadataValue(text);
+            if (!text) return;
+            setTtl(parseInt(text, 10));
           }}
-          label="metadata value"
-          value={metadataValue}
+          numberKeyboard
+          label="ttl"
+          value={ttl.toString()}
         />
         <AgoraButton
-          title={`setChannelMetadata`}
+          title={`setLock`}
           disabled={!loginSuccess}
           onPress={() => {
-            setChannelMetadata();
-          }}
-        />
-        <AgoraButton
-          title={`getChannelMetadata`}
-          disabled={!loginSuccess}
-          onPress={() => {
-            getChannelMetadata();
+            setLock();
           }}
         />
         <AgoraButton
-          title={`updateChannelMetadata`}
+          title={`acquireLock`}
           disabled={!loginSuccess}
           onPress={() => {
-            updateChannelMetadata();
+            acquireLock();
           }}
         />
         <AgoraButton
-          title={`removeChannelMetadata`}
+          title={`releaseLock`}
           disabled={!loginSuccess}
           onPress={() => {
-            removeChannelMetadata();
+            releaseLock();
           }}
         />
+        <AgoraButton
+          title={`revokeLock`}
+          disabled={!loginSuccess}
+          onPress={() => {
+            revokeLock();
+          }}
+        />
+        <AgoraButton
+          title={`removeLock`}
+          disabled={!loginSuccess}
+          onPress={() => {
+            removeLock();
+          }}
+        />
+        <AgoraButton
+          title={`getLocks`}
+          disabled={!loginSuccess}
+          onPress={() => {
+            getLocks();
+          }}
+        />
+        <AgoraText>lockDetailList:</AgoraText>
+        {lockDetailList.map((item) => {
+          return (
+            <AgoraText key={item.lockName}>{`${JSON.stringify(
+              item
+            )}`}</AgoraText>
+          );
+        })}
       </ScrollView>
     </>
   );

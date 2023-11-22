@@ -223,7 +223,7 @@ export class IChannelAttributesImpl implements IChannelAttributes {
     return 'ChannelAttributes_getAttributesSize';
   }
 
-  getAttributes(size: number, key: string[], value: string[]): void {
+  getAttributes(size: number, key: string, value: string): void {
     const apiType = this.getApiTypeFromGetAttributes();
     const jsonParams = {
       size: size,
@@ -397,7 +397,7 @@ export class IChannelImpl implements IChannel {
     return 'Channel_leave';
   }
 
-  sendMessage(message: IMessage[]): number {
+  sendMessage(message: IMessage): number {
     const apiType = this.getApiTypeFromSendMessage();
     const jsonParams = {
       message: message,
@@ -615,7 +615,7 @@ export class IRtmServiceImpl implements IRtmService {
     return 'RtmService_logout';
   }
 
-  sendMessageToPeer(peerId: string, message: IMessage[]): number {
+  sendMessageToPeer(peerId: string, message: IMessage): number {
     const apiType = this.getApiTypeFromSendMessageToPeer();
     const jsonParams = {
       peerId: peerId,
@@ -638,7 +638,7 @@ export class IRtmServiceImpl implements IRtmService {
   createChannel(
     channelId: string,
     eventHandler: IChannelEventHandler
-  ): IChannel[] {
+  ): IChannel {
     const apiType = this.getApiTypeFromCreateChannel();
     const jsonParams = {
       channelId: channelId,

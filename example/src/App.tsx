@@ -24,7 +24,7 @@ import Advanced from './advanced';
 import Basic from './basic';
 import Client from './components/Client';
 const RootStack = createStackNavigator<any>();
-setDebuggable(!isDebuggable());
+// setDebuggable(!isDebuggable());
 const DATA = [Basic, Advanced];
 
 export default function App() {

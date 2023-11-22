@@ -1,1 +1,1 @@
-["^.*(s|list|array)$", "^.*(buffer|data)$", "^.*(list|array)$"]
+["^(.*)(List|s)$"]

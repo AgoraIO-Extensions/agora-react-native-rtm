@@ -3,7 +3,6 @@ import {
   JoinChannelOptions,
   MetadataItem,
   MetadataOptions,
-  RTM_CHANNEL_TYPE,
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
@@ -20,18 +19,21 @@ import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
-export default function ChannelMetadata() {
+export default function UserMetadata() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [joinSuccess, setJoinSuccess] = useState(false);
+  const [subscribeSuccess, setSubscribeSuccess] = useState(false);
   const [streamChannel, setStreamChannel] = useState<IStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
-  const getChannelMetadataRequestId = useRef<number>();
-  const setChannelMetadataRequestId = useRef<number>();
-  const removeChannelMetadataRequestId = useRef<number>();
-  const updateChannelMetadataRequestId = useRef<number>();
+  const getUserMetadataRequestId = useRef<number>();
+  const setUserMetadataRequestId = useRef<number>();
+  const removeUserMetadataRequestId = useRef<number>();
+  const updateUserMetadataRequestId = useRef<number>();
+  const subscribeUserMetadataRequestId = useRef<number>();
   const [uid, setUid] = useState<string>(Config.uid);
-  const [metadataKey, setMetadataKey] = useState<string>('channel notice');
-  const [metadataValue, setMetadataValue] = useState<string>('rtm test');
+  const [subscribeUid, setSubscribeUid] = useState<string>('123');
+  const [metadataKey, setMetadataKey] = useState<string>('profile');
+  const [metadataValue, setMetadataValue] = useState<string>('I am a student');
 
   const metadata = useRef<RtmMetadata>(
     new RtmMetadata({
@@ -64,123 +66,93 @@ export default function ChannelMetadata() {
     []
   );
 
-  const onGetChannelMetadataResult = useCallback(
+  const onGetUserMetadataResult = useCallback(
     (
       requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
+      userId: string,
       data: RtmMetadata,
       errorCode: RTM_ERROR_CODE
     ) => {
       log.info(
-        'onGetChannelMetadataResult',
+        'onGetUserMetadataResult',
         'requestId',
         requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
+        'userId',
+        userId,
         'data',
         data,
         'errorCode',
         errorCode
       );
       if (
-        requestId === getChannelMetadataRequestId.current &&
+        requestId === getUserMetadataRequestId.current &&
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
-        log.alert(`${channelName} metadata:`, `${JSON.stringify(data)}`);
+        log.alert(`${userId} metadata:`, `${JSON.stringify(data)}`);
         metadata.current = data;
       }
     },
     []
   );
 
-  const onSetChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      errorCode: RTM_ERROR_CODE
-    ) => {
+  const onSetUserMetadataResult = useCallback(
+    (requestId: number, userId: string, errorCode: RTM_ERROR_CODE) => {
       log.info(
-        'onSetChannelMetadataResult',
+        'onSetUserMetadataResult',
         'requestId',
         requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
+        'userId',
+        userId,
         'errorCode',
         errorCode
       );
       if (
-        requestId === setChannelMetadataRequestId.current &&
+        requestId === setUserMetadataRequestId.current &&
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
-        log.alert(`setChannelMetadata success`, `channelName: ${channelName}`);
+        log.alert(`setUserMetadata success`, `userId: ${userId}`);
       }
     },
     []
   );
 
-  const onRemoveChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      errorCode: RTM_ERROR_CODE
-    ) => {
+  const onRemoveUserMetadataResult = useCallback(
+    (requestId: number, userId: string, errorCode: RTM_ERROR_CODE) => {
       log.info(
-        'onRemoveChannelMetadataResult',
+        'onRemoveUserMetadataResult',
         'requestId',
         requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
+        'userId',
+        userId,
         'errorCode',
         errorCode
       );
       if (
-        requestId === removeChannelMetadataRequestId.current &&
+        requestId === removeUserMetadataRequestId.current &&
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
-        log.alert(
-          `removeChannelMetadata success`,
-          `channelName: ${channelName}`
-        );
+        log.alert(`removeUserMetadata success`, `userId: ${userId}`);
       }
     },
     []
   );
 
-  const onUpdateChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      errorCode: RTM_ERROR_CODE
-    ) => {
+  const onUpdateUserMetadataResult = useCallback(
+    (requestId: number, userId: string, errorCode: RTM_ERROR_CODE) => {
       log.info(
-        'onUpdateChannelMetadataResult',
+        'onUpdateUserMetadataResult',
         'requestId',
         requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
+        'userId',
+        userId,
         'errorCode',
         errorCode
       );
       if (
-        requestId === updateChannelMetadataRequestId.current &&
+        requestId === updateUserMetadataRequestId.current &&
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
-        log.alert(
-          `updateChannelMetadata success`,
-          `channelName: ${channelName}`
-        );
+        log.alert(`updateUserMetadata success`, `userId: ${userId}`);
       }
     },
     []
@@ -189,6 +161,27 @@ export default function ChannelMetadata() {
   const onStorageEvent = useCallback((event: StorageEvent) => {
     log.log('onStorageEvent', 'event', event);
   }, []);
+
+  const onSubscribeUserMetadataResult = useCallback(
+    (requestId: number, userId: string, errorCode: RTM_ERROR_CODE) => {
+      log.log(
+        'onSubscribeUserMetadataResult',
+        'requestId',
+        requestId,
+        'userId',
+        userId,
+        'errorCode',
+        errorCode
+      );
+      if (
+        subscribeUserMetadataRequestId.current === requestId &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        setSubscribeSuccess(true);
+      }
+    },
+    []
+  );
 
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
@@ -238,9 +231,9 @@ export default function ChannelMetadata() {
   }, [streamChannel]);
 
   /**
-   * Step 2 : setChannelMetadata
+   * Step 2 : setUserMetadata
    */
-  const setChannelMetadata = () => {
+  const setUserMetadata = () => {
     metadata.current.metadataItems = [
       new MetadataItem({
         key: metadataKey,
@@ -249,30 +242,28 @@ export default function ChannelMetadata() {
       }),
     ];
     metadata.current.metadataItemsSize = 1;
-    setChannelMetadataRequestId.current = client
+    setUserMetadataRequestId.current = client
       .getStorage()
-      .setChannelMetadata(
-        cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+      .setUserMetadata(
+        Config.uid,
         metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        ''
+        new MetadataOptions({ recordUserId: true })
       );
   };
 
   /**
-   * Step 3 : getChannelMetadata
+   * Step 3 : getUserMetadata
    */
-  const getChannelMetadata = () => {
-    getChannelMetadataRequestId.current = client
+  const getUserMetadata = () => {
+    getUserMetadataRequestId.current = client
       .getStorage()
-      .getChannelMetadata(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM);
+      .getUserMetadata(Config.uid);
   };
 
   /**
-   * Step 4 : updateChannelMetadata
+   * Step 4 : updateUserMetadata
    */
-  const updateChannelMetadata = () => {
+  const updateUserMetadata = () => {
     metadata.current.metadataItems = [
       new MetadataItem({
         key: metadataKey,
@@ -281,21 +272,19 @@ export default function ChannelMetadata() {
       }),
     ];
     metadata.current.metadataItemsSize = 1;
-    updateChannelMetadataRequestId.current = client
+    updateUserMetadataRequestId.current = client
       .getStorage()
-      .updateChannelMetadata(
-        cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+      .updateUserMetadata(
+        Config.uid,
         metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        ''
+        new MetadataOptions({ recordUserId: true })
       );
   };
 
   /**
-   * Step 5 : removeChannelMetadata
+   * Step 5 : removeUserMetadata
    */
-  const removeChannelMetadata = () => {
+  const removeUserMetadata = () => {
     metadata.current.metadataItems = [
       new MetadataItem({
         key: metadataKey,
@@ -304,66 +293,89 @@ export default function ChannelMetadata() {
       }),
     ];
     metadata.current.metadataItemsSize = 1;
-    removeChannelMetadataRequestId.current = client
+    removeUserMetadataRequestId.current = client
       .getStorage()
-      .removeChannelMetadata(
-        cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+      .removeUserMetadata(
+        Config.uid,
         metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        ''
+        new MetadataOptions({ recordUserId: true })
       );
+  };
+
+  /**
+   * Step 6 : subscribeUserMetadata
+   */
+  const subscribeUserMetadata = () => {
+    subscribeUserMetadataRequestId.current = client
+      .getStorage()
+      .subscribeUserMetadata(subscribeUid);
+  };
+
+  /**
+   * Step 7 : unsubscribeUserMetadata
+   */
+  const unsubscribeUserMetadata = () => {
+    let result = client.getStorage().unsubscribeUserMetadata(subscribeUid);
+    if (result === RTM_ERROR_CODE.RTM_ERROR_OK) {
+      setSubscribeSuccess(false);
+    }
   };
 
   useEffect(() => {
     client.addEventListener('onJoinResult', onJoinResult);
-    client.addEventListener(
-      'onSetChannelMetadataResult',
-      onSetChannelMetadataResult
+    client.addEventListener('onSetUserMetadataResult', onSetUserMetadataResult);
+    client?.addEventListener(
+      'onGetUserMetadataResult',
+      onGetUserMetadataResult
     );
     client?.addEventListener(
-      'onGetChannelMetadataResult',
-      onGetChannelMetadataResult
+      'onRemoveUserMetadataResult',
+      onRemoveUserMetadataResult
     );
     client?.addEventListener(
-      'onRemoveChannelMetadataResult',
-      onRemoveChannelMetadataResult
-    );
-    client?.addEventListener(
-      'onUpdateChannelMetadataResult',
-      onUpdateChannelMetadataResult
+      'onUpdateUserMetadataResult',
+      onUpdateUserMetadataResult
     );
     client?.addEventListener('onStorageEvent', onStorageEvent);
+    client?.addEventListener(
+      'onSubscribeUserMetadataResult',
+      onSubscribeUserMetadataResult
+    );
 
     return () => {
       client.removeEventListener('onJoinResult', onJoinResult);
       client.removeEventListener(
-        'onSetChannelMetadataResult',
-        onSetChannelMetadataResult
+        'onSetUserMetadataResult',
+        onSetUserMetadataResult
       );
       client?.removeEventListener(
-        'onGetChannelMetadataResult',
-        onGetChannelMetadataResult
+        'onGetUserMetadataResult',
+        onGetUserMetadataResult
       );
       client?.removeEventListener(
-        'onRemoveChannelMetadataResult',
-        onRemoveChannelMetadataResult
+        'onRemoveUserMetadataResult',
+        onRemoveUserMetadataResult
       );
       client?.removeEventListener(
-        'onUpdateChannelMetadataResult',
-        onUpdateChannelMetadataResult
+        'onUpdateUserMetadataResult',
+        onUpdateUserMetadataResult
       );
-      client?.removeEventListener('onStorageEvent', onStorageEvent);
+      client.removeEventListener('onStorageEvent', onStorageEvent);
+      client.removeEventListener(
+        'onSubscribeUserMetadataResult',
+        onSubscribeUserMetadataResult
+      );
     };
   }, [
     client,
     uid,
     onJoinResult,
-    onSetChannelMetadataResult,
-    onGetChannelMetadataResult,
-    onRemoveChannelMetadataResult,
-    onUpdateChannelMetadataResult,
+    onSetUserMetadataResult,
+    onGetUserMetadataResult,
+    onRemoveUserMetadataResult,
+    onUpdateUserMetadataResult,
     onStorageEvent,
+    onSubscribeUserMetadataResult,
   ]);
 
   const onConnectionStateChanged = useCallback(
@@ -391,6 +403,7 @@ export default function ChannelMetadata() {
             RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
           ) {
             setLoginSuccess(false);
+            setSubscribeSuccess(false);
             destroyStreamChannel();
           }
           setJoinSuccess(false);
@@ -451,31 +464,53 @@ export default function ChannelMetadata() {
           value={metadataValue}
         />
         <AgoraButton
-          title={`setChannelMetadata`}
+          title={`setUserMetadata`}
           disabled={!loginSuccess}
           onPress={() => {
-            setChannelMetadata();
+            setUserMetadata();
           }}
         />
         <AgoraButton
-          title={`getChannelMetadata`}
+          title={`getUserMetadata`}
           disabled={!loginSuccess}
           onPress={() => {
-            getChannelMetadata();
+            getUserMetadata();
           }}
         />
         <AgoraButton
-          title={`updateChannelMetadata`}
+          title={`updateUserMetadata`}
           disabled={!loginSuccess}
           onPress={() => {
-            updateChannelMetadata();
+            updateUserMetadata();
           }}
         />
         <AgoraButton
-          title={`removeChannelMetadata`}
+          title={`removeUserMetadata`}
           disabled={!loginSuccess}
           onPress={() => {
-            removeChannelMetadata();
+            removeUserMetadata();
+          }}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
+            setSubscribeUid(text);
+          }}
+          placeholder="input uid you want to subscribe"
+          label="subscribeUid"
+          value={subscribeUid}
+          disabled={subscribeSuccess}
+        />
+        <AgoraButton
+          title={
+            subscribeSuccess
+              ? `unsubscribeUserMetadata`
+              : `subscribeUserMetadata`
+          }
+          disabled={!loginSuccess}
+          onPress={() => {
+            subscribeSuccess
+              ? unsubscribeUserMetadata()
+              : subscribeUserMetadata();
           }}
         />
       </ScrollView>

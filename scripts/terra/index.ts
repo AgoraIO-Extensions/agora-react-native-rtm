@@ -1,6 +1,11 @@
 import * as path from 'path';
 
-import { CXXFile, CXXTYPE, CXXTerraNode } from '@agoraio-extensions/cxx-parser';
+import {
+  CXXFile,
+  CXXTYPE,
+  CXXTerraNode,
+  SimpleTypeKind,
+} from '@agoraio-extensions/cxx-parser';
 import {
   ParseResult,
   RenderResult,
@@ -67,7 +72,7 @@ export default function (
     cxxfile.nodes = cxxfile.nodes.map((node: CXXTerraNode) => {
       let isCallback = isMatch(node.name, 'isCallback');
 
-      if (node.name === 'IRtmClient') {
+      if (node.name === 'StorageEvent') {
         // debugger;
       }
 
@@ -90,8 +95,17 @@ export default function (
             const clazzMethodParametersUserData = {
               isOptional: paramOptionalList.includes(param.fullName),
             };
+            if (param.type.kind === SimpleTypeKind.pointer_t) {
+              param.type.source = param.type.source.replace('[]', '');
+            }
             param.user_data = clazzMethodParametersUserData;
           });
+          if (method.return_type.kind === SimpleTypeKind.pointer_t) {
+            method.return_type.source = method.return_type.source.replace(
+              '[]',
+              ''
+            );
+          }
         });
       }
 
@@ -121,6 +135,12 @@ export default function (
               getDefaultValue(node.asStruct(), member_variable).length > 0,
             defaultValue: getDefaultValue(node.asStruct(), member_variable),
           };
+          if (member_variable.type.kind === SimpleTypeKind.pointer_t) {
+            member_variable.type.source = member_variable.type.source.replace(
+              '[]',
+              ''
+            );
+          }
           member_variable.user_data = structMemberVariableUserData;
         });
       }

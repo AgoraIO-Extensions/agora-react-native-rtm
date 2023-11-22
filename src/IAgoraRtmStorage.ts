@@ -37,21 +37,12 @@ export class MetadataItem {
   }
 }
 
-export abstract class IMetadata {
-  abstract setMajorRevision(revision: number): void;
-  abstract getMajorRevision(): number;
-  abstract setMetadataItem(item: MetadataItem): void;
-  abstract getMetadataItems(items: MetadataItem[], size: number): void;
-  abstract clearMetadata(): void;
-  abstract release(): void;
-}
-
 export abstract class IRtmStorage {
-  abstract createMetadata(): IMetadata[];
+  abstract createMetadata(): RtmMetadata;
   abstract setChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: IMetadata,
+    data: RtmMetadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -59,7 +50,7 @@ export abstract class IRtmStorage {
   abstract updateChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: IMetadata,
+    data: RtmMetadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -67,7 +58,7 @@ export abstract class IRtmStorage {
   abstract removeChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: IMetadata,
+    data: RtmMetadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -79,23 +70,38 @@ export abstract class IRtmStorage {
   ): number;
   abstract setUserMetadata(
     userId: string,
-    data: IMetadata,
+    data: RtmMetadata,
     options: MetadataOptions,
     requestId?: number
   ): number;
   abstract updateUserMetadata(
     userId: string,
-    data: IMetadata,
+    data: RtmMetadata,
     options: MetadataOptions,
     requestId?: number
   ): number;
   abstract removeUserMetadata(
     userId: string,
-    data: IMetadata,
+    data: RtmMetadata,
     options: MetadataOptions,
     requestId?: number
   ): number;
   abstract getUserMetadata(userId: string, requestId?: number): number;
   abstract subscribeUserMetadata(userId: string, requestId?: number): number;
   abstract unsubscribeUserMetadata(userId: string): number;
+}
+
+export class RtmMetadata {
+  majorRevision?: number = -1;
+  metadataItems?: MetadataItem[];
+  metadataItemsSize?: number;
+  constructor(
+    props?: Partial<{
+      majorRevision?: number;
+      metadataItems?: MetadataItem[];
+      metadataItemsSize?: number;
+    }>
+  ) {
+    Object.assign(this, props);
+  }
 }

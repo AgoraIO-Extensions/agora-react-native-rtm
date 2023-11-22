@@ -1,5 +1,5 @@
 {
-  "agora::rtm::IMetadata.getMetadataItems.items@type": "MetadataItem*",
+  "agora::rtm::IMetadata.getMetadataItems@return_type": "MetadataItem*",
   "agora::rtm::IChannelMember\\*": "IChannelMember",
   "^Optional<(.*)>": "$1",
   "^util::(.*)": "$1",
@@ -13,68 +13,29 @@
   "^(.*)&": "$1",
   "^(.*)\\[(.*)\\]": "$1",
 
-  "^view_t\\*$": "any[]",
-  "^uid_t\\*$": "number",
-  "^AString$": "string",
-  "^user_id_t$": "string",
-  "^view_t$": "any",
-  "^uid_t$": "number",
-  "^track_id_t$": "number",
-  "^conn_id_t$": "number",
-
-  "^size_t$": "number",
-  "^size_t\\*$": "number",
-  "^size_t const$": "number",
-
-  "^const char \\*$": "string",
   "^char const\\*$": "string",
-  "^char const\\**$": "string[]",
-  "^unsigned char\\*$": "Uint8Array",
-  "^unsigned char const\\*$": "Uint8Array",
-  "^unsigned int$": "number",
-  "^unsigned short$": "number",
   "^char\\*$": "string",
   "^char\\**$": "string[]",
+  "^char const\\**$": "string[]",
+  "^unsigned char const\\*$": "Uint8Array",
+  "^unsigned char const\\**$": "Uint8Array[]",
+  "^uint(.*)_t const\\*$": "Uint8Array",
+  "^uint(.*)_t const$": "number",
+  "^int(.*)_t const$": "number",
+  "^size_t const$": "number",
+
+  "^size_t\\*$": "number",
+  "^size_t$": "number",
   "^char$": "string",
-
-  "^ushort$": "number",
-
+  "^int$": "number",
+  "^uint(.*)_t$": "number",
+  "^int(.*)_t$": "number",
+  "^bool$": "boolean",
   "^long long$": "number",
   "^ulong$": "number",
   "^long$": "number",
 
-  "^uint8_t const\\*$": "Uint8Array",
-  "^uint8_t\\*$": "Uint8Array",
-  "^uint(.*)_t const$": "number",
-  "^uint(.*)_t$": "number",
-  "^uint\\*$": "number",
-  "^uint$": "number",
-
-  "^int64_t const$": "number",
-  "^int32_t\\*$": "number[]",
-  "^int(.*)_t$": "number",
-
-  "^int const\\*$": "number[]",
-  "^int\\*$": "number[]",
-  "^int$": "number",
-
-  "^float const\\*$": "number[]",
-  "^float$": "number",
-  "^double$": "number",
-
-  "^bool\\*$": "boolean",
-  "^bool const$": "boolean",
-  "^bool$": "boolean",
-
-  "^(.*)Sink\\*": "$1Sink",
-  "^(.*)EventHandler\\*": "$1EventHandler",
-
-  "^IStreamChannel\\*": "IStreamChannel",
-  "^IRtmPresence\\*": "IRtmPresence",
-  "^IRtmStorage\\*": "IRtmStorage",
-  "^IRtmLock\\*": "IRtmLock",
-  "^IMetadata const\\*": "IMetadata",
-  "^(.*)const\\*": "$1[]",
-
-  "^(.*)\\*": "$1[]"
+  "^(.*)const\\*$": "$1[]",
+  "^(.*)\\*$": "$1[]",
+  "^IMetadata": "RtmMetadata"
 }

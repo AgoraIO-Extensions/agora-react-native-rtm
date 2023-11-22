@@ -147,7 +147,7 @@ export abstract class IChannelAttributes {
   abstract addAttribute(key: string, value: string): number;
   abstract removeAttribute(key: string): number;
   abstract getAttributesSize(): number;
-  abstract getAttributes(size: number, key: string[], value: string[]): void;
+  abstract getAttributes(size: number, key: string, value: string): void;
   abstract getAttributeValue(key: string): string;
   abstract release(): number;
 }
@@ -159,7 +159,7 @@ export interface IChannelEventHandler {
   onJoinSuccess?(): void;
   onJoinFailure?(errorCode: JOIN_CHANNEL_ERR): void;
   onLeave?(errorCode: LEAVE_CHANNEL_ERR): void;
-  onMessageReceived?(userId: string, message: IMessage[]): void;
+  onMessageReceived?(userId: string, message: IMessage): void;
   onSendMessageState?(messageId: number, state: CHANNEL_MESSAGE_STATE): void;
   onSendMessageResult?(
     messageId: number,
@@ -181,7 +181,7 @@ export abstract class IChannel {
   abstract setEventHandler(eventHandler: IChannelEventHandler): void;
   abstract join(): number;
   abstract leave(): number;
-  abstract sendMessage(message: IMessage[]): number;
+  abstract sendMessage(message: IMessage): number;
   abstract updateAttributes(
     attributes: IChannelAttributes[],
     requestId?: number
@@ -203,7 +203,7 @@ export interface IRtmServiceEventHandler {
   onLogout?(): void;
   onConnectionStateChanged?(state: CONNECTION_STATE): void;
   onSendMessageState?(messageId: number, state: PEER_MESSAGE_STATE): void;
-  onMessageReceivedFromPeer?(peerId: string, message: IMessage[]): void;
+  onMessageReceivedFromPeer?(peerId: string, message: IMessage): void;
 }
 
 /**
@@ -218,9 +218,9 @@ export abstract class IRtmService {
   abstract release(sync: boolean): number;
   abstract login(token: string, userId: string): number;
   abstract logout(): number;
-  abstract sendMessageToPeer(peerId: string, message: IMessage[]): number;
+  abstract sendMessageToPeer(peerId: string, message: IMessage): number;
   abstract createChannel(
     channelId: string,
     eventHandler: IChannelEventHandler
-  ): IChannel[];
+  ): IChannel;
 }

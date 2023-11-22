@@ -1,6 +1,11 @@
 import * as path from 'path';
 
-import { CXXFile, CXXTYPE, CXXTerraNode } from '@agoraio-extensions/cxx-parser';
+import {
+  CXXFile,
+  CXXTYPE,
+  CXXTerraNode,
+  SimpleTypeKind,
+} from '@agoraio-extensions/cxx-parser';
 
 import { ParseResult, TerraContext } from '@agoraio-extensions/terra-core';
 
@@ -80,8 +85,17 @@ export function impl(parseResult: ParseResult) {
           const clazzMethodParametersUserData = {
             isOptional: paramOptionalList.includes(param.fullName),
           };
+          if (param.type.kind === SimpleTypeKind.pointer_t) {
+            param.type.source = param.type.source.replace('[]', '');
+          }
           param.user_data = clazzMethodParametersUserData;
         });
+        if (method.return_type.kind === SimpleTypeKind.pointer_t) {
+          method.return_type.source = method.return_type.source.replace(
+            '[]',
+            ''
+          );
+        }
       });
 
       const terraNodeUserData: TerraNodeUserData = {
