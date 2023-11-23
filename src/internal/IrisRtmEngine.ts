@@ -176,7 +176,7 @@ export function callIrisApi(this: any, funcName: string, params: any): any {
 
     if (funcName === 'RtmClient_initialize') {
       let config: RtmConfig = params.config;
-      if (config.eventHandler) {
+      if (config?.eventHandler) {
         let rtmClient = createAgoraRtmClient();
         Object.entries(config.eventHandler).forEach(([key, value]) => {
           rtmClient.addEventListener(key as keyof IRtmClientEvent, value);
