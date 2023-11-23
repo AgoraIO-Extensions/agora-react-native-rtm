@@ -2,14 +2,10 @@ import {
   IStreamChannel,
   JoinChannelOptions,
   LockDetail,
-  MetadataItem,
-  MetadataOptions,
   RTM_CHANNEL_TYPE,
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
-  RtmMetadata,
-  StorageEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -18,12 +14,9 @@ import { ScrollView } from 'react-native';
 import BaseComponent from '../../components/BaseComponent';
 import {
   AgoraButton,
-  AgoraCard,
-  AgoraList,
   AgoraStyle,
   AgoraText,
   AgoraTextInput,
-  AgoraView,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
@@ -32,7 +25,6 @@ import * as log from '../../utils/log';
 export default function Lock() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [joinSuccess, setJoinSuccess] = useState(false);
-  const [acquireLockSuccess, setAcquireLockSuccess] = useState(false);
   const [streamChannel, setStreamChannel] = useState<IStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
   const acquireLockRequestId = useRef<number>();
@@ -97,12 +89,31 @@ export default function Lock() {
       if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
         log.error(`acquire lock failed`, `errorCode: ${errorCode}`);
       }
-      if (
-        requestId === acquireLockRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        setAcquireLockSuccess(true);
-      }
+    },
+    []
+  );
+
+  const onReleaseLockResult = useCallback(
+    (
+      requestId: number,
+      channelName: string,
+      channelType: RTM_CHANNEL_TYPE,
+      _lockName: string,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.info(
+        'onAcquireLockResult',
+        'requestId',
+        requestId,
+        'channelName',
+        channelName,
+        'channelType',
+        channelType,
+        'lockName',
+        _lockName,
+        'errorCode',
+        errorCode
+      );
     },
     []
   );
@@ -341,6 +352,7 @@ export default function Lock() {
     client.addEventListener('onJoinResult', onJoinResult);
     client.addEventListener('onSetLockResult', onSetLockResult);
     client?.addEventListener('onAcquireLockResult', onAcquireLockResult);
+    client?.addEventListener('onReleaseLockResult', onReleaseLockResult);
     client?.addEventListener('onRevokeLockResult', onRevokeLockResult);
     client?.addEventListener('onRemoveLockResult', onRemoveLockResult);
     client?.addEventListener('onGetLocksResult', onGetLocksResult);
@@ -349,6 +361,7 @@ export default function Lock() {
       client.removeEventListener('onJoinResult', onJoinResult);
       client.removeEventListener('onSetLockResult', onSetLockResult);
       client?.removeEventListener('onAcquireLockResult', onAcquireLockResult);
+      client?.removeEventListener('onReleaseLockResult', onReleaseLockResult);
       client?.removeEventListener('onRevokeLockResult', onRevokeLockResult);
       client?.removeEventListener('onRemoveLockResult', onRemoveLockResult);
       client?.removeEventListener('onGetLocksResult', onGetLocksResult);
@@ -359,6 +372,7 @@ export default function Lock() {
     onJoinResult,
     onSetLockResult,
     onAcquireLockResult,
+    onReleaseLockResult,
     onRevokeLockResult,
     onRemoveLockResult,
     onGetLocksResult,
@@ -389,7 +403,6 @@ export default function Lock() {
             RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
           ) {
             setLoginSuccess(false);
-            setAcquireLockSuccess(false);
             destroyStreamChannel();
           }
           setJoinSuccess(false);

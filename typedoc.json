@@ -4,5 +4,8 @@
   "includeVersion": true,
   "hideGenerator": true,
   "includes": "./src",
-  "exclude": ["**/scripts/terra/**/*"]
+  "exclude": ["**/scripts/terra/**/*"],
+  "compilerOptions": {
+    "noUnusedLocals": false
+  }
 }
