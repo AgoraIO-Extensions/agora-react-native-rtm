@@ -4,6 +4,8 @@
   "agora::rtm::IRtmPresence.setState": "requestId",
   "agora::rtm::IRtmPresence.removeState": "requestId",
   "agora::rtm::IRtmPresence.getState": "requestId",
+  "agora::rtm::IRtmPresence.getOnlineUsers": "requestId",
+  "agora::rtm::IRtmPresence.getUserChannels": "requestId",
   "agora::rtm::IRtmLock.setLock": "requestId",
   "agora::rtm::IRtmLock.getLocks": "requestId",
   "agora::rtm::IRtmLock.removeLock": "requestId",

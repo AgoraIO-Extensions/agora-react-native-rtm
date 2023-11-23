@@ -175,7 +175,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromGetOnlineUsers(): string {
@@ -195,7 +195,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return jsonResults.requestId;
   }
 
   protected getApiTypeFromGetUserChannels(): string {

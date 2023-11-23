@@ -29,6 +29,8 @@ export default function Presence() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
   const whoNowRequestId = useRef<number>();
+  const getOnlineRequestId = useRef<number>();
+  const getUserChannelsRequestId = useRef<number>();
   const whereNowRequestId = useRef<number>();
   const setStateRequestId = useRef<number>();
   const getStateRequestId = useRef<number>();
@@ -89,6 +91,40 @@ export default function Presence() {
     [cName]
   );
 
+  const onGetOnlineUsersResult = useCallback(
+    (
+      requestId: number,
+      userStateList: UserState[],
+      count: number,
+      nextPage: string,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.log(
+        'onGetOnlineUsersResult',
+        'requestId',
+        requestId,
+        'userStateList',
+        userStateList,
+        'count',
+        count,
+        'nextPage',
+        nextPage,
+        'errorCode',
+        errorCode
+      );
+      if (
+        requestId === getOnlineRequestId.current &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        log.alert(
+          `channel: ${cName} status`,
+          `${JSON.stringify(userStateList)}`
+        );
+      }
+    },
+    [cName]
+  );
+
   const onWhereNowResult = useCallback(
     (
       requestId: number,
@@ -109,6 +145,34 @@ export default function Presence() {
       );
       if (
         requestId === whereNowRequestId.current &&
+        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
+      ) {
+        log.alert(`${searchUid} is at`, `${JSON.stringify(channels)}`);
+      }
+    },
+    [searchUid]
+  );
+
+  const onGetUserChannelsResult = useCallback(
+    (
+      requestId: number,
+      channels: ChannelInfo[],
+      count: number,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.log(
+        'onGetUserChannelsResult',
+        'requestId',
+        requestId,
+        'channels',
+        channels,
+        'count',
+        count,
+        'errorCode',
+        errorCode
+      );
+      if (
+        requestId === getUserChannelsRequestId.current &&
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
         log.alert(`${searchUid} is at`, `${JSON.stringify(channels)}`);
@@ -213,10 +277,32 @@ export default function Presence() {
   };
 
   /**
+   * Step 2-1 : getOnlineUsers
+   */
+  const getOnlineUsers = () => {
+    getOnlineRequestId.current = client
+      .getPresence()
+      .getOnlineUsers(
+        cName,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
+        new PresenceOptions({ includeState: true, includeUserId: true })
+      );
+  };
+
+  /**
    * Step 3 : whereNow
    */
   const whereNow = () => {
     whereNowRequestId.current = client.getPresence().whereNow(searchUid);
+  };
+
+  /**
+   * Step 3-1 : getUserChannels
+   */
+  const getUserChannels = () => {
+    getUserChannelsRequestId.current = client
+      .getPresence()
+      .getUserChannels(searchUid);
   };
 
   /**
@@ -262,6 +348,8 @@ export default function Presence() {
   useEffect(() => {
     client.addEventListener('onSubscribeResult', onSubscribeResult);
     client.addEventListener('onWhoNowResult', onWhoNowResult);
+    client.addEventListener('onGetOnlineUsersResult', onGetOnlineUsersResult);
+    client.addEventListener('onGetUserChannelsResult', onGetUserChannelsResult);
     client.addEventListener('onWhereNowResult', onWhereNowResult);
     client.addEventListener(
       'onPresenceSetStateResult',
@@ -280,6 +368,14 @@ export default function Presence() {
     return () => {
       client.removeEventListener('onSubscribeResult', onSubscribeResult);
       client.removeEventListener('onWhoNowResult', onWhoNowResult);
+      client.removeEventListener(
+        'onGetOnlineUsersResult',
+        onGetOnlineUsersResult
+      );
+      client.removeEventListener(
+        'onGetUserChannelsResult',
+        onGetUserChannelsResult
+      );
       client.removeEventListener('onWhereNowResult', onWhereNowResult);
       client.removeEventListener(
         'onPresenceSetStateResult',
@@ -300,7 +396,9 @@ export default function Presence() {
     uid,
     onSubscribeResult,
     onWhoNowResult,
+    onGetOnlineUsersResult,
     onWhereNowResult,
+    onGetUserChannelsResult,
     onPresenceSetStateResult,
     onPresenceGetStateResult,
     onPresenceRemoveStateResult,
@@ -372,6 +470,12 @@ export default function Presence() {
             whoNow();
           }}
         />
+        <AgoraButton
+          title={`getOnlineUsers`}
+          onPress={() => {
+            getOnlineUsers();
+          }}
+        />
         <AgoraTextInput
           onChangeText={(text) => {
             setSearchUid(text);
@@ -383,6 +487,12 @@ export default function Presence() {
           title={`whereNow`}
           onPress={() => {
             whereNow();
+          }}
+        />
+        <AgoraButton
+          title={`getUserChannels`}
+          onPress={() => {
+            getUserChannels();
           }}
         />
 
