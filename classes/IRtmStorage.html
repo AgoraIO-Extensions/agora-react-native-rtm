@@ -20,7 +20,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">IRtmStorage</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L40">IAgoraRtmStorage.ts:40</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L61">IAgoraRtmStorage.ts:61</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -59,14 +59,21 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="createMetadata.createMetadata-1"><span class="tsd-kind-call-signature">create<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a><a href="#createMetadata.createMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <a href="RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Creates the metadata object and returns the pointer.
+*</p>
+</div>
+<h4 class="tsd-returns-title">Returns <a href="RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h4><p>Pointer of the metadata object.</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L41">IAgoraRtmStorage.ts:41</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L66">IAgoraRtmStorage.ts:66</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getChannelMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>get<wbr/>Channel<wbr/>Metadata</span><a href="#getChannelMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getChannelMetadata.getChannelMetadata-1"><span class="tsd-kind-call-signature">get<wbr/>Channel<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#getChannelMetadata.getChannelMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Get the metadata of a specified channel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -75,15 +82,25 @@
 <li>
 <h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The unique ID of this request.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L66">IAgoraRtmStorage.ts:66</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L144">IAgoraRtmStorage.ts:144</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getUserMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>get<wbr/>User<wbr/>Metadata</span><a href="#getUserMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getUserMetadata.getUserMetadata-1"><span class="tsd-kind-call-signature">get<wbr/>User<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#getUserMetadata.getUserMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Get the metadata of a specified user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -91,14 +108,21 @@
 <h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L89">IAgoraRtmStorage.ts:89</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L213">IAgoraRtmStorage.ts:213</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="removeChannelMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>remove<wbr/>Channel<wbr/>Metadata</span><a href="#removeChannelMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="removeChannelMetadata.removeChannelMetadata-1"><span class="tsd-kind-call-signature">remove<wbr/>Channel<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#removeChannelMetadata.removeChannelMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Remove the metadata of a specified channel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -114,14 +138,21 @@
 <h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L58">IAgoraRtmStorage.ts:58</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L125">IAgoraRtmStorage.ts:125</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="removeUserMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>remove<wbr/>User<wbr/>Metadata</span><a href="#removeUserMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="removeUserMetadata.removeUserMetadata-1"><span class="tsd-kind-call-signature">remove<wbr/>User<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#removeUserMetadata.removeUserMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Remove the metadata of a specified user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -133,14 +164,21 @@
 <h5><span class="tsd-kind-parameter">options</span>: <a href="MetadataOptions.html" class="tsd-signature-type tsd-kind-class">MetadataOptions</a></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L83">IAgoraRtmStorage.ts:83</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L197">IAgoraRtmStorage.ts:197</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="setChannelMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>set<wbr/>Channel<wbr/>Metadata</span><a href="#setChannelMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="setChannelMetadata.setChannelMetadata-1"><span class="tsd-kind-call-signature">set<wbr/>Channel<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#setChannelMetadata.setChannelMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Set the metadata of a specified channel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -156,14 +194,21 @@
 <h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L42">IAgoraRtmStorage.ts:42</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L81">IAgoraRtmStorage.ts:81</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="setUserMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>set<wbr/>User<wbr/>Metadata</span><a href="#setUserMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="setUserMetadata.setUserMetadata-1"><span class="tsd-kind-call-signature">set<wbr/>User<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#setUserMetadata.setUserMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Set the metadata of a specified user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -175,14 +220,21 @@
 <h5><span class="tsd-kind-parameter">options</span>: <a href="MetadataOptions.html" class="tsd-signature-type tsd-kind-class">MetadataOptions</a></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L71">IAgoraRtmStorage.ts:71</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L161">IAgoraRtmStorage.ts:161</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="subscribeUserMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>subscribe<wbr/>User<wbr/>Metadata</span><a href="#subscribeUserMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="subscribeUserMetadata.subscribeUserMetadata-1"><span class="tsd-kind-call-signature">subscribe<wbr/>User<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#subscribeUserMetadata.subscribeUserMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Subscribe the metadata update event of a specified user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -190,27 +242,41 @@
 <h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L90">IAgoraRtmStorage.ts:90</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L223">IAgoraRtmStorage.ts:223</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unsubscribeUserMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>unsubscribe<wbr/>User<wbr/>Metadata</span><a href="#unsubscribeUserMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="unsubscribeUserMetadata.unsubscribeUserMetadata-1"><span class="tsd-kind-call-signature">unsubscribe<wbr/>User<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#unsubscribeUserMetadata.unsubscribeUserMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>unsubscribe the metadata update event of a specified user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L91">IAgoraRtmStorage.ts:91</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L233">IAgoraRtmStorage.ts:233</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="updateChannelMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>update<wbr/>Channel<wbr/>Metadata</span><a href="#updateChannelMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="updateChannelMetadata.updateChannelMetadata-1"><span class="tsd-kind-call-signature">update<wbr/>Channel<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#updateChannelMetadata.updateChannelMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Update the metadata of a specified channel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -226,14 +292,21 @@
 <h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L50">IAgoraRtmStorage.ts:50</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L103">IAgoraRtmStorage.ts:103</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="updateUserMetadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>update<wbr/>User<wbr/>Metadata</span><a href="#updateUserMetadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="updateUserMetadata.updateUserMetadata-1"><span class="tsd-kind-call-signature">update<wbr/>User<wbr/>Metadata</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#updateUserMetadata.updateUserMetadata-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Update the metadata of a specified user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -245,9 +318,14 @@
 <h5><span class="tsd-kind-parameter">options</span>: <a href="MetadataOptions.html" class="tsd-signature-type tsd-kind-class">MetadataOptions</a></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmStorage.ts#L77">IAgoraRtmStorage.ts:77</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmStorage.ts#L179">IAgoraRtmStorage.ts:179</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

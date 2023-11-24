@@ -24,7 +24,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">IRtmServiceEventHandler</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L200">IAgoraRtmService.ts:200</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L557">IAgoraRtmService.ts:557</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -46,73 +46,109 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onConnectionStateChanged.onConnectionStateChanged-1"><span class="tsd-kind-call-signature">on<wbr/>Connection<wbr/>State<wbr/>Changed</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">state</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onConnectionStateChanged.onConnectionStateChanged-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when the connection state of the local user has changed.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">state</span>: <a href="../enums/CONNECTION_STATE.html" class="tsd-signature-type tsd-kind-enum">CONNECTION_STATE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">state</span>: <a href="../enums/CONNECTION_STATE.html" class="tsd-signature-type tsd-kind-enum">CONNECTION_STATE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The current connection state: #CONNECTION_STATE.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L204">IAgoraRtmService.ts:204</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L575">IAgoraRtmService.ts:575</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLoginFailure" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Login<wbr/>Failure</span><a href="#onLoginFailure" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onLoginFailure.onLoginFailure-1"><span class="tsd-kind-call-signature">on<wbr/>Login<wbr/>Failure</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLoginFailure.onLoginFailure-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when the user fails to log in the RTM service.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/LOGIN_ERR_CODE.html" class="tsd-signature-type tsd-kind-enum">LOGIN_ERR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/LOGIN_ERR_CODE.html" class="tsd-signature-type tsd-kind-enum">LOGIN_ERR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The reason for the login failure: #LOGIN_ERR_CODE.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L202">IAgoraRtmService.ts:202</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L566">IAgoraRtmService.ts:566</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLoginSuccess" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Login<wbr/>Success</span><a href="#onLoginSuccess" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onLoginSuccess.onLoginSuccess-1"><span class="tsd-kind-call-signature">on<wbr/>Login<wbr/>Success</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLoginSuccess.onLoginSuccess-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Occurs when the user successfully logs in the RTM service.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L201">IAgoraRtmService.ts:201</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L561">IAgoraRtmService.ts:561</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLogout" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Logout</span><a href="#onLogout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onLogout.onLogout-1"><span class="tsd-kind-call-signature">on<wbr/>Logout</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLogout.onLogout-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Occurs when the user successfully logs out of the RTM service.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L203">IAgoraRtmService.ts:203</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L570">IAgoraRtmService.ts:570</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onMessageReceivedFromPeer" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Message<wbr/>Received<wbr/>From<wbr/>Peer</span><a href="#onMessageReceivedFromPeer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onMessageReceivedFromPeer.onMessageReceivedFromPeer-1"><span class="tsd-kind-call-signature">on<wbr/>Message<wbr/>Received<wbr/>From<wbr/>Peer</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">peerId</span>, <span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onMessageReceivedFromPeer.onMessageReceivedFromPeer-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when the local user receives a message from a remote user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">peerId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">peerId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>ID of the remote user that sends the message.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">message</span>: <a href="../classes/IMessage.html" class="tsd-signature-type tsd-kind-class">IMessage</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">message</span>: <a href="../classes/IMessage.html" class="tsd-signature-type tsd-kind-class">IMessage</a></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the message: IMessage.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L206">IAgoraRtmService.ts:206</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L587">IAgoraRtmService.ts:587</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSendMessageState" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Send<wbr/>Message<wbr/>State</span><a href="#onSendMessageState" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onSendMessageState.onSendMessageState-1"><span class="tsd-kind-call-signature">on<wbr/>Send<wbr/>Message<wbr/>State</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">messageId</span>, <span class="tsd-kind-parameter">state</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onSendMessageState.onSendMessageState-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Reports the state of sending a message.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">messageId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">messageId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>ID of the message.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">state</span>: <a href="../enums/PEER_MESSAGE_STATE.html" class="tsd-signature-type tsd-kind-enum">PEER_MESSAGE_STATE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">state</span>: <a href="../enums/PEER_MESSAGE_STATE.html" class="tsd-signature-type tsd-kind-enum">PEER_MESSAGE_STATE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The current state of the message: #PEER_MESSAGE_STATE.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L205">IAgoraRtmService.ts:205</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L581">IAgoraRtmService.ts:581</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

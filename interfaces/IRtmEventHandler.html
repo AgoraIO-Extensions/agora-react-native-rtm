@@ -29,7 +29,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <ul class="tsd-hierarchy">
 <li><span class="target">IRtmEventHandler</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L213">IAgoraRtmClient.ts:213</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L367">IAgoraRtmClient.ts:367</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -82,672 +82,1120 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onAcquireLockResult.onAcquireLockResult-1"><span class="tsd-kind-call-signature">on<wbr/>Acquire<wbr/>Lock<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">errorCode</span>, <span class="tsd-kind-parameter">errorDetails</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onAcquireLockResult.onAcquireLockResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user acquire a lock</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the lock.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">errorDetails</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L341">IAgoraRtmClient.ts:341</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L692">IAgoraRtmClient.ts:692</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onConnectionStateChanged" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Connection<wbr/>State<wbr/>Changed</span><a href="#onConnectionStateChanged" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onConnectionStateChanged.onConnectionStateChanged-1"><span class="tsd-kind-call-signature">on<wbr/>Connection<wbr/>State<wbr/>Changed</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">state</span>, <span class="tsd-kind-parameter">reason</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onConnectionStateChanged.onConnectionStateChanged-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when the connection state changes between rtm sdk and agora service.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">state</span>: <a href="../enums/RTM_CONNECTION_STATE.html" class="tsd-signature-type tsd-kind-enum">RTM_CONNECTION_STATE</a></h5></li>
+<h5><span class="tsd-kind-parameter">state</span>: <a href="../enums/RTM_CONNECTION_STATE.html" class="tsd-signature-type tsd-kind-enum">RTM_CONNECTION_STATE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The new connection state.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">reason</span>: <a href="../enums/RTM_CONNECTION_CHANGE_REASON.html" class="tsd-signature-type tsd-kind-enum">RTM_CONNECTION_CHANGE_REASON</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">reason</span>: <a href="../enums/RTM_CONNECTION_CHANGE_REASON.html" class="tsd-signature-type tsd-kind-enum">RTM_CONNECTION_CHANGE_REASON</a></h5>
+<div class="tsd-comment tsd-typography"><p>The reason for the connection state change.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L256">IAgoraRtmClient.ts:256</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L485">IAgoraRtmClient.ts:485</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onGetChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onGetChannelMetadataResult.onGetChannelMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Get<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onGetChannelMetadataResult.onGetChannelMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user try to get the channel metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h5></li>
+<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h5>
+<div class="tsd-comment tsd-typography"><p>The result metadata of getting operation.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L287">IAgoraRtmClient.ts:287</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L571">IAgoraRtmClient.ts:571</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetLocksResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>Locks<wbr/>Result</span><a href="#onGetLocksResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onGetLocksResult.onGetLocksResult-1"><span class="tsd-kind-call-signature">on<wbr/>Get<wbr/>Locks<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">lockDetailList</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onGetLocksResult.onGetLocksResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user try to get locks from the channel</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">lockDetailList</span>: <a href="../classes/LockDetail.html" class="tsd-signature-type tsd-kind-class">LockDetail</a><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><span class="tsd-kind-parameter">lockDetailList</span>: <a href="../classes/LockDetail.html" class="tsd-signature-type tsd-kind-class">LockDetail</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>The details of the locks.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The count of the locks.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L356">IAgoraRtmClient.ts:356</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L724">IAgoraRtmClient.ts:724</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetOnlineUsersResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>Online<wbr/>Users<wbr/>Result</span><a href="#onGetOnlineUsersResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onGetOnlineUsersResult.onGetOnlineUsersResult-1"><span class="tsd-kind-call-signature">on<wbr/>Get<wbr/>Online<wbr/>Users<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userStateList</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">nextPage</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onGetOnlineUsersResult.onGetOnlineUsersResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when query who joined this channel</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">userStateList</span>: <a href="../classes/UserState.html" class="tsd-signature-type tsd-kind-class">UserState</a><span class="tsd-signature-symbol">[]</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The user count.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">nextPage</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L371">IAgoraRtmClient.ts:371</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L755">IAgoraRtmClient.ts:755</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetUserChannelsResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>User<wbr/>Channels<wbr/>Result</span><a href="#onGetUserChannelsResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onGetUserChannelsResult.onGetUserChannelsResult-1"><span class="tsd-kind-call-signature">on<wbr/>Get<wbr/>User<wbr/>Channels<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channels</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onGetUserChannelsResult.onGetUserChannelsResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when query which channels the user joined</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channels</span>: <a href="../classes/ChannelInfo.html" class="tsd-signature-type tsd-kind-class">ChannelInfo</a><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><span class="tsd-kind-parameter">channels</span>: <a href="../classes/ChannelInfo.html" class="tsd-signature-type tsd-kind-class">ChannelInfo</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>The channel informations.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The channel count.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L384">IAgoraRtmClient.ts:384</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L784">IAgoraRtmClient.ts:784</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onGetUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onGetUserMetadataResult.onGetUserMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Get<wbr/>User<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onGetUserMetadataResult.onGetUserMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user try to get the user metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h5></li>
+<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h5>
+<div class="tsd-comment tsd-typography"><p>The result metadata of getting operation.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L309">IAgoraRtmClient.ts:309</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L622">IAgoraRtmClient.ts:622</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onJoinResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Join<wbr/>Result</span><a href="#onJoinResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onJoinResult.onJoinResult-1"><span class="tsd-kind-call-signature">on<wbr/>Join<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onJoinResult.onJoinResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user join a stream channel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L219">IAgoraRtmClient.ts:219</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L406">IAgoraRtmClient.ts:406</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onJoinTopicResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Join<wbr/>Topic<wbr/>Result</span><a href="#onJoinTopicResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onJoinTopicResult.onJoinTopicResult-1"><span class="tsd-kind-call-signature">on<wbr/>Join<wbr/>Topic<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">topic</span>, <span class="tsd-kind-parameter">meta</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onJoinTopicResult.onJoinTopicResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user join topic.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">meta</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">meta</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The meta of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L231">IAgoraRtmClient.ts:231</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L434">IAgoraRtmClient.ts:434</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLeaveResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Leave<wbr/>Result</span><a href="#onLeaveResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onLeaveResult.onLeaveResult-1"><span class="tsd-kind-call-signature">on<wbr/>Leave<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLeaveResult.onLeaveResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user leave a stream channel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L225">IAgoraRtmClient.ts:225</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L419">IAgoraRtmClient.ts:419</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLeaveTopicResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Leave<wbr/>Topic<wbr/>Result</span><a href="#onLeaveTopicResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onLeaveTopicResult.onLeaveTopicResult-1"><span class="tsd-kind-call-signature">on<wbr/>Leave<wbr/>Topic<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">topic</span>, <span class="tsd-kind-parameter">meta</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLeaveTopicResult.onLeaveTopicResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user leave topic.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">meta</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">meta</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The meta of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L239">IAgoraRtmClient.ts:239</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L451">IAgoraRtmClient.ts:451</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLockEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Lock<wbr/>Event</span><a href="#onLockEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onLockEvent.onLockEvent-1"><span class="tsd-kind-call-signature">on<wbr/>Lock<wbr/>Event</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLockEvent.onLockEvent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when lock state changed</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/LockEvent.html" class="tsd-signature-type tsd-kind-class">LockEvent</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/LockEvent.html" class="tsd-signature-type tsd-kind-class">LockEvent</a></h5>
+<div class="tsd-comment tsd-typography"><p>details of lock event.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L217">IAgoraRtmClient.ts:217</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L392">IAgoraRtmClient.ts:392</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLoginResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Login<wbr/>Result</span><a href="#onLoginResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onLoginResult.onLoginResult-1"><span class="tsd-kind-call-signature">on<wbr/>Login<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLoginResult.onLoginResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user login.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L268">IAgoraRtmClient.ts:268</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L519">IAgoraRtmClient.ts:519</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onMessageEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Message<wbr/>Event</span><a href="#onMessageEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onMessageEvent.onMessageEvent-1"><span class="tsd-kind-call-signature">on<wbr/>Message<wbr/>Event</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onMessageEvent.onMessageEvent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when receive a message.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/MessageEvent.html" class="tsd-signature-type tsd-kind-class">MessageEvent</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/MessageEvent.html" class="tsd-signature-type tsd-kind-class">MessageEvent</a></h5>
+<div class="tsd-comment tsd-typography"><p>details of message event.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L214">IAgoraRtmClient.ts:214</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L373">IAgoraRtmClient.ts:373</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Event</span><a href="#onPresenceEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onPresenceEvent.onPresenceEvent-1"><span class="tsd-kind-call-signature">on<wbr/>Presence<wbr/>Event</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onPresenceEvent.onPresenceEvent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when remote user presence changed</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/PresenceEvent.html" class="tsd-signature-type tsd-kind-class">PresenceEvent</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/PresenceEvent.html" class="tsd-signature-type tsd-kind-class">PresenceEvent</a></h5>
+<div class="tsd-comment tsd-typography"><p>details of presence event.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L215">IAgoraRtmClient.ts:215</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L379">IAgoraRtmClient.ts:379</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceGetStateResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Get<wbr/>State<wbr/>Result</span><a href="#onPresenceGetStateResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onPresenceGetStateResult.onPresenceGetStateResult-1"><span class="tsd-kind-call-signature">on<wbr/>Presence<wbr/>Get<wbr/>State<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">state</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onPresenceGetStateResult.onPresenceGetStateResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when get user presence</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">state</span>: <a href="../classes/UserState.html" class="tsd-signature-type tsd-kind-class">UserState</a></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L395">IAgoraRtmClient.ts:395</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L814">IAgoraRtmClient.ts:814</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceRemoveStateResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Remove<wbr/>State<wbr/>Result</span><a href="#onPresenceRemoveStateResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onPresenceRemoveStateResult.onPresenceRemoveStateResult-1"><span class="tsd-kind-call-signature">on<wbr/>Presence<wbr/>Remove<wbr/>State<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onPresenceRemoveStateResult.onPresenceRemoveStateResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when delete user presence</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L391">IAgoraRtmClient.ts:391</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L803">IAgoraRtmClient.ts:803</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceSetStateResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Set<wbr/>State<wbr/>Result</span><a href="#onPresenceSetStateResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onPresenceSetStateResult.onPresenceSetStateResult-1"><span class="tsd-kind-call-signature">on<wbr/>Presence<wbr/>Set<wbr/>State<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onPresenceSetStateResult.onPresenceSetStateResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when set user presence</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L390">IAgoraRtmClient.ts:390</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L796">IAgoraRtmClient.ts:796</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPublishResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Publish<wbr/>Result</span><a href="#onPublishResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onPublishResult.onPublishResult-1"><span class="tsd-kind-call-signature">on<wbr/>Publish<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onPublishResult.onPublishResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user publish message.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user publish message</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L267">IAgoraRtmClient.ts:267</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L513">IAgoraRtmClient.ts:513</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onReleaseLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Release<wbr/>Lock<wbr/>Result</span><a href="#onReleaseLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onReleaseLockResult.onReleaseLockResult-1"><span class="tsd-kind-call-signature">on<wbr/>Release<wbr/>Lock<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onReleaseLockResult.onReleaseLockResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user release a lock</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the lock.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L334">IAgoraRtmClient.ts:334</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L677">IAgoraRtmClient.ts:677</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRemoveChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Remove<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onRemoveChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onRemoveChannelMetadataResult.onRemoveChannelMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Remove<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onRemoveChannelMetadataResult.onRemoveChannelMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user removing the channel metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L281">IAgoraRtmClient.ts:281</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L556">IAgoraRtmClient.ts:556</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRemoveLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Remove<wbr/>Lock<wbr/>Result</span><a href="#onRemoveLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onRemoveLockResult.onRemoveLockResult-1"><span class="tsd-kind-call-signature">on<wbr/>Remove<wbr/>Lock<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onRemoveLockResult.onRemoveLockResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user delete a lock</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the lock.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L327">IAgoraRtmClient.ts:327</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L662">IAgoraRtmClient.ts:662</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRemoveUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Remove<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onRemoveUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onRemoveUserMetadataResult.onRemoveUserMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Remove<wbr/>User<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onRemoveUserMetadataResult.onRemoveUserMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user removing the user metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L304">IAgoraRtmClient.ts:304</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L609">IAgoraRtmClient.ts:609</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRevokeLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Revoke<wbr/>Lock<wbr/>Result</span><a href="#onRevokeLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onRevokeLockResult.onRevokeLockResult-1"><span class="tsd-kind-call-signature">on<wbr/>Revoke<wbr/>Lock<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onRevokeLockResult.onRevokeLockResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user revoke a lock</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the lock.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L349">IAgoraRtmClient.ts:349</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L708">IAgoraRtmClient.ts:708</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSetChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Set<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onSetChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onSetChannelMetadataResult.onSetChannelMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Set<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onSetChannelMetadataResult.onSetChannelMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user setting the channel metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L269">IAgoraRtmClient.ts:269</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L528">IAgoraRtmClient.ts:528</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSetLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Set<wbr/>Lock<wbr/>Result</span><a href="#onSetLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onSetLockResult.onSetLockResult-1"><span class="tsd-kind-call-signature">on<wbr/>Set<wbr/>Lock<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">lockName</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onSetLockResult.onSetLockResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user set a lock</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">lockName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the lock.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L320">IAgoraRtmClient.ts:320</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L647">IAgoraRtmClient.ts:647</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSetUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Set<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onSetUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onSetUserMetadataResult.onSetUserMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Set<wbr/>User<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onSetUserMetadataResult.onSetUserMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user setting the user metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L294">IAgoraRtmClient.ts:294</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L585">IAgoraRtmClient.ts:585</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onStorageEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Storage<wbr/>Event</span><a href="#onStorageEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onStorageEvent.onStorageEvent-1"><span class="tsd-kind-call-signature">on<wbr/>Storage<wbr/>Event</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onStorageEvent.onStorageEvent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when receive storage event</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/StorageEvent.html" class="tsd-signature-type tsd-kind-class">StorageEvent</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/StorageEvent.html" class="tsd-signature-type tsd-kind-class">StorageEvent</a></h5>
+<div class="tsd-comment tsd-typography"><p>details of storage event.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L218">IAgoraRtmClient.ts:218</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L398">IAgoraRtmClient.ts:398</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSubscribeResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Subscribe<wbr/>Result</span><a href="#onSubscribeResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onSubscribeResult.onSubscribeResult-1"><span class="tsd-kind-call-signature">on<wbr/>Subscribe<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onSubscribeResult.onSubscribeResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when subscribe a channel</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L262">IAgoraRtmClient.ts:262</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L502">IAgoraRtmClient.ts:502</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSubscribeTopicResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Subscribe<wbr/>Topic<wbr/>Result</span><a href="#onSubscribeTopicResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onSubscribeTopicResult.onSubscribeTopicResult-1"><span class="tsd-kind-call-signature">on<wbr/>Subscribe<wbr/>Topic<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">topic</span>, <span class="tsd-kind-parameter">succeedUsers</span>, <span class="tsd-kind-parameter">failedUsers</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onSubscribeTopicResult.onSubscribeTopicResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user subscribe topic.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">succeedUsers</span>: <a href="../classes/UserList.html" class="tsd-signature-type tsd-kind-class">UserList</a></h5></li>
+<h5><span class="tsd-kind-parameter">succeedUsers</span>: <a href="../classes/UserList.html" class="tsd-signature-type tsd-kind-class">UserList</a></h5>
+<div class="tsd-comment tsd-typography"><p>The subscribed users.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">failedUsers</span>: <a href="../classes/UserList.html" class="tsd-signature-type tsd-kind-class">UserList</a></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L247">IAgoraRtmClient.ts:247</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L469">IAgoraRtmClient.ts:469</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSubscribeUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Subscribe<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onSubscribeUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onSubscribeUserMetadataResult.onSubscribeUserMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Subscribe<wbr/>User<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onSubscribeUserMetadataResult.onSubscribeUserMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user subscribe a user metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L315">IAgoraRtmClient.ts:315</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L634">IAgoraRtmClient.ts:634</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onTokenPrivilegeWillExpire" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Token<wbr/>Privilege<wbr/>Will<wbr/>Expire</span><a href="#onTokenPrivilegeWillExpire" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onTokenPrivilegeWillExpire.onTokenPrivilegeWillExpire-1"><span class="tsd-kind-call-signature">on<wbr/>Token<wbr/>Privilege<wbr/>Will<wbr/>Expire</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onTokenPrivilegeWillExpire.onTokenPrivilegeWillExpire-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when token will expire in 30 seconds.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L261">IAgoraRtmClient.ts:261</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L495">IAgoraRtmClient.ts:495</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onTopicEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Topic<wbr/>Event</span><a href="#onTopicEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onTopicEvent.onTopicEvent-1"><span class="tsd-kind-call-signature">on<wbr/>Topic<wbr/>Event</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onTopicEvent.onTopicEvent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when remote user join/leave topic or when user first join this channel,
+got snapshot of topics in this channel</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/TopicEvent.html" class="tsd-signature-type tsd-kind-class">TopicEvent</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/TopicEvent.html" class="tsd-signature-type tsd-kind-class">TopicEvent</a></h5>
+<div class="tsd-comment tsd-typography"><p>details of topic event.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L216">IAgoraRtmClient.ts:216</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L386">IAgoraRtmClient.ts:386</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onUpdateChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Update<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onUpdateChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onUpdateChannelMetadataResult.onUpdateChannelMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Update<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onUpdateChannelMetadataResult.onUpdateChannelMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user updating the channel metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5></li>
+<h5><span class="tsd-kind-parameter">channelType</span>: <a href="../enums/RTM_CHANNEL_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_CHANNEL_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L275">IAgoraRtmClient.ts:275</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L542">IAgoraRtmClient.ts:542</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onUpdateUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Update<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onUpdateUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onUpdateUserMetadataResult.onUpdateUserMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Update<wbr/>User<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onUpdateUserMetadataResult.onUpdateUserMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user updating the user metadata</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L299">IAgoraRtmClient.ts:299</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L597">IAgoraRtmClient.ts:597</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onWhereNowResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Where<wbr/>Now<wbr/>Result</span><a href="#onWhereNowResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onWhereNowResult.onWhereNowResult-1"><span class="tsd-kind-call-signature">on<wbr/>Where<wbr/>Now<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channels</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onWhereNowResult.onWhereNowResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when query which channels the user joined</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">channels</span>: <a href="../classes/ChannelInfo.html" class="tsd-signature-type tsd-kind-class">ChannelInfo</a><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><span class="tsd-kind-parameter">channels</span>: <a href="../classes/ChannelInfo.html" class="tsd-signature-type tsd-kind-class">ChannelInfo</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>The channel informations.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The channel count.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L378">IAgoraRtmClient.ts:378</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L770">IAgoraRtmClient.ts:770</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onWhoNowResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Who<wbr/>Now<wbr/>Result</span><a href="#onWhoNowResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onWhoNowResult.onWhoNowResult-1"><span class="tsd-kind-call-signature">on<wbr/>Who<wbr/>Now<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userStateList</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">nextPage</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onWhoNowResult.onWhoNowResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when query who joined this channel</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">userStateList</span>: <a href="../classes/UserState.html" class="tsd-signature-type tsd-kind-class">UserState</a><span class="tsd-signature-symbol">[]</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The user count.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">nextPage</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmClient.ts#L364">IAgoraRtmClient.ts:364</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmClient.ts#L740">IAgoraRtmClient.ts:740</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

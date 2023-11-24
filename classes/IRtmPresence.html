@@ -25,7 +25,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">IRtmPresence</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L15">IAgoraRtmPresence.ts:15</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L15">IAgoraRtmPresence.ts:15</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -60,6 +60,8 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getOnlineUsers.getOnlineUsers-1"><span class="tsd-kind-call-signature">get<wbr/>Online<wbr/>Users</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#getOnlineUsers.getOnlineUsers-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>To query who joined this channel</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -71,14 +73,21 @@
 <h5><span class="tsd-kind-parameter">options</span>: <a href="GetOnlineUsersOptions.html" class="tsd-signature-type tsd-kind-class">GetOnlineUsersOptions</a></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L43">IAgoraRtmPresence.ts:43</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L109">IAgoraRtmPresence.ts:109</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getState" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>get<wbr/>State</span><a href="#getState" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getState.getState-1"><span class="tsd-kind-call-signature">get<wbr/>State</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#getState.getState-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Get user state</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -90,14 +99,21 @@
 <h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L37">IAgoraRtmPresence.ts:37</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L92">IAgoraRtmPresence.ts:92</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getUserChannels" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>get<wbr/>User<wbr/>Channels</span><a href="#getUserChannels" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getUserChannels.getUserChannels-1"><span class="tsd-kind-call-signature">get<wbr/>User<wbr/>Channels</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#getUserChannels.getUserChannels-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>To query which channels the user joined</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -105,14 +121,21 @@
 <h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L49">IAgoraRtmPresence.ts:49</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L124">IAgoraRtmPresence.ts:124</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="removeState" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>remove<wbr/>State</span><a href="#removeState" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="removeState.removeState-1"><span class="tsd-kind-call-signature">remove<wbr/>State</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">keys</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#removeState.removeState-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Delete user state</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -126,14 +149,21 @@
 <h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L30">IAgoraRtmPresence.ts:30</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L74">IAgoraRtmPresence.ts:74</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="setState" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>set<wbr/>State</span><a href="#setState" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="setState.setState-1"><span class="tsd-kind-call-signature">set<wbr/>State</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">items</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#setState.setState-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Set user state</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -147,14 +177,21 @@
 <h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L23">IAgoraRtmPresence.ts:23</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L55">IAgoraRtmPresence.ts:55</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="whereNow" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>where<wbr/>Now</span><a href="#whereNow" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="whereNow.whereNow-1"><span class="tsd-kind-call-signature">where<wbr/>Now</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#whereNow.whereNow-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>To query which channels the user joined</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -162,14 +199,21 @@
 <h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L22">IAgoraRtmPresence.ts:22</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L42">IAgoraRtmPresence.ts:42</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="whoNow" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>who<wbr/>Now</span><a href="#whoNow" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="whoNow.whoNow-1"><span class="tsd-kind-call-signature">who<wbr/>Now</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">channelType</span>, <span class="tsd-kind-parameter">options</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#whoNow.whoNow-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>To query who joined this channel</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -181,9 +225,14 @@
 <h5><span class="tsd-kind-parameter">options</span>: <a href="PresenceOptions.html" class="tsd-signature-type tsd-kind-class">PresenceOptions</a></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmPresence.ts#L16">IAgoraRtmPresence.ts:16</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmPresence.ts#L27">IAgoraRtmPresence.ts:27</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

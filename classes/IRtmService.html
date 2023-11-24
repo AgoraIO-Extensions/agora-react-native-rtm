@@ -24,7 +24,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">IRtmService</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L212">IAgoraRtmService.ts:212</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L593">IAgoraRtmService.ts:593</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -59,95 +59,188 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="createChannel.createChannel-1"><span class="tsd-kind-call-signature">create<wbr/>Channel</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelId</span>, <span class="tsd-kind-parameter">eventHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="IChannel.html" class="tsd-signature-type tsd-kind-class">IChannel</a><a href="#createChannel.createChannel-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates an RTM channel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">channelId</span>: <span class="tsd-signature-type">string</span></h5></li>
-<li>
-<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IChannelEventHandler.html" class="tsd-signature-type tsd-kind-interface">IChannelEventHandler</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="IChannel.html" class="tsd-signature-type tsd-kind-class">IChannel</a></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">channelId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The unique channel name for an RTM session. Supported character scopes are:</p>
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L222">IAgoraRtmService.ts:222</a></li></ul></aside></li></ul></section>
+<li>All lowercase English letters: a to z.</li>
+<li>All uppercase English letters: A to Z.</li>
+<li>All numeric characters: 0 to 9.</li>
+<li>The space character.</li>
+<li>Punctuation characters and other symbols, including: &quot;!&quot;, &quot;#&quot;, &quot;$&quot;, &quot;%&quot;, &quot;&amp;&quot;, &quot;(&quot;, &quot;)&quot;, &quot;+&quot;, &quot;-&quot;, &quot;:&quot;, &quot;;&quot;, &quot;&lt;&quot;, &quot;=&quot;,
+&quot;.&quot;, &quot;&gt;&quot;, &quot;?&quot;, &quot;@&quot;, &quot;[&quot;, &quot;]&quot;, &quot;^&quot;, &quot;_&quot;, &quot; {&quot;, &quot;}&quot;, &quot;|&quot;, &quot;~&quot;, &quot;,&quot;</li>
+</ul>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IChannelEventHandler.html" class="tsd-signature-type tsd-kind-interface">IChannelEventHandler</a></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to IChannelEventHandler.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="IChannel.html" class="tsd-signature-type tsd-kind-class">IChannel</a></h4><ul>
+<li>The pointer to an IChannel instance, if the method call succeeds.</li>
+<li>An empty pointer NULL, if the method call fails.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L669">IAgoraRtmService.ts:669</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="initialize" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>initialize</span><a href="#initialize" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="initialize.initialize-1"><span class="tsd-kind-call-signature">initialize</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">appId</span>, <span class="tsd-kind-parameter">eventHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#initialize.initialize-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates and gets an IRtmService instance.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">appId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">appId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the app ID.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IRtmServiceEventHandler.html" class="tsd-signature-type tsd-kind-interface">IRtmServiceEventHandler</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IRtmServiceEventHandler.html" class="tsd-signature-type tsd-kind-interface">IRtmServiceEventHandler</a></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the IRtmServiceEventHandler object.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L213">IAgoraRtmService.ts:213</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L603">IAgoraRtmService.ts:603</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="login" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>login</span><a href="#login" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="login.login-1"><span class="tsd-kind-call-signature">login</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">token</span>, <span class="tsd-kind-parameter">userId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#login.login-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Logs in the RTM service.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">token</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">token</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The token used to log in the RTM service.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>ID of the user logging in the RTM service.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography">
+<h4>Note</h4><ul>
+<li>If you login with the same user ID from a different instance, your previous login will be kicked.</li>
+<li>The call frequency limit of this method is 2 queries per second.</li>
+</ul>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L219">IAgoraRtmService.ts:219</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L635">IAgoraRtmService.ts:635</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="logout" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>logout</span><a href="#logout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="logout.logout-1"><span class="tsd-kind-call-signature">logout</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#logout.logout-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Logs out of the RTM service.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L220">IAgoraRtmService.ts:220</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L642">IAgoraRtmService.ts:642</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="release" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>release</span><a href="#release" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="release.release-1"><span class="tsd-kind-call-signature">release</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">sync</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#release.release-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Releases the IRtmService instance.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">sync</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">sync</span>: <span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Determines whether to report the result of this method call synchronously.</p>
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L218">IAgoraRtmService.ts:218</a></li></ul></aside></li></ul></section>
+<li>true: Report the result of this method call after the IRtmService instance is released.</li>
+<li>false: (Default) Report the result of this method call immediately, even when the IRtmService is not
+released.</li>
+</ul>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L622">IAgoraRtmService.ts:622</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="sendMessageToPeer" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>send<wbr/>Message<wbr/>To<wbr/>Peer</span><a href="#sendMessageToPeer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="sendMessageToPeer.sendMessageToPeer-1"><span class="tsd-kind-call-signature">send<wbr/>Message<wbr/>To<wbr/>Peer</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">peerId</span>, <span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#sendMessageToPeer.sendMessageToPeer-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Sends a peer message to a specified remote user.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">peerId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">peerId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the ID of the remote user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">message</span>: <a href="IMessage.html" class="tsd-signature-type tsd-kind-class">IMessage</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">message</span>: <a href="IMessage.html" class="tsd-signature-type tsd-kind-class">IMessage</a></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to message: IMessage.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L221">IAgoraRtmService.ts:221</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L652">IAgoraRtmService.ts:652</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unregisterObserver" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>unregister<wbr/>Observer</span><a href="#unregisterObserver" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="unregisterObserver.unregisterObserver-1"><span class="tsd-kind-call-signature">unregister<wbr/>Observer</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">eventHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#unregisterObserver.unregisterObserver-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Releases the IRtmServiceEventHandler object.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IRtmServiceEventHandler.html" class="tsd-signature-type tsd-kind-interface">IRtmServiceEventHandler</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IRtmServiceEventHandler.html" class="tsd-signature-type tsd-kind-interface">IRtmServiceEventHandler</a></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the IRtmServiceEventHandler object.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L217">IAgoraRtmService.ts:217</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L611">IAgoraRtmService.ts:611</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

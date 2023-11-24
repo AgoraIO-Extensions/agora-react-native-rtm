@@ -24,7 +24,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">IChannel</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L180">IAgoraRtmService.ts:180</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L471">IAgoraRtmService.ts:471</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -60,89 +60,168 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="deleteAttributes.deleteAttributes-1"><span class="tsd-kind-call-signature">delete<wbr/>Attributes</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">attributes</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#deleteAttributes.deleteAttributes-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Removes the channel attributes.</p>
+<p>A successful method call triggers the onDeleteAttributesResponse() callback on the local client.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">attributes</span>: <a href="IChannelAttributes.html" class="tsd-signature-type tsd-kind-class">IChannelAttributes</a><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><span class="tsd-kind-parameter">attributes</span>: <a href="IChannelAttributes.html" class="tsd-signature-type tsd-kind-class">IChannelAttributes</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the channel attributes that you want to remove: IChannelAttributes.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>ID of the current delete request.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L189">IAgoraRtmService.ts:189</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L531">IAgoraRtmService.ts:531</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getId" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>get<wbr/>Id</span><a href="#getId" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getId.getId-1"><span class="tsd-kind-call-signature">get<wbr/>Id</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#getId.getId-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Gets the current request ID.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><ul>
+<li>The pointer to the request ID, if the method call succeeds.</li>
+<li>An empty pointer NULL, if the method call fails.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L193">IAgoraRtmService.ts:193</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L541">IAgoraRtmService.ts:541</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="join" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>join</span><a href="#join" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="join.join-1"><span class="tsd-kind-call-signature">join</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#join.join-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Joins the current channel.</p>
+<p>A successful method call triggers either onJoinSuccess() or onJoinFailure() on the local client, to report
+the state of joining the channel.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L182">IAgoraRtmService.ts:182</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L486">IAgoraRtmService.ts:486</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="leave" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>leave</span><a href="#leave" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="leave.leave-1"><span class="tsd-kind-call-signature">leave</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#leave.leave-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Leaves the current channel.</p>
+<p>After the local user successfully leaves the channel, the SDK triggers the onLeave() on the local client.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L183">IAgoraRtmService.ts:183</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L495">IAgoraRtmService.ts:495</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="release" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>release</span><a href="#release" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="release.release-1"><span class="tsd-kind-call-signature">release</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#release.release-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Releases the IChannel instance.</p>
+<p>This is a synchronous method call, which means that the SDK reports the result of this method call
+after the IChannel instance is successfully released.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L194">IAgoraRtmService.ts:194</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L551">IAgoraRtmService.ts:551</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="sendMessage" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>send<wbr/>Message</span><a href="#sendMessage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="sendMessage.sendMessage-1"><span class="tsd-kind-call-signature">send<wbr/>Message</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#sendMessage.sendMessage-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Sends a channel message.</p>
+<p>After you successfully send a channel message, all members in the channel receive the message in the
+onMessageReceived() callback.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">message</span>: <a href="IMessage.html" class="tsd-signature-type tsd-kind-class">IMessage</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">message</span>: <a href="IMessage.html" class="tsd-signature-type tsd-kind-class">IMessage</a></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the channel message that you want to send: IMessage.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L184">IAgoraRtmService.ts:184</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L506">IAgoraRtmService.ts:506</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="setEventHandler" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>set<wbr/>Event<wbr/>Handler</span><a href="#setEventHandler" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="setEventHandler.setEventHandler-1"><span class="tsd-kind-call-signature">set<wbr/>Event<wbr/>Handler</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">eventHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#setEventHandler.setEventHandler-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Sets an event handler for IChannel.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IChannelEventHandler.html" class="tsd-signature-type tsd-kind-interface">IChannelEventHandler</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">eventHandler</span>: <a href="../interfaces/IChannelEventHandler.html" class="tsd-signature-type tsd-kind-interface">IChannelEventHandler</a></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the event handler of IChannel: IChannelEventHandler.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L181">IAgoraRtmService.ts:181</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L476">IAgoraRtmService.ts:476</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="updateAttributes" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagAbstract">Abstract</code> <span>update<wbr/>Attributes</span><a href="#updateAttributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="updateAttributes.updateAttributes-1"><span class="tsd-kind-call-signature">update<wbr/>Attributes</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">attributes</span>, <span class="tsd-kind-parameter">requestId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#updateAttributes.updateAttributes-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates the channel attributes.</p>
+<p>A successful method call triggers the onUpdateAttributesResponse() callback on the local client.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">attributes</span>: <a href="IChannelAttributes.html" class="tsd-signature-type tsd-kind-class">IChannelAttributes</a><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><span class="tsd-kind-parameter">attributes</span>: <a href="IChannelAttributes.html" class="tsd-signature-type tsd-kind-class">IChannelAttributes</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>The pointer to the channel attributes that you want to update: IChannelAttributes.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>ID of the current update request.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><ul>
+<li>0: Success.</li>
+<li>&lt; 0: Failure.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/8a5a4c8/src/IAgoraRtmService.ts#L185">IAgoraRtmService.ts:185</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/d1dd7e7/src/IAgoraRtmService.ts#L517">IAgoraRtmService.ts:517</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
