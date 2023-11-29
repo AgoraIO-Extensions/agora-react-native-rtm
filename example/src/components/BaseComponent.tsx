@@ -1,5 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { RTM_ERROR_CODE, RtmConfig } from 'agora-react-native-rtm';
+import {
+  LockEvent,
+  PresenceEvent,
+  RTM_ERROR_CODE,
+  RtmConfig,
+  StorageEvent,
+} from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import Config from '../config/agora.config';
@@ -48,6 +54,18 @@ export default function BaseComponent({
     setLoginSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
   }, []);
 
+  const onStorageEvent = useCallback((event: StorageEvent) => {
+    log.log('onStorageEvent', 'event', event);
+  }, []);
+
+  const onLockEvent = useCallback((event: LockEvent) => {
+    log.log('onLockEvent', 'event', event);
+  }, []);
+
+  const onPresenceEvent = useCallback((event: PresenceEvent) => {
+    log.log('onPresenceEvent', 'event', event);
+  }, []);
+
   useEffect(() => {
     const headerRight = () => <Header getData={() => log.logSink._data} />;
     navigation.setOptions({ headerRight });
@@ -86,11 +104,24 @@ export default function BaseComponent({
 
   useEffect(() => {
     client.addEventListener('onLoginResult', onLoginResult);
+    client.addEventListener('onLockEvent', onLockEvent);
+    client.addEventListener('onStorageEvent', onStorageEvent);
+    client.addEventListener('onPresenceEvent', onPresenceEvent);
 
     return () => {
       client.removeEventListener('onLoginResult', onLoginResult);
+      client.removeEventListener('onLockEvent', onLockEvent);
+      client.removeEventListener('onStorageEvent', onStorageEvent);
+      client.removeEventListener('onPresenceEvent', onPresenceEvent);
     };
-  }, [client, uid, onLoginResult]);
+  }, [
+    client,
+    uid,
+    onLoginResult,
+    onLockEvent,
+    onStorageEvent,
+    onPresenceEvent,
+  ]);
 
   /**
    * Step 3: login to rtm

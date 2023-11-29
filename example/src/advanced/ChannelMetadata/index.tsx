@@ -6,7 +6,6 @@ import {
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
   RtmMetadata,
-  StorageEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -176,10 +175,6 @@ export default function ChannelMetadata() {
     []
   );
 
-  const onStorageEvent = useCallback((event: StorageEvent) => {
-    log.log('onStorageEvent', 'event', event);
-  }, []);
-
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
@@ -193,6 +188,7 @@ export default function ChannelMetadata() {
       withMessage: true,
       withMetadata: true,
       withPresence: true,
+      withLock: true,
     });
   };
 
@@ -220,7 +216,7 @@ export default function ChannelMetadata() {
       .getStorage()
       .setChannelMetadata(
         cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
         ''
@@ -233,7 +229,7 @@ export default function ChannelMetadata() {
   const getChannelMetadata = () => {
     getChannelMetadataRequestId.current = client
       .getStorage()
-      .getChannelMetadata(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM);
+      .getChannelMetadata(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE);
   };
 
   /**
@@ -252,7 +248,7 @@ export default function ChannelMetadata() {
       .getStorage()
       .updateChannelMetadata(
         cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
         ''
@@ -275,7 +271,7 @@ export default function ChannelMetadata() {
       .getStorage()
       .removeChannelMetadata(
         cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
         ''
@@ -300,7 +296,6 @@ export default function ChannelMetadata() {
       'onUpdateChannelMetadataResult',
       onUpdateChannelMetadataResult
     );
-    client?.addEventListener('onStorageEvent', onStorageEvent);
 
     return () => {
       client.removeEventListener('onSubscribeResult', onSubscribeResult);
@@ -320,7 +315,6 @@ export default function ChannelMetadata() {
         'onUpdateChannelMetadataResult',
         onUpdateChannelMetadataResult
       );
-      client?.removeEventListener('onStorageEvent', onStorageEvent);
     };
   }, [
     client,
@@ -330,7 +324,6 @@ export default function ChannelMetadata() {
     onGetChannelMetadataResult,
     onRemoveChannelMetadataResult,
     onUpdateChannelMetadataResult,
-    onStorageEvent,
   ]);
 
   const onConnectionStateChanged = useCallback(

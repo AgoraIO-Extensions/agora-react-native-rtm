@@ -2,13 +2,11 @@ import { Buffer } from 'buffer';
 
 import {
   MessageEvent,
-  PresenceEvent,
   PublishOptions,
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
   RTM_MESSAGE_TYPE,
-  StorageEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -28,10 +26,6 @@ export default function PublishMessage() {
   const [uid, setUid] = useState<string>(Config.uid);
   const [messages, setMessages] = useState<AgoraMessage[]>([]);
 
-  const onStorageEvent = useCallback((event: StorageEvent) => {
-    log.log('onStorageEvent', 'event', event);
-  }, []);
-
   const onSubscribeResult = useCallback(
     (requestId: number, channelName: string, errorCode: RTM_ERROR_CODE) => {
       log.log(
@@ -47,10 +41,6 @@ export default function PublishMessage() {
     },
     []
   );
-
-  const onPresenceEvent = useCallback((event: PresenceEvent) => {
-    log.log('onPresenceEvent', 'event', event);
-  }, []);
 
   const onPublishResult = useCallback(
     (requestId: number, errorCode: RTM_ERROR_CODE) => {
@@ -158,6 +148,7 @@ export default function PublishMessage() {
       withMessage: true,
       withMetadata: true,
       withPresence: true,
+      withLock: true,
     });
   };
 
@@ -170,28 +161,16 @@ export default function PublishMessage() {
   };
 
   useEffect(() => {
-    client.addEventListener('onStorageEvent', onStorageEvent);
     client.addEventListener('onSubscribeResult', onSubscribeResult);
-    client.addEventListener('onPresenceEvent', onPresenceEvent);
     client.addEventListener('onMessageEvent', onMessageEvent);
     client.addEventListener('onPublishResult', onPublishResult);
 
     return () => {
-      client.removeEventListener('onStorageEvent', onStorageEvent);
       client.removeEventListener('onSubscribeResult', onSubscribeResult);
-      client.removeEventListener('onPresenceEvent', onPresenceEvent);
       client.removeEventListener('onMessageEvent', onMessageEvent);
       client.removeEventListener('onPublishResult', onPublishResult);
     };
-  }, [
-    client,
-    uid,
-    onStorageEvent,
-    onSubscribeResult,
-    onPresenceEvent,
-    onMessageEvent,
-    onPublishResult,
-  ]);
+  }, [client, uid, onSubscribeResult, onMessageEvent, onPublishResult]);
 
   const onConnectionStateChanged = useCallback(
     (

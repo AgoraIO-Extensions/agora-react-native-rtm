@@ -240,6 +240,7 @@ export default function Lock() {
       withMessage: true,
       withMetadata: true,
       withPresence: true,
+      withLock: true,
     });
   };
 
@@ -257,7 +258,7 @@ export default function Lock() {
   const getLocks = () => {
     getLocksRequestId.current = client
       .getLock()
-      .getLocks(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM);
+      .getLocks(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE);
   };
 
   /**
@@ -266,7 +267,7 @@ export default function Lock() {
   const setLock = () => {
     setLockRequestId.current = client
       .getLock()
-      .setLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM, lockName, ttl);
+      .setLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE, lockName, ttl);
   };
 
   /**
@@ -277,7 +278,7 @@ export default function Lock() {
       .getLock()
       .acquireLock(
         cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         lockName,
         false
       );
@@ -289,7 +290,7 @@ export default function Lock() {
   const releaseLock = () => {
     releaseLockRequestId.current = client
       .getLock()
-      .releaseLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM, lockName);
+      .releaseLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE, lockName);
   };
 
   /**
@@ -300,7 +301,7 @@ export default function Lock() {
       .getLock()
       .revokeLock(
         cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         lockName,
         Config.uid
       );
@@ -312,7 +313,7 @@ export default function Lock() {
   const removeLock = () => {
     removeLockRequestId.current = client
       .getLock()
-      .removeLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM, lockName);
+      .removeLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE, lockName);
   };
 
   useEffect(() => {

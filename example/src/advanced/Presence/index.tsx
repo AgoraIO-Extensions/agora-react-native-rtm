@@ -1,6 +1,5 @@
 import {
   ChannelInfo,
-  PresenceEvent,
   PresenceOptions,
   RTM_CHANNEL_TYPE,
   RTM_CONNECTION_CHANGE_REASON,
@@ -229,10 +228,6 @@ export default function Presence() {
     []
   );
 
-  const onPresenceEvent = useCallback((event: PresenceEvent) => {
-    log.log('onPresenceEvent', 'event', event);
-  }, []);
-
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
@@ -246,6 +241,7 @@ export default function Presence() {
       withMessage: true,
       withMetadata: true,
       withPresence: true,
+      withLock: true,
     });
   };
 
@@ -355,7 +351,6 @@ export default function Presence() {
       'onPresenceRemoveStateResult',
       onPresenceRemoveStateResult
     );
-    client.addEventListener('onPresenceEvent', onPresenceEvent);
 
     return () => {
       client.removeEventListener('onSubscribeResult', onSubscribeResult);
@@ -381,7 +376,6 @@ export default function Presence() {
         'onPresenceRemoveStateResult',
         onPresenceRemoveStateResult
       );
-      client.removeEventListener('onPresenceEvent', onPresenceEvent);
     };
   }, [
     client,
@@ -394,7 +388,6 @@ export default function Presence() {
     onPresenceSetStateResult,
     onPresenceGetStateResult,
     onPresenceRemoveStateResult,
-    onPresenceEvent,
   ]);
 
   const onConnectionStateChanged = useCallback(

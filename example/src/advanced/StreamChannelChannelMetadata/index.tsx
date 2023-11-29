@@ -8,7 +8,6 @@ import {
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
   RtmMetadata,
-  StorageEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -186,10 +185,6 @@ export default function StreamChannelChannelMetadata() {
     []
   );
 
-  const onStorageEvent = useCallback((event: StorageEvent) => {
-    log.log('onStorageEvent', 'event', event);
-  }, []);
-
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
@@ -333,7 +328,6 @@ export default function StreamChannelChannelMetadata() {
       'onUpdateChannelMetadataResult',
       onUpdateChannelMetadataResult
     );
-    client?.addEventListener('onStorageEvent', onStorageEvent);
 
     return () => {
       client.removeEventListener('onJoinResult', onJoinResult);
@@ -353,7 +347,6 @@ export default function StreamChannelChannelMetadata() {
         'onUpdateChannelMetadataResult',
         onUpdateChannelMetadataResult
       );
-      client?.removeEventListener('onStorageEvent', onStorageEvent);
     };
   }, [
     client,
@@ -363,7 +356,6 @@ export default function StreamChannelChannelMetadata() {
     onGetChannelMetadataResult,
     onRemoveChannelMetadataResult,
     onUpdateChannelMetadataResult,
-    onStorageEvent,
   ]);
 
   const onConnectionStateChanged = useCallback(

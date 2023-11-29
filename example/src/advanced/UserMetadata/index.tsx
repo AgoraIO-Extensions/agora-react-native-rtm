@@ -5,7 +5,6 @@ import {
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
   RtmMetadata,
-  StorageEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -149,10 +148,6 @@ export default function UserMetadata() {
     []
   );
 
-  const onStorageEvent = useCallback((event: StorageEvent) => {
-    log.log('onStorageEvent', 'event', event);
-  }, []);
-
   const onSubscribeUserMetadataResult = useCallback(
     (requestId: number, userId: string, errorCode: RTM_ERROR_CODE) => {
       log.log(
@@ -187,6 +182,7 @@ export default function UserMetadata() {
       withMessage: true,
       withMetadata: true,
       withPresence: true,
+      withLock: true,
     });
   };
 
@@ -304,7 +300,6 @@ export default function UserMetadata() {
       'onUpdateUserMetadataResult',
       onUpdateUserMetadataResult
     );
-    client?.addEventListener('onStorageEvent', onStorageEvent);
     client?.addEventListener(
       'onSubscribeUserMetadataResult',
       onSubscribeUserMetadataResult
@@ -328,7 +323,6 @@ export default function UserMetadata() {
         'onUpdateUserMetadataResult',
         onUpdateUserMetadataResult
       );
-      client.removeEventListener('onStorageEvent', onStorageEvent);
       client.removeEventListener(
         'onSubscribeUserMetadataResult',
         onSubscribeUserMetadataResult
@@ -342,7 +336,6 @@ export default function UserMetadata() {
     onGetUserMetadataResult,
     onRemoveUserMetadataResult,
     onUpdateUserMetadataResult,
-    onStorageEvent,
     onSubscribeUserMetadataResult,
   ]);
 
