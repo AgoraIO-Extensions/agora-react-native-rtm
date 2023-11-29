@@ -22,6 +22,7 @@ export const LogSink = ({ visible, data, onBackdropPress }: Props) => {
       <FlatList
         data={data}
         inverted={true}
+        scrollEnabled
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => <AgoraText>{item}</AgoraText>}
       />

@@ -14,15 +14,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
-import {
-  AgoraButton,
-  AgoraDropdown,
-  AgoraStyle,
-  AgoraTextInput,
-} from '../../components/ui';
+import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
-import { arrayToItems } from '../../utils';
 import * as log from '../../utils/log';
 
 export default function Presence() {
@@ -38,8 +32,8 @@ export default function Presence() {
   const [cName, setCName] = useState<string>(Config.channelName);
   const [uid, setUid] = useState<string>(Config.uid);
   const [searchUid, setSearchUid] = useState<string>(Config.uid);
-  const [feeling, setFeeling] = useState<string>('happy');
-  const [location, setLocation] = useState<string>('tokyo');
+  const [stateKey, setStateKey] = useState<string>('test state');
+  const [stateValue, setStateValue] = useState<string>('test state value');
 
   const onSubscribeResult = useCallback(
     (requestId: number, channelName: string, errorCode: RTM_ERROR_CODE) => {
@@ -309,17 +303,15 @@ export default function Presence() {
    * Step 4 : setState
    */
   const setState = () => {
-    setStateRequestId.current = client
-      .getPresence()
-      .setState(
-        cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
-        [
-          new StateItem({ key: 'feeling', value: feeling }),
-          new StateItem({ key: 'location', value: location }),
-        ],
-        1
-      );
+    setStateRequestId.current = client.getPresence().setState(
+      cName,
+      RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
+      [
+        new StateItem({ key: stateKey, value: stateValue }),
+        // new StateItem({ key: 'location', value: location }),
+      ],
+      1
+    );
   };
 
   /**
@@ -496,21 +488,19 @@ export default function Presence() {
           }}
         />
 
-        <AgoraDropdown
-          titleStyle={AgoraStyle.dropdownTitle}
-          title={'what is your location?'}
-          items={arrayToItems(['tokyo', 'shanghai', 'beijing'])}
-          value={location}
-          onValueChange={(value) => {
-            setLocation(value);
+        <AgoraTextInput
+          label="input state key"
+          value={stateKey}
+          onChangeText={(text) => {
+            setStateKey(text);
           }}
         />
         <AgoraTextInput
           onChangeText={(text) => {
-            setFeeling(text);
+            setStateValue(text);
           }}
-          label="How do you feel now?"
-          value={feeling}
+          label="input state value"
+          value={stateValue}
         />
         <AgoraButton
           title={`setState`}

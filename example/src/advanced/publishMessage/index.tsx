@@ -62,7 +62,7 @@ export default function PublishMessage() {
         errorCode
       );
       if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
-        log.error('CHANNEL_INVALID_MESSAGE', errorCode);
+        log.error(`CHANNEL_INVALID_MESSAGE: ${errorCode}`);
       } else {
         messages.map((message) => {
           if (message.requestId === requestId) {

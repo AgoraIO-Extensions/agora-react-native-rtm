@@ -1,4 +1,6 @@
 import {
+  IStreamChannel,
+  JoinChannelOptions,
   LockDetail,
   RTM_CHANNEL_TYPE,
   RTM_CONNECTION_CHANGE_REASON,
@@ -20,9 +22,10 @@ import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
-export default function Lock() {
+export default function StreamChannelLock() {
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const [subscribeSuccess, setSubscribeSuccess] = useState(false);
+  const [joinSuccess, setJoinSuccess] = useState(false);
+  const [streamChannel, setStreamChannel] = useState<IStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
   const acquireLockRequestId = useRef<number>();
   const setLockRequestId = useRef<number>();
@@ -36,18 +39,25 @@ export default function Lock() {
   const [lockName, setLockName] = useState<string>('lock-test');
   const [ttl, setTtl] = useState<number>(10);
 
-  const onSubscribeResult = useCallback(
-    (requestId: number, channelName: string, errorCode: RTM_ERROR_CODE) => {
-      log.log(
-        'onSubscribeResult',
+  const onJoinResult = useCallback(
+    (
+      requestId: number,
+      channelName: string,
+      userId: string,
+      errorCode: RTM_ERROR_CODE
+    ) => {
+      log.info(
+        'onJoinResult',
         'requestId',
         requestId,
         'channelName',
         channelName,
+        'userId',
+        userId,
         'errorCode',
         errorCode
       );
-      setSubscribeSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
+      setJoinSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
     },
     []
   );
@@ -233,26 +243,49 @@ export default function Lock() {
   const client = useRtmClient();
 
   /**
-   * Step 1-1(optional) : subscribe message channel
+   * Step 1-1 : createStreamChannel
    */
-  const subscribe = () => {
-    client.subscribe(Config.channelName, {
-      withMessage: true,
-      withMetadata: true,
-      withPresence: true,
-    });
+  const createStreamChannel = () => {
+    if (joinSuccess) {
+      log.error('already joined channel');
+      return;
+    }
+    let result = client.createStreamChannel(cName);
+    setStreamChannel(result);
   };
 
   /**
-   * Step 1-2 : unsubscribe message channel
+   * Step 1-2 : join message channel
    */
-  const unsubscribe = () => {
-    client.unsubscribe(Config.channelName);
-    setSubscribeSuccess(false);
+  const join = () => {
+    if (!streamChannel) {
+      log.error('please create streamChannel first');
+      return;
+    }
+    streamChannel.join(
+      new JoinChannelOptions({ token: Config.appId, withMetadata: true })
+    );
   };
 
   /**
-   * Step 1-3 : getLocks
+   * Step 1-3 : leave message channel
+   */
+  const leave = () => {
+    if (streamChannel) {
+      streamChannel.leave(0);
+    }
+  };
+
+  /**
+   * Step 1-4 : destroyStreamChannel
+   */
+  const destroyStreamChannel = useCallback(() => {
+    streamChannel?.release();
+    setStreamChannel(undefined);
+  }, [streamChannel]);
+
+  /**
+   * Step 1-4 : getLocks
    */
   const getLocks = () => {
     getLocksRequestId.current = client
@@ -316,7 +349,7 @@ export default function Lock() {
   };
 
   useEffect(() => {
-    client.addEventListener('onSubscribeResult', onSubscribeResult);
+    client.addEventListener('onJoinResult', onJoinResult);
     client.addEventListener('onSetLockResult', onSetLockResult);
     client?.addEventListener('onAcquireLockResult', onAcquireLockResult);
     client?.addEventListener('onReleaseLockResult', onReleaseLockResult);
@@ -325,7 +358,7 @@ export default function Lock() {
     client?.addEventListener('onGetLocksResult', onGetLocksResult);
 
     return () => {
-      client.removeEventListener('onSubscribeResult', onSubscribeResult);
+      client.removeEventListener('onJoinResult', onJoinResult);
       client.removeEventListener('onSetLockResult', onSetLockResult);
       client?.removeEventListener('onAcquireLockResult', onAcquireLockResult);
       client?.removeEventListener('onReleaseLockResult', onReleaseLockResult);
@@ -336,7 +369,7 @@ export default function Lock() {
   }, [
     client,
     uid,
-    onSubscribeResult,
+    onJoinResult,
     onSetLockResult,
     onAcquireLockResult,
     onReleaseLockResult,
@@ -370,12 +403,13 @@ export default function Lock() {
             RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
           ) {
             setLoginSuccess(false);
+            destroyStreamChannel();
           }
-          setSubscribeSuccess(false);
+          setJoinSuccess(false);
           break;
       }
     },
-    []
+    [destroyStreamChannel]
   );
   useEffect(() => {
     client?.addEventListener(
@@ -400,9 +434,18 @@ export default function Lock() {
         />
         <AgoraButton
           disabled={!loginSuccess}
-          title={`${subscribeSuccess ? 'unsubscribe' : 'subscribe'}`}
+          title={`${
+            streamChannel ? 'destroyStreamChannel' : 'createStreamChannel'
+          }`}
           onPress={() => {
-            subscribeSuccess ? unsubscribe() : subscribe();
+            streamChannel ? destroyStreamChannel() : createStreamChannel();
+          }}
+        />
+        <AgoraButton
+          disabled={!loginSuccess || !streamChannel}
+          title={`${joinSuccess ? 'leaveChannel' : 'joinChannel'}`}
+          onPress={() => {
+            joinSuccess ? leave() : join();
           }}
         />
         <AgoraTextInput

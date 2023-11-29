@@ -24,7 +24,6 @@ import Advanced from './advanced';
 import Basic from './basic';
 import Client from './components/Client';
 const RootStack = createStackNavigator<any>();
-// setDebuggable(!isDebuggable());
 const DATA = [Basic, Advanced];
 
 export default function App() {
@@ -70,7 +69,9 @@ export default function App() {
           onPress={() => {
             setDebuggable(!isDebuggable());
           }}
-        />
+        >
+          <Text style={styles.version}>Powered by Agora RTM SDK</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </NavigationContainer>
   );

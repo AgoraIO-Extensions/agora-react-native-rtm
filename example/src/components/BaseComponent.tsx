@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { RTM_ERROR_CODE, RtmConfig } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -5,12 +6,32 @@ import Config from '../config/agora.config';
 import { useRtmClient } from '../hooks/useRtmClient';
 import * as log from '../utils/log';
 
+import { LogSink } from './LogSink';
 import { AgoraButton, AgoraStyle, AgoraTextInput, AgoraView } from './ui';
 
 interface Props {
   onUidChanged?: (value: string) => void;
   onChannelNameChanged?: (value: string) => void;
 }
+
+const Header = ({ getData }: { getData: () => Array<string> }) => {
+  const [visible, setVisible] = useState(false);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+
+  return (
+    <>
+      <AgoraButton title="Logs" onPress={toggleOverlay} />
+      <LogSink
+        visible={visible}
+        data={getData()}
+        onBackdropPress={toggleOverlay}
+      />
+    </>
+  );
+};
 
 export default function BaseComponent({
   onUidChanged,
@@ -20,10 +41,22 @@ export default function BaseComponent({
   const [initResult, setInitResult] = useState<number>(0);
   const [cName, setCName] = useState<string>(Config.channelName);
   const [uid, setUid] = useState<string>(Config.uid);
+  const navigation = useNavigation();
 
   const onLoginResult = useCallback((errorCode: RTM_ERROR_CODE) => {
     log.log('onLoginResult', 'errorCode', errorCode);
     setLoginSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
+  }, []);
+
+  useEffect(() => {
+    const headerRight = () => <Header getData={() => log.logSink._data} />;
+    navigation.setOptions({ headerRight });
+  }, [navigation]);
+
+  useEffect(() => {
+    return () => {
+      log.logSink.clearData();
+    };
   }, []);
 
   /**
