@@ -31,7 +31,8 @@
   ],
   "scripts": {
     "terra": "cd scripts/terra && yarn terra",
-    "test": "jest",
+    "test": "jest --collect-coverage",
+    "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{cjs,js,ts,tsx}\"",
     "lint:fix": "eslint --fix \"**/*.{cjs,js,ts,tsx}\"",
@@ -96,16 +97,6 @@
   "packageManager": "yarn@4.0.1",
   "engines": {
     "node": ">= 18.0.0"
-  },
-  "jest": {
-    "preset": "react-native",
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/example/e2e"
-    ]
   },
   "release-it": {
     "git": {

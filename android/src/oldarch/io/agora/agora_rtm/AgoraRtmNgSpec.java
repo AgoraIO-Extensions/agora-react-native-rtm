@@ -15,10 +15,6 @@ public abstract class AgoraRtmNgSpec extends ReactContextBaseJavaModule {
 
   public abstract String callApi(ReadableMap arguments);
 
-  public abstract void
-  showRPSystemBroadcastPickerView(boolean showsMicrophoneButton,
-                                  Promise promise);
-
   public abstract void addListener(String eventName);
 
   public abstract void removeListeners(double count);

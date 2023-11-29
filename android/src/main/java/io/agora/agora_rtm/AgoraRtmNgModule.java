@@ -83,12 +83,6 @@ public class AgoraRtmNgModule
   }
 
   @ReactMethod
-  public void showRPSystemBroadcastPickerView(boolean showsMicrophoneButton,
-                                              Promise promise) {
-    promise.reject("", "not support");
-  }
-
-  @ReactMethod
   public void addListener(String eventName) {}
 
   @ReactMethod

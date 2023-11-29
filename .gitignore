@@ -84,5 +84,8 @@ env_local.*
 docs/
 example/ios/*.dSYM.zip
 
+# coverage
+coverage
 
+# terra
 .terra

@@ -12,10 +12,6 @@ export interface Spec extends TurboModule {
     buffers?: string[];
   }): string;
 
-  showRPSystemBroadcastPickerView(
-    showsMicrophoneButton: boolean
-  ): Promise<void>;
-
   // Keep: Required for RN built in Event Emitter Calls.
   addListener(eventName: string): void;
 

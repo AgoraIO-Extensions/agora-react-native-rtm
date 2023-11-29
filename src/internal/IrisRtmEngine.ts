@@ -172,8 +172,6 @@ export function callIrisApi(this: any, funcName: string, params: any): any {
       };
     }
 
-    // RTM_ERROR_DUPLICATE_OPERATION
-
     if (funcName === 'RtmClient_initialize') {
       let config: RtmConfig = params.config;
       if (config?.eventHandler) {
