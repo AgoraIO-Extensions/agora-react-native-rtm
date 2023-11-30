@@ -20,7 +20,7 @@ interface Props {
   onChannelNameChanged?: (value: string) => void;
 }
 
-const Header = ({ getData }: { getData: () => Array<string> }) => {
+const Header = () => {
   const [visible, setVisible] = useState(false);
 
   const toggleOverlay = () => {
@@ -30,11 +30,7 @@ const Header = ({ getData }: { getData: () => Array<string> }) => {
   return (
     <>
       <AgoraButton title="Logs" onPress={toggleOverlay} />
-      <LogSink
-        visible={visible}
-        data={getData()}
-        onBackdropPress={toggleOverlay}
-      />
+      {visible && <LogSink onBackdropPress={toggleOverlay} />}
     </>
   );
 };
@@ -67,7 +63,7 @@ export default function BaseComponent({
   }, []);
 
   useEffect(() => {
-    const headerRight = () => <Header getData={() => log.logSink._data} />;
+    const headerRight = () => <Header />;
     navigation.setOptions({ headerRight });
   }, [navigation]);
 
