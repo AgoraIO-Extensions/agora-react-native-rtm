@@ -237,7 +237,7 @@ export default function Presence() {
    * Step 1-1(optional) : subscribe message channel
    */
   const subscribe = () => {
-    client.subscribe(Config.channelName, {
+    client.subscribe(cName, {
       withMessage: true,
       withMetadata: true,
       withPresence: true,
@@ -249,7 +249,7 @@ export default function Presence() {
    * Step 1-1 : unsubscribe message channel
    */
   const unsubscribe = () => {
-    client.unsubscribe(Config.channelName);
+    client.unsubscribe(cName);
     setSubscribeSuccess(false);
   };
 
@@ -328,7 +328,7 @@ export default function Presence() {
       .removeState(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
-        ['feeling', 'location'],
+        [stateKey],
         1
       );
   };

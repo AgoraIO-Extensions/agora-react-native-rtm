@@ -178,7 +178,7 @@ export default function UserMetadata() {
    * Step 1-1(optional) : subscribe message channel
    */
   const subscribe = () => {
-    client.subscribe(Config.channelName, {
+    client.subscribe(cName, {
       withMessage: true,
       withMetadata: true,
       withPresence: true,
@@ -190,7 +190,7 @@ export default function UserMetadata() {
    * Step 1-2 : unsubscribe message channel
    */
   const unsubscribe = () => {
-    client.unsubscribe(Config.channelName);
+    client.unsubscribe(cName);
     setSubscribeSuccess(false);
   };
 
