@@ -233,14 +233,14 @@ export default function StreamChannelUserMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
-        authorUserId: Config.uid,
+        authorUserId: uid,
       }),
     ];
     metadata.current.metadataItemsSize = 1;
     setUserMetadataRequestId.current = client
       .getStorage()
       .setUserMetadata(
-        Config.uid,
+        uid,
         metadata.current,
         new MetadataOptions({ recordUserId: true })
       );
@@ -250,9 +250,7 @@ export default function StreamChannelUserMetadata() {
    * Step 3 : getUserMetadata
    */
   const getUserMetadata = () => {
-    getUserMetadataRequestId.current = client
-      .getStorage()
-      .getUserMetadata(Config.uid);
+    getUserMetadataRequestId.current = client.getStorage().getUserMetadata(uid);
   };
 
   /**
@@ -263,14 +261,14 @@ export default function StreamChannelUserMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
-        authorUserId: Config.uid,
+        authorUserId: uid,
       }),
     ];
     metadata.current.metadataItemsSize = 1;
     updateUserMetadataRequestId.current = client
       .getStorage()
       .updateUserMetadata(
-        Config.uid,
+        uid,
         metadata.current,
         new MetadataOptions({ recordUserId: true })
       );
@@ -284,14 +282,14 @@ export default function StreamChannelUserMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
-        authorUserId: Config.uid,
+        authorUserId: uid,
       }),
     ];
     metadata.current.metadataItemsSize = 1;
     removeUserMetadataRequestId.current = client
       .getStorage()
       .removeUserMetadata(
-        Config.uid,
+        uid,
         metadata.current,
         new MetadataOptions({ recordUserId: true })
       );

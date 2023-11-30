@@ -240,7 +240,7 @@ export default function StreamChannelChannelMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
-        authorUserId: Config.uid,
+        authorUserId: uid,
       }),
     ];
     metadata.current.metadataItemsSize = 1;
@@ -272,7 +272,7 @@ export default function StreamChannelChannelMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
-        authorUserId: Config.uid,
+        authorUserId: uid,
       }),
     ];
     metadata.current.metadataItemsSize = 1;
@@ -295,7 +295,7 @@ export default function StreamChannelChannelMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
-        authorUserId: Config.uid,
+        authorUserId: uid,
       }),
     ];
     metadata.current.metadataItemsSize = 1;

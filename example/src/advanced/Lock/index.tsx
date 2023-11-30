@@ -303,7 +303,7 @@ export default function Lock() {
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         lockName,
-        Config.uid
+        uid
       );
   };
 

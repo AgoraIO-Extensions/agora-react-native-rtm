@@ -335,7 +335,7 @@ export default function StreamChannelLock() {
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         lockName,
-        Config.uid
+        uid
       );
   };
 
