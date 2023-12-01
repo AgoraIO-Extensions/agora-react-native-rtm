@@ -31,10 +31,12 @@ export default function UserMetadata() {
   const [subscribeUid, setSubscribeUid] = useState<string>('123');
   const [metadataKey, setMetadataKey] = useState<string>('profile');
   const [metadataValue, setMetadataValue] = useState<string>('I am a student');
+  const [majorRevision, setMajorRevision] = useState<number>(-1);
+  const [revision, setRevision] = useState<number>(-1);
 
   const metadata = useRef<RtmMetadata>(
     new RtmMetadata({
-      majorRevision: -1,
+      majorRevision: majorRevision,
       metadataItems: [],
       metadataItemsSize: 0,
     })
@@ -202,6 +204,7 @@ export default function UserMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
+        revision: revision,
         authorUserId: uid,
       }),
     ];
@@ -230,6 +233,7 @@ export default function UserMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
+        revision: revision,
         authorUserId: uid,
       }),
     ];
@@ -251,6 +255,7 @@ export default function UserMetadata() {
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
+        revision: revision,
         authorUserId: uid,
       }),
     ];
@@ -400,6 +405,14 @@ export default function UserMetadata() {
         />
         <AgoraTextInput
           onChangeText={(text) => {
+            if (!text) return;
+            setMajorRevision(parseInt(text, 10));
+          }}
+          label="majorRevision"
+          value={majorRevision.toString()}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
             setMetadataKey(text);
           }}
           label="metadata key"
@@ -411,6 +424,14 @@ export default function UserMetadata() {
           }}
           label="metadata value"
           value={metadataValue}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
+            if (!text) return;
+            setRevision(parseInt(text, 10));
+          }}
+          label="revision"
+          value={revision.toString()}
         />
         <AgoraButton
           title={`setUserMetadata`}

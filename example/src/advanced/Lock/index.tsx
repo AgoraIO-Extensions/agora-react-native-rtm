@@ -13,6 +13,7 @@ import BaseComponent from '../../components/BaseComponent';
 import {
   AgoraButton,
   AgoraStyle,
+  AgoraSwitch,
   AgoraText,
   AgoraTextInput,
 } from '../../components/ui';
@@ -35,6 +36,8 @@ export default function Lock() {
 
   const [lockName, setLockName] = useState<string>('lock-test');
   const [ttl, setTtl] = useState<number>(10);
+  const [retry, setRetry] = useState<boolean>(false);
+  const [revokeOwner, setRevokeOwner] = useState<string>('');
 
   const onSubscribeResult = useCallback(
     (requestId: number, channelName: string, errorCode: RTM_ERROR_CODE) => {
@@ -280,7 +283,7 @@ export default function Lock() {
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         lockName,
-        false
+        retry
       );
   };
 
@@ -303,7 +306,7 @@ export default function Lock() {
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         lockName,
-        uid
+        revokeOwner
       );
   };
 
@@ -429,6 +432,13 @@ export default function Lock() {
             setLock();
           }}
         />
+        <AgoraSwitch
+          title="retry"
+          value={retry}
+          onValueChange={(v) => {
+            setRetry(v);
+          }}
+        />
         <AgoraButton
           title={`acquireLock`}
           disabled={!loginSuccess}
@@ -442,6 +452,13 @@ export default function Lock() {
           onPress={() => {
             releaseLock();
           }}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
+            setRevokeOwner(text);
+          }}
+          label="revoke lock owner"
+          value={revokeOwner}
         />
         <AgoraButton
           title={`revokeLock`}
