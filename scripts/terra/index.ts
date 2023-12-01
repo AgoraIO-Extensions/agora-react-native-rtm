@@ -135,11 +135,12 @@ export default function (
               getDefaultValue(node.asStruct(), member_variable).length > 0,
             defaultValue: getDefaultValue(node.asStruct(), member_variable),
           };
-          if (member_variable.type.kind === SimpleTypeKind.pointer_t) {
-            member_variable.type.source = member_variable.type.source.replace(
-              '[]',
-              ''
-            );
+          member_variable.type.source = member_variable.type.source.replace(
+            '[]',
+            ''
+          );
+          if (member_variable.type.kind === SimpleTypeKind.array_t) {
+            member_variable.type.source += '[]';
           }
           member_variable.user_data = structMemberVariableUserData;
         });

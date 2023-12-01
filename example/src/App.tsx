@@ -23,15 +23,21 @@ import {
 import Advanced from './advanced';
 import Basic from './basic';
 import Client from './components/Client';
+import { ConfigHeader } from './config/ConfigHeader';
 const RootStack = createStackNavigator<any>();
 const DATA = [Basic, Advanced];
 
 export default function App() {
+  // const [version, setVersion] = useState<SDKBuildInfo>({});
+
   useEffect(() => {
+    const client = createAgoraRtmClient();
+    // setVersion(client.getVersion());
+
     let subscription = AppState.addEventListener('change', (state) => {
       //just for live reload mode To reset the rtm client in Android
       if (state === 'background' && Platform.OS === 'android') {
-        createAgoraRtmClient().release();
+        client.release();
       }
     });
     return () => {
@@ -80,6 +86,11 @@ export default function App() {
 const AppSectionList = SectionList<any>;
 
 const Home = ({ navigation }: StackScreenProps<any>) => {
+  useEffect(() => {
+    const headerRight = () => <ConfigHeader />;
+    navigation.setOptions({ headerRight });
+  }, [navigation]);
+
   return (
     <AppSectionList
       sections={DATA}

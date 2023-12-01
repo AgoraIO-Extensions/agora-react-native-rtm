@@ -1160,12 +1160,12 @@ export class RtmEncryptionConfig {
   /**
    * The encryption salt.
    */
-  encryptionSalt?: number;
+  encryptionSalt?: number[];
   constructor(
     props?: Partial<{
       encryptionMode?: RTM_ENCRYPTION_MODE;
       encryptionKey?: string;
-      encryptionSalt?: number;
+      encryptionSalt?: number[];
     }>
   ) {
     Object.assign(this, props);

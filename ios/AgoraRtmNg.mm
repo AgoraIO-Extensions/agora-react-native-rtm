@@ -184,10 +184,13 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(callApi
   char result[kBasicResultLength] = "";
   int error_code;
 
+  NSUInteger paramsLength =
+      [params lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+
   ApiParam param = {
       .event = funcName.UTF8String,
       .data = params.UTF8String,
-      .data_size = static_cast<unsigned int>(params.length),
+      .data_size = static_cast<unsigned int>(paramsLength),
       .result = result,
       .buffer = buffers,
       .length = length,
