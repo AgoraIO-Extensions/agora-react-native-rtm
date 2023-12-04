@@ -23,7 +23,7 @@ import {
 import Advanced from './advanced';
 import Basic from './basic';
 import Client from './components/Client';
-// import { ConfigHeader } from './config/ConfigHeader';
+import { ConfigHeader } from './config/ConfigHeader';
 const RootStack = createStackNavigator<any>();
 const DATA = [Basic, Advanced];
 
@@ -82,8 +82,8 @@ const AppSectionList = SectionList<any>;
 
 const Home = ({ navigation }: StackScreenProps<any>) => {
   useEffect(() => {
-    // const headerRight = () => <ConfigHeader />;
-    // navigation.setOptions({ headerRight });
+    const headerRight = () => <ConfigHeader />;
+    navigation.setOptions({ headerRight });
   }, [navigation]);
 
   return (

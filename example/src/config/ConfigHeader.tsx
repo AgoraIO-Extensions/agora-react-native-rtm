@@ -18,7 +18,7 @@ import {
   AgoraStyle,
   AgoraTextInput,
 } from '../components/ui';
-import { enumToItems } from '../utils';
+import { enumToItems } from '../utils/index';
 
 import Config from './agora.config';
 
