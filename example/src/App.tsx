@@ -28,16 +28,11 @@ const RootStack = createStackNavigator<any>();
 const DATA = [Basic, Advanced];
 
 export default function App() {
-  // const [version, setVersion] = useState<SDKBuildInfo>({});
-
   useEffect(() => {
-    const client = createAgoraRtmClient();
-    // setVersion(client.getVersion());
-
     let subscription = AppState.addEventListener('change', (state) => {
       //just for live reload mode To reset the rtm client in Android
       if (state === 'background' && Platform.OS === 'android') {
-        client.release();
+        createAgoraRtmClient().release();
       }
     });
     return () => {

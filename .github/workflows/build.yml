@@ -12,6 +12,11 @@ on:
         required: false
         type: boolean
         default: false
+      build_ios:
+        description: 'build iOS'
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   build-android:
@@ -84,6 +89,7 @@ jobs:
           if-no-files-found: error
 
   build-ios:
+    if: ${{ inputs.build_ios }}
     runs-on: macos-latest
     env:
       TURBO_CACHE_DIR: .turbo/ios
