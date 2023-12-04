@@ -4,8 +4,8 @@ import {
   PresenceEvent,
   RTM_ERROR_CODE,
   RtmConfig,
-  // RtmEncryptionConfig,
-  // RtmProxyConfig,
+  RtmEncryptionConfig,
+  RtmProxyConfig,
   StorageEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -91,19 +91,19 @@ export default function BaseComponent({
       new RtmConfig({
         userId: uid,
         appId: Config.appId,
-        // areaCode: Config.areaCode,
-        // proxyConfig: new RtmProxyConfig({
-        //   proxyType: Config.proxyType,
-        //   server: Config.server,
-        //   port: Config.port,
-        //   account: Config.account,
-        //   password: Config.password,
-        // }),
-        // encryptionConfig: new RtmEncryptionConfig({
-        //   encryptionMode: Config.encryptionMode,
-        //   encryptionKey: Config.encryptionKey,
-        //   encryptionSalt: Config.encryptionSalt,
-        // }),
+        areaCode: Config.areaCode,
+        proxyConfig: new RtmProxyConfig({
+          proxyType: Config.proxyType,
+          server: Config.server,
+          port: Config.port,
+          account: Config.account,
+          password: Config.password,
+        }),
+        encryptionConfig: new RtmEncryptionConfig({
+          encryptionMode: Config.encryptionMode,
+          encryptionKey: Config.encryptionKey,
+          encryptionSalt: Config.encryptionSalt,
+        }),
       })
     );
     setInitResult(result);
