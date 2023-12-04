@@ -12,7 +12,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
-import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
+import {
+  AgoraButton,
+  AgoraDivider,
+  AgoraStyle,
+  AgoraSwitch,
+  AgoraTextInput,
+} from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
@@ -21,6 +27,8 @@ export default function ChannelMetadata() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
+  const acquireLockRequestId = useRef<number>();
+  const [retry, setRetry] = useState<boolean>(false);
   const getChannelMetadataRequestId = useRef<number>();
   const setChannelMetadataRequestId = useRef<number>();
   const removeChannelMetadataRequestId = useRef<number>();
@@ -52,6 +60,37 @@ export default function ChannelMetadata() {
         errorCode
       );
       setSubscribeSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
+    },
+    []
+  );
+
+  const onAcquireLockResult = useCallback(
+    (
+      requestId: number,
+      channelName: string,
+      channelType: RTM_CHANNEL_TYPE,
+      _lockName: string,
+      errorCode: RTM_ERROR_CODE,
+      errorDetails: string
+    ) => {
+      log.info(
+        'onAcquireLockResult',
+        'requestId',
+        requestId,
+        'channelName',
+        channelName,
+        'channelType',
+        channelType,
+        'lockName',
+        _lockName,
+        'errorCode',
+        errorCode,
+        'errorDetails',
+        errorDetails
+      );
+      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
+        log.error(`acquire lock failed: errorCode: ${errorCode}`);
+      }
     },
     []
   );
@@ -236,6 +275,20 @@ export default function ChannelMetadata() {
   };
 
   /**
+   * Step 3-1 : acquireLock
+   */
+  const acquireLock = () => {
+    acquireLockRequestId.current = client
+      .getLock()
+      .acquireLock(
+        cName,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
+        lockName,
+        retry
+      );
+  };
+
+  /**
    * Step 4 : updateChannelMetadata
    */
   const updateChannelMetadata = () => {
@@ -289,6 +342,7 @@ export default function ChannelMetadata() {
       'onSetChannelMetadataResult',
       onSetChannelMetadataResult
     );
+    client?.addEventListener('onAcquireLockResult', onAcquireLockResult);
     client?.addEventListener(
       'onGetChannelMetadataResult',
       onGetChannelMetadataResult
@@ -308,6 +362,7 @@ export default function ChannelMetadata() {
         'onSetChannelMetadataResult',
         onSetChannelMetadataResult
       );
+      client?.removeEventListener('onAcquireLockResult', onAcquireLockResult);
       client?.removeEventListener(
         'onGetChannelMetadataResult',
         onGetChannelMetadataResult
@@ -325,6 +380,7 @@ export default function ChannelMetadata() {
     client,
     uid,
     onSubscribeResult,
+    onAcquireLockResult,
     onSetChannelMetadataResult,
     onGetChannelMetadataResult,
     onRemoveChannelMetadataResult,
@@ -419,6 +475,20 @@ export default function ChannelMetadata() {
           }}
           label="lockName value"
           value={lockName}
+        />
+        <AgoraSwitch
+          title="retry"
+          value={retry}
+          onValueChange={(v) => {
+            setRetry(v);
+          }}
+        />
+        <AgoraButton
+          title={`acquireLock`}
+          disabled={!loginSuccess}
+          onPress={() => {
+            acquireLock();
+          }}
         />
         <AgoraTextInput
           onChangeText={(text) => {
