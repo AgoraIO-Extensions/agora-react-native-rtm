@@ -72,8 +72,8 @@ jobs:
 
       - name: Modify APP ID
         run: |
-          sed "s/localAppId = '\(.*\)'/localAppId = '${{ secrets.APP_ID_RTM }}'/g" agora.config.ts > tmp
-          mv tmp agora.config.ts
+          touch env_local.ts
+          echo "export default { appId: '${{ secrets.APP_ID_RTM }}' };" > env_local.ts
         working-directory: example/src/config
 
       - name: Build example for Android
@@ -140,8 +140,8 @@ jobs:
 
       - name: Modify APP ID
         run: |
-          sed "s/localAppId = '\(.*\)'/localAppId = '${{ secrets.APP_ID_RTM }}'/g" agora.config.ts > tmp
-          mv tmp agora.config.ts
+          touch env_local.ts
+          echo "export default { appId: '${{ secrets.APP_ID_RTM }}' };" > env_local.ts
         working-directory: example/src/config
 
       - name: Install the Apple certificate and provisioning profile
