@@ -88,7 +88,6 @@ export default function StreamChannelUserMetadata() {
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
         log.alert(`${userId} metadata:`, `${JSON.stringify(data)}`);
-        metadata.current = data;
       }
     },
     []
