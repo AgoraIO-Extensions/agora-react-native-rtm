@@ -1,4 +1,5 @@
-import { Overlay } from '@rneui/base';
+import { Overlay } from '@rneui/themed';
+
 import {
   RTM_AREA_CODE,
   RTM_ENCRYPTION_MODE,
