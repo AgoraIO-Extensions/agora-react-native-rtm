@@ -1,9 +1,3 @@
-import {
-  RTM_AREA_CODE,
-  RTM_ENCRYPTION_MODE,
-  RTM_PROXY_TYPE,
-} from 'agora-react-native-rtm';
-
 let env: any = '';
 let localAppId = '';
 try {
@@ -22,11 +16,11 @@ const config = {
   logFilePath: '',
   server: '',
   port: 0,
-  proxyType: RTM_PROXY_TYPE.RTM_PROXY_TYPE_NONE,
+  proxyType: 0,
   account: 'ds',
   password: 'ssds',
-  areaCode: RTM_AREA_CODE.RTM_AREA_CODE_GLOB,
-  encryptionMode: RTM_ENCRYPTION_MODE.RTM_ENCRYPTION_MODE_NONE,
+  areaCode: 4294967295,
+  encryptionMode: 0,
   encryptionKey: '',
   encryptionSalt: new Array(32).fill(1, 0, 32),
 };
