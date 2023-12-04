@@ -157,7 +157,7 @@ export default function PublishTopicMessage() {
       errorCode: RTM_ERROR_CODE
     ) => {
       log.info(
-        'onJoinTopicResult',
+        'onLeaveTopicResult',
         'requestId',
         requestId,
         'channelName',

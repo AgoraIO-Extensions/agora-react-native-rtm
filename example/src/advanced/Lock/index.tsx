@@ -95,7 +95,7 @@ export default function Lock() {
       errorCode: RTM_ERROR_CODE
     ) => {
       log.info(
-        'onAcquireLockResult',
+        'onReleaseLockResult',
         'requestId',
         requestId,
         'channelName',

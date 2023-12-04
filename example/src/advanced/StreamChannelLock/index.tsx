@@ -102,7 +102,7 @@ export default function StreamChannelLock() {
       errorCode: RTM_ERROR_CODE
     ) => {
       log.info(
-        'onAcquireLockResult',
+        'onReleaseLockResult',
         'requestId',
         requestId,
         'channelName',

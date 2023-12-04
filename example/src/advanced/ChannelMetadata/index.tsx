@@ -30,6 +30,7 @@ export default function ChannelMetadata() {
   const [metadataValue, setMetadataValue] = useState<string>('rtm test');
   const [majorRevision, setMajorRevision] = useState<number>(-1);
   const [revision, setRevision] = useState<number>(-1);
+  const [lockName, setLockName] = useState<string>('');
 
   const metadata = useRef<RtmMetadata>(
     new RtmMetadata({
@@ -81,7 +82,6 @@ export default function ChannelMetadata() {
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
         log.alert(`${channelName} metadata:`, `${JSON.stringify(data)}`);
-        metadata.current = data;
       }
     },
     []
@@ -222,7 +222,7 @@ export default function ChannelMetadata() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName
       );
   };
 
@@ -255,7 +255,7 @@ export default function ChannelMetadata() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName
       );
   };
 
@@ -279,7 +279,7 @@ export default function ChannelMetadata() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName
       );
   };
 
@@ -412,6 +412,13 @@ export default function ChannelMetadata() {
           }}
           label="metadata value"
           value={metadataValue}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
+            setLockName(text);
+          }}
+          label="lockName value"
+          value={lockName}
         />
         <AgoraTextInput
           onChangeText={(text) => {
