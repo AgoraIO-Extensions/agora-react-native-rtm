@@ -31,6 +31,7 @@ export default function StreamChannelChannelMetadata() {
   const [uid, setUid] = useState<string>(Config.uid);
   const [metadataKey, setMetadataKey] = useState<string>('channel notice');
   const [metadataValue, setMetadataValue] = useState<string>('rtm test');
+  const [lockName, setLockName] = useState<string>('');
 
   const metadata = useRef<RtmMetadata>(
     new RtmMetadata({
@@ -89,7 +90,6 @@ export default function StreamChannelChannelMetadata() {
         errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
       ) {
         log.alert(`${channelName} metadata:`, `${JSON.stringify(data)}`);
-        metadata.current = data;
       }
     },
     []
@@ -251,7 +251,7 @@ export default function StreamChannelChannelMetadata() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName
       );
   };
 
@@ -283,7 +283,7 @@ export default function StreamChannelChannelMetadata() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName
       );
   };
 
@@ -306,7 +306,7 @@ export default function StreamChannelChannelMetadata() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         metadata.current,
         new MetadataOptions({ recordUserId: true }),
-        ''
+        lockName
       );
   };
 
@@ -441,6 +441,13 @@ export default function StreamChannelChannelMetadata() {
           }}
           label="metadata value"
           value={metadataValue}
+        />
+        <AgoraTextInput
+          onChangeText={(text) => {
+            setLockName(text);
+          }}
+          label="lockName value"
+          value={lockName}
         />
         <AgoraButton
           title={`setChannelMetadata`}
