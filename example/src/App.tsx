@@ -3,15 +3,10 @@ import {
   StackScreenProps,
   createStackNavigator,
 } from '@react-navigation/stack';
-import createAgoraRtmClient, {
-  isDebuggable,
-  setDebuggable,
-} from 'agora-react-native-rtm';
+import { isDebuggable, setDebuggable } from 'agora-react-native-rtm';
 import React, { useEffect } from 'react';
 import {
-  AppState,
   Keyboard,
-  Platform,
   SafeAreaView,
   SectionList,
   StyleSheet,
@@ -28,17 +23,6 @@ const RootStack = createStackNavigator<any>();
 const DATA = [Basic, Advanced];
 
 export default function App() {
-  useEffect(() => {
-    let subscription = AppState.addEventListener('change', (state) => {
-      //just for live reload mode To reset the rtm client in Android
-      if (state === 'background' && Platform.OS === 'android') {
-        createAgoraRtmClient().release();
-      }
-    });
-    return () => {
-      subscription.remove();
-    };
-  }, []);
   return (
     <NavigationContainer>
       <SafeAreaView
