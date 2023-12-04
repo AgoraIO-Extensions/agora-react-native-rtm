@@ -2,7 +2,7 @@ import {
   RTM_AREA_CODE,
   RTM_ENCRYPTION_MODE,
   RTM_PROXY_TYPE,
-} from '../../../src/AgoraRtmBase';
+} from 'agora-react-native-rtm';
 
 let env: any = '';
 let localAppId = '';
