@@ -1,9 +1,0 @@
-[
-  "operator==",
-  "operator!=",
-  "operator=",
-  "operator>",
-  "operator<",
-  "Optional",
-  "agora::rtm::IMetadata"
-]

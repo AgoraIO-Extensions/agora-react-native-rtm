@@ -60,9 +60,9 @@ export class MetadataItem {
 
 export abstract class IRtmStorage {
   /**
-  Creates the metadata object and returns the pointer.
+Creates the metadata object and returns the pointer.
 * @return Pointer of the metadata object.
-  */
+*/
   abstract createMetadata(): RtmMetadata;
   /**
    * Set the metadata of a specified channel.

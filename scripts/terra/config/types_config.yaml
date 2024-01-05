@@ -1,5 +1,4 @@
 parsers:
-  # CXXParser should always put first
   - name: CXXParser
     package: '@agoraio-extensions/cxx-parser'
     args:
@@ -24,27 +23,34 @@ parsers:
         exclude:
           - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/include/IAgoraService.h'
 
-  - name: PointerToArrayParser
+  - name: RemoveNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
     args:
-      configJsonFilePath: ./pointer_to_array.json
-  - name: OrderNodeParser
+      configFilePath: ./remove_node_list.ts
+  - name: PointerToArrayParser
     package: '@agoraio-extensions/terra_shared_configs'
+  - name: UpdateSimpleTypeParser
+    package: '@agoraio-extensions/terra_shared_configs'
+  - name: ReturnTypeParser
+    package: '@agoraio-extensions/terra_shared_configs'
+    args:
+      convertReturnToVoid: false
   - name: FixEnumConstantParser
+    package: '@agoraio-extensions/terra_shared_configs'
+  - name: MergeNodeParser
+    package: '@agoraio-extensions/terra_shared_configs'
+  - name: OrderNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
   - name: UpdateSimpleTypeParser
     package: '@agoraio-extensions/terra_shared_configs'
     args:
-      configJsonFilePath: ./param_type_list.json
-  - name: RemoveNodeParser
+      parserDefaultValue: true
+      ignoreDefaultConfig: true
+      configFilePath: ./c_to_ts_config.ts
+  - name: CommentParser
     package: '@agoraio-extensions/terra_shared_configs'
-    args:
-      configJsonFilePath: ./remove_node_list.json
-
-# defines_macros:
-#   - __IRIS_WEB__
 
 renderers:
-  - path: ../impl.ts
+  - path: ../index.ts
 
 version: 2.1.7

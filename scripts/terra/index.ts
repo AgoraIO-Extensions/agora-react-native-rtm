@@ -14,14 +14,7 @@ import {
 
 import { renderWithConfiguration } from '@agoraio-extensions/terra_shared_configs';
 
-import {
-  appendNumberToDuplicateMemberFunction,
-  filterFile,
-  getDefaultValue,
-  isMatch,
-} from './utils';
-
-const paramOptionalList = require('./config/param_optional_list.json');
+import { getDefaultValue, isMatch } from './utils';
 
 interface CXXFileUserData {
   fileName: string;
@@ -32,24 +25,14 @@ interface TerraNodeUserData {
   isEnumz: boolean;
   isClazz: boolean;
   isCallback: boolean;
-  hasComment: boolean;
-  comment: string;
 }
 
 interface ClazzMethodUserData {
-  hasComment: boolean;
-  comment: string;
-}
-
-interface EnumMethodUserData {
-  hasComment: boolean;
-  comment: string;
+  output: string;
+  input: string;
 }
 
 interface StructMemberVariableUserData {
-  hasComment: boolean;
-  comment: string;
-  hasDefaultValue: boolean;
   defaultValue: any;
 }
 
@@ -59,8 +42,7 @@ export default function (
   parseResult: ParseResult
 ): RenderResult[] {
   let cxxfiles = parseResult.nodes as CXXFile[];
-  //移除不需要的文件
-  let view = filterFile(cxxfiles).map((cxxfile: CXXFile) => {
+  let view = cxxfiles.map((cxxfile: CXXFile) => {
     const cxxUserData: CXXFileUserData = {
       fileName: path.basename(
         cxxfile.file_path,
@@ -71,77 +53,59 @@ export default function (
 
     cxxfile.nodes = cxxfile.nodes.map((node: CXXTerraNode) => {
       let isCallback = isMatch(node.name, 'isCallback');
-
-      if (node.name === 'StorageEvent') {
-        // debugger;
-      }
-
       if (node.__TYPE === CXXTYPE.Clazz) {
-        //重载函数重命名, 自动末尾+数字
-        //['joinChannel', 'joinChannel'] => ['joinChannel', 'joinChannel2']
-        node.asClazz().methods = appendNumberToDuplicateMemberFunction(
-          node.asClazz().methods
-        );
         node.asClazz().methods.map((method) => {
           const clazzMethodUserData: ClazzMethodUserData = {
-            hasComment: method.comment !== '',
-            comment: method.comment
-              .replace(/^\n/, '* ')
-              .replace(/\n$/, '')
-              .replace(/\n/g, '\n* '),
+            output: '',
+            input: '',
           };
-          method.user_data = clazzMethodUserData;
+          let output_params: string[] = [];
+          let input_params: string[] = [];
           method.asMemberFunction().parameters.map((param) => {
-            const clazzMethodParametersUserData = {
-              isOptional: paramOptionalList.includes(param.fullName),
-            };
-            if (param.type.kind === SimpleTypeKind.pointer_t) {
-              param.type.source = param.type.source.replace('[]', '');
+            if (param.is_output) {
+              input_params.push(`${param.name}?: ${param.type.name}`);
+              output_params.push(`${param.name}: ${param.type.name}`);
+            } else {
+              if (param.default_value) {
+                input_params.push(`${param.name}?: ${param.type.name}`);
+              } else {
+                input_params.push(`${param.name}: ${param.type.name}`);
+              }
             }
-            param.user_data = clazzMethodParametersUserData;
           });
-          if (method.return_type.kind === SimpleTypeKind.pointer_t) {
-            method.return_type.source = method.return_type.source.replace(
-              '[]',
-              ''
-            );
+          if (output_params.length > 0) {
+            if (
+              method.asMemberFunction().return_type.name !== 'void' &&
+              method.asMemberFunction().return_type.name !== 'number'
+            ) {
+              output_params.push(`result: ${method.return_type.name},`);
+            }
           }
+          clazzMethodUserData.input = input_params.join(',');
+          if (output_params.length > 1) {
+            clazzMethodUserData.output = `{${output_params.join(',')}}`;
+          } else if (output_params.length == 1) {
+            clazzMethodUserData.output = output_params[0]?.split(': ')[1]!;
+          } else {
+            clazzMethodUserData.output = `${method.return_type.name}`;
+          }
+          method.user_data = clazzMethodUserData;
         });
       }
 
       if (node.__TYPE === CXXTYPE.Enumz) {
-        // debugger;
         node.asEnumz().enum_constants.map((enum_constant) => {
-          const clazzMethodUserData: EnumMethodUserData = {
-            hasComment: enum_constant.comment !== '',
-            comment: enum_constant.comment
-              .replace(/^\n/, '* ')
-              .replace(/\n$/, '')
-              .replace(/\n/g, '\n* '),
-          };
-          enum_constant.user_data = clazzMethodUserData;
+          enum_constant.name =
+            enum_constant.name.charAt(0).toUpperCase() +
+            enum_constant.name.slice(1);
         });
       }
 
       if (node.__TYPE === CXXTYPE.Struct) {
         node.asStruct().member_variables.map((member_variable) => {
           const structMemberVariableUserData: StructMemberVariableUserData = {
-            hasComment: member_variable.comment !== '',
-            comment: member_variable.comment
-              .replace(/^\n/, '* ')
-              .replace(/\n$/, '')
-              .replace(/\n/g, '\n* '),
-            hasDefaultValue:
-              getDefaultValue(node.asStruct(), member_variable).length > 0,
             defaultValue: getDefaultValue(node.asStruct(), member_variable),
           };
-          member_variable.type.source = member_variable.type.source.replace(
-            '[]',
-            ''
-          );
-          if (member_variable.type.kind === SimpleTypeKind.array_t) {
-            member_variable.type.source += '[]';
-          }
           member_variable.user_data = structMemberVariableUserData;
         });
       }
@@ -151,11 +115,6 @@ export default function (
         isEnumz: node.__TYPE === CXXTYPE.Enumz,
         isClazz: node.__TYPE === CXXTYPE.Clazz,
         isCallback: isCallback,
-        hasComment: node.comment !== '',
-        comment: node.comment
-          .replace(/^\n/, '* ')
-          .replace(/\n$/, '')
-          .replace(/\n/g, '\n* '),
       };
       node.user_data = terraNodeUserData;
 
@@ -164,7 +123,7 @@ export default function (
 
     return cxxfile;
   });
-  //移除不含有Clazz,Enumz,Struct的文件
+  //remove Clazz/Enumz/Struct doesn't exist file
   view = view.filter((cxxfile) => {
     return (
       cxxfile.nodes.filter((node) => {
@@ -180,13 +139,13 @@ export default function (
     fileNameTemplatePath: path.join(
       __dirname,
       'templates',
-      'types',
+      'type',
       'file_name.mustache'
     ),
     fileContentTemplatePath: path.join(
       __dirname,
       'templates',
-      'types',
+      'type',
       'file_content.mustache'
     ),
     view,

@@ -1,0 +1,15 @@
+
+{{{comment}}}
+export class {{name}} {
+{{#member_variables}}
+  {{{comment}}}
+  {{name}}?: {{#type}}{{name}}{{/type}}{{{user_data.defaultValue}}};
+{{/member_variables}}
+  constructor(props?: Partial<{
+    {{#member_variables}}
+  {{name}}?: {{#type}}{{name}}{{/type}};
+{{/member_variables}}
+  }>) {
+    Object.assign(this, props);
+  }
+}
