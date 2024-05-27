@@ -1,11 +1,6 @@
 import * as path from 'path';
 
-import {
-  CXXFile,
-  CXXTYPE,
-  CXXTerraNode,
-  SimpleTypeKind,
-} from '@agoraio-extensions/cxx-parser';
+import { CXXFile, CXXTYPE, CXXTerraNode } from '@agoraio-extensions/cxx-parser';
 import {
   ParseResult,
   RenderResult,

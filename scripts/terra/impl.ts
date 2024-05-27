@@ -12,13 +12,11 @@ import { ParseResult, TerraContext } from '@agoraio-extensions/terra-core';
 import { renderWithConfiguration } from '@agoraio-extensions/terra_shared_configs';
 
 import {
-  // convertToCamelCase,
   deepClone,
   findClazz,
   findEnumz,
   findStruct,
   isMatch,
-  renderApiType,
   upperFirstWord,
 } from './utils';
 
@@ -53,7 +51,7 @@ interface ClazzMethodUserData {
 }
 
 export function impl(parseResult: ParseResult) {
-  let preParseResult = deepClone(parseResult, ['parent']);
+  let preParseResult = deepClone(parseResult, ['parent', 'outVariable']);
   let cxxfiles = parseResult.nodes as CXXFile[];
   //only render file which has clazz
   let view = cxxfiles
@@ -90,12 +88,12 @@ export function impl(parseResult: ParseResult) {
             hasParameters: true,
             bindingFunctionName: `getApiTypeFrom${upperFirstWord(method.name)}`,
             returnParam: '',
-            renderApiType: renderApiType(method),
+            renderApiType: `${node.asClazz().name.slice(1)}_${method.name}`,
           };
           // method.return_type.name = convertToCamelCase(method.return_type.name);
           method.asMemberFunction().parameters.map((param) => {
             let variableUserData: VariableUserData = {
-              name: convertToCamelCase(param.name, false),
+              name: param.name,
             };
             let typeName = param.type.name;
             let default_value = param.default_value;
