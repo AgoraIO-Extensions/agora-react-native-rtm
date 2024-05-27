@@ -214,7 +214,7 @@ export abstract class IStreamChannel {
    */
   abstract subscribeTopic(
     topic: string,
-    options?: TopicOptions,
+    options: TopicOptions,
     requestId?: number
   ): number;
   /**
@@ -225,7 +225,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract unsubscribeTopic(topic: string, options?: TopicOptions): number;
+  abstract unsubscribeTopic(topic: string, options: TopicOptions): number;
   /**
    * Get subscribed user list
    *
@@ -235,7 +235,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract getSubscribedUserList(topic: string, users: UserList[]): number;
+  abstract getSubscribedUserList(topic: string): UserList[];
   /**
    * Release the stream channel instance.
    *

@@ -8,6 +8,7 @@ parsers:
         include:
           - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/include/*.h'
         exclude:
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/include/IAgoraRtmService.h'
           - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/include/IAgoraService.h'
 
   - name: AddNodeParser
@@ -21,23 +22,31 @@ parsers:
           - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/include/*.h'
           - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/custom_headers/*.h'
         exclude:
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/include/IAgoraRtmService.h'
           - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.7/include/IAgoraService.h'
 
   - name: RemoveNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
     args:
+      ignoreDefaultConfig: true
       configFilePath: ./remove_node_list.ts
   - name: PointerToArrayParser
     package: '@agoraio-extensions/terra_shared_configs'
+    args:
+      ignoreDefaultConfig: true
+      configFilePath: ./pointer_to_array.ts
   - name: UpdateSimpleTypeParser
     package: '@agoraio-extensions/terra_shared_configs'
+    args:
+      ignoreDefaultConfig: true
+      configFilePath: ./rename_member_function_param_type_list.ts
   - name: ReturnTypeParser
     package: '@agoraio-extensions/terra_shared_configs'
     args:
       convertReturnToVoid: false
+      ignoreDefaultConfig: true
+      configFilePath: ./fixed_return_type_list.ts
   - name: FixEnumConstantParser
-    package: '@agoraio-extensions/terra_shared_configs'
-  - name: MergeNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
   - name: OrderNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
@@ -47,8 +56,10 @@ parsers:
       parserDefaultValue: true
       ignoreDefaultConfig: true
       configFilePath: ./c_to_ts_config.ts
-  - name: CommentParser
+  - name: TsCommentParser
     package: '@agoraio-extensions/terra_shared_configs'
+    args:
+      language: 'ts'
 
 renderers:
   - path: ../index.ts

@@ -1,1 +1,4 @@
-module.exports = ['agora::rtm::IMetadata'];
+module.exports = [
+  'agora::rtm::IMetadata',
+  'agora::rtm::IStreamChannel.getSubscribedUserList.users',
+];

@@ -61,7 +61,7 @@ export class RtmConfig {
    * - For Windows, it is the window handle of app. Once set, this parameter enables you to plug
    * or unplug the video devices while they are powered.
    */
-  context?: void;
+  context?: any;
   /**
    * Whether to use String user IDs, if you are using RTC products with Int user IDs,
    * set this value as 'false'. Otherwise errors might occur.
@@ -89,7 +89,7 @@ export class RtmConfig {
       userId?: string;
       areaCode?: RTM_AREA_CODE;
       presenceTimeout?: number;
-      context?: void;
+      context?: any;
       useStringUserId?: boolean;
       eventHandler?: IRtmEventHandler;
       logConfig?: RtmLogConfig;

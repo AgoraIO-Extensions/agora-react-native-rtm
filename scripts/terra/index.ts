@@ -52,6 +52,9 @@ export default function (
     cxxfile.user_data = cxxUserData;
 
     cxxfile.nodes = cxxfile.nodes.map((node: CXXTerraNode) => {
+      if (node.name === 'IRtmPresence') {
+        // debugger;
+      }
       let isCallback = isMatch(node.name, 'isCallback');
       if (node.__TYPE === CXXTYPE.Clazz) {
         node.asClazz().methods.map((method) => {

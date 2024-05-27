@@ -1,9 +1,13 @@
 
 {{#name}}
+{{#comment}}
 {{{comment}}}
+{{/comment}}
 export enum {{name}} {
 {{#enum_constants}}
+  {{#comment}}
   {{{comment}}}
+  {{/comment}}
   {{name}} = {{{value}}},
 {{/enum_constants}}
 }

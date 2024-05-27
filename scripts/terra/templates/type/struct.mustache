@@ -1,8 +1,12 @@
 
+{{#comment}}
 {{{comment}}}
+{{/comment}}
 export class {{name}} {
 {{#member_variables}}
+  {{#comment}}
   {{{comment}}}
+  {{/comment}}
   {{name}}?: {{#type}}{{name}}{{/type}}{{{user_data.defaultValue}}};
 {{/member_variables}}
   constructor(props?: Partial<{
