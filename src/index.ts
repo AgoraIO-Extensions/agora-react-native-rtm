@@ -6,7 +6,6 @@ export * from './AgoraRtmBase';
 export * from './IAgoraRtmClient';
 export * from './IAgoraRtmLock';
 export * from './IAgoraRtmPresence';
-export * from './IAgoraRtmService';
 export * from './IAgoraRtmStorage';
 export * from './IAgoraStreamChannel';
 export {

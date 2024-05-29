@@ -16,6 +16,7 @@
 
 namespace agora {
 namespace iris {
+namespace rtm {
 class EventHandler : public IrisEventHandler {
 public:
   EventHandler(void *plugin) { plugin_ = (__bridge AgoraRtmNg *)plugin; }
@@ -52,12 +53,13 @@ public:
 private:
   AgoraRtmNg *plugin_;
 };
+} // namespace rtm
 } // namespace iris
 } // namespace agora
 
 @interface AgoraRtmNg ()
 
-@property(nonatomic) agora::iris::EventHandler *eventHandler;
+@property(nonatomic) agora::iris::rtm::EventHandler *eventHandler;
 
 @end
 
@@ -73,7 +75,7 @@ RCT_EXPORT_MODULE()
 - (instancetype)init {
   if (self = [super init]) {
     self.irisRtmEngine = nullptr;
-    self.eventHandler = new agora::iris::EventHandler((__bridge void *)self);
+    self.eventHandler = new agora::iris::rtm::EventHandler((__bridge void *)self);
     instance = self;
   }
   return instance;

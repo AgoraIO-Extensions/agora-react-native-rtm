@@ -4,6 +4,7 @@ import Presence from './Presence';
 import StreamChannelChannelMetadata from './StreamChannelChannelMetadata';
 import StreamChannelLock from './StreamChannelLock';
 import StreamChannelUserMetadata from './StreamChannelUserMetadata';
+import UseRTC from './UseRTC';
 import UserMetadata from './UserMetadata';
 import PublishMessage from './publishMessage';
 import PublishTopicMessage from './publishTopicMessage';
@@ -46,6 +47,10 @@ const Advanced = {
     {
       name: 'StreamChannelLock',
       component: StreamChannelLock,
+    },
+    {
+      name: 'UseRTC',
+      component: UseRTC,
     },
   ],
 };

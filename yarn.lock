@@ -3698,6 +3698,7 @@ __metadata:
     pod-install: "npm:^0.1.0"
     react: "npm:18.2.0"
     react-native: "npm:0.72.5"
+    react-native-agora: "npm:^4.3.1"
     react-native-chart-kit: "npm:^6.12.0"
     react-native-color-picker: "npm:^0.6.0"
     react-native-fs: "npm:^2.20.0"
@@ -4469,6 +4470,13 @@ __metadata:
   version: 1.6.51
   resolution: "big-integer@npm:1.6.51"
   checksum: c8139662d57f8833a44802f4b65be911679c569535ea73c5cfd3c1c8994eaead1b84b6f63e1db63833e4d4cacb6b6a9e5522178113dfdc8e4c81ed8436f1e8cc
+  languageName: node
+  linkType: hard
+
+"bignumber.js@npm:^9.0.0":
+  version: 9.1.2
+  resolution: "bignumber.js@npm:9.1.2"
+  checksum: e17786545433f3110b868725c449fa9625366a6e675cd70eb39b60938d6adbd0158cb4b3ad4f306ce817165d37e63f4aa3098ba4110db1d9a3b9f66abfbaf10d
   languageName: node
   linkType: hard
 
@@ -10440,6 +10448,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json-bigint@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "json-bigint@npm:1.0.0"
+  dependencies:
+    bignumber.js: "npm:^9.0.0"
+  checksum: e3f34e43be3284b573ea150a3890c92f06d54d8ded72894556357946aeed9877fd795f62f37fe16509af189fd314ab1104d0fd0f163746ad231b9f378f5b33f4
+  languageName: node
+  linkType: hard
+
 "json-buffer@npm:3.0.1":
   version: 3.0.1
   resolution: "json-buffer@npm:3.0.1"
@@ -13170,6 +13187,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-agora@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "react-native-agora@npm:4.3.1"
+  dependencies:
+    buffer: "npm:^6.0.3"
+    eventemitter3: "npm:^5.0.1"
+    json-bigint: "npm:^1.0.0"
+    ts-interface-checker: "npm:^1.0.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: cd41ad7a1512dee58cb694ac6b3f25df9748dbfe90f4d79b53a3a57211428d8159fcdfce999fe499ee58db4be7c4795812781ad9d9b5fe7bbf28b647c3c47dbc
+  languageName: node
+  linkType: hard
+
 "react-native-builder-bob@npm:^0.20.0":
   version: 0.20.4
   resolution: "react-native-builder-bob@npm:0.20.4"
@@ -15385,6 +15417,13 @@ __metadata:
   dependencies:
     utf8-byte-length: "npm:^1.0.1"
   checksum: af2b431fc4314f119b551e5fccfad49d4c0ef82e13ba9ca61be6567801195b08e732ce9643542e8ad1b3df44f3df2d7345b3dd34f723954b6bb43a14584d6b3c
+  languageName: node
+  linkType: hard
+
+"ts-interface-checker@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "ts-interface-checker@npm:1.0.2"
+  checksum: 0a6addc09ad823e5824367f61a615cc91a051927e1f673577596f84969858bd94cd1c8d82e092bbc52250a25e21f3dc7c594aa1fa491967069d36a4dc3026b79
   languageName: node
   linkType: hard
 
