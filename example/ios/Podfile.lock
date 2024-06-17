@@ -1,11 +1,11 @@
 PODS:
-  - agora-react-native-rtm (2.1.7):
-    - AgoraIrisRTM_iOS (= 2.1.7-build.1)
-    - AgoraRtm_iOS (= 2.1.7)
+  - agora-react-native-rtm (2.1.12):
+    - AgoraIrisRTM_iOS (= 2.1.12-dev.1)
+    - AgoraRtm_iOS (= 2.1.12)
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - AgoraIrisRTC_iOS (4.3.1-build.1)
-  - AgoraIrisRTM_iOS (2.1.7-build.1)
+  - AgoraIrisRTM_iOS (2.1.12-dev.1)
   - AgoraRtcEngine_iOS (4.3.1):
     - AgoraRtcEngine_iOS/AIAEC (= 4.3.1)
     - AgoraRtcEngine_iOS/AINS (= 4.3.1)
@@ -41,7 +41,7 @@ PODS:
   - AgoraRtcEngine_iOS/VideoCodecEnc (4.3.1)
   - AgoraRtcEngine_iOS/VirtualBackground (4.3.1)
   - AgoraRtcEngine_iOS/VQA (4.3.1)
-  - AgoraRtm_iOS (2.1.7)
+  - AgoraRtm_iOS (2.1.12)
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -754,11 +754,11 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  agora-react-native-rtm: db09801b83ccbde861b8261e00bc46a03f8f4136
+  agora-react-native-rtm: feac636a75ebb40a3c29072a823d8442babdc87b
   AgoraIrisRTC_iOS: 7710d853202eca4900c2916aefc44abd5a139d4e
-  AgoraIrisRTM_iOS: 588c042feef52bb2545e3618da1e442f19e2cf5b
+  AgoraIrisRTM_iOS: 8333f60aeee673e88fcf02a0f627484f21731f67
   AgoraRtcEngine_iOS: f64be00fdda786bb7edd84ab461c31b7b4c93534
-  AgoraRtm_iOS: cd26cf8a377a79934864d37e184866dbd1430eaf
+  AgoraRtm_iOS: 54dbd6c1f33f1d7432becf1d271713bcc35653cb
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54

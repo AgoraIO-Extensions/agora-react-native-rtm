@@ -162,7 +162,7 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-  implementation "io.agora:agora-rtm:2.1.7"
+  implementation "io.agora:agora-rtm:2.1.12"
   implementation "io.agora.rtm:iris-rtm:2.1.7-build.1"
 
 }

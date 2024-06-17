@@ -301,6 +301,10 @@ export enum RTM_ERROR_CODE {
    */
   RTM_ERROR_CHANNEL_PRESENCE_NOT_READY = -11032,
   /**
+   * -11033: The destination user of publish message is offline.
+   */
+  RTM_ERROR_CHANNEL_RECEIVER_OFFLINE = -11033,
+  /**
    * -12001 ~ -13000 : reserved for storage error.
    * -12001: The storage operation failed.
    */
@@ -628,6 +632,10 @@ export enum RTM_CHANNEL_TYPE {
    * 2: Stream channel.
    */
   RTM_CHANNEL_TYPE_STREAM = 2,
+  /**
+   * 3: User.
+   */
+  RTM_CHANNEL_TYPE_USER = 3,
 }
 
 /**
@@ -735,6 +743,10 @@ export enum RTM_PROXY_TYPE {
    * 1: Link with http proxy
    */
   RTM_PROXY_TYPE_HTTP = 1,
+  /**
+   * 2: Link with tcp cloud proxy
+   */
+  RTM_PROXY_TYPE_CLOUD_TCP = 2,
 }
 
 /**
@@ -1083,10 +1095,34 @@ export class GetOnlineUsersOptions {
  * @brief Publish message option
  */
 export class PublishOptions {
+  channelType?: RTM_CHANNEL_TYPE = RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE;
   /**
    * The message type.
    */
-  type?: RTM_MESSAGE_TYPE = RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY;
+  messageType?: RTM_MESSAGE_TYPE = RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY;
+  /**
+   * The custom type of the message, up to 32 bytes for customize
+   */
+  customType?: string;
+  constructor(
+    props?: Partial<{
+      channelType?: RTM_CHANNEL_TYPE;
+      messageType?: RTM_MESSAGE_TYPE;
+      customType?: string;
+    }>
+  ) {
+    Object.assign(this, props);
+  }
+}
+
+/**
+ * @brief topic message option
+ */
+export class TopicMessageOptions {
+  /**
+   * The message type.
+   */
+  messageType?: RTM_MESSAGE_TYPE = RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY;
   /**
    * The time to calibrate data with media,
    * only valid when user join topic with syncWithMedia in stream channel
@@ -1098,7 +1134,7 @@ export class PublishOptions {
   customType?: string;
   constructor(
     props?: Partial<{
-      type?: RTM_MESSAGE_TYPE;
+      messageType?: RTM_MESSAGE_TYPE;
       sendTs?: number;
       customType?: string;
     }>

@@ -1,4 +1,4 @@
-import { PublishOptions, UserList } from '../AgoraRtmBase';
+import { PublishOptions, TopicMessageOptions, UserList } from '../AgoraRtmBase';
 import {
   IStreamChannel,
   JoinChannelOptions,
@@ -96,7 +96,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     topic: string,
     message: string,
     length: number,
-    option: PublishOptions
+    option: TopicMessageOptions
   ): number {
     const apiType = this.getApiTypeFromPublishTopicMessage(
       topic,
@@ -126,7 +126,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     topic: string,
     message: string,
     length: number,
-    option: PublishOptions
+    option: TopicMessageOptions
   ): string {
     return 'StreamChannel_publishTopicMessage';
   }
