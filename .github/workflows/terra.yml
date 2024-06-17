@@ -3,10 +3,10 @@ name: Generate codes
 on:
   workflow_dispatch:
     inputs:
-      terra-ref:
-        description: The terra repo ref
+      version:
+        description: 'native sdk version'
+        type: string
         required: true
-        default: 'main'
 
 jobs:
   generate-codes:
@@ -14,37 +14,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Generate codes
-        id: terra
-        uses: AgoraIO-Extensions/actions/.github/actions/terra@main
-        env:
-          LLVM_DOWNLOAD_URL: |
-            https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.6/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+      - name: Generate code and comment by terra
+        uses: AgoraIO-Extensions/actions/.github/actions/generate@main
         with:
           github-token: ${{ secrets.GH_TOKEN }}
-          terra-ref: ${{ inputs.terra-ref }}
-          config: ci/config/terra_config.yaml
-          output-dir: src
-          export-file-path: src/index.ts
-
-      - name: Format codes
-        run: |
-          rm -rf terra
-          yarn lint --fix
-
-      - name: Generate ts interface
-        run: |
-          yarn
-
-      - name: Generate comments
-        uses: ./.github/actions/doc
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          target-path: ${{ github.workspace }}
+          generate-code: true
+          generate-comment: true
+          generate-code-command: |
+            sed "s/sdkVersion: .*/sdkVersion: ${{ inputs.version }}/g" config/impl_config.yaml > tmp
+            mv tmp config/impl_config.yaml
+            sed "s/sdkVersion: .*/sdkVersion: ${{ inputs.version }}/g" config/types_config.yaml > tmp
+            mv tmp config/types_config.yaml
+            sh generate-prepare.sh
+            sh generate-code.sh
 
       - name: Create pull request
         uses: AgoraIO-Extensions/actions/.github/actions/pr@main
@@ -55,8 +44,4 @@ jobs:
           target-branch-name-surffix: terra-update
           pull-request-title: |
             [AUTO] Generate codes by terra
-          pull-request-body: |
-            Terra configuration:
-
-            ${{ steps.terra.outputs.configuration }}
           add-paths: src
