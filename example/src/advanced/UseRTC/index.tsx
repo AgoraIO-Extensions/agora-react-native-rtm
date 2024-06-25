@@ -10,7 +10,11 @@ import {
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import { ChannelProfileType, createAgoraRtcEngine } from 'react-native-agora';
+import {
+  ChannelProfileType,
+  SDKBuildInfo,
+  createAgoraRtcEngine,
+} from 'react-native-agora';
 
 import {
   AgoraButton,
@@ -24,7 +28,10 @@ import * as log from '../../utils/log';
 
 export default function UseRTC() {
   const [uid, setUid] = useState(Config.uid);
-  const [rtcVersion, setRtcVersion] = useState(Config.uid);
+  const [rtcVersion, setRtcVersion] = useState<SDKBuildInfo>({
+    version: '',
+    build: 0,
+  });
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [initResult, setInitResult] = useState<number>(0);
   const onLoginResult = useCallback((errorCode: RTM_ERROR_CODE) => {
@@ -126,13 +133,14 @@ export default function UseRTC() {
 
   useEffect(() => {
     let engine = createAgoraRtcEngine();
-    engine.initialize({
-      appId: Config.appId,
-      channelProfile: ChannelProfileType.ChannelProfileLiveBroadcasting,
-    });
-    setRtcVersion(engine.getVersion());
+    console.log(6666);
+    // engine.initialize({
+    //   appId: Config.appId,
+    //   channelProfile: ChannelProfileType.ChannelProfileLiveBroadcasting,
+    // });
+    // setRtcVersion(engine.getVersion());
     return () => {
-      engine.release();
+      // engine.release();
     };
   }, []);
 
@@ -142,7 +150,7 @@ export default function UseRTC() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={AgoraStyle.fullSize}>
-        <AgoraText>{`RTC version:${rtcVersion.version},build: ${rtcVersion.build}`}</AgoraText>
+        {/* <AgoraText>{`RTC version:${rtcVersion.version},build: ${rtcVersion.build}`}</AgoraText> */}
         {loginSuccess ? (
           <AgoraText>{`current login userId:\n${uid}`}</AgoraText>
         ) : (
