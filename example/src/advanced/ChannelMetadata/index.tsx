@@ -451,6 +451,7 @@ export default function ChannelMetadata() {
           onChangeText={(text) => {
             if (!text) return;
             setMajorRevision(parseInt(text, 10));
+            metadata.current.majorRevision = parseInt(text, 10);
           }}
           label="majorRevision"
           value={majorRevision.toString()}
