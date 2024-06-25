@@ -134,13 +134,12 @@ export default function UseRTC() {
   useEffect(() => {
     let engine = createAgoraRtcEngine();
     console.log(engine.getVersion());
-    // engine.initialize({
-    //   appId: Config.appId,
-    //   channelProfile: ChannelProfileType.ChannelProfileLiveBroadcasting,
-    // });
-    // setRtcVersion(engine.getVersion());
+    engine.initialize({
+      appId: Config.appId,
+    });
+    setRtcVersion(engine.getVersion());
     return () => {
-      // engine.release();
+      engine.release();
     };
   }, []);
 
