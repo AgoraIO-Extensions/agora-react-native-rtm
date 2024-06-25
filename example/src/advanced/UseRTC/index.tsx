@@ -10,7 +10,11 @@ import {
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import { ChannelProfileType, createAgoraRtcEngine } from 'react-native-agora';
+import {
+  ChannelProfileType,
+  SDKBuildInfo,
+  createAgoraRtcEngine,
+} from 'react-native-agora';
 
 import {
   AgoraButton,
@@ -24,7 +28,10 @@ import * as log from '../../utils/log';
 
 export default function UseRTC() {
   const [uid, setUid] = useState(Config.uid);
-  const [rtcVersion, setRtcVersion] = useState(Config.uid);
+  const [rtcVersion, setRtcVersion] = useState<SDKBuildInfo>({
+    version: '',
+    build: 0,
+  });
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [initResult, setInitResult] = useState<number>(0);
   const onLoginResult = useCallback((errorCode: RTM_ERROR_CODE) => {
@@ -126,9 +133,9 @@ export default function UseRTC() {
 
   useEffect(() => {
     let engine = createAgoraRtcEngine();
+    console.log(engine.getVersion());
     engine.initialize({
       appId: Config.appId,
-      channelProfile: ChannelProfileType.ChannelProfileLiveBroadcasting,
     });
     setRtcVersion(engine.getVersion());
     return () => {
