@@ -136,6 +136,7 @@ export default function UseRTC() {
     console.log(engine.getVersion());
     engine.initialize({
       appId: Config.appId,
+      channelProfile: ChannelProfileType.ChannelProfileLiveBroadcasting,
     });
     setRtcVersion(engine.getVersion());
     return () => {
