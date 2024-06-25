@@ -133,7 +133,7 @@ export default function UseRTC() {
 
   useEffect(() => {
     let engine = createAgoraRtcEngine();
-    console.log(6666);
+    console.log(engine.getVersion());
     // engine.initialize({
     //   appId: Config.appId,
     //   channelProfile: ChannelProfileType.ChannelProfileLiveBroadcasting,
@@ -150,7 +150,7 @@ export default function UseRTC() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={AgoraStyle.fullSize}>
-        {/* <AgoraText>{`RTC version:${rtcVersion.version},build: ${rtcVersion.build}`}</AgoraText> */}
+        <AgoraText>{`RTC version:${rtcVersion.version},build: ${rtcVersion.build}`}</AgoraText>
         {loginSuccess ? (
           <AgoraText>{`current login userId:\n${uid}`}</AgoraText>
         ) : (
