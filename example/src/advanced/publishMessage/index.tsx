@@ -3,26 +3,38 @@ import { Buffer } from 'buffer';
 import {
   MessageEvent,
   PublishOptions,
+  RTM_CHANNEL_TYPE,
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
   RTM_MESSAGE_TYPE,
+  RTM_PROXY_TYPE,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import BaseComponent from '../../components/BaseComponent';
-import { AgoraButton, AgoraStyle, AgoraView } from '../../components/ui';
+import {
+  AgoraButton,
+  AgoraDivider,
+  AgoraDropdown,
+  AgoraStyle,
+  AgoraView,
+} from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import { AgoraMessage } from '../../types';
 import * as log from '../../utils/log';
+import { enumToItems } from '../../utils';
 
 export default function PublishMessage() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
   const [publishMessageByBuffer, setPublishMessageByBuffer] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
+  const [channelType, setChannelType] = useState<number>(
+    RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
+  );
   const [uid, setUid] = useState<string>(Config.uid);
   const [messages, setMessages] = useState<AgoraMessage[]>([]);
 
@@ -101,7 +113,8 @@ export default function PublishMessage() {
             Buffer.from(msg.text),
             msg.text?.length,
             new PublishOptions({
-              type: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
+              channelType: channelType,
+              messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
             })
           );
         } else {
@@ -110,7 +123,8 @@ export default function PublishMessage() {
             msg.text,
             msg.text?.length,
             new PublishOptions({
-              type: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
+              channelType: channelType,
+              messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
             })
           );
         }
@@ -123,7 +137,7 @@ export default function PublishMessage() {
         return;
       }
     },
-    [cName, client, publishMessageByBuffer]
+    [cName, client, publishMessageByBuffer, channelType]
   );
 
   const onSend = useCallback(
@@ -223,6 +237,15 @@ export default function PublishMessage() {
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onUidChanged={(v) => setUid(v)}
+        />
+        <AgoraDivider/>
+        <AgoraDropdown
+          items={enumToItems(RTM_CHANNEL_TYPE)}
+          onValueChange={(v) => {
+            setChannelType(v);
+          }}
+          title="select channelType"
+          value={channelType}
         />
         <AgoraButton
           disabled={!loginSuccess}

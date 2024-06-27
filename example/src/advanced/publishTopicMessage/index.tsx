@@ -11,6 +11,7 @@ import {
   RTM_ERROR_CODE,
   RTM_MESSAGE_TYPE,
   TopicEvent,
+  TopicOptions,
   UserList,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -218,7 +219,7 @@ export default function PublishTopicMessage() {
           Buffer.from(msg.text),
           msg.text?.length,
           new PublishOptions({
-            type: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
+            messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
           })
         );
       } else {
@@ -227,7 +228,7 @@ export default function PublishTopicMessage() {
           msg.text,
           msg.text?.length,
           new PublishOptions({
-            type: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
+            messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
           })
         );
       }
@@ -262,14 +263,14 @@ export default function PublishTopicMessage() {
    * Step 3(optional) : subscribe topic
    */
   const subscribe = () => {
-    streamChannel?.subscribeTopic(topicName);
+    streamChannel?.subscribeTopic(topicName, {});
   };
 
   /**
    * Step 4 : unsubscribe topic
    */
   const unsubscribe = () => {
-    streamChannel?.unsubscribeTopic(topicName);
+    streamChannel?.unsubscribeTopic(topicName, {});
     setSubscribeSuccess(false);
   };
 
