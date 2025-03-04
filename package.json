@@ -30,6 +30,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "example": "yarn workspace agora-react-native-rtm-example",
     "terra": "cd scripts/terra && yarn terra",
     "test": "jest",
     "typecheck": "tsc --noEmit",
@@ -146,7 +147,7 @@
   },
   "codegenConfig": {
     "name": "AgoraRtmNgSpec",
-    "type": "all",
+    "type": "modules",
     "jsSrcsDir": "src/specs",
     "android": {
       "javaPackageName": "io.agora.agora_rtm"

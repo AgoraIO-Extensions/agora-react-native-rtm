@@ -22,7 +22,7 @@
     "events": "^3.0.0",
     "react": "18.3.1",
     "react-native": "0.77.1",
-    "react-native-agora": "^4.3.1",
+    "react-native-agora": "git@github.com:AgoraIO-Extensions/react-native-agora.git#head=dev/rn-upgrade",
     "react-native-chart-kit": "^6.12.0",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.24.0",
