@@ -1,7 +1,7 @@
 {
   "root": true,
   "extends": ["@react-native", "prettier"],
-  "plugins": ["import", "auto-import"],
+  "plugins": ["import", "auto-import", "eslint-plugin-prettier"],
   "rules": {
     "prettier/prettier": [
       "error",
