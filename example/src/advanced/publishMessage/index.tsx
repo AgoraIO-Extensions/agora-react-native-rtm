@@ -24,8 +24,8 @@ import {
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import { AgoraMessage } from '../../types';
-import * as log from '../../utils/log';
 import { enumToItems } from '../../utils';
+import * as log from '../../utils/log';
 
 export default function PublishMessage() {
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -238,7 +238,7 @@ export default function PublishMessage() {
           onChannelNameChanged={(v) => setCName(v)}
           onUidChanged={(v) => setUid(v)}
         />
-        <AgoraDivider/>
+        <AgoraDivider />
         <AgoraDropdown
           items={enumToItems(RTM_CHANNEL_TYPE)}
           onValueChange={(v) => {

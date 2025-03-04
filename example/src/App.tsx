@@ -1,8 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
-import {
-  StackScreenProps,
-  createStackNavigator,
-} from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StackScreenProps } from '@react-navigation/stack';
 import { isDebuggable, setDebuggable } from 'agora-react-native-rtm';
 import React, { useEffect } from 'react';
 import {
@@ -19,7 +17,7 @@ import Advanced from './advanced';
 import Basic from './basic';
 import Client from './components/Client';
 import { ConfigHeader } from './config/ConfigHeader';
-const RootStack = createStackNavigator<any>();
+const RootStack = createNativeStackNavigator<any>();
 const DATA = [Basic, Advanced];
 
 export default function App() {
