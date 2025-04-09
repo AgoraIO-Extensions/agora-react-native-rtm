@@ -11,11 +11,10 @@ import {
   RTM_ERROR_CODE,
   RTM_MESSAGE_TYPE,
   TopicEvent,
-  TopicOptions,
   UserList,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 
 import BaseComponent from '../../components/BaseComponent';

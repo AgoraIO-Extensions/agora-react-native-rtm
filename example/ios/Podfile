@@ -23,6 +23,19 @@ target 'AgoraRtmNgExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pre_install do |installer|
+    rtm_pod_path = File.join(installer.sandbox.root, 'AgoraRtm')
+
+    aosl_xcframework_path = File.join(rtm_pod_path, 'aosl.xcframework')
+
+    if File.exist?(aosl_xcframework_path)
+      puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
+      FileUtils.rm_rf(aosl_xcframework_path)
+    else
+      puts "aosl.xcframework not found, skipping deletion."
+    end
+  end
+
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(

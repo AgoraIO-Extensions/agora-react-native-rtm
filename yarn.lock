@@ -5010,7 +5010,7 @@ __metadata:
     pod-install: "npm:^0.1.0"
     react: "npm:18.3.1"
     react-native: "npm:0.77.1"
-    react-native-agora: "git@github.com:AgoraIO-Extensions/react-native-agora.git#head=dev/rn-upgrade"
+    react-native-agora: "npm:4.5.2"
     react-native-chart-kit: "npm:^6.12.0"
     react-native-fs: "npm:^2.20.0"
     react-native-gesture-handler: "npm:^2.24.0"
@@ -14596,9 +14596,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-agora@git@github.com:AgoraIO-Extensions/react-native-agora.git#head=dev/rn-upgrade":
-  version: 4.5.1
-  resolution: "react-native-agora@git@github.com:AgoraIO-Extensions/react-native-agora.git#commit=00c87e6d447a93c9913d708564f005fabb025bf6"
+"react-native-agora@npm:4.5.2":
+  version: 4.5.2
+  resolution: "react-native-agora@npm:4.5.2"
   dependencies:
     buffer: "npm:^6.0.3"
     eventemitter3: "npm:^5.0.1"
@@ -14607,7 +14607,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: e240c4fb56f62c75b1cdefc5f1b509f8cdecbab35d283792f0a4647d50b09ee1d22c0a037ded41acc9ffdffaf4edd81dc14b96a2e1cb3fc73b32bdcbcdc728da
+  checksum: 7d508f84d34116120d16d8be2a336189abece68ce81b8b07a24c1a33c85fe8feef687fdb5fda9b25fb58206cdd484ee3dc027caa84fb7379ab40dd5d517f3a23
   languageName: node
   linkType: hard
 

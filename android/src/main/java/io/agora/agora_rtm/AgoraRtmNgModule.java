@@ -1,4 +1,4 @@
-package io.agora.agora_rtm;
+package io.agora.rtm.ng.react;
 
 import android.util.Base64;
 import androidx.annotation.NonNull;
@@ -25,7 +25,9 @@ public class AgoraRtmNgModule
   public static final String NAME = "AgoraRtmNg";
   public IrisRtmEngine irisRtmEngine;
 
-  AgoraRtmNgModule(ReactApplicationContext context) { super(context); }
+  AgoraRtmNgModule(ReactApplicationContext context) {
+    super(context);
+  }
 
   @Override
   @NonNull
@@ -84,15 +86,17 @@ public class AgoraRtmNgModule
 
   @ReactMethod
   public void showRPSystemBroadcastPickerView(boolean showsMicrophoneButton,
-                                              Promise promise) {
+      Promise promise) {
     promise.reject("", "not support");
   }
 
   @ReactMethod
-  public void addListener(String eventName) {}
+  public void addListener(String eventName) {
+  }
 
   @ReactMethod
-  public void removeListeners(double count) {}
+  public void removeListeners(double count) {
+  }
 
   @Override
   public void OnEvent(String event, String data, List<byte[]> buffers) {

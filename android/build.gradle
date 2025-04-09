@@ -67,7 +67,7 @@ def supportsNamespace() {
 
 android {
   if (supportsNamespace()) {
-    namespace "io.agora.agora_rtm"
+    namespace "io.agora.rtm.ng.react"
 
     sourceSets {
       main {
@@ -162,8 +162,8 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-  implementation "io.agora:agora-rtm:2.1.12"
-  implementation "io.agora.rtm:iris-rtm:2.1.12-build.1"
+  implementation "io.agora:agora-rtm:2.2.3"
+  implementation "io.agora.rtm:iris-rtm:2.2.3-build.1"
 
 }
 
@@ -171,6 +171,6 @@ if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
     libraryName = codegenViewLibraryName
-    codegenJavaPackageName = libraryManifestJson.codegenConfig.android.javaPackageName
+    codegenJavaPackageName = "io.agora.rtm.ng.react"
   }
 }

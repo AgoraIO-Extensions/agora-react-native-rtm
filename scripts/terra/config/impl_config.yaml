@@ -3,27 +3,27 @@ parsers:
     package: '@agoraio-extensions/cxx-parser'
     args:
       includeHeaderDirs:
-        - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include'
+        - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include'
       parseFiles:
         include:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include/*.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/*.h'
         exclude:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include/IAgoraRtmService.h'
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include/IAgoraService.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraRtmService.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraService.h'
 
   - name: AddNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
     args:
       customHeaderFileNamePrefix: 'Custom'
       includeHeaderDirs:
-        - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include'
+        - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include'
       parseFiles:
         include:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include/*.h'
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/custom_headers/*.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/*.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/custom_headers/*.h'
         exclude:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include/IAgoraRtmService.h'
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.1.12/include/IAgoraService.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraRtmService.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraService.h'
 
   - name: RemoveNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
@@ -60,4 +60,4 @@ parsers:
 renderers:
   - path: ../impl.ts
 
-version: 2.1.12
+version: 2.2.3
