@@ -1,4 +1,5 @@
-import { IRtmEventHandler } from '../IAgoraRtmClient';
+import { IRtmEventHandler, RtmConfig } from '../IAgoraRtmClient';
+import { IRtmHistory } from '../IAgoraRtmHistory';
 import { IRtmLock } from '../IAgoraRtmLock';
 import { IRtmPresence } from '../IAgoraRtmPresence';
 import { IRtmStorage } from '../IAgoraRtmStorage';
@@ -6,10 +7,13 @@ import { IStreamChannel } from '../IAgoraStreamChannel';
 import { IRtmClientEvent } from '../extensions/IAgoraRtmClientExtension';
 import { IRtmClientImpl } from '../impl/IAgoraRtmClientImpl';
 
+import { RtmHistoryInternal } from '../internal/RtmHistoryInternal';
+
 import {
   DeviceEventEmitter,
   EVENT_TYPE,
   EventProcessor,
+  callIrisApi,
 } from './IrisRtmEngine';
 import { RtmLockInternal } from './RtmLockInternal';
 import { RtmPresenceInternal } from './RtmPresenceInternal';
@@ -19,13 +23,39 @@ import { StreamChannelInternal } from './StreamChannelInternal';
 export class RtmClientInternal extends IRtmClientImpl {
   static _event_handlers: IRtmEventHandler[] = [];
 
+  constructor(config: RtmConfig) {
+    super();
+    if (config?.eventHandler) {
+      Object.entries(config.eventHandler).forEach(([key, value]) => {
+        this.addEventListener(key as keyof IRtmClientEvent, value);
+      });
+    }
+
+    const jsonParams = {
+      config: config,
+      toJSON: () => {
+        return {
+          config: config,
+        };
+      },
+    };
+
+    callIrisApi.call(this, 'RtmClient_create', jsonParams);
+  }
+
   protected getApiTypeFromPublishWithBuffer(): string {
     return 'RtmClient_publish';
   }
 
-  override createStreamChannel(channelName: string): IStreamChannel {
-    super.createStreamChannel(channelName);
-    return new StreamChannelInternal(channelName);
+  override createStreamChannel(channelName: string): {
+    errorCode: number;
+    result: IStreamChannel;
+  } {
+    const result = super.createStreamChannel(channelName);
+    return {
+      errorCode: result.errorCode,
+      result: new StreamChannelInternal(channelName),
+    };
   }
 
   override getPresence(): IRtmPresence {
@@ -38,6 +68,10 @@ export class RtmClientInternal extends IRtmClientImpl {
 
   override getLock(): IRtmLock {
     return new RtmLockInternal();
+  }
+
+  override getHistory(): IRtmHistory {
+    return new RtmHistoryInternal();
   }
 
   override release(): number {

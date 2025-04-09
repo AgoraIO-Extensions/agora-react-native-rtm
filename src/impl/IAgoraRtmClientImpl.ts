@@ -1,5 +1,6 @@
 import { PublishOptions, SubscribeOptions } from '../AgoraRtmBase';
-import { IRtmClient, IRtmEventHandler, RtmConfig } from '../IAgoraRtmClient';
+import { IRtmClient, IRtmEventHandler } from '../IAgoraRtmClient';
+import { IRtmHistory } from '../IAgoraRtmHistory';
 import { IRtmLock } from '../IAgoraRtmLock';
 import { IRtmPresence } from '../IAgoraRtmPresence';
 import { IRtmStorage } from '../IAgoraRtmStorage';
@@ -11,6 +12,11 @@ export function processIRtmEventHandler(
   jsonParams: any
 ) {
   switch (event) {
+    case 'onLinkStateEvent':
+      if (handler.onLinkStateEvent !== undefined) {
+        handler.onLinkStateEvent(jsonParams.event);
+      }
+      break;
     case 'onMessageEvent':
       if (handler.onMessageEvent !== undefined) {
         handler.onMessageEvent(jsonParams.event);
@@ -56,6 +62,16 @@ export function processIRtmEventHandler(
         );
       }
       break;
+    case 'onPublishTopicMessageResult':
+      if (handler.onPublishTopicMessageResult !== undefined) {
+        handler.onPublishTopicMessageResult(
+          jsonParams.requestId,
+          jsonParams.channelName,
+          jsonParams.topic,
+          jsonParams.errorCode
+        );
+      }
+      break;
     case 'onJoinTopicResult':
       if (handler.onJoinTopicResult !== undefined) {
         handler.onJoinTopicResult(
@@ -93,6 +109,27 @@ export function processIRtmEventHandler(
         );
       }
       break;
+    case 'onUnsubscribeTopicResult':
+      if (handler.onUnsubscribeTopicResult !== undefined) {
+        handler.onUnsubscribeTopicResult(
+          jsonParams.requestId,
+          jsonParams.channelName,
+          jsonParams.topic,
+          jsonParams.errorCode
+        );
+      }
+      break;
+    case 'onGetSubscribedUserListResult':
+      if (handler.onGetSubscribedUserListResult !== undefined) {
+        handler.onGetSubscribedUserListResult(
+          jsonParams.requestId,
+          jsonParams.channelName,
+          jsonParams.topic,
+          jsonParams.users,
+          jsonParams.errorCode
+        );
+      }
+      break;
     case 'onConnectionStateChanged':
       if (handler.onConnectionStateChanged !== undefined) {
         handler.onConnectionStateChanged(
@@ -116,6 +153,15 @@ export function processIRtmEventHandler(
         );
       }
       break;
+    case 'onUnsubscribeResult':
+      if (handler.onUnsubscribeResult !== undefined) {
+        handler.onUnsubscribeResult(
+          jsonParams.requestId,
+          jsonParams.channelName,
+          jsonParams.errorCode
+        );
+      }
+      break;
     case 'onPublishResult':
       if (handler.onPublishResult !== undefined) {
         handler.onPublishResult(jsonParams.requestId, jsonParams.errorCode);
@@ -123,7 +169,22 @@ export function processIRtmEventHandler(
       break;
     case 'onLoginResult':
       if (handler.onLoginResult !== undefined) {
-        handler.onLoginResult(jsonParams.errorCode);
+        handler.onLoginResult(jsonParams.requestId, jsonParams.errorCode);
+      }
+      break;
+    case 'onLogoutResult':
+      if (handler.onLogoutResult !== undefined) {
+        handler.onLogoutResult(jsonParams.requestId, jsonParams.errorCode);
+      }
+      break;
+    case 'onRenewTokenResult':
+      if (handler.onRenewTokenResult !== undefined) {
+        handler.onRenewTokenResult(
+          jsonParams.requestId,
+          jsonParams.serverType,
+          jsonParams.channelName,
+          jsonParams.errorCode
+        );
       }
       break;
     case 'onSetChannelMetadataResult':
@@ -207,6 +268,15 @@ export function processIRtmEventHandler(
     case 'onSubscribeUserMetadataResult':
       if (handler.onSubscribeUserMetadataResult !== undefined) {
         handler.onSubscribeUserMetadataResult(
+          jsonParams.requestId,
+          jsonParams.userId,
+          jsonParams.errorCode
+        );
+      }
+      break;
+    case 'onUnsubscribeUserMetadataResult':
+      if (handler.onUnsubscribeUserMetadataResult !== undefined) {
+        handler.onUnsubscribeUserMetadataResult(
           jsonParams.requestId,
           jsonParams.userId,
           jsonParams.errorCode
@@ -348,29 +418,22 @@ export function processIRtmEventHandler(
         );
       }
       break;
+    case 'onGetHistoryMessagesResult':
+      if (handler.onGetHistoryMessagesResult !== undefined) {
+        handler.onGetHistoryMessagesResult(
+          jsonParams.requestId,
+          jsonParams.messageList,
+          jsonParams.count,
+          jsonParams.newStart,
+          jsonParams.errorCode
+        );
+      }
+      break;
   }
 }
 
 // @ts-ignore
 export class IRtmClientImpl implements IRtmClient {
-  initialize(config: RtmConfig): number {
-    const apiType = this.getApiTypeFromInitialize(config);
-    const jsonParams = {
-      config: config,
-      toJSON: () => {
-        return {
-          config: config,
-        };
-      },
-    };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
-  }
-
-  protected getApiTypeFromInitialize(config: RtmConfig): string {
-    return 'RtmClient_initialize';
-  }
-
   release(): number {
     const apiType = this.getApiTypeFromRelease();
     const jsonParams = {};
@@ -393,7 +456,8 @@ export class IRtmClientImpl implements IRtmClient {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromLogin(token: string): string {
@@ -404,7 +468,8 @@ export class IRtmClientImpl implements IRtmClient {
     const apiType = this.getApiTypeFromLogout();
     const jsonParams = {};
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromLogout(): string {
@@ -444,6 +509,17 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_getPresence';
   }
 
+  getHistory(): IRtmHistory {
+    const apiType = this.getApiTypeFromGetHistory();
+    const jsonParams = {};
+    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
+    return jsonResults.result;
+  }
+
+  protected getApiTypeFromGetHistory(): string {
+    return 'RtmClient_getHistory';
+  }
+
   renewToken(token: string): number {
     const apiType = this.getApiTypeFromRenewToken(token);
     const jsonParams = {
@@ -455,7 +531,8 @@ export class IRtmClientImpl implements IRtmClient {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromRenewToken(token: string): string {
@@ -537,14 +614,18 @@ export class IRtmClientImpl implements IRtmClient {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromUnsubscribe(channelName: string): string {
     return 'RtmClient_unsubscribe';
   }
 
-  createStreamChannel(channelName: string): IStreamChannel {
+  createStreamChannel(channelName: string): {
+    errorCode: number;
+    result: IStreamChannel;
+  } {
     const apiType = this.getApiTypeFromCreateStreamChannel(channelName);
     const jsonParams = {
       channelName: channelName,
@@ -555,7 +636,8 @@ export class IRtmClientImpl implements IRtmClient {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const errorCode = jsonResults.errorCode;
+    return errorCode;
   }
 
   protected getApiTypeFromCreateStreamChannel(channelName: string): string {
@@ -580,13 +662,13 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_setParameters';
   }
 
-  publishWithBuffer(
+  publishBinaryMessage(
     channelName: string,
     message: Uint8Array,
     length: number,
     option: PublishOptions
   ): number {
-    const apiType = this.getApiTypeFromPublishWithBuffer(
+    const apiType = this.getApiTypeFromPublishBinaryMessage(
       channelName,
       message,
       length,
@@ -610,13 +692,13 @@ export class IRtmClientImpl implements IRtmClient {
     return requestId;
   }
 
-  protected getApiTypeFromPublishWithBuffer(
+  protected getApiTypeFromPublishBinaryMessage(
     channelName: string,
     message: Uint8Array,
     length: number,
     option: PublishOptions
   ): string {
-    return 'RtmClient_publishWithBuffer';
+    return 'RtmClient_publishBinaryMessage';
   }
 }
 

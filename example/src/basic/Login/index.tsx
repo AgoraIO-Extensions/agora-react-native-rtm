@@ -10,20 +10,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
-import {
-  AgoraButton,
-  AgoraStyle,
-  AgoraText,
-  AgoraTextInput,
-} from '../../components/ui';
+import { AgoraButton, AgoraStyle } from '../../components/ui';
 import Config from '../../config/agora.config';
 import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function Login() {
-  const [uid, setUid] = useState(Config.uid);
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const [initResult, setInitResult] = useState<number>(0);
   const onLoginResult = useCallback((errorCode: RTM_ERROR_CODE) => {
     log.log('onLoginResult', 'errorCode', errorCode);
     setLoginSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
@@ -57,39 +50,11 @@ export default function Login() {
    * Step 2: initialize rtm client
    */
   useEffect(() => {
-    if (!uid || uid.length === 0) {
-      return;
-    }
-    let result = client.initialize(
-      new RtmConfig({
-        userId: uid,
-        appId: Config.appId,
-        areaCode: Config.areaCode,
-        proxyConfig: new RtmProxyConfig({
-          proxyType: Config.proxyType,
-          server: Config.server,
-          port: Config.port,
-          account: Config.account,
-          password: Config.password,
-        }),
-        encryptionConfig: new RtmEncryptionConfig({
-          encryptionMode: Config.encryptionMode,
-          encryptionKey: Config.encryptionKey,
-          encryptionSalt: Config.encryptionSalt,
-        }),
-        eventHandler: {
-          onLoginResult: () => {
-            console.log('onLoginResult');
-          },
-        },
-      })
-    );
-    setInitResult(result);
     return () => {
       setLoginSuccess(false);
       client.release();
     };
-  }, [client, uid]);
+  }, [client]);
 
   /**
    * Step 3: login to rtm
@@ -119,7 +84,7 @@ export default function Login() {
         onConnectionStateChanged
       );
     };
-  }, [client, uid, onLoginResult, onConnectionStateChanged]);
+  }, [client, onLoginResult, onConnectionStateChanged]);
 
   return (
     <KeyboardAvoidingView
@@ -127,20 +92,8 @@ export default function Login() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={AgoraStyle.fullSize}>
-        {loginSuccess ? (
-          <AgoraText>{`current login userId:\n${uid}`}</AgoraText>
-        ) : (
-          <AgoraTextInput
-            onChangeText={(text) => {
-              setUid(text);
-            }}
-            placeholder="please input userId"
-            label="userId"
-            value={uid}
-          />
-        )}
         <AgoraButton
-          disabled={!uid || initResult !== 0}
+          disabled={!Config.uid}
           title={`${loginSuccess ? 'logout' : 'login'}`}
           onPress={() => {
             loginSuccess ? logout() : login();

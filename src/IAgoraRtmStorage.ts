@@ -58,12 +58,31 @@ export class MetadataItem {
   }
 }
 
-export abstract class IRtmStorage {
+export class Metadata {
   /**
-Creates the metadata object and returns the pointer.
-* @return Pointer of the metadata object.
-*/
-  abstract createMetadata(): RtmMetadata;
+   * the major revision of metadata.
+   */
+  majorRevision?: number = -1;
+  /**
+   * The metadata item array.
+   */
+  items?: MetadataItem[];
+  /**
+   * The items count.
+   */
+  itemCount?: number = 0;
+  constructor(
+    props?: Partial<{
+      majorRevision?: number;
+      items?: MetadataItem[];
+      itemCount?: number;
+    }>
+  ) {
+    Object.assign(this, props);
+  }
+}
+
+export abstract class IRtmStorage {
   /**
    * Set the metadata of a specified channel.
    *
@@ -81,7 +100,7 @@ Creates the metadata object and returns the pointer.
   abstract setChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -103,7 +122,7 @@ Creates the metadata object and returns the pointer.
   abstract updateChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -125,7 +144,7 @@ Creates the metadata object and returns the pointer.
   abstract removeChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string,
     requestId?: number
@@ -160,7 +179,7 @@ Creates the metadata object and returns the pointer.
    */
   abstract setUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     requestId?: number
   ): number;
@@ -178,7 +197,7 @@ Creates the metadata object and returns the pointer.
    */
   abstract updateUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     requestId?: number
   ): number;
@@ -196,7 +215,7 @@ Creates the metadata object and returns the pointer.
    */
   abstract removeUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     requestId?: number
   ): number;
@@ -230,29 +249,5 @@ Creates the metadata object and returns the pointer.
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract unsubscribeUserMetadata(userId: string): number;
-}
-
-export class RtmMetadata {
-  /**
-   * The key of the metadata item.
-   */
-  majorRevision?: number = -1;
-  /**
-   * The value of the metadata item.
-   */
-  metadataItems?: MetadataItem[];
-  /**
-   * The User ID of the user who makes the latest update to the metadata item.
-   */
-  metadataItemsSize?: number;
-  constructor(
-    props?: Partial<{
-      majorRevision?: number;
-      metadataItems?: MetadataItem[];
-      metadataItemsSize?: number;
-    }>
-  ) {
-    Object.assign(this, props);
-  }
+  abstract unsubscribeUserMetadata(userId: string, requestId?: number): number;
 }

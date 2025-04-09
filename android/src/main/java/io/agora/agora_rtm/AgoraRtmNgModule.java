@@ -23,6 +23,7 @@ import org.json.JSONObject;
 public class AgoraRtmNgModule
     extends AgoraRtmNgSpec implements IrisRtmEventHandler {
   public static final String NAME = "AgoraRtmNg";
+  public final Object irisApiLock = new Object();
   public IrisRtmEngine irisRtmEngine;
 
   AgoraRtmNgModule(ReactApplicationContext context) {
@@ -37,49 +38,55 @@ public class AgoraRtmNgModule
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public boolean newIrisRtmEngine() {
-    if (irisRtmEngine == null) {
-      IrisRtmEngine.enableUseJsonArray(true);
-      irisRtmEngine = new IrisRtmEngine(getReactApplicationContext());
-      irisRtmEngine.setEventHandler(this);
-      return true;
+    synchronized (irisApiLock) {
+      if (irisRtmEngine == null) {
+        IrisRtmEngine.enableUseJsonArray(true);
+        irisRtmEngine = new IrisRtmEngine(getReactApplicationContext());
+        irisRtmEngine.setEventHandler(this);
+        return true;
+      }
     }
     return false;
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public boolean destroyIrisRtmEngine() {
-    if (irisRtmEngine != null) {
-      irisRtmEngine.setEventHandler(null);
-      irisRtmEngine.destroy();
-      irisRtmEngine = null;
-      return true;
+    synchronized (irisApiLock) {
+      if (irisRtmEngine != null) {
+        irisRtmEngine.setEventHandler(null);
+        irisRtmEngine.destroy();
+        irisRtmEngine = null;
+        return true;
+      }
     }
     return false;
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public String callApi(ReadableMap args) {
-    String funcName = args.getString("funcName");
-    String params = args.getString("params");
-    List<byte[]> buffers = null;
+    synchronized (irisApiLock) {
+      String funcName = args.getString("funcName");
+      String params = args.getString("params");
+      List<byte[]> buffers = null;
 
-    ReadableArray array = args.getArray("buffers");
-    if (array != null) {
-      buffers = new ArrayList<>();
-      for (int i = 0; i < array.size(); i++) {
-        buffers.add(Base64.decode(array.getString(i), Base64.DEFAULT));
+      ReadableArray array = args.getArray("buffers");
+      if (array != null) {
+        buffers = new ArrayList<>();
+        for (int i = 0; i < array.size(); i++) {
+          buffers.add(Base64.decode(array.getString(i), Base64.DEFAULT));
+        }
       }
-    }
 
-    try {
-      newIrisRtmEngine();
-      return irisRtmEngine.callIrisApi(funcName, params, buffers);
-    } catch (Exception e) {
-      e.printStackTrace();
       try {
-        return new JSONObject().put("result", e.getMessage()).toString();
-      } catch (JSONException ex) {
-        throw new RuntimeException(ex);
+        newIrisRtmEngine();
+        return irisRtmEngine.callIrisApi(funcName, params, buffers);
+      } catch (Exception e) {
+        e.printStackTrace();
+        try {
+          return new JSONObject().put("result", e.getMessage()).toString();
+        } catch (JSONException ex) {
+          throw new RuntimeException(ex);
+        }
       }
     }
   }

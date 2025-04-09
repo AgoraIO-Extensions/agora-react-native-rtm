@@ -5,10 +5,8 @@ import base64 from 'base64-js';
 import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
-import { IRtmEventHandler, RtmConfig } from '../IAgoraRtmClient';
-import { IRtmClientEvent } from '../extensions/IAgoraRtmClientExtension';
+import { IRtmEventHandler } from '../IAgoraRtmClient';
 import { processIRtmEventHandler } from '../impl/IAgoraRtmClientImpl';
-import { createAgoraRtmClient } from '../index';
 import AgoraRtmNg from '../specs';
 
 import { RtmClientInternal } from './RtmClientInternal';
@@ -115,8 +113,8 @@ function handleEvent({ event, data, buffers }: any) {
     return false;
   });
 
-  const _buffers: Uint8Array[] = (buffers as string[])?.map((value) => {
-    return Buffer.from(value, 'base64');
+  const _buffers: Uint8Array[] = (buffers as Buffer[])?.map((value) => {
+    return new Uint8Array(value);
   });
   if (processor.preprocess) {
     processor.preprocess(_event, _data, _buffers);
@@ -155,7 +153,7 @@ export function callIrisApi(this: any, funcName: string, params: any): any {
     ) {
       if (typeof params.message === 'string') {
         let buffer = base64.fromByteArray(
-          Buffer.from(params.message ?? '') ?? Buffer.from('')
+          new Uint8Array(Buffer.from(params.message ?? ''))
         );
         buffers.push(buffer);
         params.length = base64.byteLength(buffer);
@@ -174,14 +172,7 @@ export function callIrisApi(this: any, funcName: string, params: any): any {
 
     // RTM_ERROR_DUPLICATE_OPERATION
 
-    if (funcName === 'RtmClient_initialize') {
-      let config: RtmConfig = params.config;
-      if (config?.eventHandler) {
-        let rtmClient = createAgoraRtmClient();
-        Object.entries(config.eventHandler).forEach(([key, value]) => {
-          rtmClient.addEventListener(key as keyof IRtmClientEvent, value);
-        });
-      }
+    if (funcName === 'RtmClient_create') {
       AgoraRtmNg.newIrisRtmEngine();
     }
     let ret = AgoraRtmNg.callApi({
@@ -193,13 +184,13 @@ export function callIrisApi(this: any, funcName: string, params: any): any {
       AgoraRtmNg.destroyIrisRtmEngine();
     }
 
-    if (ret !== undefined && ret !== null && ret !== '') {
+    if (ret !== undefined && ret !== null && ret !== '' && ret !== 'null') {
       const retObj = JSON.parse(ret);
       if (isDebuggable()) {
         if (typeof retObj.result === 'number' && retObj.result < 0) {
           console.error('callApi', funcName, JSON.stringify(params), ret);
         } else {
-          console.debug('callApi', funcName, JSON.stringify(params), ret);
+          console.log('callApi', funcName, JSON.stringify(params), ret);
         }
       }
       return retObj;

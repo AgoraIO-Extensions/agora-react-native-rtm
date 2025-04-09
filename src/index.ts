@@ -1,4 +1,4 @@
-import { IRtmClient } from './IAgoraRtmClient';
+import { IRtmClient, RtmConfig } from './IAgoraRtmClient';
 
 import { RtmClientInternal } from './internal/RtmClientInternal';
 
@@ -14,8 +14,6 @@ export {
   callIrisApi,
 } from './internal/IrisRtmEngine';
 
-const instance = new RtmClientInternal();
-
 /**
  * Creates one IRtmClient object.
  *
@@ -24,8 +22,8 @@ const instance = new RtmClientInternal();
  * @returns
  * One IRtmClient object.
  */
-export function createAgoraRtmClient(): IRtmClient {
-  return instance;
+export function createAgoraRtmClient(config: RtmConfig): IRtmClient {
+  return new RtmClientInternal(config);
 }
 
 export default createAgoraRtmClient;

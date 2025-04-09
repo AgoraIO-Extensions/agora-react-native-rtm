@@ -1,4 +1,4 @@
-import { PublishOptions, TopicMessageOptions, UserList } from '../AgoraRtmBase';
+import { TopicMessageOptions, UserList } from '../AgoraRtmBase';
 import {
   IStreamChannel,
   JoinChannelOptions,
@@ -38,7 +38,8 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromRenewToken(token: string): string {
@@ -119,7 +120,8 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromPublishTopicMessage(
@@ -187,7 +189,8 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromUnsubscribeTopic(
@@ -197,13 +200,15 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_unsubscribeTopic';
   }
 
-  getSubscribedUserList(topic: string): UserList[] {
-    const apiType = this.getApiTypeFromGetSubscribedUserList(topic);
+  getSubscribedUserList(topic: string, requestId: number): UserList[] {
+    const apiType = this.getApiTypeFromGetSubscribedUserList(topic, requestId);
     const jsonParams = {
       topic: topic,
+      requestId: requestId,
       toJSON: () => {
         return {
           topic: topic,
+          requestId: requestId,
         };
       },
     };
@@ -211,7 +216,10 @@ export class IStreamChannelImpl implements IStreamChannel {
     return jsonResults.result;
   }
 
-  protected getApiTypeFromGetSubscribedUserList(topic: string): string {
+  protected getApiTypeFromGetSubscribedUserList(
+    topic: string,
+    requestId: number
+  ): string {
     return 'StreamChannel_getSubscribedUserList';
   }
 
@@ -226,13 +234,53 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_release';
   }
 
-  publishTopicMessageWithBuffer(
+  publishTextMessage(
+    topic: string,
+    message: string,
+    length: number,
+    option: TopicMessageOptions
+  ): number {
+    const apiType = this.getApiTypeFromPublishTextMessage(
+      topic,
+      message,
+      length,
+      option
+    );
+    const jsonParams = {
+      topic: topic,
+      message: message,
+      length: length,
+      option: option,
+      toJSON: () => {
+        return {
+          topic: topic,
+          message: message,
+          length: length,
+          option: option,
+        };
+      },
+    };
+    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
+    const requestId = jsonResults.requestId;
+    return requestId;
+  }
+
+  protected getApiTypeFromPublishTextMessage(
+    topic: string,
+    message: string,
+    length: number,
+    option: TopicMessageOptions
+  ): string {
+    return 'StreamChannel_publishTextMessage';
+  }
+
+  publishBinaryMessage(
     topic: string,
     message: Uint8Array,
     length: number,
-    option: PublishOptions
+    option: TopicMessageOptions
   ): number {
-    const apiType = this.getApiTypeFromPublishTopicMessageWithBuffer(
+    const apiType = this.getApiTypeFromPublishBinaryMessage(
       topic,
       message,
       length,
@@ -252,16 +300,17 @@ export class IStreamChannelImpl implements IStreamChannel {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
-  protected getApiTypeFromPublishTopicMessageWithBuffer(
+  protected getApiTypeFromPublishBinaryMessage(
     topic: string,
     message: Uint8Array,
     length: number,
-    option: PublishOptions
+    option: TopicMessageOptions
   ): string {
-    return 'StreamChannel_publishTopicMessageWithBuffer';
+    return 'StreamChannel_publishBinaryMessage';
   }
 }
 

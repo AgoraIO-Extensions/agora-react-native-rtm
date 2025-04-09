@@ -1,23 +1,12 @@
 import { RTM_CHANNEL_TYPE } from '../AgoraRtmBase';
-import { IRtmStorage, MetadataOptions, RtmMetadata } from '../IAgoraRtmStorage';
+import { IRtmStorage, Metadata, MetadataOptions } from '../IAgoraRtmStorage';
 
 // @ts-ignore
 export class IRtmStorageImpl implements IRtmStorage {
-  createMetadata(): RtmMetadata {
-    const apiType = this.getApiTypeFromCreateMetadata();
-    const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
-  }
-
-  protected getApiTypeFromCreateMetadata(): string {
-    return 'RtmStorage_createMetadata';
-  }
-
   setChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string
   ): number {
@@ -52,7 +41,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   protected getApiTypeFromSetChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string
   ): string {
@@ -62,7 +51,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   updateChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string
   ): number {
@@ -97,7 +86,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   protected getApiTypeFromUpdateChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string
   ): string {
@@ -107,7 +96,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   removeChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string
   ): number {
@@ -142,7 +131,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   protected getApiTypeFromRemoveChannelMetadata(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions,
     lockName: string
   ): string {
@@ -181,7 +170,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   setUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions
   ): number {
     const apiType = this.getApiTypeFromSetUserMetadata(userId, data, options);
@@ -204,7 +193,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   protected getApiTypeFromSetUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions
   ): string {
     return 'RtmStorage_setUserMetadata';
@@ -212,7 +201,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   updateUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions
   ): number {
     const apiType = this.getApiTypeFromUpdateUserMetadata(
@@ -239,7 +228,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   protected getApiTypeFromUpdateUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions
   ): string {
     return 'RtmStorage_updateUserMetadata';
@@ -247,7 +236,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   removeUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions
   ): number {
     const apiType = this.getApiTypeFromRemoveUserMetadata(
@@ -274,7 +263,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   protected getApiTypeFromRemoveUserMetadata(
     userId: string,
-    data: RtmMetadata,
+    data: Metadata,
     options: MetadataOptions
   ): string {
     return 'RtmStorage_removeUserMetadata';
@@ -329,7 +318,8 @@ export class IRtmStorageImpl implements IRtmStorage {
       },
     };
     const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    const requestId = jsonResults.requestId;
+    return requestId;
   }
 
   protected getApiTypeFromUnsubscribeUserMetadata(userId: string): string {

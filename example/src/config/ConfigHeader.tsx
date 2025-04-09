@@ -24,6 +24,7 @@ export const ConfigHeader = () => {
   const [visible, setVisible] = useState(false);
   const [server, setServer] = useState(Config.server);
   const [port, setPort] = useState<number>(Config.port);
+  const [userId, setUserId] = useState<string>(Config.uid);
   const [areaCode, setAreaCode] = useState<number>(Config.areaCode);
   const [proxyType, setProxyType] = useState<RTM_PROXY_TYPE>(Config.proxyType);
   const [encryptionMode, setEncryptionMode] = useState<number>(
@@ -48,6 +49,16 @@ export const ConfigHeader = () => {
             overlayStyle={styles.overlay}
           >
             <ScrollView style={AgoraStyle.fullSize}>
+              <AgoraTextInput
+                onChangeText={(text) => {
+                  setUserId(text);
+                  Config.uid = text;
+                }}
+                placeholder="please input userId"
+                label="userId"
+                value={userId}
+              />
+              <AgoraDivider />
               <AgoraDropdown
                 items={enumToItems(RTM_PROXY_TYPE)}
                 onValueChange={(v) => {
