@@ -40,7 +40,7 @@ export class IRtmLockImpl implements IRtmLock {
     lockName: string,
     ttl: number
   ): string {
-    return 'RtmLock_setLock';
+    return 'RtmLock_setLock_89e5672';
   }
 
   getLocks(channelName: string, channelType: RTM_CHANNEL_TYPE): number {
@@ -64,7 +64,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE
   ): string {
-    return 'RtmLock_getLocks';
+    return 'RtmLock_getLocks_ad8568b';
   }
 
   removeLock(
@@ -99,7 +99,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelType: RTM_CHANNEL_TYPE,
     lockName: string
   ): string {
-    return 'RtmLock_removeLock';
+    return 'RtmLock_removeLock_4ffa44d';
   }
 
   acquireLock(
@@ -139,7 +139,7 @@ export class IRtmLockImpl implements IRtmLock {
     lockName: string,
     retry: boolean
   ): string {
-    return 'RtmLock_acquireLock';
+    return 'RtmLock_acquireLock_cd2dbc2';
   }
 
   releaseLock(
@@ -174,7 +174,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelType: RTM_CHANNEL_TYPE,
     lockName: string
   ): string {
-    return 'RtmLock_releaseLock';
+    return 'RtmLock_releaseLock_4ffa44d';
   }
 
   revokeLock(
@@ -214,7 +214,7 @@ export class IRtmLockImpl implements IRtmLock {
     lockName: string,
     owner: string
   ): string {
-    return 'RtmLock_revokeLock';
+    return 'RtmLock_revokeLock_fc4a9d7';
   }
 }
 

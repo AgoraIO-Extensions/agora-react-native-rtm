@@ -24,7 +24,7 @@ export class IStreamChannelImpl implements IStreamChannel {
   }
 
   protected getApiTypeFromJoin(options: JoinChannelOptions): string {
-    return 'StreamChannel_join';
+    return 'StreamChannel_join_2090a6b';
   }
 
   renewToken(token: string): number {
@@ -43,7 +43,7 @@ export class IStreamChannelImpl implements IStreamChannel {
   }
 
   protected getApiTypeFromRenewToken(token: string): string {
-    return 'StreamChannel_renewToken';
+    return 'StreamChannel_renewToken_1fa04dd';
   }
 
   leave(): number {
@@ -55,7 +55,7 @@ export class IStreamChannelImpl implements IStreamChannel {
   }
 
   protected getApiTypeFromLeave(): string {
-    return 'StreamChannel_leave';
+    return 'StreamChannel_leave_90386a9';
   }
 
   getChannelName(): string {
@@ -90,7 +90,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     topic: string,
     options: JoinTopicOptions
   ): string {
-    return 'StreamChannel_joinTopic';
+    return 'StreamChannel_joinTopic_ff0ec3f';
   }
 
   publishTopicMessage(
@@ -130,7 +130,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     length: number,
     option: TopicMessageOptions
   ): string {
-    return 'StreamChannel_publishTopicMessage';
+    return 'StreamChannel_publishTopicMessage_a31773e';
   }
 
   leaveTopic(topic: string): number {
@@ -149,7 +149,7 @@ export class IStreamChannelImpl implements IStreamChannel {
   }
 
   protected getApiTypeFromLeaveTopic(topic: string): string {
-    return 'StreamChannel_leaveTopic';
+    return 'StreamChannel_leaveTopic_1fa04dd';
   }
 
   subscribeTopic(topic: string, options: TopicOptions): number {
@@ -173,7 +173,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     topic: string,
     options: TopicOptions
   ): string {
-    return 'StreamChannel_subscribeTopic';
+    return 'StreamChannel_subscribeTopic_b801234';
   }
 
   unsubscribeTopic(topic: string, options: TopicOptions): number {
@@ -197,7 +197,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     topic: string,
     options: TopicOptions
   ): string {
-    return 'StreamChannel_unsubscribeTopic';
+    return 'StreamChannel_unsubscribeTopic_b801234';
   }
 
   getSubscribedUserList(topic: string, requestId: number): UserList[] {
@@ -220,7 +220,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     topic: string,
     requestId: number
   ): string {
-    return 'StreamChannel_getSubscribedUserList';
+    return 'StreamChannel_getSubscribedUserList_1fa04dd';
   }
 
   release(): number {
@@ -271,7 +271,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     length: number,
     option: TopicMessageOptions
   ): string {
-    return 'StreamChannel_publishTextMessage';
+    return 'StreamChannel_publishTopicMessage_a31773e';
   }
 
   publishBinaryMessage(
@@ -310,7 +310,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     length: number,
     option: TopicMessageOptions
   ): string {
-    return 'StreamChannel_publishBinaryMessage';
+    return 'StreamChannel_publishTopicMessage_a31773e';
   }
 }
 

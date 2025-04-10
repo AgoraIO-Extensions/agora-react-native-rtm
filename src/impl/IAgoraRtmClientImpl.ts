@@ -461,7 +461,7 @@ export class IRtmClientImpl implements IRtmClient {
   }
 
   protected getApiTypeFromLogin(token: string): string {
-    return 'RtmClient_login';
+    return 'RtmClient_login_1fa04dd';
   }
 
   logout(): number {
@@ -473,7 +473,7 @@ export class IRtmClientImpl implements IRtmClient {
   }
 
   protected getApiTypeFromLogout(): string {
-    return 'RtmClient_logout';
+    return 'RtmClient_logout_90386a9';
   }
 
   getStorage(): IRtmStorage {
@@ -536,7 +536,7 @@ export class IRtmClientImpl implements IRtmClient {
   }
 
   protected getApiTypeFromRenewToken(token: string): string {
-    return 'RtmClient_renewToken';
+    return 'RtmClient_renewToken_1fa04dd';
   }
 
   publish(
@@ -576,7 +576,7 @@ export class IRtmClientImpl implements IRtmClient {
     length: number,
     option: PublishOptions
   ): string {
-    return 'RtmClient_publish';
+    return 'RtmClient_publish_2d36e93';
   }
 
   subscribe(channelName: string, options: SubscribeOptions): number {
@@ -600,7 +600,7 @@ export class IRtmClientImpl implements IRtmClient {
     channelName: string,
     options: SubscribeOptions
   ): string {
-    return 'RtmClient_subscribe';
+    return 'RtmClient_subscribe_3fae92d';
   }
 
   unsubscribe(channelName: string): number {
@@ -619,7 +619,7 @@ export class IRtmClientImpl implements IRtmClient {
   }
 
   protected getApiTypeFromUnsubscribe(channelName: string): string {
-    return 'RtmClient_unsubscribe';
+    return 'RtmClient_unsubscribe_1fa04dd';
   }
 
   createStreamChannel(channelName: string): {
@@ -641,7 +641,7 @@ export class IRtmClientImpl implements IRtmClient {
   }
 
   protected getApiTypeFromCreateStreamChannel(channelName: string): string {
-    return 'RtmClient_createStreamChannel';
+    return 'RtmClient_createStreamChannel_ae3d0cf';
   }
 
   setParameters(parameters: string): number {
@@ -659,7 +659,7 @@ export class IRtmClientImpl implements IRtmClient {
   }
 
   protected getApiTypeFromSetParameters(parameters: string): string {
-    return 'RtmClient_setParameters';
+    return 'RtmClient_setParameters_3a2037f';
   }
 
   publishBinaryMessage(
@@ -698,7 +698,7 @@ export class IRtmClientImpl implements IRtmClient {
     length: number,
     option: PublishOptions
   ): string {
-    return 'RtmClient_publishBinaryMessage';
+    return 'RtmClient_publish_2d36e93';
   }
 }
 

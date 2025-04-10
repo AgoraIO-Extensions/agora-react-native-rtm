@@ -9,7 +9,11 @@ import {
 
 import { ParseResult, TerraContext } from '@agoraio-extensions/terra-core';
 
-import { renderWithConfiguration } from '@agoraio-extensions/terra_shared_configs';
+import {
+  IrisApiIdParserUserData,
+  getOverrideNodeParserUserData,
+  renderWithConfiguration,
+} from '@agoraio-extensions/terra_shared_configs';
 
 import {
   deepClone,
@@ -38,7 +42,7 @@ interface VariableUserData {
   name: string;
 }
 
-interface ClazzMethodUserData {
+interface ClazzMethodUserData extends IrisApiIdParserUserData {
   output: string;
   input: string;
   input_map: Variable[];
@@ -46,7 +50,6 @@ interface ClazzMethodUserData {
   output_map: Variable[];
   hasParameters: boolean;
   bindingFunctionName?: string;
-  renderApiType?: string;
   returnParam?: string;
 }
 
@@ -88,8 +91,13 @@ export function impl(parseResult: ParseResult) {
             hasParameters: true,
             bindingFunctionName: `getApiTypeFrom${upperFirstWord(method.name)}`,
             returnParam: '',
-            renderApiType: `${node.asClazz().name.slice(1)}_${method.name}`,
+            ...method.user_data,
           };
+          let overrideNode = getOverrideNodeParserUserData(method);
+          if (overrideNode && overrideNode.redirectIrisApiId) {
+            clazzMethodUserData.IrisApiIdParser.value =
+              overrideNode.redirectIrisApiId;
+          }
           // method.return_type.name = convertToCamelCase(method.return_type.name);
           method.asMemberFunction().parameters.map((param) => {
             let variableUserData: VariableUserData = {

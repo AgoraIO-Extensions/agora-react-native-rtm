@@ -8,6 +8,7 @@ export * from './IAgoraRtmLock';
 export * from './IAgoraRtmPresence';
 export * from './IAgoraRtmStorage';
 export * from './IAgoraStreamChannel';
+export * from './hooks';
 export {
   isDebuggable,
   setDebuggable,

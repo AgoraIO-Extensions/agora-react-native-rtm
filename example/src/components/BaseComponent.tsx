@@ -7,11 +7,11 @@ import {
   RtmEncryptionConfig,
   RtmProxyConfig,
   StorageEvent,
+  useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import Config from '../config/agora.config';
-import { useRtmClient } from '../hooks/useRtmClient';
 import * as log from '../utils/log';
 
 import { LogSink } from './LogSink';
@@ -78,7 +78,7 @@ export default function BaseComponent({
   /**
    * Step 1: getRtmClient
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 2: initialize rtm client and login
@@ -109,7 +109,6 @@ export default function BaseComponent({
     setInitResult(result);
     return () => {
       setLoginSuccess(false);
-      client.release();
     };
   }, [client, uid]);
 

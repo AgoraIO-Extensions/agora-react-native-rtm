@@ -1,16 +1,15 @@
 import {
   IRtmClient,
+  RTMProvider,
   RtmConfig,
   RtmEncryptionConfig,
   RtmProxyConfig,
   createAgoraRtmClient,
 } from 'agora-react-native-rtm';
 import type { ReactNode } from 'react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Config from '../config/agora.config';
-
-import { AgoraRTMProvider } from './RtmProvider';
 
 interface ClientProps {
   children: ReactNode;
@@ -44,9 +43,13 @@ export const Client = ({ children }: ClientProps) => {
     )
   );
 
-  console.log('client', client);
+  useEffect(() => {
+    return () => {
+      client.release();
+    };
+  }, [client]);
 
-  return <AgoraRTMProvider client={client}>{children}</AgoraRTMProvider>;
+  return <RTMProvider client={client}>{children}</RTMProvider>;
 };
 
 export default Client;

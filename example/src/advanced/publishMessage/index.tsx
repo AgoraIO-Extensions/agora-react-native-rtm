@@ -9,6 +9,7 @@ import {
   RTM_ERROR_CODE,
   RTM_MESSAGE_TYPE,
   RTM_PROXY_TYPE,
+  useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -22,7 +23,6 @@ import {
   AgoraView,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import { AgoraMessage } from '../../types';
 import { enumToItems } from '../../utils';
 import * as log from '../../utils/log';
@@ -99,7 +99,7 @@ export default function PublishMessage() {
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 2 : publish message to message channel

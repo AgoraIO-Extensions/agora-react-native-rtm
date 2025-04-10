@@ -7,6 +7,7 @@ import {
   RTM_ERROR_CODE,
   StateItem,
   UserState,
+  useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -15,7 +16,6 @@ import { ScrollView } from 'react-native';
 import BaseComponent from '../../components/BaseComponent';
 import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function Presence() {
@@ -231,7 +231,7 @@ export default function Presence() {
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 1-1(optional) : subscribe message channel

@@ -45,7 +45,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     options: MetadataOptions,
     lockName: string
   ): string {
-    return 'RtmStorage_setChannelMetadata';
+    return 'RtmStorage_setChannelMetadata_55e6d00';
   }
 
   updateChannelMetadata(
@@ -90,7 +90,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     options: MetadataOptions,
     lockName: string
   ): string {
-    return 'RtmStorage_updateChannelMetadata';
+    return 'RtmStorage_updateChannelMetadata_55e6d00';
   }
 
   removeChannelMetadata(
@@ -135,7 +135,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     options: MetadataOptions,
     lockName: string
   ): string {
-    return 'RtmStorage_removeChannelMetadata';
+    return 'RtmStorage_removeChannelMetadata_55e6d00';
   }
 
   getChannelMetadata(
@@ -165,7 +165,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE
   ): string {
-    return 'RtmStorage_getChannelMetadata';
+    return 'RtmStorage_getChannelMetadata_ad8568b';
   }
 
   setUserMetadata(
@@ -196,7 +196,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     data: Metadata,
     options: MetadataOptions
   ): string {
-    return 'RtmStorage_setUserMetadata';
+    return 'RtmStorage_setUserMetadata_24ae125';
   }
 
   updateUserMetadata(
@@ -231,7 +231,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     data: Metadata,
     options: MetadataOptions
   ): string {
-    return 'RtmStorage_updateUserMetadata';
+    return 'RtmStorage_updateUserMetadata_24ae125';
   }
 
   removeUserMetadata(
@@ -266,7 +266,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     data: Metadata,
     options: MetadataOptions
   ): string {
-    return 'RtmStorage_removeUserMetadata';
+    return 'RtmStorage_removeUserMetadata_24ae125';
   }
 
   getUserMetadata(userId: string): number {
@@ -285,7 +285,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   }
 
   protected getApiTypeFromGetUserMetadata(userId: string): string {
-    return 'RtmStorage_getUserMetadata';
+    return 'RtmStorage_getUserMetadata_1fa04dd';
   }
 
   subscribeUserMetadata(userId: string): number {
@@ -304,7 +304,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   }
 
   protected getApiTypeFromSubscribeUserMetadata(userId: string): string {
-    return 'RtmStorage_subscribeUserMetadata';
+    return 'RtmStorage_subscribeUserMetadata_1fa04dd';
   }
 
   unsubscribeUserMetadata(userId: string): number {
@@ -323,7 +323,7 @@ export class IRtmStorageImpl implements IRtmStorage {
   }
 
   protected getApiTypeFromUnsubscribeUserMetadata(userId: string): string {
-    return 'RtmStorage_unsubscribeUserMetadata';
+    return 'RtmStorage_unsubscribeUserMetadata_1fa04dd';
   }
 }
 

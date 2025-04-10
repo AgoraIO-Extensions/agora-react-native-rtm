@@ -163,7 +163,7 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
   implementation "io.agora:agora-rtm:2.2.3"
-  implementation "io.agora.rtm:iris-rtm:2.2.3-build.1"
+  implementation "io.agora.rtm:iris-rtm:2.2.3-dev.1"
 
 }
 

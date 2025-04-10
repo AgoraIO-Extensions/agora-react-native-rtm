@@ -40,7 +40,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelType: RTM_CHANNEL_TYPE,
     options: PresenceOptions
   ): string {
-    return 'RtmPresence_whoNow';
+    return 'RtmPresence_whoNow_f7f61d1';
   }
 
   whereNow(userId: string): number {
@@ -59,7 +59,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
   }
 
   protected getApiTypeFromWhereNow(userId: string): string {
-    return 'RtmPresence_whereNow';
+    return 'RtmPresence_whereNow_1fa04dd';
   }
 
   setState(
@@ -99,7 +99,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     items: StateItem[],
     count: number
   ): string {
-    return 'RtmPresence_setState';
+    return 'RtmPresence_setState_b73723a';
   }
 
   removeState(
@@ -139,7 +139,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     keys: string[],
     count: number
   ): string {
-    return 'RtmPresence_removeState';
+    return 'RtmPresence_removeState_d7033d8';
   }
 
   getState(
@@ -174,7 +174,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelType: RTM_CHANNEL_TYPE,
     userId: string
   ): string {
-    return 'RtmPresence_getState';
+    return 'RtmPresence_getState_4ffa44d';
   }
 
   getOnlineUsers(
@@ -209,7 +209,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelType: RTM_CHANNEL_TYPE,
     options: GetOnlineUsersOptions
   ): string {
-    return 'RtmPresence_getOnlineUsers';
+    return 'RtmPresence_getOnlineUsers_ce2d8e8';
   }
 
   getUserChannels(userId: string): number {
@@ -228,7 +228,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
   }
 
   protected getApiTypeFromGetUserChannels(userId: string): string {
-    return 'RtmPresence_getUserChannels';
+    return 'RtmPresence_getUserChannels_1fa04dd';
   }
 }
 

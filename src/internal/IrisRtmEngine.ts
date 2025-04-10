@@ -113,6 +113,11 @@ function handleEvent({ event, data, buffers }: any) {
     return false;
   });
 
+  // for new IrisType, but this is temporary
+  if (_event.includes('_')) {
+    _event = _event.substring(0, _event.indexOf('_'));
+  }
+
   const _buffers: Uint8Array[] = (buffers as Buffer[])?.map((value) => {
     return new Uint8Array(value);
   });
@@ -214,4 +219,14 @@ export function emitEvent<EventType extends keyof T, T extends ProcessorType>(
   data: any
 ): void {
   DeviceEventEmitter.emit(eventType as string, eventProcessor, data);
+}
+
+/**
+ * @internal
+ */
+export function getAPIResultFromEvent<
+  EventType extends keyof T,
+  T extends ProcessorType
+>(eventType: EventType, eventProcessor: EventProcessor<T>, data: any): void {
+  // return eventProcessor.handlers(data);
 }

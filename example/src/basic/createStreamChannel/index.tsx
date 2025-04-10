@@ -4,6 +4,7 @@ import {
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
+  useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -12,7 +13,6 @@ import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import BaseComponent from '../../components/BaseComponent';
 import { AgoraButton, AgoraStyle } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function CreateStreamChannel() {
@@ -71,7 +71,7 @@ export default function CreateStreamChannel() {
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 2 : createStreamChannel

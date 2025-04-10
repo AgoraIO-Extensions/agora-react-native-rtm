@@ -5,6 +5,7 @@ import {
   RtmConfig,
   RtmEncryptionConfig,
   RtmProxyConfig,
+  useRtm,
 } from 'agora-react-native-rtm';
 
 import React, { useCallback, useEffect, useState } from 'react';
@@ -23,7 +24,6 @@ import {
   AgoraTextInput,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function UseRTC() {
@@ -61,7 +61,7 @@ export default function UseRTC() {
   /**
    * Step 1: getRtmClient
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 2: initialize rtm client

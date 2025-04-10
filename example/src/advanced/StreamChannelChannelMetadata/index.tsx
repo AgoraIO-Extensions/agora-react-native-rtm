@@ -1,13 +1,14 @@
 import {
   IStreamChannel,
   JoinChannelOptions,
+  Metadata,
   MetadataItem,
   MetadataOptions,
   RTM_CHANNEL_TYPE,
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
-  RtmMetadata,
+  useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -16,7 +17,6 @@ import { ScrollView } from 'react-native';
 import BaseComponent from '../../components/BaseComponent';
 import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function StreamChannelChannelMetadata() {
@@ -33,8 +33,8 @@ export default function StreamChannelChannelMetadata() {
   const [metadataValue, setMetadataValue] = useState<string>('rtm test');
   const [lockName, setLockName] = useState<string>('');
 
-  const metadata = useRef<RtmMetadata>(
-    new RtmMetadata({
+  const metadata = useRef<Metadata>(
+    new Metadata({
       majorRevision: -1,
       metadataItems: [],
       metadataItemsSize: 0,
@@ -188,7 +188,7 @@ export default function StreamChannelChannelMetadata() {
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 1-1 : createStreamChannel

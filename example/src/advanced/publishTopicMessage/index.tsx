@@ -12,6 +12,7 @@ import {
   RTM_MESSAGE_TYPE,
   TopicEvent,
   UserList,
+  useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
@@ -25,7 +26,6 @@ import {
   AgoraView,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function PublishTopicMessage() {
@@ -203,7 +203,7 @@ export default function PublishTopicMessage() {
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 2 : publish message to topic by publishTopicMessage

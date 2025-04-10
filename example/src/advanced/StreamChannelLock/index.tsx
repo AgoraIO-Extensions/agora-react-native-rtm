@@ -6,6 +6,7 @@ import {
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
+  useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -19,7 +20,6 @@ import {
   AgoraTextInput,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function StreamChannelLock() {
@@ -240,7 +240,7 @@ export default function StreamChannelLock() {
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 1-1 : createStreamChannel

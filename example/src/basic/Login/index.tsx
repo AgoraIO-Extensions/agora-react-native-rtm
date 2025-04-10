@@ -2,49 +2,24 @@ import {
   RTM_CONNECTION_CHANGE_REASON,
   RTM_CONNECTION_STATE,
   RTM_ERROR_CODE,
-  RtmConfig,
-  RtmEncryptionConfig,
-  RtmProxyConfig,
+  useRtm,
+  useRtmEvent,
 } from 'agora-react-native-rtm';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
 import { AgoraButton, AgoraStyle } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import * as log from '../../utils/log';
 
 export default function Login() {
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const onLoginResult = useCallback((errorCode: RTM_ERROR_CODE) => {
-    log.log('onLoginResult', 'errorCode', errorCode);
-    setLoginSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
-  }, []);
-
-  const onConnectionStateChanged = useCallback(
-    (
-      channelName: string,
-      state: RTM_CONNECTION_STATE,
-      reason: RTM_CONNECTION_CHANGE_REASON
-    ) => {
-      log.log(
-        'onConnectionStateChanged',
-        'channelName',
-        channelName,
-        'state',
-        state,
-        'reason',
-        reason
-      );
-    },
-    []
-  );
 
   /**
    * Step 1: getRtmClient
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 2: initialize rtm client
@@ -52,7 +27,6 @@ export default function Login() {
   useEffect(() => {
     return () => {
       setLoginSuccess(false);
-      client.release();
     };
   }, [client]);
 
@@ -71,20 +45,29 @@ export default function Login() {
     setLoginSuccess(false);
   };
 
-  useEffect(() => {
-    client?.addEventListener('onLoginResult', onLoginResult);
-    client?.addEventListener(
-      'onConnectionStateChanged',
-      onConnectionStateChanged
-    );
-    return () => {
-      client?.removeEventListener('onLoginResult', onLoginResult);
-      client?.removeEventListener(
+  useRtmEvent(client, 'onLoginResult', (errorCode: RTM_ERROR_CODE) => {
+    log.log('onLoginResult', 'errorCode', errorCode);
+    setLoginSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
+  });
+  useRtmEvent(
+    client,
+    'onConnectionStateChanged',
+    (
+      channelName: string,
+      state: RTM_CONNECTION_STATE,
+      reason: RTM_CONNECTION_CHANGE_REASON
+    ) => {
+      log.log(
         'onConnectionStateChanged',
-        onConnectionStateChanged
+        'channelName',
+        channelName,
+        'state',
+        state,
+        'reason',
+        reason
       );
-    };
-  }, [client, onLoginResult, onConnectionStateChanged]);
+    }
+  );
 
   return (
     <KeyboardAvoidingView

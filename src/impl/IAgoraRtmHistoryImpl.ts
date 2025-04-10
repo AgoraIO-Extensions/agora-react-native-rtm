@@ -35,7 +35,7 @@ export class IRtmHistoryImpl implements IRtmHistory {
     channelType: RTM_CHANNEL_TYPE,
     options: GetHistoryMessagesOptions
   ): string {
-    return 'RtmHistory_getMessages';
+    return 'RtmHistory_getMessages_e5877fc';
   }
 }
 

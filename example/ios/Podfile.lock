@@ -1,6 +1,6 @@
 PODS:
   - agora-react-native-rtm (2.1.12):
-    - AgoraIrisRTM_iOS (= 2.2.3-build.1)
+    - AgoraIrisRTM_iOS (= 2.2.3-dev.1)
     - AgoraRtm (= 2.2.3)
     - DoubleConversion
     - glog
@@ -24,7 +24,7 @@ PODS:
     - Yoga
   - AgoraInfra_iOS (1.2.13)
   - AgoraIrisRTC_iOS (4.5.1-build.1)
-  - AgoraIrisRTM_iOS (2.2.3-build.1)
+  - AgoraIrisRTM_iOS (2.2.3-dev.1)
   - AgoraRtcEngine_iOS (4.5.1):
     - AgoraRtcEngine_iOS/AIAEC (= 4.5.1)
     - AgoraRtcEngine_iOS/AIAECLL (= 4.5.1)
