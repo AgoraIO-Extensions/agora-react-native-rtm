@@ -56,6 +56,7 @@ export class RequestQueue {
         const item = this._requestMap.get(requestId);
         if (item) {
           this._requestMap.delete(requestId);
+          console.log(`请求超时: ${requestId}`);
           item.reject(
             new Error(`Request ${requestId} timed out after ${timeoutMs}ms`)
           );
@@ -185,17 +186,9 @@ function handleEvent({ event, data, buffers }: any) {
 
   // Handle request resolution
   const requestId = _data.requestId;
-  if (requestId !== undefined) {
+  if (requestId !== undefined && _data.errorCode !== undefined) {
     const requestQueue = RequestQueue.instance;
-    if (
-      event.endsWith('Result') &&
-      requestQueue.resolveRequest(requestId, _data.errorCode, _data)
-    ) {
-      // If request was resolved successfully, still process the event for other listeners
-      console.log(
-        `Request ${requestId} resolved with error code: ${_data.errorCode}`
-      );
-    }
+    requestQueue.resolveRequest(requestId, _data.errorCode, _data);
   }
 
   let _event: string = event;

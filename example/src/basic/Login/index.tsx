@@ -1,4 +1,4 @@
-import { useRtm } from 'agora-react-native-rtm';
+import { RTM_ERROR_CODE, useRtm } from 'agora-react-native-rtm';
 import React, { useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
@@ -26,41 +26,25 @@ export default function Login() {
   /**
    * Step 3: login to rtm
    */
-  const login = () => {
-    client.login(Config.token);
+  const login = async () => {
+    let result = await client.login(Config.token);
+    console.log('login', result);
+    setLoginSuccess(result.errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
   };
 
   /**
    * Step 4 (Optional): logout
    */
-  const logout = () => {
-    client.logout();
+  const logout = async () => {
+    let result = await client.logout();
+    console.log('logout', result);
     setLoginSuccess(false);
   };
 
   // useRtmEvent(client, 'onLoginResult', (errorCode: RTM_ERROR_CODE) => {
-  //   log.log('onLoginResult', 'errorCode', errorCode);
+  //   console.log('onLoginResult', 'errorCode', errorCode);
   //   setLoginSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
   // });
-  // useRtmEvent(
-  //   client,
-  //   'onConnectionStateChanged',
-  //   (
-  //     channelName: string,
-  //     state: RTM_CONNECTION_STATE,
-  //     reason: RTM_CONNECTION_CHANGE_REASON
-  //   ) => {
-  //     log.log(
-  //       'onConnectionStateChanged',
-  //       'channelName',
-  //       channelName,
-  //       'state',
-  //       state,
-  //       'reason',
-  //       reason
-  //     );
-  //   }
-  // );
 
   return (
     <KeyboardAvoidingView
@@ -71,8 +55,8 @@ export default function Login() {
         <AgoraButton
           disabled={!Config.uid}
           title={`${loginSuccess ? 'logout' : 'login'}`}
-          onPress={() => {
-            loginSuccess ? logout() : login();
+          onPress={async () => {
+            loginSuccess ? await logout() : await login();
           }}
         />
       </ScrollView>

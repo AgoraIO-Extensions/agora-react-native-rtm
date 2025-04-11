@@ -112,46 +112,40 @@ export class RtmClientInternal extends RTMClient {
 
   async login(options?: LoginOptions | undefined): Promise<LoginResponse> {
     const token = options?.token || '';
-
-    // 先调用原生方法获取 requestId
-    const requestId = this._rtmClientImpl.login(token);
-    console.log('requestId', requestId);
-    // 使用获取到的 requestId 创建请求
-    let result = await RequestQueue.instance.addRequest(
-      'onLoginResult',
-      10000,
-      requestId
-    );
-
-    console.log('result4442424', result);
-
-    // 等待回调解析 Promise
     try {
-      // await request;
-      console.log(545454);
-      return { timestamp: Date.now() };
+      const requestId = this._rtmClientImpl.login(token);
+      const result = await RequestQueue.instance.addRequest(
+        'onLoginResult',
+        10000,
+        requestId
+      );
+      return result;
     } catch (error) {
-      return { timestamp: Date.now() };
+      return {
+        error: true,
+        reason: '登录失败',
+        operation: 'login',
+        errorCode: 1,
+      };
     }
   }
 
   async logout(): Promise<LogoutResponse> {
-    // 先调用原生方法获取 requestId
-    const requestId = this._rtmClientImpl.logout();
-
-    // 使用获取到的 requestId 创建请求
-    const request = RequestQueue.instance.addRequest(
-      'onLogoutResult',
-      10000,
-      requestId
-    );
-
-    // 等待回调解析 Promise
     try {
-      await request;
-      return { timestamp: Date.now() };
+      const requestId = this._rtmClientImpl.logout();
+      const result = await RequestQueue.instance.addRequest(
+        'onLogoutResult',
+        10000,
+        requestId
+      );
+      return result;
     } catch (error) {
-      return { timestamp: Date.now() };
+      return {
+        error: true,
+        reason: '登出失败',
+        operation: 'logout',
+        errorCode: 1,
+      };
     }
   }
 
