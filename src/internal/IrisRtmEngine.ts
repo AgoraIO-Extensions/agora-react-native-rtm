@@ -5,8 +5,8 @@ import base64 from 'base64-js';
 import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
-import { IRtmEventHandler } from '../IAgoraRtmClient';
-import { processIRtmEventHandler } from '../impl/IAgoraRtmClientImpl';
+import { IRtmEventHandler } from '../legacy/IAgoraRtmClient';
+import { processIRtmEventHandler } from '../legacy/impl/IAgoraRtmClientImpl';
 import AgoraRtmNg from '../specs';
 
 import { RtmClientInternal } from './RtmClientInternal';

@@ -1,3 +1,4 @@
+import { callIrisApi } from '../../internal/IrisRtmEngine';
 import { GetHistoryMessagesOptions, RTM_CHANNEL_TYPE } from '../AgoraRtmBase';
 import { IRtmHistory } from '../IAgoraRtmHistory';
 
@@ -38,5 +39,3 @@ export class IRtmHistoryImpl implements IRtmHistory {
     return 'RtmHistory_getMessages_e5877fc';
   }
 }
-
-import { callIrisApi } from '../internal/IrisRtmEngine';

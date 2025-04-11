@@ -1,3 +1,4 @@
+import { callIrisApi } from '../../internal/IrisRtmEngine';
 import { RTM_CHANNEL_TYPE } from '../AgoraRtmBase';
 import { IRtmLock } from '../IAgoraRtmLock';
 
@@ -217,5 +218,3 @@ export class IRtmLockImpl implements IRtmLock {
     return 'RtmLock_revokeLock_fc4a9d7';
   }
 }
-
-import { callIrisApi } from '../internal/IrisRtmEngine';

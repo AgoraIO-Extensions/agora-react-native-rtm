@@ -1,3 +1,4 @@
+import { callIrisApi } from '../../internal/IrisRtmEngine';
 import { PublishOptions, SubscribeOptions } from '../AgoraRtmBase';
 import { IRtmClient, IRtmEventHandler } from '../IAgoraRtmClient';
 import { IRtmHistory } from '../IAgoraRtmHistory';
@@ -701,5 +702,3 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_publish_2d36e93';
   }
 }
-
-import { callIrisApi } from '../internal/IrisRtmEngine';

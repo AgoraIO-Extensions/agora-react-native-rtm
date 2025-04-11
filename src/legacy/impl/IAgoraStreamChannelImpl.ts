@@ -1,3 +1,4 @@
+import { callIrisApi } from '../../internal/IrisRtmEngine';
 import { TopicMessageOptions, UserList } from '../AgoraRtmBase';
 import {
   IStreamChannel,
@@ -313,5 +314,3 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_publishTopicMessage_a31773e';
   }
 }
-
-import { callIrisApi } from '../internal/IrisRtmEngine';

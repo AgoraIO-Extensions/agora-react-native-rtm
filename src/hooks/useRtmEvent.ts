@@ -1,18 +1,17 @@
 import { useEffect, useRef } from 'react';
 
-import { IRtmClient } from '../IAgoraRtmClient';
-import { IRtmClientEvent } from '../extensions/IAgoraRtmClientExtension';
+import { IRtmClientEvent, RTMClient } from '../api/RTMClient';
 
 type Disposer = () => void;
 type Nullable<T> = T | null | undefined;
 
 function listen<EventType extends keyof IRtmClientEvent>(
-  listenable: IRtmClient,
+  listenable: RTMClient,
   event: EventType,
   listener: IRtmClientEvent[EventType]
 ): Disposer;
 function listen<EventType extends keyof IRtmClientEvent>(
-  listenable: IRtmClient,
+  listenable: RTMClient,
   event: EventType,
   listener: IRtmClientEvent[EventType]
 ) {
@@ -21,7 +20,7 @@ function listen<EventType extends keyof IRtmClientEvent>(
 }
 
 export function useRtmEvent<EventType extends keyof IRtmClientEvent>(
-  client: Nullable<IRtmClient>,
+  client: Nullable<RTMClient>,
   event: EventType,
   listener: Nullable<(...args: any[]) => void>
 ) {

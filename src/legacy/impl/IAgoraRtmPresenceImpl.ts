@@ -1,3 +1,4 @@
+import { callIrisApi } from '../../internal/IrisRtmEngine';
 import {
   GetOnlineUsersOptions,
   PresenceOptions,
@@ -231,5 +232,3 @@ export class IRtmPresenceImpl implements IRtmPresence {
     return 'RtmPresence_getUserChannels_1fa04dd';
   }
 }
-
-import { callIrisApi } from '../internal/IrisRtmEngine';

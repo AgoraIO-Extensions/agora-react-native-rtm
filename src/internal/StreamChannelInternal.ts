@@ -1,6 +1,6 @@
-import { IStreamChannelImpl } from '../impl/IAgoraStreamChannelImpl';
+import { RTMStreamChannel } from '../api/RTMStreamChannel';
 
-export class StreamChannelInternal extends IStreamChannelImpl {
+export class StreamChannelInternal extends RTMStreamChannel {
   private readonly _channelName: string = '';
 
   constructor(channelName: string) {
@@ -10,9 +10,5 @@ export class StreamChannelInternal extends IStreamChannelImpl {
 
   get channelName(): string {
     return this._channelName;
-  }
-
-  protected override getApiTypeFromPublishTopicMessageWithBuffer(): string {
-    return 'StreamChannel_publishTopicMessage';
   }
 }

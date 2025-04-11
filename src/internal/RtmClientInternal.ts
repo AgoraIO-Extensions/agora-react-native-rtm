@@ -1,13 +1,21 @@
-import { IRtmEventHandler, RtmConfig } from '../IAgoraRtmClient';
-import { IRtmHistory } from '../IAgoraRtmHistory';
-import { IRtmLock } from '../IAgoraRtmLock';
-import { IRtmPresence } from '../IAgoraRtmPresence';
-import { IRtmStorage } from '../IAgoraRtmStorage';
-import { IStreamChannel } from '../IAgoraStreamChannel';
-import { IRtmClientEvent } from '../extensions/IAgoraRtmClientExtension';
-import { IRtmClientImpl } from '../impl/IAgoraRtmClientImpl';
-
-import { RtmHistoryInternal } from '../internal/RtmHistoryInternal';
+import {
+  IRtmClientEvent,
+  LoginOptions,
+  LoginResponse,
+  RTMClient,
+} from '../api/RTMClient';
+import { RTMHistory } from '../api/RTMHistory';
+import { RTMLock } from '../api/RTMLock';
+import { RTMPresence } from '../api/RTMPresence';
+import { RTMStorage } from '../api/RTMStorage';
+import { RTMStreamChannel } from '../api/RTMStreamChannel';
+import { IRtmEventHandler, RtmConfig } from '../legacy/IAgoraRtmClient';
+import { IRtmHistory } from '../legacy/IAgoraRtmHistory';
+import { IRtmLock } from '../legacy/IAgoraRtmLock';
+import { IRtmPresence } from '../legacy/IAgoraRtmPresence';
+import { IRtmStorage } from '../legacy/IAgoraRtmStorage';
+import { IStreamChannel } from '../legacy/IAgoraStreamChannel';
+import { IRtmClientImpl } from '../legacy/impl/IAgoraRtmClientImpl';
 
 import {
   DeviceEventEmitter,
@@ -15,16 +23,22 @@ import {
   EventProcessor,
   callIrisApi,
 } from './IrisRtmEngine';
+import { RtmHistoryInternal } from './RtmHistoryInternal';
 import { RtmLockInternal } from './RtmLockInternal';
 import { RtmPresenceInternal } from './RtmPresenceInternal';
 import { RtmStorageInternal } from './RtmStorageInternal';
 import { StreamChannelInternal } from './StreamChannelInternal';
 
-export class RtmClientInternal extends IRtmClientImpl {
+export class RtmClientInternal extends RTMClient {
+  private _rtmClientImpl: IRtmClientImpl = new IRtmClientImpl();
   static _event_handlers: IRtmEventHandler[] = [];
+  public presence: RTMPresence = new RtmPresenceInternal();
+  // public storage: RTMStorage = new RtmStorageInternal();
+  // public lock: RTMLock = new RtmLockInternal();
+  // public history: RTMHistory = new RtmHistoryInternal();
 
   constructor(config: RtmConfig) {
-    super();
+    super(config);
     if (config?.eventHandler) {
       Object.entries(config.eventHandler).forEach(([key, value]) => {
         this.addEventListener(key as keyof IRtmClientEvent, value);
@@ -43,41 +57,15 @@ export class RtmClientInternal extends IRtmClientImpl {
     callIrisApi.call(this, 'RtmClient_create', jsonParams);
   }
 
-  protected getApiTypeFromPublishWithBuffer(): string {
-    return 'RtmClient_publish';
+  createStreamChannel(channelName: string): RTMStreamChannel {
+    // const result = super.createStreamChannel(channelName);
+    return new StreamChannelInternal(channelName);
   }
 
-  override createStreamChannel(channelName: string): {
-    errorCode: number;
-    result: IStreamChannel;
-  } {
-    const result = super.createStreamChannel(channelName);
-    return {
-      errorCode: result.errorCode,
-      result: new StreamChannelInternal(channelName),
-    };
-  }
-
-  override getPresence(): IRtmPresence {
-    return new RtmPresenceInternal();
-  }
-
-  override getStorage(): IRtmStorage {
-    return new RtmStorageInternal();
-  }
-
-  override getLock(): IRtmLock {
-    return new RtmLockInternal();
-  }
-
-  override getHistory(): IRtmHistory {
-    return new RtmHistoryInternal();
-  }
-
-  override release(): number {
+  release(): number {
     RtmClientInternal._event_handlers = [];
     this.removeAllListeners();
-    const ret = super.release();
+    const ret = this._rtmClientImpl.release();
     return ret;
   }
 
@@ -114,5 +102,15 @@ export class RtmClientInternal extends IRtmClientImpl {
   ) {
     RtmClientInternal._event_handlers = [];
     DeviceEventEmitter.removeAllListeners(eventType);
+  }
+
+  async login(options?: LoginOptions | undefined): Promise<LoginResponse> {
+    return new Promise((resolve, reject) => {
+      // this._rtmClientImpl.login(token, (ret) => {
+      //   resolve(ret);
+      // });
+    });
+
+    // return this._rtmClientImpl.login(token);
   }
 }

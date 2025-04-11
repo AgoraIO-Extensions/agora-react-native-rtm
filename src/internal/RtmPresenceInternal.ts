@@ -1,6 +1,6 @@
-import { IRtmPresenceImpl } from '../impl/IAgoraRtmPresenceImpl';
+import { RTMPresence } from '../api/RTMPresence';
 
-export class RtmPresenceInternal extends IRtmPresenceImpl {
+export class RtmPresenceInternal extends RTMPresence {
   constructor() {
     super();
   }

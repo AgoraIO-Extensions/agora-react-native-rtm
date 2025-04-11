@@ -1,14 +1,15 @@
-import { IRtmClient } from 'agora-react-native-rtm';
 import { useContext } from 'react';
 
 import React, { ReactNode, createContext } from 'react';
 
+import { RTMClient } from '../api/index';
+
 export interface RTMProviderProps {
-  readonly client: IRtmClient;
+  readonly client: RTMClient;
   readonly children?: ReactNode;
 }
 
-export const AgoraRTMContext = /* @__PURE__ */ createContext<IRtmClient | null>(
+export const AgoraRTMContext = /* @__PURE__ */ createContext<RTMClient | null>(
   null
 );
 
@@ -20,12 +21,12 @@ export function RTMProvider({ client, children }: RTMProviderProps) {
   );
 }
 
-function useOptionalRTM(client?: IRtmClient | null): IRtmClient | null {
+function useOptionalRTM(client?: RTMClient | null): RTMClient | null {
   const clientFromContext = useContext(AgoraRTMContext);
   return client || clientFromContext;
 }
 
-export function useRtm(client?: IRtmClient | null): IRtmClient {
+export function useRtm(client?: RTMClient | null): RTMClient {
   const resolvedClient = useOptionalRTM(client);
 
   if (!resolvedClient) {

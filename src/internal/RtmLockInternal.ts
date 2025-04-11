@@ -1,4 +1,4 @@
-import { IRtmLockImpl } from '../impl/IAgoraRtmLockImpl';
+import { IRtmLockImpl } from '../legacy/impl/IAgoraRtmLockImpl';
 
 export class RtmLockInternal extends IRtmLockImpl {
   constructor() {

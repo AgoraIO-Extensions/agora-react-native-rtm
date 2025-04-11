@@ -1,3 +1,4 @@
+import { callIrisApi } from '../../internal/IrisRtmEngine';
 import { RTM_CHANNEL_TYPE } from '../AgoraRtmBase';
 import { IRtmStorage, Metadata, MetadataOptions } from '../IAgoraRtmStorage';
 
@@ -326,5 +327,3 @@ export class IRtmStorageImpl implements IRtmStorage {
     return 'RtmStorage_unsubscribeUserMetadata_1fa04dd';
   }
 }
-
-import { callIrisApi } from '../internal/IrisRtmEngine';
