@@ -22,7 +22,6 @@ export abstract class IRtmHistory {
   abstract getMessages(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    options: GetHistoryMessagesOptions,
-    requestId?: number
+    options: GetHistoryMessagesOptions
   ): number;
 }

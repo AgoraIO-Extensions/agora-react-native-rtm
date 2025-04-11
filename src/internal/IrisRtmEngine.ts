@@ -12,6 +12,93 @@ import AgoraRtmNg from '../specs';
 import { RtmClientInternal } from './RtmClientInternal';
 import { StreamChannelInternal } from './StreamChannelInternal';
 
+// Request queue for handling async operations
+type RequestItem = {
+  resolve: Function;
+  reject: Function;
+  callbackName: string;
+  timeout?: ReturnType<typeof setTimeout>;
+};
+
+export class RequestQueue {
+  private static _instance: RequestQueue;
+  private _requestMap: Map<number, RequestItem> = new Map();
+
+  private constructor() {}
+
+  public static get instance(): RequestQueue {
+    if (!RequestQueue._instance) {
+      RequestQueue._instance = new RequestQueue();
+    }
+    return RequestQueue._instance;
+  }
+
+  public addRequest(
+    callbackName: string,
+    timeoutMs: number = 10000,
+    externalRequestId: number
+  ): Promise<any> & { requestId: number } {
+    const requestId = externalRequestId;
+
+    let promiseResolve: Function;
+    let promiseReject: Function;
+
+    const promise = new Promise((resolve, reject) => {
+      promiseResolve = resolve;
+      promiseReject = reject;
+    }) as Promise<any> & { requestId: number };
+
+    promise.requestId = requestId;
+
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+    if (timeoutMs > 0) {
+      timeout = setTimeout(() => {
+        const item = this._requestMap.get(requestId);
+        if (item) {
+          this._requestMap.delete(requestId);
+          item.reject(
+            new Error(`Request ${requestId} timed out after ${timeoutMs}ms`)
+          );
+        }
+      }, timeoutMs);
+    }
+
+    this._requestMap.set(requestId, {
+      resolve: promiseResolve!,
+      reject: promiseReject!,
+      callbackName,
+      timeout,
+    });
+
+    return promise;
+  }
+
+  public resolveRequest(
+    requestId: number,
+    errorCode: number,
+    ...args: any[]
+  ): boolean {
+    const request = this._requestMap.get(requestId);
+    if (!request) {
+      return false;
+    }
+
+    if (request.timeout) {
+      clearTimeout(request.timeout);
+    }
+
+    this._requestMap.delete(requestId);
+
+    if (errorCode === 0) {
+      request.resolve(...args);
+    } else {
+      request.reject(new Error(`Request failed with error code: ${errorCode}`));
+    }
+
+    return true;
+  }
+}
+
 export type IrisApiParam = {
   funcName: string;
   params: string;
@@ -94,6 +181,21 @@ function handleEvent({ event, data, buffers }: any) {
     _data = JSON.parse(data) ?? {};
   } catch (e) {
     _data = {};
+  }
+
+  // Handle request resolution
+  const requestId = _data.requestId;
+  if (requestId !== undefined) {
+    const requestQueue = RequestQueue.instance;
+    if (
+      event.endsWith('Result') &&
+      requestQueue.resolveRequest(requestId, _data.errorCode, _data)
+    ) {
+      // If request was resolved successfully, still process the event for other listeners
+      console.log(
+        `Request ${requestId} resolved with error code: ${_data.errorCode}`
+      );
+    }
   }
 
   let _event: string = event;
@@ -219,14 +321,4 @@ export function emitEvent<EventType extends keyof T, T extends ProcessorType>(
   data: any
 ): void {
   DeviceEventEmitter.emit(eventType as string, eventProcessor, data);
-}
-
-/**
- * @internal
- */
-export function getAPIResultFromEvent<
-  EventType extends keyof T,
-  T extends ProcessorType
->(eventType: EventType, eventProcessor: EventProcessor<T>, data: any): void {
-  // return eventProcessor.handlers(data);
 }

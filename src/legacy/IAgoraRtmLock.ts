@@ -24,8 +24,7 @@ export abstract class IRtmLock {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     lockName: string,
-    ttl: number,
-    requestId?: number
+    ttl: number
   ): number;
   /**
    * gets locks in the channel
@@ -37,11 +36,7 @@ export abstract class IRtmLock {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract getLocks(
-    channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
-    requestId?: number
-  ): number;
+  abstract getLocks(channelName: string, channelType: RTM_CHANNEL_TYPE): number;
   /**
    * removes a lock
    *
@@ -56,8 +51,7 @@ export abstract class IRtmLock {
   abstract removeLock(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    lockName: string,
-    requestId?: number
+    lockName: string
   ): number;
   /**
    * acquires a lock
@@ -75,8 +69,7 @@ export abstract class IRtmLock {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     lockName: string,
-    retry: boolean,
-    requestId?: number
+    retry: boolean
   ): number;
   /**
    * releases a lock
@@ -92,8 +85,7 @@ export abstract class IRtmLock {
   abstract releaseLock(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    lockName: string,
-    requestId?: number
+    lockName: string
   ): number;
   /**
    * disables a lock
@@ -111,7 +103,6 @@ export abstract class IRtmLock {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     lockName: string,
-    owner: string,
-    requestId?: number
+    owner: string
   ): number;
 }

@@ -1,5 +1,5 @@
 import {
-  IRtmClient,
+  RTMClient,
   RTMProvider,
   RtmConfig,
   RtmEncryptionConfig,
@@ -10,13 +10,12 @@ import type { ReactNode } from 'react';
 import React, { useEffect, useState } from 'react';
 
 import Config from '../config/agora.config';
-
 interface ClientProps {
   children: ReactNode;
 }
 
 export const Client = ({ children }: ClientProps) => {
-  const [client] = useState<IRtmClient>(() =>
+  const [client] = useState<RTMClient>(() =>
     createAgoraRtmClient(
       new RtmConfig({
         userId: Config.uid,

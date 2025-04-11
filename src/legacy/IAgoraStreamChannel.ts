@@ -146,7 +146,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract join(options: JoinChannelOptions, requestId?: number): number;
+  abstract join(options: JoinChannelOptions): number;
   /**
    * Renews the token. Once a token is enabled and used, it expires after a certain period of time.
    * You should generate a new token on your server, call this method to renew it.
@@ -155,7 +155,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract renewToken(token: string, requestId?: number): number;
+  abstract renewToken(token: string): number;
   /**
    * Leave the channel.
    *
@@ -163,7 +163,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract leave(requestId?: number): number;
+  abstract leave(): number;
   /**
    * Return the channel name of this stream channel.
    *
@@ -179,11 +179,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract joinTopic(
-    topic: string,
-    options: JoinTopicOptions,
-    requestId?: number
-  ): number;
+  abstract joinTopic(topic: string, options: JoinTopicOptions): number;
   /**
    * Publish a message in the topic.
    *
@@ -199,8 +195,7 @@ export abstract class IStreamChannel {
     topic: string,
     message: string,
     length: number,
-    option: TopicMessageOptions,
-    requestId?: number
+    option: TopicMessageOptions
   ): number;
   /**
    * Leave the topic.
@@ -210,7 +205,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract leaveTopic(topic: string, requestId?: number): number;
+  abstract leaveTopic(topic: string): number;
   /**
    * Subscribe a topic.
    *
@@ -220,11 +215,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract subscribeTopic(
-    topic: string,
-    options: TopicOptions,
-    requestId?: number
-  ): number;
+  abstract subscribeTopic(topic: string, options: TopicOptions): number;
   /**
    * Unsubscribe a topic.
    *
@@ -233,11 +224,7 @@ export abstract class IStreamChannel {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract unsubscribeTopic(
-    topic: string,
-    options: TopicOptions,
-    requestId?: number
-  ): number;
+  abstract unsubscribeTopic(topic: string, options: TopicOptions): number;
   /**
    * Get subscribed user list
    *
@@ -260,14 +247,12 @@ export abstract class IStreamChannel {
     topic: string,
     message: string,
     length: number,
-    option: TopicMessageOptions,
-    requestId?: number
+    option: TopicMessageOptions
   ): number;
   abstract publishBinaryMessage(
     topic: string,
     message: Uint8Array,
     length: number,
-    option: TopicMessageOptions,
-    requestId?: number
+    option: TopicMessageOptions
   ): number;
 }

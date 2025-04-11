@@ -10,6 +10,8 @@ export * from './legacy/IAgoraRtmPresence';
 export * from './legacy/IAgoraRtmStorage';
 export * from './legacy/IAgoraStreamChannel';
 export * from './hooks';
+export * from './api/RTMClient';
+
 export {
   isDebuggable,
   setDebuggable,
@@ -25,7 +27,7 @@ export {
  * One RTMClient object.
  */
 export function createAgoraRtmClient(config: RtmConfig): RTMClient {
-  return new RtmClientInternal(config) as unknown as RTMClient;
+  return new RtmClientInternal(config);
 }
 
 export default createAgoraRtmClient;

@@ -1,3 +1,4 @@
+import { PublishOptions, SubscribeOptions } from '../legacy/AgoraRtmBase';
 import { IRtmEventHandler, RtmConfig } from '../legacy/IAgoraRtmClient';
 
 import { RTMHistory } from './RTMHistory';
@@ -12,46 +13,46 @@ import {
   ServiceType,
 } from './common';
 
-export interface SubscribeOptions {
-  /**@zh-cn
-   * 可选参数，是否订阅频道消息。默认值为 true。
-   */
-  /**
-   * Optional parameter, whether to subscribe to channel messages. The default value is true. @default true
-   */
-  withMessage?: boolean;
-  // 是否订阅presence事件，默认 false
-  /**@zh-cn
-   * 可选参数，是否同时订阅频道出席事件。 默认值为 true
-   */
-  /**
-   * Optional parameter, whether to subscribe to channel presence event at the same time. The default value is true. @default true
-   */
-  withPresence?: boolean;
+// export interface SubscribeOptions {
+//   /**@zh-cn
+//    * 可选参数，是否订阅频道消息。默认值为 true。
+//    */
+//   /**
+//    * Optional parameter, whether to subscribe to channel messages. The default value is true. @default true
+//    */
+//   withMessage?: boolean;
+//   // 是否订阅presence事件，默认 false
+//   /**@zh-cn
+//    * 可选参数，是否同时订阅频道出席事件。 默认值为 true
+//    */
+//   /**
+//    * Optional parameter, whether to subscribe to channel presence event at the same time. The default value is true. @default true
+//    */
+//   withPresence?: boolean;
 
-  /**@zh-cn
-   * 可选参数，是否隐身加入频道。默认值为 false
-   */
-  /**
-   * Optional parameter, whether subscribe channel be quiet, The default value is false. @default false
-   */
-  beQuiet?: boolean;
+//   /**@zh-cn
+//    * 可选参数，是否隐身加入频道。默认值为 false
+//    */
+//   /**
+//    * Optional parameter, whether subscribe channel be quiet, The default value is false. @default false
+//    */
+//   beQuiet?: boolean;
 
-  /**@zh-cn
-   * 可选参数，是否同时订阅频道属性。 默认值为 false
-   */
-  /**
-   * Optional parameter, whether to subscribe to channel properties at the same time. The default value is false. @default false
-   */
-  withMetadata?: boolean;
-  /**@zh-cn
-   * 可选参数，是否同时订阅分布式锁更新事件。默认值为 false
-   */
-  /**
-   * Optional parameter, whether to subscribe to the distributed lock update event at the same time. The default value is false. @default false
-   */
-  withLock?: boolean;
-}
+//   /**@zh-cn
+//    * 可选参数，是否同时订阅频道属性。 默认值为 false
+//    */
+//   /**
+//    * Optional parameter, whether to subscribe to channel properties at the same time. The default value is false. @default false
+//    */
+//   withMetadata?: boolean;
+//   /**@zh-cn
+//    * 可选参数，是否同时订阅分布式锁更新事件。默认值为 false
+//    */
+//   /**
+//    * Optional parameter, whether to subscribe to the distributed lock update event at the same time. The default value is false. @default false
+//    */
+//   withLock?: boolean;
+// }
 
 export interface LogFilterLevel {
   /** @zh-cn
@@ -171,77 +172,77 @@ export interface PublishResponse extends RTMOperationResponse {}
 
 export interface RenewTokenResponse extends BaseResponse {}
 export interface UpdateConfigResponse extends BaseResponse {}
-export interface PublishOptions {
-  /**@zh-cn
-   * 自定义消息负载结构
-   */
-  /**
-   * type of message payload
-   */
-  customType?: string;
-  /**@zh-cn
-   * 设置为 USER 则表示发送私密消息
-   */
-  /**
-   * set to USER to send a private channel message
-   */
-  channelType?: ChannelType;
-  /**@zh-cn
-   * 设置为 true 则表示存储为历史消息
-   */
-  /**
-   * Whether to store in history, true to enable
-   */
-  storeInHistory?: boolean;
-}
+// export interface PublishOptions {
+//   /**@zh-cn
+//    * 自定义消息负载结构
+//    */
+//   /**
+//    * type of message payload
+//    */
+//   customType?: string;
+//   /**@zh-cn
+//    * 设置为 USER 则表示发送私密消息
+//    */
+//   /**
+//    * set to USER to send a private channel message
+//    */
+//   channelType?: ChannelType;
+//   /**@zh-cn
+//    * 设置为 true 则表示存储为历史消息
+//    */
+//   /**
+//    * Whether to store in history, true to enable
+//    */
+//   storeInHistory?: boolean;
+// }
 export interface RenewTokenOptions {
   channelName?: string;
 }
 
 export type IRtmClientEvent = IRtmEventHandler;
 
-export declare class RTMClient {
-  constructor(config: RtmConfig);
+export abstract class RTMClient {
+  abstract presence: RTMPresence;
+  abstract history: RTMHistory;
+  abstract storage: RTMStorage;
+  abstract lock: RTMLock;
 
-  presence: RTMPresence;
-  history: RTMHistory;
-  storage: RTMStorage;
-  lock: RTMLock;
-
-  addEventListener<EventType extends keyof IRtmClientEvent>(
+  abstract addEventListener<EventType extends keyof IRtmClientEvent>(
     eventType: EventType,
     listener: IRtmClientEvent[EventType]
   ): void;
 
-  removeEventListener<EventType extends keyof IRtmClientEvent>(
+  abstract removeEventListener<EventType extends keyof IRtmClientEvent>(
     eventType: EventType,
     listener?: IRtmClientEvent[EventType]
   ): void;
 
-  removeAllListeners<EventType extends keyof IRtmClientEvent>(
+  abstract removeAllListeners<EventType extends keyof IRtmClientEvent>(
     eventType?: EventType
   ): void;
 
-  login(options?: LoginOptions): Promise<LoginResponse>;
+  abstract login(options?: LoginOptions): Promise<LoginResponse>;
 
-  logout(): Promise<LogoutResponse>;
+  abstract logout(): Promise<LogoutResponse>;
 
-  publish(
+  abstract release(): number;
+
+  abstract publish(
     channelName: string,
     message: string | Uint8Array,
     options?: PublishOptions
   ): Promise<PublishResponse>;
 
-  subscribe(
+  abstract subscribe(
     channelName: string,
     options?: SubscribeOptions
   ): Promise<SubscribeResponse>;
 
-  unsubscribe(channelName: string): Promise<UnsubscribeResponse>;
+  abstract unsubscribe(channelName: string): Promise<UnsubscribeResponse>;
 
-  createStreamChannel(channelName: string): RTMStreamChannel;
+  abstract createStreamChannel(channelName: string): RTMStreamChannel;
 
-  renewToken(
+  abstract renewToken(
     token: string,
     options?: RenewTokenOptions
   ): Promise<RenewTokenResponse>;

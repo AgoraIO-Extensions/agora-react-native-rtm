@@ -27,8 +27,7 @@ export abstract class IRtmPresence {
   abstract whoNow(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    options: PresenceOptions,
-    requestId?: number
+    options: PresenceOptions
   ): number;
   /**
    * To query which channels the user joined
@@ -39,7 +38,7 @@ export abstract class IRtmPresence {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract whereNow(userId: string, requestId?: number): number;
+  abstract whereNow(userId: string): number;
   /**
    * Set user state
    *
@@ -56,8 +55,7 @@ export abstract class IRtmPresence {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     items: StateItem[],
-    count: number,
-    requestId?: number
+    count: number
   ): number;
   /**
    * Delete user state
@@ -75,8 +73,7 @@ export abstract class IRtmPresence {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     keys: string[],
-    count: number,
-    requestId?: number
+    count: number
   ): number;
   /**
    * Get user state
@@ -92,8 +89,7 @@ export abstract class IRtmPresence {
   abstract getState(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    userId: string,
-    requestId?: number
+    userId: string
   ): number;
   /**
    * To query who joined this channel
@@ -109,8 +105,7 @@ export abstract class IRtmPresence {
   abstract getOnlineUsers(
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
-    options: GetOnlineUsersOptions,
-    requestId?: number
+    options: GetOnlineUsersOptions
   ): number;
   /**
    * To query which channels the user joined
@@ -121,5 +116,5 @@ export abstract class IRtmPresence {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract getUserChannels(userId: string, requestId?: number): number;
+  abstract getUserChannels(userId: string): number;
 }

@@ -63,7 +63,7 @@ export interface GetMessagesResponse extends BaseResponse {
    */
   newStart: number;
 }
-export declare class RTMHistory {
+export abstract class RTMHistory {
   /**
    * Get history message of the channel.
    *
@@ -71,7 +71,7 @@ export declare class RTMHistory {
    * @param HistoryChannelType channelType for this channel. See {@link HistoryChannelType}
    * @param options Options for this metadata operation. See {@link GetHistoryMessageOptions}.
    */
-  getMessages(
+  abstract getMessages(
     channelName: string,
     channelType: HistoryChannelType,
     options?: GetHistoryMessageOptions

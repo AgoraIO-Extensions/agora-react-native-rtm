@@ -1,16 +1,13 @@
 import { useEffect } from 'react';
 
-import { IRtmClient } from '../IAgoraRtmClient';
+import { RTMClient } from '../api';
+import { LoginOptions } from '../api/RTMClient';
 
-export function useLogin(
-  client: IRtmClient,
-  token: string,
-  requestId?: number
-) {
+export function useLogin(client: RTMClient, loginOptions: LoginOptions) {
   useEffect(() => {
-    client.login(token, requestId);
+    client.login(loginOptions);
     return () => {
       client?.logout();
     };
-  }, [client, requestId, token]);
+  }, [client, loginOptions]);
 }

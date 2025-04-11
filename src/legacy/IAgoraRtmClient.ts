@@ -1097,7 +1097,7 @@ export abstract class IRtmClient {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract login(token: string, requestId?: number): number;
+  abstract login(token: string): number;
   /**
    * Logout the Agora RTM service. Be noticed that this method will break the rtm service including storage/lock/presence.
    *
@@ -1105,7 +1105,7 @@ export abstract class IRtmClient {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract logout(requestId?: number): number;
+  abstract logout(): number;
   /**
    * Get the storage instance.
    *
@@ -1142,7 +1142,7 @@ export abstract class IRtmClient {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract renewToken(token: string, requestId?: number): number;
+  abstract renewToken(token: string): number;
   /**
    * Publish a message in the channel.
    *
@@ -1159,8 +1159,7 @@ export abstract class IRtmClient {
     channelName: string,
     message: string,
     length: number,
-    option: PublishOptions,
-    requestId?: number
+    option: PublishOptions
   ): number;
   /**
    * Subscribe a channel.
@@ -1171,11 +1170,7 @@ export abstract class IRtmClient {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract subscribe(
-    channelName: string,
-    options: SubscribeOptions,
-    requestId?: number
-  ): number;
+  abstract subscribe(channelName: string, options: SubscribeOptions): number;
   /**
    * Unsubscribe a channel.
    *
@@ -1184,7 +1179,7 @@ export abstract class IRtmClient {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract unsubscribe(channelName: string, requestId?: number): number;
+  abstract unsubscribe(channelName: string): number;
   /**
    * Create a stream channel instance.
    *
@@ -1193,10 +1188,10 @@ export abstract class IRtmClient {
    * @return
    * - return NULL if error occurred
    */
-  abstract createStreamChannel(
-    channelName: string,
-    errorCode?: number
-  ): { errorCode: number; result: IStreamChannel };
+  abstract createStreamChannel(channelName: string): {
+    errorCode: number;
+    result: IStreamChannel;
+  };
   /**
    * Set parameters of the sdk or engine
    *
@@ -1210,7 +1205,6 @@ export abstract class IRtmClient {
     channelName: string,
     message: Uint8Array,
     length: number,
-    option: PublishOptions,
-    requestId?: number
+    option: PublishOptions
   ): number;
 }

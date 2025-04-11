@@ -102,8 +102,7 @@ export abstract class IRtmStorage {
     channelType: RTM_CHANNEL_TYPE,
     data: Metadata,
     options: MetadataOptions,
-    lockName: string,
-    requestId?: number
+    lockName: string
   ): number;
   /**
    * Update the metadata of a specified channel.
@@ -124,8 +123,7 @@ export abstract class IRtmStorage {
     channelType: RTM_CHANNEL_TYPE,
     data: Metadata,
     options: MetadataOptions,
-    lockName: string,
-    requestId?: number
+    lockName: string
   ): number;
   /**
    * Remove the metadata of a specified channel.
@@ -146,8 +144,7 @@ export abstract class IRtmStorage {
     channelType: RTM_CHANNEL_TYPE,
     data: Metadata,
     options: MetadataOptions,
-    lockName: string,
-    requestId?: number
+    lockName: string
   ): number;
   /**
    * Get the metadata of a specified channel.
@@ -162,8 +159,7 @@ export abstract class IRtmStorage {
    */
   abstract getChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
-    requestId?: number
+    channelType: RTM_CHANNEL_TYPE
   ): number;
   /**
    * Set the metadata of a specified user.
@@ -180,8 +176,7 @@ export abstract class IRtmStorage {
   abstract setUserMetadata(
     userId: string,
     data: Metadata,
-    options: MetadataOptions,
-    requestId?: number
+    options: MetadataOptions
   ): number;
   /**
    * Update the metadata of a specified user.
@@ -198,8 +193,7 @@ export abstract class IRtmStorage {
   abstract updateUserMetadata(
     userId: string,
     data: Metadata,
-    options: MetadataOptions,
-    requestId?: number
+    options: MetadataOptions
   ): number;
   /**
    * Remove the metadata of a specified user.
@@ -216,8 +210,7 @@ export abstract class IRtmStorage {
   abstract removeUserMetadata(
     userId: string,
     data: Metadata,
-    options: MetadataOptions,
-    requestId?: number
+    options: MetadataOptions
   ): number;
   /**
    * Get the metadata of a specified user.
@@ -229,7 +222,7 @@ export abstract class IRtmStorage {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract getUserMetadata(userId: string, requestId?: number): number;
+  abstract getUserMetadata(userId: string): number;
   /**
    * Subscribe the metadata update event of a specified user.
    *
@@ -239,7 +232,7 @@ export abstract class IRtmStorage {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract subscribeUserMetadata(userId: string, requestId?: number): number;
+  abstract subscribeUserMetadata(userId: string): number;
   /**
    * unsubscribe the metadata update event of a specified user.
    *
@@ -249,5 +242,5 @@ export abstract class IRtmStorage {
    * - 0: Success.
    * - < 0: Failure.
    */
-  abstract unsubscribeUserMetadata(userId: string, requestId?: number): number;
+  abstract unsubscribeUserMetadata(userId: string): number;
 }

@@ -247,7 +247,7 @@ export interface GetUserMetadataOptions {
   userId?: string;
 }
 
-export declare class RTMStorage {
+export abstract class RTMStorage {
   /**@zh-cn
    * 设置频道的元数据项。
    *
@@ -260,7 +260,7 @@ export declare class RTMStorage {
    * @param data the items user wants to operate, each item must has unique key. The item type please see {@link MetadataItem}.
    * @param options Options for this metadata operation. See {@link MetadataOptions}.
    */
-  setChannelMetadata(
+  abstract setChannelMetadata(
     channelName: string,
     channelType: ChannelType,
     data: MetadataItem[],
@@ -277,7 +277,7 @@ export declare class RTMStorage {
    * @param channelName A channel that needs to be specified.
    * @param channelType channelType for this channel. See {@link ChannelType}
    */
-  getChannelMetadata(
+  abstract getChannelMetadata(
     channelName: string,
     channelType: ChannelType
   ): Promise<GetChannelMetadataResponse>;
@@ -293,7 +293,7 @@ export declare class RTMStorage {
    * @param channelType channelType for this channel. See {@link ChannelType}
    * @param options Options for this metadata operation. See {@link RemoveChannelMetadataOptions}.
    */
-  removeChannelMetadata(
+  abstract removeChannelMetadata(
     channelName: string,
     channelType: ChannelType,
     options?: RemoveChannelMetadataOptions
@@ -311,7 +311,7 @@ export declare class RTMStorage {
    * @param data the items user wants to operate, each item must has unique key. The item type please see {@link MetadataItem}.
    * @param options Options for this metadata operation. See {@link MetadataOptions}.
    */
-  updateChannelMetadata(
+  abstract updateChannelMetadata(
     channelName: string,
     channelType: ChannelType,
     data: MetadataItem[],
@@ -328,7 +328,7 @@ export declare class RTMStorage {
    * @param data the items user wants to operate, each item must has unique key. The item type please see {@link MetadataItem}.
    * @param options Options for this metadata operation. See {@link SetOrUpdateUserMetadataOptions}.
    */
-  setUserMetadata(
+  abstract setUserMetadata(
     data: MetadataItem[],
     options?: SetOrUpdateUserMetadataOptions
   ): Promise<SetUserMetadataResponse>;
@@ -341,7 +341,7 @@ export declare class RTMStorage {
    * Get the user’s metadata of a specified user.
    * @param userId The userId of the user logging in the Agora RTM system.
    */
-  getUserMetadata(
+  abstract getUserMetadata(
     options?: GetUserMetadataOptions
   ): Promise<GetUserMetadataResponse>;
 
@@ -355,7 +355,7 @@ export declare class RTMStorage {
    * @param options Options for this metadata operation. See {@link RemoveUserMetadataOptions}.
    *
    */
-  removeUserMetadata(
+  abstract removeUserMetadata(
     options?: RemoveUserMetadataOptions
   ): Promise<RemoveUserMetadataResponse>;
 
@@ -369,7 +369,7 @@ export declare class RTMStorage {
    * @param data the items user wants to operate, each item must has unique key. The item type please see {@link MetadataItem}.
    * @param options Options for this metadata operation. See {@link SetOrUpdateUserMetadataOptions}.
    */
-  updateUserMetadata(
+  abstract updateUserMetadata(
     data: MetadataItem[],
     options?: SetOrUpdateUserMetadataOptions
   ): Promise<UpdateUserMetadataResponse>;
@@ -383,7 +383,9 @@ export declare class RTMStorage {
    * Subscribe to user metadata update events for a specific users.
    * @param userId The userId of the user logging in the Agora RTM system.
    */
-  subscribeUserMetadata(userId: string): Promise<SubscribeUserMetaResponse>;
+  abstract subscribeUserMetadata(
+    userId: string
+  ): Promise<SubscribeUserMetaResponse>;
 
   /**@zh-cn
    * 取消订阅特定用户的用户元数据更新事件。
@@ -393,5 +395,7 @@ export declare class RTMStorage {
    * Unsubscribe to user metadata update events for a specific users.
    * @param userId The userId of the user logging in the Agora RTM system.
    */
-  unsubscribeUserMetadata(userId: string): Promise<UnsubscribeUserMetaResponse>;
+  abstract unsubscribeUserMetadata(
+    userId: string
+  ): Promise<UnsubscribeUserMetaResponse>;
 }

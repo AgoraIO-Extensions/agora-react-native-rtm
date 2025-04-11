@@ -142,129 +142,34 @@ export interface RemoveStateResponse extends BaseResponse {}
 export interface RemoveStateOptions {
   states?: string[];
 }
-export declare class RTMPresence {
-  // 用于查询某频道当前有哪些用户，以及用户的临时状态
-  // 获取频道，无需进入频道就能查询
-  // 未提供频道名，返回所有
-  /**@zh-cn
-   * 查询指定频道当前有哪些用户，以及用户的临时状态。
-   * @param channelName 指定频道名称。
-   * @param channelType 指定频道类型。
-   * @param options 查询选项，详见 {@link WhoNowOptions}。
-   * @returns 对象 {@link WhoNowResponse}
-   */
-  /**
-   * Query which users are currently in the specified channel and the temporary state of the users.
-   * @param channelName The specified channel name.
-   * @param channelType The specified channel type.
-   * @param options Query options. See {@link WhoNowOptions}.
-   * @returns The {@link WhoNowResponse} object.
-   */
-  whoNow(
+export abstract class RTMPresence {
+  abstract whoNow(
     channelName: string,
     channelType: ChannelType,
     options?: WhoNowOptions
   ): Promise<WhoNowResponse>;
-  /**@zh-cn
-   * 查询指定频道当前有哪些用户，以及用户的临时状态。
-   * @param channelName 指定频道名称。
-   * @param channelType 指定频道类型。
-   * @param options 查询选项，详见 {@link GetOnlineUsersOptions}。
-   * @returns 对象 {@link GetOnlineUsersResponse}
-   */
-  /**
-   * Query which users are currently in the specified channel and the temporary state of the users.
-   * @param channelName The specified channel name.
-   * @param channelType The specified channel type.
-   * @param options Query options. See {@link GetOnlineUsersOptions}.
-   * @returns The {@link GetOnlineUsersResponse} object.
-   */
-  getOnlineUsers(
+  abstract getOnlineUsers(
     channelName: string,
     channelType: ChannelType,
     options?: GetOnlineUsersOptions
   ): Promise<GetOnlineUsersResponse>;
 
-  // 用于查询某用户加入了哪些频道
-  /**@zh-cn
-   * 查询指定用户加入了哪些频道。
-   * @param userId 指定用户 ID。
-   * @returns 对象 {@link WhereNowResponse}
-   */
-  /**
-   * Query which channels the specified user has joined.
-   * @param userId The specified user ID.
-   * @returns The {@link WhereNowResponse} object.
-   */
-  whereNow(userId: string): Promise<WhereNowResponse>;
+  abstract whereNow(userId: string): Promise<WhereNowResponse>;
+  abstract getUserChannels(userId: string): Promise<GetUserChannelsResponse>;
 
-  /**@zh-cn
-   * 查询指定用户加入了哪些频道。
-   * @param userId 指定用户 ID。
-   */
-  /**
-   * Query which channels the specified user has joined.
-   * @param userId The specified user ID.
-   * @returns The {@link GetUserChannelsResponse} object.
-   */
-  getUserChannels(userId: string): Promise<GetUserChannelsResponse>;
-
-  // 用于用户新增或者更新自身在某频道下的临时状态
-  // 设置用户状态，支持设置特定值为null删除健值对
-  // 多个频道设置同样的属性吗？
-  /**@zh-cn
-   * 设置用户在指定频道下的临时状态。
-   * @param channelName 指定频道名称。
-   * @param channelType 指定频道类型。
-   * @param state 指定用户的临时状态，详见 {@link StateDetail}。
-   */
-  /**
-   * Set the temporary state of the user in the specified channel.
-   * @param channelName The specified channel name.
-   * @param channelType The specified channel type.
-   * @param state The temporary state of the user. See {@link StateDetail}.
-   */
-  setState(
+  abstract setState(
     channelName: string,
     channelType: ChannelType,
     state: StateDetail
   ): Promise<SetStateResponse>;
 
-  // 用于查询某用户在某频道下的临时状态
-  /**@zh-cn
-   * 查询指定用户在指定频道下的临时状态。
-   * @param userId 指定用户 ID。
-   * @param channelName 指定频道名称。
-   * @param channelType 指定频道类型。
-   * @returns 对象 {@link GetStateResponse}
-   */
-  /**
-   * Query the temporary state of the specified user in the specified channel.
-   * @param userId The specified user ID.
-   * @param channelName The specified channel name.
-   * @param channelType The specified channel type.
-   * @returns The {@link GetStateResponse} object.
-   */
-  getState(
+  abstract getState(
     userId: string,
     channelName: string,
     channelType: ChannelType
   ): Promise<GetStateResponse>;
 
-  // 用于用户删除自身在某频道下的临时状态
-  /**@zh-cn
-   * 删除指定用户在指定频道下的临时状态。
-   * @param channelName 指定频道名称。
-   * @param channelType 指定频道类型。
-   * @param options.states 传入要删除的 state key 列表, 不传代表全部删除。
-   */
-  /**
-   * Delete the temporary state of the specified user in the specified channel.
-   * @param channelName The specified channel name.
-   * @param channelType The specified channel type.
-   * @param options.states Pass in the list of state keys to be deleted, and all will be deleted if not passed in.
-   */
-  removeState(
+  abstract removeState(
     channelName: string,
     channelType: ChannelType,
     // 传入 state key, 不传代表全部删除

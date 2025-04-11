@@ -83,104 +83,41 @@ export interface AcquireLockOptions {
   retry?: boolean;
 }
 
-export declare class RTMLock {
-  // 只有服务端才能执行 setLock()的操作，所以开发在需要使用 secretKey 初始化一个服务器端 RTM SDK❓
-  /**@zh-cn
-   * 设置指定频道的分布式锁。
-   * @param options.ttl 可选的 ttl ，表示拥有这把锁的用户掉线后，为其保留多长时间。若超过此时间用户没能恢复链接，锁将会被释放。 默认值 10s。@default 10
-   * 最小值 10 秒.(默认值)
-   * 最大值 300 秒.
-   */
-  /**
-   * Set a distributed lock for the specified channel.
-   * @param channelName A channel that needs to be specified.
-   * @param channelType ChannelType for this channel. See {@link ChannelType}
-   * @param lockName The lockName you wants to operate.
-   * @param options.ttl An optional ttl indicates how long to keep the lock after the user who owns the lock goes offline. If the user fails to restore the connection after this time, the lock will be released. It is set to `10` by default. @default 10
-   * Min 10 seconds.(default)
-   * 300 seconds Maximum.
-   */
-  setLock(
+export abstract class RTMLock {
+  abstract setLock(
     channelName: string,
     channelType: ChannelType,
     lockName: string,
     options?: SetLockOptions
   ): Promise<SetLockResponse>;
 
-  /**@zh-cn
-   * 删除指定频道的分布式锁。
-   */
-  /**
-   * Delete a distributed lock for the specified channel.
-   * @param channelName A channel that needs to be specified.
-   * @param channelType ChannelType for this channel. See {@link ChannelType}
-   * @param lockName The lockName you wants to operate.
-   */
-  removeLock(
+  abstract removeLock(
     channelName: string,
     channelType: ChannelType,
     lockName: string
   ): Promise<RemoveLockResponse>;
 
-  /**@zh-cn
-   * 获取指定频道的分布式锁。
-   * @param options.retry 可选的 retry ，当获取的锁被占用时是否继续尝试，直到成功获取或退出频道为止。 默认值 false。@default false
-   */
-  /**
-   * Set a distributed lock for the specified channel.
-   * @param channelName A channel that needs to be specified.
-   * @param channelType ChannelType for this channel. See {@link ChannelType}
-   * @param lockName The lockName you wants to operate.
-   * @param options.retry An Optional retry , whether to keep trying when the acquired lock is occupied, until it is successfully acquired or the channel is exited. It is set to `false` by default. @default false
-   */
-  acquireLock(
+  abstract acquireLock(
     channelName: string,
     channelType: ChannelType,
     lockName: string,
     options?: AcquireLockOptions // 默认false
   ): Promise<AcquireLockResponse>;
 
-  /**@zh-cn
-   * 释放指定频道的分布式锁。
-   */
-  /**
-   * Release a distributed lock for the specified channel.
-   * @param channelName A channel that needs to be specified.
-   * @param channelType ChannelType for this channel. See {@link ChannelType}
-   * @param lockName The lockName you wants to operate.
-   */
-  releaseLock(
+  abstract releaseLock(
     channelName: string,
     channelType: ChannelType,
     lockName: string
   ): Promise<ReleaseLockResponse>;
 
-  /**@zh-cn
-   * 剥夺指定频道的某个用户的分布式锁。
-   */
-  /**
-   * Revoke a distributed lock of a user for the specified channel.
-   * @param channelName A channel that needs to be specified.
-   * @param channelType ChannelType for this channel. See {@link ChannelType}
-   * @param lockName The lockName you wants to operate.
-   * @param owner The owner of the lock you wants to revoke.
-   */
-  revokeLock(
+  abstract revokeLock(
     channelName: string,
     channelType: ChannelType,
     lockName: string,
     owner: string
   ): Promise<RevokeLockResponse>;
 
-  /**@zh-cn
-   * 查询指定频道的分布式锁。
-   */
-  /**
-   * Get all distributed locks for the specified channel.
-   * @param channelName A channel that needs to be specified.
-   * @param channelType ChannelType for this channel. See {@link ChannelType}
-   */
-  getLock(
+  abstract getLock(
     channelName: string,
     channelType: ChannelType
   ): Promise<GetLockResponse>;
