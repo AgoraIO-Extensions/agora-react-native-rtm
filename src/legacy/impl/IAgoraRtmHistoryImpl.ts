@@ -8,7 +8,7 @@ export class IRtmHistoryImpl implements IRtmHistory {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     options: GetHistoryMessagesOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromGetMessages(
       channelName,
       channelType,
@@ -26,9 +26,7 @@ export class IRtmHistoryImpl implements IRtmHistory {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetMessages(

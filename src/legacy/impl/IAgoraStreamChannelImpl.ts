@@ -1,5 +1,5 @@
 import { callIrisApi } from '../../internal/IrisRtmEngine';
-import { TopicMessageOptions, UserList } from '../AgoraRtmBase';
+import { TopicMessageOptions } from '../AgoraRtmBase';
 import {
   IStreamChannel,
   JoinChannelOptions,
@@ -9,7 +9,7 @@ import {
 
 // @ts-ignore
 export class IStreamChannelImpl implements IStreamChannel {
-  join(options: JoinChannelOptions): number {
+  join(options: JoinChannelOptions): any {
     const apiType = this.getApiTypeFromJoin(options);
     const jsonParams = {
       options: options,
@@ -19,16 +19,14 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromJoin(options: JoinChannelOptions): string {
     return 'StreamChannel_join_2090a6b';
   }
 
-  renewToken(token: string): number {
+  renewToken(token: string): any {
     const apiType = this.getApiTypeFromRenewToken(token);
     const jsonParams = {
       token: token,
@@ -38,39 +36,34 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRenewToken(token: string): string {
     return 'StreamChannel_renewToken_1fa04dd';
   }
 
-  leave(): number {
+  leave(): any {
     const apiType = this.getApiTypeFromLeave();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromLeave(): string {
     return 'StreamChannel_leave_90386a9';
   }
 
-  getChannelName(): string {
+  getChannelName(): any {
     const apiType = this.getApiTypeFromGetChannelName();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetChannelName(): string {
     return 'StreamChannel_getChannelName';
   }
 
-  joinTopic(topic: string, options: JoinTopicOptions): number {
+  joinTopic(topic: string, options: JoinTopicOptions): any {
     const apiType = this.getApiTypeFromJoinTopic(topic, options);
     const jsonParams = {
       topic: topic,
@@ -82,9 +75,7 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromJoinTopic(
@@ -99,7 +90,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     message: string,
     length: number,
     option: TopicMessageOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromPublishTopicMessage(
       topic,
       message,
@@ -120,9 +111,7 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromPublishTopicMessage(
@@ -134,7 +123,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_publishTopicMessage_a31773e';
   }
 
-  leaveTopic(topic: string): number {
+  leaveTopic(topic: string): any {
     const apiType = this.getApiTypeFromLeaveTopic(topic);
     const jsonParams = {
       topic: topic,
@@ -144,16 +133,14 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromLeaveTopic(topic: string): string {
     return 'StreamChannel_leaveTopic_1fa04dd';
   }
 
-  subscribeTopic(topic: string, options: TopicOptions): number {
+  subscribeTopic(topic: string, options: TopicOptions): any {
     const apiType = this.getApiTypeFromSubscribeTopic(topic, options);
     const jsonParams = {
       topic: topic,
@@ -165,9 +152,7 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSubscribeTopic(
@@ -177,7 +162,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_subscribeTopic_b801234';
   }
 
-  unsubscribeTopic(topic: string, options: TopicOptions): number {
+  unsubscribeTopic(topic: string, options: TopicOptions): any {
     const apiType = this.getApiTypeFromUnsubscribeTopic(topic, options);
     const jsonParams = {
       topic: topic,
@@ -189,9 +174,7 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromUnsubscribeTopic(
@@ -201,7 +184,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_unsubscribeTopic_b801234';
   }
 
-  getSubscribedUserList(topic: string, requestId: number): UserList[] {
+  getSubscribedUserList(topic: string, requestId: number): any {
     const apiType = this.getApiTypeFromGetSubscribedUserList(topic, requestId);
     const jsonParams = {
       topic: topic,
@@ -213,8 +196,7 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetSubscribedUserList(
@@ -224,11 +206,10 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_getSubscribedUserList_1fa04dd';
   }
 
-  release(): number {
+  release(): any {
     const apiType = this.getApiTypeFromRelease();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRelease(): string {
@@ -240,7 +221,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     message: string,
     length: number,
     option: TopicMessageOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromPublishTextMessage(
       topic,
       message,
@@ -261,9 +242,7 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromPublishTextMessage(
@@ -280,7 +259,7 @@ export class IStreamChannelImpl implements IStreamChannel {
     message: Uint8Array,
     length: number,
     option: TopicMessageOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromPublishBinaryMessage(
       topic,
       message,
@@ -300,9 +279,7 @@ export class IStreamChannelImpl implements IStreamChannel {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromPublishBinaryMessage(

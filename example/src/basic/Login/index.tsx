@@ -1,10 +1,11 @@
-import { RTM_ERROR_CODE, useRtm } from 'agora-react-native-rtm';
+import { useRtm } from 'agora-react-native-rtm';
 import React, { useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
 import { AgoraButton, AgoraStyle } from '../../components/ui';
 import Config from '../../config/agora.config';
+import * as log from '../../utils/log';
 
 export default function Login() {
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -27,18 +28,24 @@ export default function Login() {
    * Step 3: login to rtm
    */
   const login = async () => {
-    let result = await client.login(Config.token);
-    console.log('login', result);
-    setLoginSuccess(result.errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
+    try {
+      await client.login({ token: Config.token });
+      setLoginSuccess(true);
+    } catch (status: any) {
+      log.error('login error', status);
+    }
   };
 
   /**
    * Step 4 (Optional): logout
    */
   const logout = async () => {
-    let result = await client.logout();
-    console.log('logout', result);
-    setLoginSuccess(false);
+    try {
+      await client.logout();
+      setLoginSuccess(false);
+    } catch (status: any) {
+      log.error('logout error', status);
+    }
   };
 
   // useRtmEvent(client, 'onLoginResult', (errorCode: RTM_ERROR_CODE) => {

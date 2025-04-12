@@ -10,7 +10,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     data: Metadata,
     options: MetadataOptions,
     lockName: string
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromSetChannelMetadata(
       channelName,
       channelType,
@@ -34,9 +34,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSetChannelMetadata(
@@ -55,7 +53,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     data: Metadata,
     options: MetadataOptions,
     lockName: string
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromUpdateChannelMetadata(
       channelName,
       channelType,
@@ -79,9 +77,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromUpdateChannelMetadata(
@@ -100,7 +96,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     data: Metadata,
     options: MetadataOptions,
     lockName: string
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromRemoveChannelMetadata(
       channelName,
       channelType,
@@ -124,9 +120,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRemoveChannelMetadata(
@@ -139,10 +133,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     return 'RtmStorage_removeChannelMetadata_55e6d00';
   }
 
-  getChannelMetadata(
-    channelName: string,
-    channelType: RTM_CHANNEL_TYPE
-  ): number {
+  getChannelMetadata(channelName: string, channelType: RTM_CHANNEL_TYPE): any {
     const apiType = this.getApiTypeFromGetChannelMetadata(
       channelName,
       channelType
@@ -157,9 +148,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetChannelMetadata(
@@ -173,7 +162,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     userId: string,
     data: Metadata,
     options: MetadataOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromSetUserMetadata(userId, data, options);
     const jsonParams = {
       userId: userId,
@@ -187,9 +176,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSetUserMetadata(
@@ -204,7 +191,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     userId: string,
     data: Metadata,
     options: MetadataOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromUpdateUserMetadata(
       userId,
       data,
@@ -222,9 +209,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromUpdateUserMetadata(
@@ -239,7 +224,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     userId: string,
     data: Metadata,
     options: MetadataOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromRemoveUserMetadata(
       userId,
       data,
@@ -257,9 +242,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRemoveUserMetadata(
@@ -270,7 +253,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     return 'RtmStorage_removeUserMetadata_24ae125';
   }
 
-  getUserMetadata(userId: string): number {
+  getUserMetadata(userId: string): any {
     const apiType = this.getApiTypeFromGetUserMetadata(userId);
     const jsonParams = {
       userId: userId,
@@ -280,16 +263,14 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetUserMetadata(userId: string): string {
     return 'RtmStorage_getUserMetadata_1fa04dd';
   }
 
-  subscribeUserMetadata(userId: string): number {
+  subscribeUserMetadata(userId: string): any {
     const apiType = this.getApiTypeFromSubscribeUserMetadata(userId);
     const jsonParams = {
       userId: userId,
@@ -299,16 +280,14 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSubscribeUserMetadata(userId: string): string {
     return 'RtmStorage_subscribeUserMetadata_1fa04dd';
   }
 
-  unsubscribeUserMetadata(userId: string): number {
+  unsubscribeUserMetadata(userId: string): any {
     const apiType = this.getApiTypeFromUnsubscribeUserMetadata(userId);
     const jsonParams = {
       userId: userId,
@@ -318,9 +297,7 @@ export class IRtmStorageImpl implements IRtmStorage {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromUnsubscribeUserMetadata(userId: string): string {

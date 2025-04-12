@@ -164,14 +164,14 @@ export interface LoginOptions {
 export interface RTMOperationResponse extends BaseResponse {
   channelName: string;
 }
-export interface SubscribeResponse extends RTMOperationResponse {}
-export interface UnsubscribeResponse extends RTMOperationResponse {}
-export interface LoginResponse extends BaseResponse {}
-export interface LogoutResponse extends BaseResponse {}
-export interface PublishResponse extends RTMOperationResponse {}
+export type SubscribeResponse = RTMOperationResponse | ErrorInfo;
+export type UnsubscribeResponse = RTMOperationResponse | ErrorInfo;
+export type LoginResponse = BaseResponse | ErrorInfo;
+export type LogoutResponse = BaseResponse | ErrorInfo;
+export type PublishResponse = RTMOperationResponse | ErrorInfo;
 
-export interface RenewTokenResponse extends BaseResponse {}
-export interface UpdateConfigResponse extends BaseResponse {}
+export type RenewTokenResponse = BaseResponse | ErrorInfo;
+export type UpdateConfigResponse = BaseResponse | ErrorInfo;
 // export interface PublishOptions {
 //   /**@zh-cn
 //    * 自定义消息负载结构

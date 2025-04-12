@@ -9,7 +9,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelType: RTM_CHANNEL_TYPE,
     lockName: string,
     ttl: number
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromSetLock(
       channelName,
       channelType,
@@ -30,9 +30,7 @@ export class IRtmLockImpl implements IRtmLock {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSetLock(
@@ -44,7 +42,7 @@ export class IRtmLockImpl implements IRtmLock {
     return 'RtmLock_setLock_89e5672';
   }
 
-  getLocks(channelName: string, channelType: RTM_CHANNEL_TYPE): number {
+  getLocks(channelName: string, channelType: RTM_CHANNEL_TYPE): any {
     const apiType = this.getApiTypeFromGetLocks(channelName, channelType);
     const jsonParams = {
       channelName: channelName,
@@ -56,9 +54,7 @@ export class IRtmLockImpl implements IRtmLock {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetLocks(
@@ -72,7 +68,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     lockName: string
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromRemoveLock(
       channelName,
       channelType,
@@ -90,9 +86,7 @@ export class IRtmLockImpl implements IRtmLock {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRemoveLock(
@@ -108,7 +102,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelType: RTM_CHANNEL_TYPE,
     lockName: string,
     retry: boolean
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromAcquireLock(
       channelName,
       channelType,
@@ -129,9 +123,7 @@ export class IRtmLockImpl implements IRtmLock {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromAcquireLock(
@@ -147,7 +139,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     lockName: string
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromReleaseLock(
       channelName,
       channelType,
@@ -165,9 +157,7 @@ export class IRtmLockImpl implements IRtmLock {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromReleaseLock(
@@ -183,7 +173,7 @@ export class IRtmLockImpl implements IRtmLock {
     channelType: RTM_CHANNEL_TYPE,
     lockName: string,
     owner: string
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromRevokeLock(
       channelName,
       channelType,
@@ -204,9 +194,7 @@ export class IRtmLockImpl implements IRtmLock {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRevokeLock(

@@ -43,14 +43,11 @@ interface VariableUserData {
 }
 
 interface ClazzMethodUserData extends IrisApiIdParserUserData {
-  output: string;
   input: string;
   input_map: Variable[];
   input_map_fixed: Variable[];
-  output_map: Variable[];
   hasParameters: boolean;
   bindingFunctionName?: string;
-  returnParam?: string;
 }
 
 export function impl(parseResult: ParseResult) {
@@ -80,17 +77,13 @@ export function impl(parseResult: ParseResult) {
 
       cxxfile.nodes = nodes.map((node: CXXTerraNode) => {
         node.asClazz().methods.map((method) => {
-          let output_params: string[] = [];
           let input_params: string[] = [];
           const clazzMethodUserData: ClazzMethodUserData = {
-            output: '',
             input: '',
             input_map: [],
             input_map_fixed: [],
-            output_map: [],
             hasParameters: true,
             bindingFunctionName: `getApiTypeFrom${upperFirstWord(method.name)}`,
-            returnParam: '',
             ...method.user_data,
           };
           let overrideNode = getOverrideNodeParserUserData(method);
@@ -106,10 +99,7 @@ export function impl(parseResult: ParseResult) {
             let typeName = param.type.name;
             let default_value = param.default_value;
             param.user_data = variableUserData;
-            if (param.is_output) {
-              output_params.push(`${variableUserData.name}: ${typeName}`);
-              clazzMethodUserData.output_map.push(param);
-            } else {
+            if (!param.is_output) {
               let member = `${variableUserData.name}: ${typeName}`;
               if (param.default_value) {
                 if (
@@ -144,50 +134,9 @@ export function impl(parseResult: ParseResult) {
               }
             }
           });
-          if (output_params.length > 0) {
-            if (
-              method.asMemberFunction().return_type.name !== 'void' &&
-              method.asMemberFunction().return_type.name !== 'number'
-            ) {
-              output_params.push(`result: ${method.return_type.name},`);
-            }
-          }
           clazzMethodUserData.input = input_params.join(',');
-          if (output_params.length > 1) {
-            clazzMethodUserData.output = `{${output_params.join(',')}}`;
-          } else if (output_params.length == 1) {
-            clazzMethodUserData.output = output_params[0]?.split(': ')[1]!;
-          } else {
-            clazzMethodUserData.output = `${method.return_type.name}`;
-          }
           clazzMethodUserData.hasParameters =
             clazzMethodUserData.input_map.length > 0;
-          if (
-            clazzMethodUserData.output_map.length > 0 ||
-            method.return_type.name !== 'void'
-          ) {
-            clazzMethodUserData.returnParam = `const jsonResults = `;
-          }
-          clazzMethodUserData.returnParam +=
-            'callIrisApi.call(this, apiType, jsonParams);\n';
-          clazzMethodUserData.output_map.map((output) => {
-            clazzMethodUserData.returnParam += `    const ${output.name} = jsonResults.${output.name};\n`;
-          });
-          if (clazzMethodUserData.output_map.length === 0) {
-            if (method.return_type.name !== 'void') {
-              clazzMethodUserData.returnParam += `    return jsonResults.result;\n`;
-            }
-          } else {
-            if (clazzMethodUserData.output_map.length === 1) {
-              clazzMethodUserData.returnParam += `    return ${clazzMethodUserData.output_map[0]?.name}\n`;
-            } else {
-              clazzMethodUserData.returnParam += `    return {\n`;
-              clazzMethodUserData.output_map.map((output) => {
-                clazzMethodUserData.returnParam += `${output.name},\n`;
-              });
-              clazzMethodUserData.returnParam += `}\n`;
-            }
-          }
           method.user_data = clazzMethodUserData;
         });
 

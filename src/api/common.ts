@@ -1,6 +1,6 @@
-import { ErrorInfo } from './RTMClient';
-
-export interface BaseResponse extends ErrorInfo {}
+export interface BaseResponse {
+  timestamp: number;
+}
 
 /** @zh-cn
  * @hidden

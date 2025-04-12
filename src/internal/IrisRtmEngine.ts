@@ -5,6 +5,8 @@ import base64 from 'base64-js';
 import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
+import { BaseResponse, ErrorInfo } from '../api';
+import { RTM_ERROR_CODE } from '../legacy/AgoraRtmBase';
 import { IRtmEventHandler } from '../legacy/IAgoraRtmClient';
 import { processIRtmEventHandler } from '../legacy/impl/IAgoraRtmClientImpl';
 import AgoraRtmNg from '../specs';
@@ -77,12 +79,26 @@ export class RequestQueue {
   public resolveRequest(
     requestId: number,
     errorCode: number,
+    callbackName: string,
     ...args: any[]
   ): boolean {
     const request = this._requestMap.get(requestId);
     if (!request) {
+      console.log(`找不到请求 ${requestId}`);
       return false;
     }
+
+    // 检查回调名称是否匹配
+    if (request.callbackName !== callbackName) {
+      console.log(
+        `回调名称不匹配: 期望 ${request.callbackName}, 实际 ${callbackName}`
+      );
+      return false;
+    }
+
+    console.log(
+      `解析请求: ${requestId}, 回调: ${callbackName}, 错误码: ${errorCode}`
+    );
 
     if (request.timeout) {
       clearTimeout(request.timeout);
@@ -184,13 +200,6 @@ function handleEvent({ event, data, buffers }: any) {
     _data = {};
   }
 
-  // Handle request resolution
-  const requestId = _data.requestId;
-  if (requestId !== undefined && _data.errorCode !== undefined) {
-    const requestQueue = RequestQueue.instance;
-    requestQueue.resolveRequest(requestId, _data.errorCode, _data);
-  }
-
   let _event: string = event;
   let processor: EventProcessor<any> = EVENT_PROCESSORS.IRtmEventHandler;
 
@@ -228,6 +237,13 @@ function handleEvent({ event, data, buffers }: any) {
         });
       }
     });
+  }
+
+  // 处理请求解析
+  const requestId = _data.requestId;
+  if (requestId !== undefined && _data.errorCode !== undefined) {
+    const requestQueue = RequestQueue.instance;
+    requestQueue.resolveRequest(requestId, _data.errorCode, _event, _data);
   }
 
   emitEvent(_event, processor, _data);
@@ -314,4 +330,53 @@ export function emitEvent<EventType extends keyof T, T extends ProcessorType>(
   data: any
 ): void {
   DeviceEventEmitter.emit(eventType as string, eventProcessor, data);
+}
+
+/**
+ * @internal
+ */
+export async function wrapRtmResult(
+  data: any,
+  operation: string,
+  callbackName: string
+): Promise<BaseResponse | ErrorInfo> {
+  if (data.result < 0) {
+    throw {
+      error: true,
+      reason: 'iris call failed',
+      operation,
+      errorCode: data.result,
+    };
+  } else {
+    const result = await RequestQueue.instance.addRequest(
+      callbackName,
+      10000,
+      data.requestId
+    );
+    let nativeReturnCode = result.errorCode;
+    if (nativeReturnCode === 0) {
+      return {
+        timestamp: 0,
+      };
+    } else {
+      throw {
+        error: true,
+        reason: data.reason,
+        operation,
+        errorCode: nativeReturnCode,
+      };
+    }
+  }
+}
+
+/**
+ * @internal
+ */
+export function handleError(error: any, operation: string): ErrorInfo {
+  return {
+    error: true,
+    reason: JSON.stringify(error),
+    operation: operation,
+    errorCode: (error as any)?.code,
+  };
 }

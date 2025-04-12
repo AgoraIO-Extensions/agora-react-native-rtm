@@ -13,7 +13,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     options: PresenceOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromWhoNow(
       channelName,
       channelType,
@@ -31,9 +31,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromWhoNow(
@@ -44,7 +42,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     return 'RtmPresence_whoNow_f7f61d1';
   }
 
-  whereNow(userId: string): number {
+  whereNow(userId: string): any {
     const apiType = this.getApiTypeFromWhereNow(userId);
     const jsonParams = {
       userId: userId,
@@ -54,9 +52,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromWhereNow(userId: string): string {
@@ -68,7 +64,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelType: RTM_CHANNEL_TYPE,
     items: StateItem[],
     count: number
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromSetState(
       channelName,
       channelType,
@@ -89,9 +85,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSetState(
@@ -108,7 +102,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelType: RTM_CHANNEL_TYPE,
     keys: string[],
     count: number
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromRemoveState(
       channelName,
       channelType,
@@ -129,9 +123,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRemoveState(
@@ -147,7 +139,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     userId: string
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromGetState(
       channelName,
       channelType,
@@ -165,9 +157,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetState(
@@ -182,7 +172,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     channelName: string,
     channelType: RTM_CHANNEL_TYPE,
     options: GetOnlineUsersOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromGetOnlineUsers(
       channelName,
       channelType,
@@ -200,9 +190,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetOnlineUsers(
@@ -213,7 +201,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
     return 'RtmPresence_getOnlineUsers_ce2d8e8';
   }
 
-  getUserChannels(userId: string): number {
+  getUserChannels(userId: string): any {
     const apiType = this.getApiTypeFromGetUserChannels(userId);
     const jsonParams = {
       userId: userId,
@@ -223,9 +211,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetUserChannels(userId: string): string {

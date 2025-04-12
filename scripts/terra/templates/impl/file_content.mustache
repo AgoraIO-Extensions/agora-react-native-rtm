@@ -25,7 +25,7 @@ export class {{name}}Impl {{#base_clazzs}}extends {{.}}Impl{{/base_clazzs}} impl
 {{#methods}}
   {{name}}(
     {{{user_data.input}}}
-    ): {{user_data.output}} {
+    ): any {
     const apiType = this.{{user_data.bindingFunctionName}}({{#user_data.input_map}}{{user_data.name}},{{/user_data.input_map}});
     const jsonParams = {
       {{#user_data.input_map}}
@@ -41,7 +41,7 @@ export class {{name}}Impl {{#base_clazzs}}extends {{.}}Impl{{/base_clazzs}} impl
       },
       {{/user_data.hasParameters}}
     };
-    {{{user_data.returnParam}}}
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected {{user_data.bindingFunctionName}}({{{user_data.input}}}): string {

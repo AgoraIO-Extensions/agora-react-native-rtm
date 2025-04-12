@@ -1,11 +1,6 @@
 import { callIrisApi } from '../../internal/IrisRtmEngine';
 import { PublishOptions, SubscribeOptions } from '../AgoraRtmBase';
 import { IRtmClient, IRtmEventHandler } from '../IAgoraRtmClient';
-import { IRtmHistory } from '../IAgoraRtmHistory';
-import { IRtmLock } from '../IAgoraRtmLock';
-import { IRtmPresence } from '../IAgoraRtmPresence';
-import { IRtmStorage } from '../IAgoraRtmStorage';
-import { IStreamChannel } from '../IAgoraStreamChannel';
 
 export function processIRtmEventHandler(
   handler: IRtmEventHandler,
@@ -435,18 +430,17 @@ export function processIRtmEventHandler(
 
 // @ts-ignore
 export class IRtmClientImpl implements IRtmClient {
-  release(): number {
+  release(): any {
     const apiType = this.getApiTypeFromRelease();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRelease(): string {
     return 'RtmClient_release';
   }
 
-  login(token: string): number {
+  login(token: string): any {
     const apiType = this.getApiTypeFromLogin(token);
     const jsonParams = {
       token: token,
@@ -456,72 +450,64 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromLogin(token: string): string {
-    return 'RtmClient_login_1fa04dd';
+    return 'RtmClient_login_1fa0ff4dd';
   }
 
-  logout(): number {
+  logout(): any {
     const apiType = this.getApiTypeFromLogout();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromLogout(): string {
     return 'RtmClient_logout_90386a9';
   }
 
-  getStorage(): IRtmStorage {
+  getStorage(): any {
     const apiType = this.getApiTypeFromGetStorage();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetStorage(): string {
     return 'RtmClient_getStorage';
   }
 
-  getLock(): IRtmLock {
+  getLock(): any {
     const apiType = this.getApiTypeFromGetLock();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetLock(): string {
     return 'RtmClient_getLock';
   }
 
-  getPresence(): IRtmPresence {
+  getPresence(): any {
     const apiType = this.getApiTypeFromGetPresence();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetPresence(): string {
     return 'RtmClient_getPresence';
   }
 
-  getHistory(): IRtmHistory {
+  getHistory(): any {
     const apiType = this.getApiTypeFromGetHistory();
     const jsonParams = {};
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromGetHistory(): string {
     return 'RtmClient_getHistory';
   }
 
-  renewToken(token: string): number {
+  renewToken(token: string): any {
     const apiType = this.getApiTypeFromRenewToken(token);
     const jsonParams = {
       token: token,
@@ -531,9 +517,7 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromRenewToken(token: string): string {
@@ -545,7 +529,7 @@ export class IRtmClientImpl implements IRtmClient {
     message: string,
     length: number,
     option: PublishOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromPublish(
       channelName,
       message,
@@ -566,9 +550,7 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromPublish(
@@ -580,7 +562,7 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_publish_2d36e93';
   }
 
-  subscribe(channelName: string, options: SubscribeOptions): number {
+  subscribe(channelName: string, options: SubscribeOptions): any {
     const apiType = this.getApiTypeFromSubscribe(channelName, options);
     const jsonParams = {
       channelName: channelName,
@@ -592,9 +574,7 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSubscribe(
@@ -604,7 +584,7 @@ export class IRtmClientImpl implements IRtmClient {
     return 'RtmClient_subscribe_3fae92d';
   }
 
-  unsubscribe(channelName: string): number {
+  unsubscribe(channelName: string): any {
     const apiType = this.getApiTypeFromUnsubscribe(channelName);
     const jsonParams = {
       channelName: channelName,
@@ -614,19 +594,14 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromUnsubscribe(channelName: string): string {
     return 'RtmClient_unsubscribe_1fa04dd';
   }
 
-  createStreamChannel(channelName: string): {
-    errorCode: number;
-    result: IStreamChannel;
-  } {
+  createStreamChannel(channelName: string): any {
     const apiType = this.getApiTypeFromCreateStreamChannel(channelName);
     const jsonParams = {
       channelName: channelName,
@@ -636,16 +611,14 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const errorCode = jsonResults.errorCode;
-    return errorCode;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromCreateStreamChannel(channelName: string): string {
     return 'RtmClient_createStreamChannel_ae3d0cf';
   }
 
-  setParameters(parameters: string): number {
+  setParameters(parameters: string): any {
     const apiType = this.getApiTypeFromSetParameters(parameters);
     const jsonParams = {
       parameters: parameters,
@@ -655,8 +628,7 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    return jsonResults.result;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromSetParameters(parameters: string): string {
@@ -668,7 +640,7 @@ export class IRtmClientImpl implements IRtmClient {
     message: Uint8Array,
     length: number,
     option: PublishOptions
-  ): number {
+  ): any {
     const apiType = this.getApiTypeFromPublishBinaryMessage(
       channelName,
       message,
@@ -688,9 +660,7 @@ export class IRtmClientImpl implements IRtmClient {
         };
       },
     };
-    const jsonResults = callIrisApi.call(this, apiType, jsonParams);
-    const requestId = jsonResults.requestId;
-    return requestId;
+    return callIrisApi.call(this, apiType, jsonParams);
   }
 
   protected getApiTypeFromPublishBinaryMessage(

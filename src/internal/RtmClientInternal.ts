@@ -1,4 +1,5 @@
 import {
+  ErrorInfo,
   IRtmClientEvent,
   LoginOptions,
   LoginResponse,
@@ -15,7 +16,11 @@ import { RTMLock } from '../api/RTMLock';
 import { RTMPresence } from '../api/RTMPresence';
 import { RTMStorage } from '../api/RTMStorage';
 import { RTMStreamChannel } from '../api/RTMStreamChannel';
-import { PublishOptions, SubscribeOptions } from '../legacy/AgoraRtmBase';
+import {
+  PublishOptions,
+  RTM_ERROR_CODE,
+  SubscribeOptions,
+} from '../legacy/AgoraRtmBase';
 import { IRtmEventHandler, RtmConfig } from '../legacy/IAgoraRtmClient';
 import { IRtmHistory } from '../legacy/IAgoraRtmHistory';
 import { IRtmLock } from '../legacy/IAgoraRtmLock';
@@ -30,6 +35,8 @@ import {
   EventProcessor,
   RequestQueue,
   callIrisApi,
+  handleError,
+  wrapRtmResult,
 } from './IrisRtmEngine';
 import { RtmHistoryInternal } from './RtmHistoryInternal';
 import { RtmLockInternal } from './RtmLockInternal';
@@ -64,7 +71,6 @@ export class RtmClientInternal extends RTMClient {
   }
 
   createStreamChannel(channelName: string): RTMStreamChannel {
-    // const result = super.createStreamChannel(channelName);
     return new StreamChannelInternal(channelName);
   }
 
@@ -110,42 +116,26 @@ export class RtmClientInternal extends RTMClient {
     DeviceEventEmitter.removeAllListeners(eventType);
   }
 
-  async login(options?: LoginOptions | undefined): Promise<LoginResponse> {
+  async login(options?: LoginOptions): Promise<LoginResponse> {
     const token = options?.token || '';
+    let operation = 'login';
+    let callBack = 'onLoginResult';
     try {
-      const requestId = this._rtmClientImpl.login(token);
-      const result = await RequestQueue.instance.addRequest(
-        'onLoginResult',
-        10000,
-        requestId
-      );
-      return result;
+      const status = this._rtmClientImpl.login(token);
+      return wrapRtmResult(status, operation, callBack);
     } catch (error) {
-      return {
-        error: true,
-        reason: '登录失败',
-        operation: 'login',
-        errorCode: 1,
-      };
+      throw handleError(error, operation);
     }
   }
 
   async logout(): Promise<LogoutResponse> {
+    let operation = 'logout';
+    let callBack = 'onLogoutResult';
     try {
-      const requestId = this._rtmClientImpl.logout();
-      const result = await RequestQueue.instance.addRequest(
-        'onLogoutResult',
-        10000,
-        requestId
-      );
-      return result;
+      const status = this._rtmClientImpl.logout();
+      return wrapRtmResult(status, operation, callBack);
     } catch (error) {
-      return {
-        error: true,
-        reason: '登出失败',
-        operation: 'logout',
-        errorCode: 1,
-      };
+      throw handleError(error, operation);
     }
   }
 
