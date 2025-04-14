@@ -1,6 +1,7 @@
 import { PublishOptions, SubscribeOptions } from '../legacy/AgoraRtmBase';
 import { IRtmEventHandler, RtmConfig } from '../legacy/IAgoraRtmClient';
 
+import { RTMClientEventMap } from './RTMEvents';
 import { RTMHistory } from './RTMHistory';
 import { RTMLock } from './RTMLock';
 import { RTMPresence } from './RTMPresence';
@@ -12,7 +13,6 @@ import {
   LogFilterType,
   ServiceType,
 } from './common';
-
 // export interface SubscribeOptions {
 //   /**@zh-cn
 //    * 可选参数，是否订阅频道消息。默认值为 true。
@@ -199,25 +199,23 @@ export interface RenewTokenOptions {
   channelName?: string;
 }
 
-export type IRtmClientEvent = IRtmEventHandler;
-
 export abstract class RTMClient {
   abstract presence: RTMPresence;
   abstract history: RTMHistory;
   abstract storage: RTMStorage;
   abstract lock: RTMLock;
 
-  abstract addEventListener<EventType extends keyof IRtmClientEvent>(
+  abstract addEventListener<EventType extends keyof RTMClientEventMap>(
     eventType: EventType,
-    listener: IRtmClientEvent[EventType]
+    listener: RTMClientEventMap[EventType]
   ): void;
 
-  abstract removeEventListener<EventType extends keyof IRtmClientEvent>(
+  abstract removeEventListener<EventType extends keyof RTMClientEventMap>(
     eventType: EventType,
-    listener?: IRtmClientEvent[EventType]
+    listener?: RTMClientEventMap[EventType]
   ): void;
 
-  abstract removeAllListeners<EventType extends keyof IRtmClientEvent>(
+  abstract removeAllListeners<EventType extends keyof RTMClientEventMap>(
     eventType?: EventType
   ): void;
 

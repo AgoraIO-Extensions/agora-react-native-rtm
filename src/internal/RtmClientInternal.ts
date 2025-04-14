@@ -1,6 +1,4 @@
 import {
-  ErrorInfo,
-  IRtmClientEvent,
   LoginOptions,
   LoginResponse,
   LogoutResponse,
@@ -11,29 +9,20 @@ import {
   SubscribeResponse,
   UnsubscribeResponse,
 } from '../api/RTMClient';
+import { RTMClientEventMap } from '../api/RTMEvents';
 import { RTMHistory } from '../api/RTMHistory';
 import { RTMLock } from '../api/RTMLock';
 import { RTMPresence } from '../api/RTMPresence';
 import { RTMStorage } from '../api/RTMStorage';
 import { RTMStreamChannel } from '../api/RTMStreamChannel';
-import {
-  PublishOptions,
-  RTM_ERROR_CODE,
-  SubscribeOptions,
-} from '../legacy/AgoraRtmBase';
-import { IRtmEventHandler, RtmConfig } from '../legacy/IAgoraRtmClient';
-import { IRtmHistory } from '../legacy/IAgoraRtmHistory';
-import { IRtmLock } from '../legacy/IAgoraRtmLock';
-import { IRtmPresence } from '../legacy/IAgoraRtmPresence';
-import { IRtmStorage } from '../legacy/IAgoraRtmStorage';
-import { IStreamChannel } from '../legacy/IAgoraStreamChannel';
+import { PublishOptions, SubscribeOptions } from '../legacy/AgoraRtmBase';
+import { RtmConfig } from '../legacy/IAgoraRtmClient';
 import { IRtmClientImpl } from '../legacy/impl/IAgoraRtmClientImpl';
 
 import {
   DeviceEventEmitter,
   EVENT_TYPE,
   EventProcessor,
-  RequestQueue,
   callIrisApi,
   handleError,
   wrapRtmResult,
@@ -46,17 +35,26 @@ import { StreamChannelInternal } from './StreamChannelInternal';
 
 export class RtmClientInternal extends RTMClient {
   private _rtmClientImpl: IRtmClientImpl = new IRtmClientImpl();
-  static _event_handlers: IRtmEventHandler[] = [];
+  static _event_handlers: RTMClientEventMap[] = [];
   public presence: RTMPresence = new RtmPresenceInternal();
   public storage: RTMStorage = new RtmStorageInternal();
   public lock: RTMLock = new RtmLockInternal();
   public history: RTMHistory = new RtmHistoryInternal();
+  private event_name_map = {
+    linkState: 'onLinkStateEvent',
+    presence: 'onPresenceEvent',
+    message: 'onMessageEvent',
+    storage: 'onStorageEvent',
+    lock: 'onLockEvent',
+    topic: 'onTopicEvent',
+    tokenPrivilegeWillExpire: 'onTokenPrivilegeWillExpire',
+  };
 
   constructor(config: RtmConfig) {
     super();
     if (config?.eventHandler) {
       Object.entries(config.eventHandler).forEach(([key, value]) => {
-        this.addEventListener(key as keyof IRtmClientEvent, value);
+        this.addEventListener(key as keyof RTMClientEventMap, value);
       });
     }
     const jsonParams = {
@@ -81,12 +79,12 @@ export class RtmClientInternal extends RTMClient {
     return ret;
   }
 
-  addEventListener<EventType extends keyof IRtmClientEvent>(
+  addEventListener<EventType extends keyof RTMClientEventMap>(
     eventType: EventType,
-    listener: IRtmClientEvent[EventType]
+    listener: RTMClientEventMap[EventType]
   ): void {
     const callback = (eventProcessor: EventProcessor<any>, data: any) => {
-      if (eventProcessor.type(data) !== EVENT_TYPE.IRtmClient) {
+      if (eventProcessor.type(data) !== EVENT_TYPE.RTMEvent) {
         return;
       }
       eventProcessor.func.map((it) => {
@@ -95,12 +93,13 @@ export class RtmClientInternal extends RTMClient {
     };
     // @ts-ignore
     listener!.agoraCallback = callback;
-    DeviceEventEmitter.addListener(eventType, callback);
+    const eventName = this.event_name_map[eventType] || eventType;
+    DeviceEventEmitter.addListener(eventName, callback);
   }
 
-  removeEventListener<EventType extends keyof IRtmClientEvent>(
+  removeEventListener<EventType extends keyof RTMClientEventMap>(
     eventType: EventType,
-    listener?: IRtmClientEvent[EventType]
+    listener?: RTMClientEventMap[EventType]
   ) {
     DeviceEventEmitter.removeListener(
       eventType,
@@ -109,7 +108,7 @@ export class RtmClientInternal extends RTMClient {
     );
   }
 
-  removeAllListeners<EventType extends keyof IRtmClientEvent>(
+  removeAllListeners<EventType extends keyof RTMClientEventMap>(
     eventType?: EventType
   ) {
     RtmClientInternal._event_handlers = [];

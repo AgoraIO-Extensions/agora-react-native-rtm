@@ -6,9 +6,7 @@ import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
 import { BaseResponse, ErrorInfo } from '../api';
-import { RTM_ERROR_CODE } from '../legacy/AgoraRtmBase';
-import { IRtmEventHandler } from '../legacy/IAgoraRtmClient';
-import { processIRtmEventHandler } from '../legacy/impl/IAgoraRtmClientImpl';
+import { RTMClientEventMap, processRTMClientEventMap } from '../api/RTMEvents';
 import AgoraRtmNg from '../specs';
 
 import { RtmClientInternal } from './RtmClientInternal';
@@ -156,23 +154,23 @@ export type EventProcessor<T extends ProcessorType> = {
 };
 
 export enum EVENT_TYPE {
-  IRtmClient,
+  RTMEvent,
 }
 
-type ProcessorType = IRtmEventHandler;
+type ProcessorType = RTMClientEventMap;
 
 type EventProcessors = {
-  IRtmEventHandler: EventProcessor<IRtmEventHandler>;
+  RTMClientEventMap: EventProcessor<RTMClientEventMap>;
 };
 
 /**
  * @internal
  */
 export const EVENT_PROCESSORS: EventProcessors = {
-  IRtmEventHandler: {
+  RTMClientEventMap: {
     suffix: 'RtmEventHandler_',
-    type: () => EVENT_TYPE.IRtmClient,
-    func: [processIRtmEventHandler],
+    type: () => EVENT_TYPE.RTMEvent,
+    func: [processRTMClientEventMap],
     handlers: () => RtmClientInternal._event_handlers,
     preprocess: (
       event: string,
@@ -201,7 +199,7 @@ function handleEvent({ event, data, buffers }: any) {
   }
 
   let _event: string = event;
-  let processor: EventProcessor<any> = EVENT_PROCESSORS.IRtmEventHandler;
+  let processor: EventProcessor<any> = EVENT_PROCESSORS.RTMClientEventMap;
 
   Object.values(EVENT_PROCESSORS).some((it) => {
     const p = it as EventProcessor<any>;

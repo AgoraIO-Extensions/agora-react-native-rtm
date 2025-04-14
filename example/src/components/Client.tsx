@@ -33,11 +33,11 @@ export const Client = ({ children }: ClientProps) => {
           encryptionKey: Config.encryptionKey,
           encryptionSalt: Config.encryptionSalt,
         }),
-        eventHandler: {
-          onLoginResult: () => {
-            console.log('onLoginResult');
-          },
-        },
+        // eventHandler: {
+        //   onLoginResult: () => {
+        //     console.log('onLoginResult');
+        //   },
+        // },
       })
     )
   );

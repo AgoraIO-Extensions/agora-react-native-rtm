@@ -454,7 +454,7 @@ export class IRtmClientImpl implements IRtmClient {
   }
 
   protected getApiTypeFromLogin(token: string): string {
-    return 'RtmClient_login_1fa0ff4dd';
+    return 'RtmClient_login_1fa04dd';
   }
 
   logout(): any {

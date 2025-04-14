@@ -1,4 +1,4 @@
-import { useRtm } from 'agora-react-native-rtm';
+import { LinkStateEvent, useRtm, useRtmEvent } from 'agora-react-native-rtm';
 import React, { useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
@@ -48,10 +48,9 @@ export default function Login() {
     }
   };
 
-  // useRtmEvent(client, 'onLoginResult', (errorCode: RTM_ERROR_CODE) => {
-  //   console.log('onLoginResult', 'errorCode', errorCode);
-  //   setLoginSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
-  // });
+  useRtmEvent(client, 'linkState', (linkState: LinkStateEvent) => {
+    console.log('linkState', linkState);
+  });
 
   return (
     <KeyboardAvoidingView
