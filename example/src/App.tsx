@@ -20,8 +20,6 @@ import { ConfigHeader } from './config/ConfigHeader';
 const RootStack = createNativeStackNavigator<any>();
 const DATA = [Basic, Advanced];
 
-setDebuggable(true);
-
 export default function App() {
   return (
     <NavigationContainer>

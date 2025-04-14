@@ -6,7 +6,6 @@ import {
   LeaveTopicResponse,
   PublishTopicMessageOptions,
   PublishTopicMessageResponse,
-  RTMStreamChannel,
   SubscribeTopicOptions,
   SubscribeTopicResponse,
   UnsubscribeTopicOptions,

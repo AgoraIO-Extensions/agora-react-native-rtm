@@ -1,8 +1,6 @@
-import type { LinkStateEvent, RTMStreamChannel } from 'agora-react-native-rtm';
+import type { RTMStreamChannel } from 'agora-react-native-rtm';
 import {
   JoinChannelOptions,
-  RTM_LINK_STATE,
-  RTM_LINK_STATE_CHANGE_REASON,
   useRtm,
   useRtmEvent,
 } from 'agora-react-native-rtm';
@@ -94,25 +92,6 @@ export default function CreateStreamChannel() {
     }
   };
 
-  useRtmEvent(client, 'linkState', (linkState: LinkStateEvent) => {
-    log.info('linkState', linkState);
-    switch (linkState.currentState) {
-      case RTM_LINK_STATE.RTM_LINK_STATE_CONNECTED:
-        setLoginSuccess(true);
-        break;
-      case RTM_LINK_STATE.RTM_LINK_STATE_DISCONNECTED:
-        if (
-          linkState.reasonCode ===
-          RTM_LINK_STATE_CHANGE_REASON.RTM_LINK_STATE_CHANGE_REASON_LOGOUT
-        ) {
-          setLoginSuccess(false);
-          destroyStreamChannel();
-        }
-        setJoinSuccess(false);
-        break;
-    }
-  });
-
   useRtmEvent(client, 'tokenPrivilegeWillExpire', () => {
     log.info('tokenPrivilegeWillExpire');
   });
@@ -123,7 +102,10 @@ export default function CreateStreamChannel() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={AgoraStyle.fullSize}>
-        <BaseComponent onChannelNameChanged={(v) => setCName(v)} />
+        <BaseComponent
+          onChannelNameChanged={(v) => setCName(v)}
+          onLoginStatusChanged={(status) => setLoginSuccess(status)}
+        />
         <AgoraButton
           disabled={!loginSuccess}
           title={`${
