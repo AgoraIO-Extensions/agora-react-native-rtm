@@ -48,8 +48,23 @@ export default function Login() {
     }
   };
 
+  /**
+   * Step 5: renew token
+   */
+  const renewToken = async () => {
+    try {
+      await client.renewToken(Config.token);
+    } catch (status: any) {
+      log.error('renewToken error', status);
+    }
+  };
+
   useRtmEvent(client, 'linkState', (linkState: LinkStateEvent) => {
-    console.log('linkState', linkState);
+    log.info('linkState', linkState);
+  });
+
+  useRtmEvent(client, 'tokenPrivilegeWillExpire', () => {
+    log.info('tokenPrivilegeWillExpire');
   });
 
   return (
@@ -65,6 +80,7 @@ export default function Login() {
             loginSuccess ? await logout() : await login();
           }}
         />
+        <AgoraButton title="renewToken" onPress={renewToken} />
       </ScrollView>
     </KeyboardAvoidingView>
   );

@@ -634,41 +634,4 @@ export class IRtmClientImpl implements IRtmClient {
   protected getApiTypeFromSetParameters(parameters: string): string {
     return 'RtmClient_setParameters_3a2037f';
   }
-
-  publishBinaryMessage(
-    channelName: string,
-    message: Uint8Array,
-    length: number,
-    option: PublishOptions
-  ): any {
-    const apiType = this.getApiTypeFromPublishBinaryMessage(
-      channelName,
-      message,
-      length,
-      option
-    );
-    const jsonParams = {
-      channelName: channelName,
-      message: message,
-      length: length,
-      option: option,
-      toJSON: () => {
-        return {
-          channelName: channelName,
-          length: length,
-          option: option,
-        };
-      },
-    };
-    return callIrisApi.call(this, apiType, jsonParams);
-  }
-
-  protected getApiTypeFromPublishBinaryMessage(
-    channelName: string,
-    message: Uint8Array,
-    length: number,
-    option: PublishOptions
-  ): string {
-    return 'RtmClient_publish_2d36e93';
-  }
 }

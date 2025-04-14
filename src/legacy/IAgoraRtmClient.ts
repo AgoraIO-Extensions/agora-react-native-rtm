@@ -1201,10 +1201,4 @@ export abstract class IRtmClient {
    * - < 0: Failure.
    */
   abstract setParameters(parameters: string): number;
-  abstract publishBinaryMessage(
-    channelName: string,
-    message: Uint8Array,
-    length: number,
-    option: PublishOptions
-  ): number;
 }

@@ -1,13 +1,12 @@
+import type { LinkStateEvent, RTMStreamChannel } from 'agora-react-native-rtm';
 import {
-  IStreamChannel,
   JoinChannelOptions,
-  RTM_CONNECTION_CHANGE_REASON,
-  RTM_CONNECTION_STATE,
-  RTM_ERROR_CODE,
+  RTM_LINK_STATE,
+  RTM_LINK_STATE_CHANGE_REASON,
   useRtm,
+  useRtmEvent,
 } from 'agora-react-native-rtm';
-import React, { useCallback, useEffect, useState } from 'react';
-
+import React, { useCallback, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
@@ -18,55 +17,8 @@ import * as log from '../../utils/log';
 export default function CreateStreamChannel() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [joinSuccess, setJoinSuccess] = useState(false);
-  const [streamChannel, setStreamChannel] = useState<IStreamChannel>();
+  const [streamChannel, setStreamChannel] = useState<RTMStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
-  const [uid, setUid] = useState<string>(Config.uid);
-
-  const onJoinResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      userId: string,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onJoinResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'userId',
-        userId,
-        'errorCode',
-        errorCode
-      );
-      setJoinSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
-    },
-    []
-  );
-
-  const onLeaveResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      userId: string,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onLeaveResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'userId',
-        userId,
-        'errorCode',
-        errorCode
-      );
-      setJoinSuccess(errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK);
-    },
-    []
-  );
 
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
@@ -88,24 +40,36 @@ export default function CreateStreamChannel() {
   /**
    * Step 3 : join
    */
-  const join = () => {
-    if (!streamChannel) {
-      log.error('please create streamChannel first');
-      return;
+  const join = async () => {
+    try {
+      if (!streamChannel) {
+        log.error('please create streamChannel first');
+        return;
+      }
+      await streamChannel.join(
+        new JoinChannelOptions({
+          token: Config.appId,
+        })
+      );
+      setJoinSuccess(true);
+    } catch (status: any) {
+      log.error('join error', status);
     }
-    streamChannel.join(
-      new JoinChannelOptions({
-        token: Config.appId,
-      })
-    );
   };
 
   /**
    * Step 4 : leave
    */
-  const leave = () => {
-    if (streamChannel) {
-      streamChannel.leave(0);
+  const leave = async () => {
+    try {
+      if (!streamChannel) {
+        log.error('please create streamChannel first');
+        return;
+      }
+      await streamChannel.leave();
+      setJoinSuccess(false);
+    } catch (status: any) {
+      log.error('leave error', status);
     }
   };
 
@@ -117,61 +81,41 @@ export default function CreateStreamChannel() {
     setStreamChannel(undefined);
   }, [streamChannel]);
 
-  useEffect(() => {
-    client.addEventListener('onJoinResult', onJoinResult);
-    client.addEventListener('onLeaveResult', onLeaveResult);
+  /**
+   * Step 6: renew token
+   */
+  const renewToken = async () => {
+    try {
+      await client.renewToken(Config.token, {
+        channelName: cName,
+      });
+    } catch (status: any) {
+      log.error('renewToken error', status);
+    }
+  };
 
-    return () => {
-      client.removeEventListener('onJoinResult', onJoinResult);
-      client.removeEventListener('onLeaveResult', onLeaveResult);
-    };
-  }, [client, uid, onJoinResult, onLeaveResult]);
+  useRtmEvent(client, 'linkState', (linkState: LinkStateEvent) => {
+    log.info('linkState', linkState);
+    switch (linkState.currentState) {
+      case RTM_LINK_STATE.RTM_LINK_STATE_CONNECTED:
+        setLoginSuccess(true);
+        break;
+      case RTM_LINK_STATE.RTM_LINK_STATE_DISCONNECTED:
+        if (
+          linkState.reasonCode ===
+          RTM_LINK_STATE_CHANGE_REASON.RTM_LINK_STATE_CHANGE_REASON_LOGOUT
+        ) {
+          setLoginSuccess(false);
+          destroyStreamChannel();
+        }
+        setJoinSuccess(false);
+        break;
+    }
+  });
 
-  const onConnectionStateChanged = useCallback(
-    (
-      channelName: string,
-      state: RTM_CONNECTION_STATE,
-      reason: RTM_CONNECTION_CHANGE_REASON
-    ) => {
-      log.log(
-        'onConnectionStateChanged',
-        'channelName',
-        channelName,
-        'state',
-        state,
-        'reason',
-        reason
-      );
-      switch (state) {
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_CONNECTED:
-          setLoginSuccess(true);
-          break;
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_DISCONNECTED:
-          if (
-            reason ===
-            RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
-          ) {
-            setLoginSuccess(false);
-            destroyStreamChannel();
-          }
-          setJoinSuccess(false);
-          break;
-      }
-    },
-    [destroyStreamChannel]
-  );
-  useEffect(() => {
-    client?.addEventListener(
-      'onConnectionStateChanged',
-      onConnectionStateChanged
-    );
-    return () => {
-      client?.removeEventListener(
-        'onConnectionStateChanged',
-        onConnectionStateChanged
-      );
-    };
-  }, [client, uid, onConnectionStateChanged]);
+  useRtmEvent(client, 'tokenPrivilegeWillExpire', () => {
+    log.info('tokenPrivilegeWillExpire');
+  });
 
   return (
     <KeyboardAvoidingView
@@ -179,10 +123,7 @@ export default function CreateStreamChannel() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={AgoraStyle.fullSize}>
-        <BaseComponent
-          onChannelNameChanged={(v) => setCName(v)}
-          onUidChanged={(v) => setUid(v)}
-        />
+        <BaseComponent onChannelNameChanged={(v) => setCName(v)} />
         <AgoraButton
           disabled={!loginSuccess}
           title={`${
@@ -200,13 +141,9 @@ export default function CreateStreamChannel() {
           }}
         />
         <AgoraButton
-          disabled={!streamChannel}
-          title={`getChannelName`}
-          onPress={() => {
-            if (streamChannel) {
-              log.alert(streamChannel.getChannelName());
-            }
-          }}
+          disabled={!loginSuccess || !streamChannel}
+          title="renewToken"
+          onPress={renewToken}
         />
       </ScrollView>
     </KeyboardAvoidingView>

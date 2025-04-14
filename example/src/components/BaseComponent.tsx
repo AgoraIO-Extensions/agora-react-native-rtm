@@ -18,7 +18,6 @@ import { LogSink } from './LogSink';
 import { AgoraButton, AgoraStyle, AgoraTextInput, AgoraView } from './ui';
 
 interface Props {
-  onUidChanged?: (value: string) => void;
   onChannelNameChanged?: (value: string) => void;
 }
 
@@ -37,14 +36,10 @@ const Header = () => {
   );
 };
 
-export default function BaseComponent({
-  onUidChanged,
-  onChannelNameChanged,
-}: Props) {
+export default function BaseComponent({ onChannelNameChanged }: Props) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [initResult, setInitResult] = useState<number>(0);
   const [cName, setCName] = useState<string>(Config.channelName);
-  const [uid, setUid] = useState<string>(Config.uid);
   const navigation = useNavigation();
 
   const onLoginResult = useCallback((errorCode: RTM_ERROR_CODE) => {
@@ -80,88 +75,55 @@ export default function BaseComponent({
    */
   const client = useRtm();
 
-  /**
-   * Step 2: initialize rtm client and login
-   */
-  useEffect(() => {
-    if (!uid || uid.length === 0) {
-      return;
-    }
-    let result = client.initialize(
-      new RtmConfig({
-        userId: uid,
-        appId: Config.appId,
-        areaCode: Config.areaCode,
-        proxyConfig: new RtmProxyConfig({
-          proxyType: Config.proxyType,
-          server: Config.server,
-          port: Config.port,
-          account: Config.account,
-          password: Config.password,
-        }),
-        encryptionConfig: new RtmEncryptionConfig({
-          encryptionMode: Config.encryptionMode,
-          encryptionKey: Config.encryptionKey,
-          encryptionSalt: Config.encryptionSalt,
-        }),
-      })
-    );
-    setInitResult(result);
-    return () => {
-      setLoginSuccess(false);
-    };
-  }, [client, uid]);
+  // useEffect(() => {
+  //   client.addEventListener('onLoginResult', onLoginResult);
+  //   client.addEventListener('onLockEvent', onLockEvent);
+  //   client.addEventListener('onStorageEvent', onStorageEvent);
+  //   client.addEventListener('onPresenceEvent', onPresenceEvent);
 
-  useEffect(() => {
-    client.addEventListener('onLoginResult', onLoginResult);
-    client.addEventListener('onLockEvent', onLockEvent);
-    client.addEventListener('onStorageEvent', onStorageEvent);
-    client.addEventListener('onPresenceEvent', onPresenceEvent);
-
-    return () => {
-      client.removeEventListener('onLoginResult', onLoginResult);
-      client.removeEventListener('onLockEvent', onLockEvent);
-      client.removeEventListener('onStorageEvent', onStorageEvent);
-      client.removeEventListener('onPresenceEvent', onPresenceEvent);
-    };
-  }, [
-    client,
-    uid,
-    onLoginResult,
-    onLockEvent,
-    onStorageEvent,
-    onPresenceEvent,
-  ]);
+  //   return () => {
+  //     client.removeEventListener('onLoginResult', onLoginResult);
+  //     client.removeEventListener('onLockEvent', onLockEvent);
+  //     client.removeEventListener('onStorageEvent', onStorageEvent);
+  //     client.removeEventListener('onPresenceEvent', onPresenceEvent);
+  //   };
+  // }, [
+  //   client,
+  //   uid,
+  //   onLoginResult,
+  //   onLockEvent,
+  //   onStorageEvent,
+  //   onPresenceEvent,
+  // ]);
 
   /**
    * Step 3: login to rtm
    */
-  const login = () => {
-    client.login(Config.token);
+  const login = async () => {
+    try {
+      await client.login({ token: Config.token });
+      setLoginSuccess(true);
+    } catch (status: any) {
+      log.error('login error', status);
+    }
   };
 
   /**
    * Step 4 (Optional): logout
    */
-  const logout = () => {
-    client.logout();
-    setLoginSuccess(false);
+  const logout = async () => {
+    try {
+      await client.logout();
+      setLoginSuccess(false);
+    } catch (status: any) {
+      log.error('logout error', status);
+    }
   };
 
   return (
     <AgoraView style={AgoraStyle.fullWidth}>
-      <AgoraTextInput
-        onChangeText={(text) => {
-          setUid(text);
-          onUidChanged?.(text);
-        }}
-        placeholder="please input userId"
-        label="userId"
-        value={uid}
-        disabled={loginSuccess}
-      />
       <AgoraButton
-        disabled={!uid || initResult !== 0}
+        disabled={initResult !== 0}
         title={`${loginSuccess ? 'logout' : 'login'}`}
         onPress={() => {
           loginSuccess ? logout() : login();

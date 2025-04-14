@@ -14,20 +14,6 @@ parsers:
   - name: IrisApiIdParser
     package: '@agoraio-extensions/terra_shared_configs'
 
-  - name: OverrideNodeParser
-    package: '@agoraio-extensions/terra_shared_configs'
-    args:
-      customHeaderFileNamePrefix: 'Custom'
-      includeHeaderDirs:
-        - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include'
-      parseFiles:
-        include:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/*.h'
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/custom_headers/*.h'
-        exclude:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraRtmService.h'
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraService.h'
-
   - name: RemoveNodeParser
     package: '@agoraio-extensions/terra_shared_configs'
     args:

@@ -1,5 +1,4 @@
 import { callIrisApi } from '../../internal/IrisRtmEngine';
-import { TopicMessageOptions } from '../AgoraRtmBase';
 import {
   IStreamChannel,
   JoinChannelOptions,
@@ -83,44 +82,6 @@ export class IStreamChannelImpl implements IStreamChannel {
     options: JoinTopicOptions
   ): string {
     return 'StreamChannel_joinTopic_ff0ec3f';
-  }
-
-  publishTopicMessage(
-    topic: string,
-    message: string,
-    length: number,
-    option: TopicMessageOptions
-  ): any {
-    const apiType = this.getApiTypeFromPublishTopicMessage(
-      topic,
-      message,
-      length,
-      option
-    );
-    const jsonParams = {
-      topic: topic,
-      message: message,
-      length: length,
-      option: option,
-      toJSON: () => {
-        return {
-          topic: topic,
-          message: message,
-          length: length,
-          option: option,
-        };
-      },
-    };
-    return callIrisApi.call(this, apiType, jsonParams);
-  }
-
-  protected getApiTypeFromPublishTopicMessage(
-    topic: string,
-    message: string,
-    length: number,
-    option: TopicMessageOptions
-  ): string {
-    return 'StreamChannel_publishTopicMessage_a31773e';
   }
 
   leaveTopic(topic: string): any {
@@ -214,80 +175,5 @@ export class IStreamChannelImpl implements IStreamChannel {
 
   protected getApiTypeFromRelease(): string {
     return 'StreamChannel_release';
-  }
-
-  publishTextMessage(
-    topic: string,
-    message: string,
-    length: number,
-    option: TopicMessageOptions
-  ): any {
-    const apiType = this.getApiTypeFromPublishTextMessage(
-      topic,
-      message,
-      length,
-      option
-    );
-    const jsonParams = {
-      topic: topic,
-      message: message,
-      length: length,
-      option: option,
-      toJSON: () => {
-        return {
-          topic: topic,
-          message: message,
-          length: length,
-          option: option,
-        };
-      },
-    };
-    return callIrisApi.call(this, apiType, jsonParams);
-  }
-
-  protected getApiTypeFromPublishTextMessage(
-    topic: string,
-    message: string,
-    length: number,
-    option: TopicMessageOptions
-  ): string {
-    return 'StreamChannel_publishTopicMessage_a31773e';
-  }
-
-  publishBinaryMessage(
-    topic: string,
-    message: Uint8Array,
-    length: number,
-    option: TopicMessageOptions
-  ): any {
-    const apiType = this.getApiTypeFromPublishBinaryMessage(
-      topic,
-      message,
-      length,
-      option
-    );
-    const jsonParams = {
-      topic: topic,
-      message: message,
-      length: length,
-      option: option,
-      toJSON: () => {
-        return {
-          topic: topic,
-          length: length,
-          option: option,
-        };
-      },
-    };
-    return callIrisApi.call(this, apiType, jsonParams);
-  }
-
-  protected getApiTypeFromPublishBinaryMessage(
-    topic: string,
-    message: Uint8Array,
-    length: number,
-    option: TopicMessageOptions
-  ): string {
-    return 'StreamChannel_publishTopicMessage_a31773e';
   }
 }

@@ -40,6 +40,8 @@ export class RtmClientInternal extends RTMClient {
   public storage: RTMStorage = new RtmStorageInternal();
   public lock: RTMLock = new RtmLockInternal();
   public history: RTMHistory = new RtmHistoryInternal();
+  static _streamChannels: Map<string, StreamChannelInternal> = new Map();
+
   private event_name_map = {
     linkState: 'onLinkStateEvent',
     presence: 'onPresenceEvent',
@@ -69,7 +71,10 @@ export class RtmClientInternal extends RTMClient {
   }
 
   createStreamChannel(channelName: string): RTMStreamChannel {
-    return new StreamChannelInternal(channelName);
+    const streamChannel = new StreamChannelInternal(channelName);
+    RtmClientInternal._streamChannels.set(channelName, streamChannel);
+    this._rtmClientImpl.createStreamChannel(channelName);
+    return streamChannel;
   }
 
   release(): number {
@@ -158,6 +163,28 @@ export class RtmClientInternal extends RTMClient {
     token: string,
     options?: RenewTokenOptions
   ): Promise<RenewTokenResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'renewToken';
+    let callBack = 'onRenewTokenResult';
+
+    try {
+      if (!options) {
+        const status = this._rtmClientImpl.renewToken(token);
+        return wrapRtmResult(status, operation, callBack);
+      } else {
+        const channelName = options.channelName;
+        if (!channelName) {
+          throw handleError(new Error('Channel name is required'), operation);
+        }
+        if (!RtmClientInternal._streamChannels.has(channelName)) {
+          throw handleError(new Error('Stream channel not found'), operation);
+        }
+        const status = RtmClientInternal._streamChannels
+          .get(channelName)!
+          .renewToken(token);
+        return wrapRtmResult(status, operation, callBack);
+      }
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
 }

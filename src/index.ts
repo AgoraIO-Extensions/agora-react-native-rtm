@@ -11,6 +11,7 @@ export * from './legacy/IAgoraRtmStorage';
 export * from './legacy/IAgoraStreamChannel';
 export * from './hooks';
 export * from './api/RTMClient';
+export * from './api/RTMStreamChannel';
 
 export {
   isDebuggable,
