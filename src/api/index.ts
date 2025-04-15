@@ -94,8 +94,6 @@ export type {
   JoinOptions,
   joinTopicOptions,
   PublishTopicMessageOptions,
-  SubscribeTopicOptions,
-  UnsubscribeTopicOptions,
 } from './RTMStreamChannel';
 export type {
   AcquireLockResponse,
@@ -123,17 +121,13 @@ export type {
   LogoutResponse,
   PublishResponse,
   RTMClient,
-  RTMConfig,
   RTMOperationResponse,
   RenewTokenResponse,
-  SubscribeOptions,
   SubscribeResponse,
   UnsubscribeResponse,
   UpdateConfigResponse,
   PrivateConfig,
-  PublishOptions,
   RenewTokenOptions,
 } from './RTMClient';
-export type { RTMEvents } from './RTMEvents';
 export type { BaseResponse, ChannelType, ServiceType } from './common';
 export type { ConstantsType };

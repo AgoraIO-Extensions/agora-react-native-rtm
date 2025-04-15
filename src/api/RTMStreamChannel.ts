@@ -1,4 +1,9 @@
+import { TopicMessageOptions } from '../legacy/AgoraRtmBase';
+
+import { TopicOptions } from '../legacy/IAgoraStreamChannel';
+
 import { ErrorInfo } from './RTMClient';
+
 import { BaseResponse } from './common';
 
 export interface StreamChannelOperationResponse extends BaseResponse {
@@ -135,17 +140,6 @@ export interface PublishTopicMessageOptions {
   customType?: string;
 }
 
-export interface SubscribeTopicOptions {
-  users?: string[];
-  // todo: 2.1 api
-  // topic 的 presence 事件； sdk 侧判定是否将事件抛出吗 ??? ❓
-  // withPresence?: boolean;
-}
-
-export interface UnsubscribeTopicOptions {
-  users?: string[];
-}
-
 export abstract class RTMStreamChannel {
   abstract join(options?: JoinOptions): Promise<JoinChannelResponse>;
   abstract leave(): Promise<LeaveChannelResponse>;
@@ -156,16 +150,16 @@ export abstract class RTMStreamChannel {
   abstract publishTopicMessage(
     topicName: string,
     message: string | Uint8Array,
-    options?: PublishTopicMessageOptions
+    options?: TopicMessageOptions
   ): Promise<PublishTopicMessageResponse>;
   abstract leaveTopic(topicName: string): Promise<LeaveTopicResponse>;
   abstract subscribeTopic(
     topicName: string,
-    options?: SubscribeTopicOptions
+    options?: TopicOptions
   ): Promise<SubscribeTopicResponse>;
   abstract unsubscribeTopic(
     topicName: string,
-    options?: UnsubscribeTopicOptions
+    options?: TopicOptions
   ): Promise<UnsubscribeTopicResponse>;
   abstract getSubscribedUserList(
     topicName: string

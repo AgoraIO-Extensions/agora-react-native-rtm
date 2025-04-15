@@ -5,7 +5,7 @@ import base64 from 'base64-js';
 import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
-import { BaseResponse, ErrorInfo } from '../api';
+import { BaseResponse, ErrorInfo, RTMOperationResponse } from '../api';
 import { RTMClientEventMap, processRTMClientEventMap } from '../api/RTMEvents';
 import AgoraRtmNg from '../specs';
 
@@ -179,6 +179,7 @@ export const EVENT_PROCESSORS: EventProcessors = {
     ) => {
       switch (event) {
         case 'onMessageEvent':
+          console.log('onMessageEvent', data.event.message, buffers);
           data.event.message = buffers[0]?.toString();
       }
       return { event, data, buffers };
@@ -220,8 +221,8 @@ function handleEvent({ event, data, buffers }: any) {
     _event = _event.substring(0, _event.indexOf('_'));
   }
 
-  const _buffers: Uint8Array[] = (buffers as Buffer[])?.map((value) => {
-    return new Uint8Array(value);
+  const _buffers: Uint8Array[] = (buffers as string[])?.map((value) => {
+    return Buffer.from(value, 'base64') as unknown as Uint8Array;
   });
   if (processor.preprocess) {
     processor.preprocess(_event, _data, _buffers);
@@ -262,8 +263,8 @@ export function callIrisApi(this: any, funcName: string, params: any): any {
       };
     }
     if (
-      funcName === 'RtmClient_publish' ||
-      funcName === 'StreamChannel_publishTopicMessage'
+      funcName === 'RtmClient_publish_2d36e93' ||
+      funcName === 'StreamChannel_publishTopicMessage_a31773e'
     ) {
       if (typeof params.message === 'string') {
         let buffer = base64.fromByteArray(
@@ -336,8 +337,9 @@ export function emitEvent<EventType extends keyof T, T extends ProcessorType>(
 export async function wrapRtmResult(
   data: any,
   operation: string,
-  callbackName: string
-): Promise<BaseResponse | ErrorInfo> {
+  callbackName: string,
+  channelName?: string
+): Promise<ErrorInfo | RTMOperationResponse | BaseResponse> {
   if (data.result < 0) {
     throw {
       error: true,
@@ -353,9 +355,16 @@ export async function wrapRtmResult(
     );
     let nativeReturnCode = result.errorCode;
     if (nativeReturnCode === 0) {
-      return {
-        timestamp: 0,
-      };
+      if (channelName) {
+        return {
+          timestamp: 0,
+          channelName,
+        };
+      } else {
+        return {
+          timestamp: 0,
+        };
+      }
     } else {
       throw {
         error: true,

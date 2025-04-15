@@ -148,16 +148,45 @@ export class RtmClientInternal extends RTMClient {
     message: string | Uint8Array,
     options?: PublishOptions
   ): Promise<PublishResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'publish';
+    let callBack = 'onPublishResult';
+    try {
+      const status = this._rtmClientImpl.publish(
+        channelName,
+        message,
+        message.length,
+        options!
+      );
+      // @ts-ignore
+      return wrapRtmResult(status, operation, callBack, channelName);
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   subscribe(
     channelName: string,
     options?: SubscribeOptions
   ): Promise<SubscribeResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'subscribe';
+    let callBack = 'onSubscribeResult';
+    try {
+      const status = this._rtmClientImpl.subscribe(channelName, options!);
+      // @ts-ignore
+      return wrapRtmResult(status, operation, callBack, channelName);
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   unsubscribe(channelName: string): Promise<UnsubscribeResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'unsubscribe';
+    let callBack = 'onUnsubscribeResult';
+    try {
+      const status = this._rtmClientImpl.unsubscribe(channelName);
+      // @ts-ignore
+      return wrapRtmResult(status, operation, callBack, channelName);
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   renewToken(
     token: string,

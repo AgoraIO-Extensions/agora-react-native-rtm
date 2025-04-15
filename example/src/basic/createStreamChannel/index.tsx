@@ -118,8 +118,8 @@ export default function CreateStreamChannel() {
         <AgoraButton
           disabled={!loginSuccess || !streamChannel}
           title={`${joinSuccess ? 'leaveChannel' : 'joinChannel'}`}
-          onPress={() => {
-            joinSuccess ? leave() : join();
+          onPress={async () => {
+            joinSuccess ? await leave() : await join();
           }}
         />
         <AgoraButton

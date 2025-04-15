@@ -6,12 +6,11 @@ import {
   LeaveTopicResponse,
   PublishTopicMessageOptions,
   PublishTopicMessageResponse,
-  SubscribeTopicOptions,
   SubscribeTopicResponse,
-  UnsubscribeTopicOptions,
   UnsubscribeTopicResponse,
   joinTopicOptions,
 } from '../api/RTMStreamChannel';
+import { TopicOptions } from '../legacy/IAgoraStreamChannel';
 import { JoinChannelOptions } from '../legacy/IAgoraStreamChannel';
 import { IStreamChannelImpl } from '../legacy/impl/IAgoraStreamChannelImpl';
 
@@ -56,35 +55,95 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     topicName: string,
     options?: joinTopicOptions
   ): Promise<JoinTopicResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'joinTopic';
+    let callBack = 'onJoinTopicResult';
+    try {
+      const status = super.joinTopic(topicName, options!);
+      return wrapRtmResult(
+        status,
+        operation,
+        callBack
+      ) as Promise<JoinTopicResponse>;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
+
   publishTopicMessage(
     topicName: string,
     message: string | Uint8Array,
     options?: PublishTopicMessageOptions
   ): Promise<PublishTopicMessageResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'publishTopicMessage';
+    let callBack = 'onPublishTopicMessageResult';
+    try {
+      const status = super.publishTopicMessage(topicName, message, options!);
+      return wrapRtmResult(
+        status,
+        operation,
+        callBack
+      ) as Promise<PublishTopicMessageResponse>;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   leaveTopic(topicName: string): Promise<LeaveTopicResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'leaveTopic';
+    let callBack = 'onLeaveTopicResult';
+    try {
+      const status = super.leaveTopic(topicName);
+      return wrapRtmResult(
+        status,
+        operation,
+        callBack
+      ) as Promise<LeaveTopicResponse>;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   subscribeTopic(
     topicName: string,
-    options?: SubscribeTopicOptions
+    options?: TopicOptions
   ): Promise<SubscribeTopicResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'subscribeTopic';
+    let callBack = 'onSubscribeTopicResult';
+    try {
+      if (!options) {
+        options = {};
+      }
+      const status = super.subscribeTopic(topicName, options!);
+      return wrapRtmResult(
+        status,
+        operation,
+        callBack
+      ) as Promise<SubscribeTopicResponse>;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   unsubscribeTopic(
     topicName: string,
-    options?: UnsubscribeTopicOptions
+    options?: TopicOptions
   ): Promise<UnsubscribeTopicResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'unsubscribeTopic';
+    let callBack = 'onUnsubscribeTopicResult';
+    try {
+      const status = super.unsubscribeTopic(topicName, options!);
+      return wrapRtmResult(
+        status,
+        operation,
+        callBack
+      ) as Promise<UnsubscribeTopicResponse>;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   getSubscribedUserList(
     topicName: string
   ): Promise<GetSubscribedUserListResponse> {
     throw new Error('Method not implemented.');
   }
+
   release(): number {
     const ret = super.release();
     return ret;

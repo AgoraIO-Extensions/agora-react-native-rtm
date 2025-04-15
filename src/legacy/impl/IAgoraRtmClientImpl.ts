@@ -526,7 +526,7 @@ export class IRtmClientImpl implements IRtmClient {
 
   publish(
     channelName: string,
-    message: string,
+    message: any,
     length: number,
     option: PublishOptions
   ): any {
@@ -555,7 +555,7 @@ export class IRtmClientImpl implements IRtmClient {
 
   protected getApiTypeFromPublish(
     channelName: string,
-    message: string,
+    message: any,
     length: number,
     option: PublishOptions
   ): string {

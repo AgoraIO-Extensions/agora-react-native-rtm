@@ -1157,7 +1157,7 @@ export abstract class IRtmClient {
    */
   abstract publish(
     channelName: string,
-    message: string,
+    message: any,
     length: number,
     option: PublishOptions
   ): number;

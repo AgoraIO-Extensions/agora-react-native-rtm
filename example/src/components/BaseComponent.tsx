@@ -1,19 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import {
-  LinkStateEvent,
-  LockEvent,
-  PresenceEvent,
-  RTM_ERROR_CODE,
-  RTM_LINK_STATE,
-  RTM_LINK_STATE_CHANGE_REASON,
-  RtmConfig,
-  RtmEncryptionConfig,
-  RtmProxyConfig,
-  StorageEvent,
-  useRtm,
-  useRtmEvent,
-} from 'agora-react-native-rtm';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useRtm } from 'agora-react-native-rtm';
+import React, { useEffect, useState } from 'react';
 
 import Config from '../config/agora.config';
 import * as log from '../utils/log';
@@ -48,18 +35,6 @@ export default function BaseComponent({
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
   const navigation = useNavigation();
-
-  const onStorageEvent = useCallback((event: StorageEvent) => {
-    log.log('onStorageEvent', 'event', event);
-  }, []);
-
-  const onLockEvent = useCallback((event: LockEvent) => {
-    log.log('onLockEvent', 'event', event);
-  }, []);
-
-  const onPresenceEvent = useCallback((event: PresenceEvent) => {
-    log.log('onPresenceEvent', 'event', event);
-  }, []);
 
   useEffect(() => {
     const headerRight = () => <Header />;
