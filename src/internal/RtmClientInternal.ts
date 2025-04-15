@@ -126,7 +126,8 @@ export class RtmClientInternal extends RTMClient {
     let callBack = 'onLoginResult';
     try {
       const status = this._rtmClientImpl.login(token);
-      return wrapRtmResult(status, operation, callBack);
+      let result = await wrapRtmResult(status, operation, callBack);
+      return result;
     } catch (error) {
       throw handleError(error, operation);
     }
@@ -137,13 +138,14 @@ export class RtmClientInternal extends RTMClient {
     let callBack = 'onLogoutResult';
     try {
       const status = this._rtmClientImpl.logout();
-      return wrapRtmResult(status, operation, callBack);
+      let result = await wrapRtmResult(status, operation, callBack);
+      return result;
     } catch (error) {
       throw handleError(error, operation);
     }
   }
 
-  publish(
+  async publish(
     channelName: string,
     message: string | Uint8Array,
     options?: PublishOptions
@@ -157,13 +159,16 @@ export class RtmClientInternal extends RTMClient {
         message.length,
         options!
       );
-      // @ts-ignore
-      return wrapRtmResult(status, operation, callBack, channelName);
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        channelName,
+      };
     } catch (error) {
       throw handleError(error, operation);
     }
   }
-  subscribe(
+  async subscribe(
     channelName: string,
     options?: SubscribeOptions
   ): Promise<SubscribeResponse> {
@@ -171,24 +176,30 @@ export class RtmClientInternal extends RTMClient {
     let callBack = 'onSubscribeResult';
     try {
       const status = this._rtmClientImpl.subscribe(channelName, options!);
-      // @ts-ignore
-      return wrapRtmResult(status, operation, callBack, channelName);
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        channelName,
+      };
     } catch (error) {
       throw handleError(error, operation);
     }
   }
-  unsubscribe(channelName: string): Promise<UnsubscribeResponse> {
+  async unsubscribe(channelName: string): Promise<UnsubscribeResponse> {
     let operation = 'unsubscribe';
     let callBack = 'onUnsubscribeResult';
     try {
       const status = this._rtmClientImpl.unsubscribe(channelName);
-      // @ts-ignore
-      return wrapRtmResult(status, operation, callBack, channelName);
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        channelName,
+      };
     } catch (error) {
       throw handleError(error, operation);
     }
   }
-  renewToken(
+  async renewToken(
     token: string,
     options?: RenewTokenOptions
   ): Promise<RenewTokenResponse> {
@@ -198,7 +209,8 @@ export class RtmClientInternal extends RTMClient {
     try {
       if (!options) {
         const status = this._rtmClientImpl.renewToken(token);
-        return wrapRtmResult(status, operation, callBack);
+        let result = await wrapRtmResult(status, operation, callBack);
+        return result;
       } else {
         const channelName = options.channelName;
         if (!channelName) {
@@ -210,7 +222,8 @@ export class RtmClientInternal extends RTMClient {
         const status = RtmClientInternal._streamChannels
           .get(channelName)!
           .renewToken(token);
-        return wrapRtmResult(status, operation, callBack);
+        let result = await wrapRtmResult(status, operation, callBack);
+        return result;
       }
     } catch (error) {
       throw handleError(error, operation);

@@ -96,6 +96,14 @@ export default function CreateStreamChannel() {
     log.info('tokenPrivilegeWillExpire');
   });
 
+  const handleLoginStatus = useCallback((status: boolean) => {
+    setLoginSuccess(status);
+    if (!status) {
+      setStreamChannel(undefined);
+      setJoinSuccess(false);
+    }
+  }, []);
+
   return (
     <KeyboardAvoidingView
       style={AgoraStyle.fullSize}
@@ -104,7 +112,7 @@ export default function CreateStreamChannel() {
       <ScrollView style={AgoraStyle.fullSize}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
-          onLoginStatusChanged={(status) => setLoginSuccess(status)}
+          onLoginStatusChanged={handleLoginStatus}
         />
         <AgoraButton
           disabled={!loginSuccess}

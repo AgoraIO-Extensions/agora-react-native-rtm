@@ -153,12 +153,19 @@ export default function PublishMessage() {
     log.info('storage', storage);
   });
 
+  const handleLoginStatus = useCallback((status: boolean) => {
+    setLoginSuccess(status);
+    if (!status) {
+      setSubscribeSuccess(false);
+    }
+  }, []);
+
   return (
     <>
       <AgoraView style={AgoraStyle.fullWidth}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
-          onLoginStatusChanged={(status) => setLoginSuccess(status)}
+          onLoginStatusChanged={handleLoginStatus}
         />
         <AgoraDivider />
         <AgoraDropdown

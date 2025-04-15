@@ -51,7 +51,7 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     }
   }
 
-  joinTopic(
+  async joinTopic(
     topicName: string,
     options?: joinTopicOptions
   ): Promise<JoinTopicResponse> {
@@ -59,17 +59,17 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     let callBack = 'onJoinTopicResult';
     try {
       const status = super.joinTopic(topicName, options!);
-      return wrapRtmResult(
-        status,
-        operation,
-        callBack
-      ) as Promise<JoinTopicResponse>;
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        topicName,
+      };
     } catch (error) {
       throw handleError(error, operation);
     }
   }
 
-  publishTopicMessage(
+  async publishTopicMessage(
     topicName: string,
     message: string | Uint8Array,
     options?: PublishTopicMessageOptions
@@ -78,30 +78,30 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     let callBack = 'onPublishTopicMessageResult';
     try {
       const status = super.publishTopicMessage(topicName, message, options!);
-      return wrapRtmResult(
-        status,
-        operation,
-        callBack
-      ) as Promise<PublishTopicMessageResponse>;
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        topicName,
+      };
     } catch (error) {
       throw handleError(error, operation);
     }
   }
-  leaveTopic(topicName: string): Promise<LeaveTopicResponse> {
+  async leaveTopic(topicName: string): Promise<LeaveTopicResponse> {
     let operation = 'leaveTopic';
     let callBack = 'onLeaveTopicResult';
     try {
       const status = super.leaveTopic(topicName);
-      return wrapRtmResult(
-        status,
-        operation,
-        callBack
-      ) as Promise<LeaveTopicResponse>;
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        topicName,
+      };
     } catch (error) {
       throw handleError(error, operation);
     }
   }
-  subscribeTopic(
+  async subscribeTopic(
     topicName: string,
     options?: TopicOptions
   ): Promise<SubscribeTopicResponse> {
@@ -112,16 +112,18 @@ export class StreamChannelInternal extends IStreamChannelImpl {
         options = {};
       }
       const status = super.subscribeTopic(topicName, options!);
-      return wrapRtmResult(
-        status,
-        operation,
-        callBack
-      ) as Promise<SubscribeTopicResponse>;
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        succeedUsers: result.callBackResult?.succeedUsers,
+        failedUsers: result.callBackResult?.failedUsers,
+        timestamp: result.timestamp,
+        topicName,
+      };
     } catch (error) {
       throw handleError(error, operation);
     }
   }
-  unsubscribeTopic(
+  async unsubscribeTopic(
     topicName: string,
     options?: TopicOptions
   ): Promise<UnsubscribeTopicResponse> {
@@ -129,21 +131,29 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     let callBack = 'onUnsubscribeTopicResult';
     try {
       const status = super.unsubscribeTopic(topicName, options!);
-      return wrapRtmResult(
-        status,
-        operation,
-        callBack
-      ) as Promise<UnsubscribeTopicResponse>;
+      let result = await wrapRtmResult(status, operation, callBack);
+      return result;
     } catch (error) {
       throw handleError(error, operation);
     }
   }
-  getSubscribedUserList(
+  async getSubscribedUserList(
     topicName: string
   ): Promise<GetSubscribedUserListResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'getSubscribedUserList';
+    let callBack = 'onGetSubscribedUserListResult';
+    try {
+      const status = super.getSubscribedUserList(topicName, 0);
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        subscribed: result.callBackResult?.users,
+        topicName,
+        timestamp: result.timestamp,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-
   release(): number {
     const ret = super.release();
     return ret;

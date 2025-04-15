@@ -1,6 +1,4 @@
-import { ChannelType } from '../api';
 import {
-  GetOnlineUsersOptions,
   GetOnlineUsersResponse,
   GetStateResponse,
   GetUserChannelsResponse,
@@ -8,55 +6,161 @@ import {
   RemoveStateOptions,
   RemoveStateResponse,
   SetStateResponse,
-  StateDetail,
   WhereNowResponse,
-  WhoNowOptions,
   WhoNowResponse,
 } from '../api/RTMPresence';
+import {
+  PresenceOptions,
+  RTM_CHANNEL_TYPE,
+  StateItem,
+} from '../legacy/AgoraRtmBase';
+import { IRtmPresenceImpl } from '../legacy/impl/IAgoraRtmPresenceImpl';
+
+import { handleError, wrapRtmResult } from './IrisRtmEngine';
 
 export class RtmPresenceInternal extends RTMPresence {
-  whoNow(
+  private _rtmPresenceImpl: IRtmPresenceImpl = new IRtmPresenceImpl();
+
+  async whoNow(
     channelName: string,
-    channelType: ChannelType,
-    options?: WhoNowOptions
+    channelType: RTM_CHANNEL_TYPE,
+    options?: PresenceOptions
   ): Promise<WhoNowResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'whoNow';
+    let callBack = 'onWhoNowResult';
+    try {
+      const status = this._rtmPresenceImpl.whoNow(
+        channelName,
+        channelType,
+        options!
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        totalOccupancy: result.callBackResult?.count,
+        occupants: result.callBackResult?.userStateList,
+        nextPage: result.callBackResult?.nextPage,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  getOnlineUsers(
+  async getOnlineUsers(
     channelName: string,
-    channelType: ChannelType,
-    options?: GetOnlineUsersOptions
+    channelType: RTM_CHANNEL_TYPE,
+    options?: PresenceOptions
   ): Promise<GetOnlineUsersResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'getOnlineUsers';
+    let callBack = 'onGetOnlineUsersResult';
+    try {
+      const status = this._rtmPresenceImpl.getOnlineUsers(
+        channelName,
+        channelType,
+        options!
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        totalOccupancy: result.callBackResult?.count,
+        occupants: result.callBackResult?.userStateList,
+        nextPage: result.callBackResult?.nextPage,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  whereNow(userId: string): Promise<WhereNowResponse> {
-    throw new Error('Method not implemented.');
+  async whereNow(userId: string): Promise<WhereNowResponse> {
+    let operation = 'whereNow';
+    let callBack = 'onWhereNowResult';
+    try {
+      const status = this._rtmPresenceImpl.whereNow(userId);
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channels: result.callBackResult?.channels,
+        totalChannel: result.callBackResult?.count,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  getUserChannels(userId: string): Promise<GetUserChannelsResponse> {
-    throw new Error('Method not implemented.');
+  async getUserChannels(userId: string): Promise<GetUserChannelsResponse> {
+    let operation = 'getUserChannels';
+    let callBack = 'onGetUserChannelsResult';
+    try {
+      const status = this._rtmPresenceImpl.getUserChannels(userId);
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channels: result.callBackResult?.channels,
+        totalChannel: result.callBackResult?.count,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  setState(
+  async setState(
     channelName: string,
-    channelType: ChannelType,
-    state: StateDetail
+    channelType: RTM_CHANNEL_TYPE,
+    state: StateItem
   ): Promise<SetStateResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'setState';
+    let callBack = 'onPresenceSetStateResult';
+    try {
+      const status = this._rtmPresenceImpl.setState(
+        channelName,
+        channelType,
+        [state],
+        1
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return result;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  getState(
+  async getState(
     userId: string,
     channelName: string,
-    channelType: ChannelType
+    channelType: RTM_CHANNEL_TYPE
   ): Promise<GetStateResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'getState';
+    let callBack = 'onPresenceGetStateResult';
+    try {
+      const status = this._rtmPresenceImpl.getState(
+        channelName,
+        channelType,
+        userId
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        statesCount: result.callBackResult?.state.statesCount,
+        states: result.callBackResult?.state.states,
+        userId: result.callBackResult?.state.userId,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  removeState(
+  async removeState(
     channelName: string,
-    channelType: ChannelType,
+    channelType: RTM_CHANNEL_TYPE,
     options?: RemoveStateOptions
   ): Promise<RemoveStateResponse> {
-    throw new Error('Method not implemented.');
-  }
-  constructor() {
-    super();
+    let operation = 'removeState';
+    let callBack = 'onPresenceRemoveStateResult';
+    try {
+      const status = this._rtmPresenceImpl.removeState(
+        channelName,
+        channelType,
+        options?.states ?? [],
+        options?.states?.length ?? 0
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return result;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
 }

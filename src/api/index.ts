@@ -40,18 +40,13 @@ declare const AgoraRTM: IAgoraRTM;
 export default AgoraRTM;
 
 export type {
-  ChannelDetail,
   GetStateResponse,
   GetUserChannelsResponse,
-  OccupancyDetail,
   RTMPresence,
   RemoveStateResponse,
   SetStateResponse,
-  StateDetail,
   WhereNowResponse,
-  WhoNowOptions,
   WhoNowResponse,
-  GetOnlineUsersOptions,
   GetOnlineUsersResponse,
   RemoveStateOptions,
 } from './RTMPresence';
@@ -86,10 +81,8 @@ export type {
   LeaveTopicResponse,
   PublishTopicMessageResponse,
   RTMStreamChannel,
-  RTMStreamChannelStatusCode,
   StreamChannelOperationResponse,
   SubscribeTopicResponse,
-  SubscribedFailedReason,
   UnsubscribeTopicResponse,
   JoinOptions,
   joinTopicOptions,
@@ -126,7 +119,6 @@ export type {
   SubscribeResponse,
   UnsubscribeResponse,
   UpdateConfigResponse,
-  PrivateConfig,
   RenewTokenOptions,
 } from './RTMClient';
 export type { BaseResponse, ChannelType, ServiceType } from './common';

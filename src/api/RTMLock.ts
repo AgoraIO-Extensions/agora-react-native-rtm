@@ -60,20 +60,20 @@ export interface GetLockResponse extends BaseResponse {
   channelType: ChannelType;
 }
 
-export interface LockOperationResponse extends BaseResponse {
+export type LockOperationResponse = BaseResponse & {
   channelName: string;
   channelType: ChannelType;
   lockName: string;
-}
-export interface SetLockResponse extends LockOperationResponse {}
+};
+export type SetLockResponse = LockOperationResponse;
 
-export interface RemoveLockResponse extends LockOperationResponse {}
+export type RemoveLockResponse = LockOperationResponse;
 
-export interface RevokeLockResponse extends LockOperationResponse {}
+export type RevokeLockResponse = LockOperationResponse;
 
-export interface ReleaseLockResponse extends LockOperationResponse {}
+export type ReleaseLockResponse = LockOperationResponse;
 
-export interface AcquireLockResponse extends LockOperationResponse {}
+export type AcquireLockResponse = LockOperationResponse;
 
 export interface SetLockOptions {
   ttl?: number;

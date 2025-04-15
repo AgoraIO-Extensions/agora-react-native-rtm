@@ -97,7 +97,8 @@ export default function PublishTopicMessage() {
    */
   const subscribe = async () => {
     try {
-      await streamChannel?.subscribeTopic(topicName);
+      let result = await streamChannel?.subscribeTopic(topicName);
+      console.log('subscribe result', result);
       setSubscribeSuccess(true);
     } catch (status: any) {
       log.error('subscribe error', status);
@@ -107,9 +108,14 @@ export default function PublishTopicMessage() {
   /**
    * Step 4 : unsubscribe topic
    */
-  const unsubscribe = () => {
-    streamChannel?.unsubscribeTopic(topicName);
-    setSubscribeSuccess(false);
+  const unsubscribe = async () => {
+    try {
+      let result = await streamChannel?.unsubscribeTopic(topicName);
+      console.log('unsubscribe result', result);
+      setSubscribeSuccess(false);
+    } catch (status: any) {
+      log.error('unsubscribe error', status);
+    }
   };
 
   /**
@@ -200,6 +206,18 @@ export default function PublishTopicMessage() {
     setStreamChannel(undefined);
   }, [streamChannel]);
 
+  /**
+   * Step 6 : getSubscribedUserList
+   */
+  const getSubscribedUserList = async () => {
+    try {
+      const result = await streamChannel?.getSubscribedUserList(topicName);
+      log.info('getSubscribedUserList', result);
+    } catch (status: any) {
+      log.error('getSubscribedUserList error', status);
+    }
+  };
+
   useRtmEvent(client, 'message', (message: MessageEvent) => {
     log.info('message', message, 333);
     setMessages((prevState) =>
@@ -276,6 +294,13 @@ export default function PublishTopicMessage() {
             title={`${subscribeSuccess ? 'unsubscribe' : 'subscribe'} topic`}
             onPress={async () => {
               subscribeSuccess ? await unsubscribe() : await subscribe();
+            }}
+          />
+          <AgoraButton
+            disabled={!loginSuccess || !joinSuccess}
+            title={`getSubscribedUserList`}
+            onPress={async () => {
+              await getSubscribedUserList();
             }}
           />
           <AgoraButton

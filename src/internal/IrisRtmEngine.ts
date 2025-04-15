@@ -5,7 +5,12 @@ import base64 from 'base64-js';
 import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
-import { BaseResponse, ErrorInfo, RTMOperationResponse } from '../api';
+import {
+  BaseResponse,
+  ErrorInfo,
+  LockOperationResponse,
+  RTMOperationResponse,
+} from '../api';
 import { RTMClientEventMap, processRTMClientEventMap } from '../api/RTMEvents';
 import AgoraRtmNg from '../specs';
 
@@ -331,6 +336,10 @@ export function emitEvent<EventType extends keyof T, T extends ProcessorType>(
   DeviceEventEmitter.emit(eventType as string, eventProcessor, data);
 }
 
+type WrapRtmResultResult = BaseResponse & {
+  callBackResult?: any;
+};
+
 /**
  * @internal
  */
@@ -338,8 +347,8 @@ export async function wrapRtmResult(
   data: any,
   operation: string,
   callbackName: string,
-  channelName?: string
-): Promise<ErrorInfo | RTMOperationResponse | BaseResponse> {
+  withCallbackResult: boolean = false
+): Promise<WrapRtmResultResult> {
   if (data.result < 0) {
     throw {
       error: true,
@@ -355,16 +364,10 @@ export async function wrapRtmResult(
     );
     let nativeReturnCode = result.errorCode;
     if (nativeReturnCode === 0) {
-      if (channelName) {
-        return {
-          timestamp: 0,
-          channelName,
-        };
-      } else {
-        return {
-          timestamp: 0,
-        };
-      }
+      return {
+        timestamp: 0,
+        ...(withCallbackResult ? { callBackResult: result } : {}),
+      };
     } else {
       throw {
         error: true,
