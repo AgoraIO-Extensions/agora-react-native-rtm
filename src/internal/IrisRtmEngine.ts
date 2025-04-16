@@ -112,7 +112,7 @@ export class RequestQueue {
     if (errorCode === 0) {
       request.resolve(...args);
     } else {
-      request.reject(new Error(`Request failed with error code: ${errorCode}`));
+      request.reject(...args);
     }
 
     return true;
@@ -362,31 +362,21 @@ export async function wrapRtmResult(
       10000,
       data.requestId
     );
-    let nativeReturnCode = result.errorCode;
-    if (nativeReturnCode === 0) {
-      return {
-        timestamp: 0,
-        ...(withCallbackResult ? { callBackResult: result } : {}),
-      };
-    } else {
-      throw {
-        error: true,
-        reason: data.reason,
-        operation,
-        errorCode: nativeReturnCode,
-      };
-    }
+    return {
+      timestamp: 0,
+      ...(withCallbackResult ? { callBackResult: result } : {}),
+    };
   }
 }
 
 /**
  * @internal
  */
-export function handleError(error: any, operation: string): ErrorInfo {
+export function handleError(data: any, operation: string): ErrorInfo {
   return {
     error: true,
-    reason: JSON.stringify(error),
+    reason: data,
     operation: operation,
-    errorCode: (error as any)?.code,
+    errorCode: data?.errorCode,
   };
 }

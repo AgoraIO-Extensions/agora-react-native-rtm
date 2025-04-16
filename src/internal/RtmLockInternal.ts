@@ -1,4 +1,3 @@
-import { ChannelType } from '../api';
 import {
   AcquireLockOptions,
   AcquireLockResponse,
@@ -10,67 +9,160 @@ import {
   SetLockOptions,
   SetLockResponse,
 } from '../api/RTMLock';
+import { RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
+import { IRtmLockImpl } from '../legacy/impl/IAgoraRtmLockImpl';
 
 import { handleError } from './IrisRtmEngine';
 import { wrapRtmResult } from './IrisRtmEngine';
 
 export class RtmLockInternal extends RTMLock {
-  setLock(
+  private _rtmLockImpl: IRtmLockImpl = new IRtmLockImpl();
+
+  async setLock(
     channelName: string,
-    channelType: ChannelType,
+    channelType: RTM_CHANNEL_TYPE,
     lockName: string,
     options?: SetLockOptions
   ): Promise<SetLockResponse> {
-    throw new Error('Method not implemented.');
-    // let operation = 'setLock';
-    // let callBack = 'onSetLockResult';
-    // try {
-    //   const status = super.setLock(
-    //     channelName,
-    //     channelType,
-    //     lockName,
-    //     options!
-    //   );
-    //   return wrapRtmResult(status, operation, callBack);
-    // } catch (error) {
-    //   throw handleError(error, operation);
-    // }
+    let operation = 'setLock';
+    let callBack = 'onSetLockResult';
+    try {
+      const status = this._rtmLockImpl.setLock(
+        channelName,
+        channelType,
+        lockName,
+        options?.ttl ?? 0
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channelName: result.callBackResult?.channelName,
+        channelType: result.callBackResult?.channelType,
+        lockName: result.callBackResult?.lockName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  removeLock(
+  async removeLock(
     channelName: string,
-    channelType: ChannelType,
+    channelType: RTM_CHANNEL_TYPE,
     lockName: string
   ): Promise<RemoveLockResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'removeLock';
+    let callBack = 'onRemoveLockResult';
+    try {
+      const status = this._rtmLockImpl.removeLock(
+        channelName,
+        channelType,
+        lockName
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channelName: result.callBackResult?.channelName,
+        channelType: result.callBackResult?.channelType,
+        lockName: result.callBackResult?.lockName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  acquireLock(
+  async acquireLock(
     channelName: string,
-    channelType: ChannelType,
+    channelType: RTM_CHANNEL_TYPE,
     lockName: string,
     options?: AcquireLockOptions
   ): Promise<AcquireLockResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'acquireLock';
+    let callBack = 'onAcquireLockResult';
+    try {
+      const status = this._rtmLockImpl.acquireLock(
+        channelName,
+        channelType,
+        lockName,
+        options?.retry ?? false
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channelName: result.callBackResult?.channelName,
+        channelType: result.callBackResult?.channelType,
+        lockName: result.callBackResult?.lockName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  releaseLock(
+  async releaseLock(
     channelName: string,
-    channelType: ChannelType,
+    channelType: RTM_CHANNEL_TYPE,
     lockName: string
   ): Promise<ReleaseLockResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'releaseLock';
+    let callBack = 'onReleaseLockResult';
+    try {
+      const status = this._rtmLockImpl.releaseLock(
+        channelName,
+        channelType,
+        lockName
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channelName: result.callBackResult?.channelName,
+        channelType: result.callBackResult?.channelType,
+        lockName: result.callBackResult?.lockName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  revokeLock(
+  async revokeLock(
     channelName: string,
-    channelType: ChannelType,
+    channelType: RTM_CHANNEL_TYPE,
     lockName: string,
     owner: string
   ): Promise<RevokeLockResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'revokeLock';
+    let callBack = 'onRevokeLockResult';
+    try {
+      const status = this._rtmLockImpl.revokeLock(
+        channelName,
+        channelType,
+        lockName,
+        owner
+      );
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channelName: result.callBackResult?.channelName,
+        channelType: result.callBackResult?.channelType,
+        lockName: result.callBackResult?.lockName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
-  getLock(
+  async getLock(
     channelName: string,
-    channelType: ChannelType
+    channelType: RTM_CHANNEL_TYPE
   ): Promise<GetLockResponse> {
-    throw new Error('Method not implemented.');
+    let operation = 'getLock';
+    let callBack = 'onGetLocksResult';
+    try {
+      const status = this._rtmLockImpl.getLocks(channelName, channelType);
+      let result = await wrapRtmResult(status, operation, callBack, true);
+      return {
+        timestamp: result.timestamp,
+        channelName: result.callBackResult?.channelName,
+        channelType: result.callBackResult?.channelType,
+        totalLocks: result.callBackResult?.count,
+        lockDetails: result.callBackResult?.lockDetailList,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
   constructor() {
     super();
