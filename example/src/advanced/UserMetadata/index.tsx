@@ -4,7 +4,13 @@ import React, { useCallback, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
-import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
+import {
+  AgoraButton,
+  AgoraDivider,
+  AgoraStyle,
+  AgoraSwitch,
+  AgoraTextInput,
+} from '../../components/ui';
 import Config from '../../config/agora.config';
 import * as log from '../../utils/log';
 
@@ -20,6 +26,8 @@ export default function UserMetadata() {
   const [metadataValue, setMetadataValue] = useState<string>('I am a student');
   const [majorRevision, setMajorRevision] = useState<number>(-1);
   const [revision, setRevision] = useState<number>(-1);
+  const [addTimeStamp, setAddTimeStamp] = useState<boolean>(true);
+  const [addUserId, setAddUserId] = useState<boolean>(true);
 
   const metadata = useRef<Metadata>(
     new Metadata({
@@ -80,8 +88,8 @@ export default function UserMetadata() {
       await client.storage.setUserMetadata(metadata.current, {
         userId: uid,
         majorRevision: majorRevision,
-        addUserId: true,
-        addTimeStamp: false,
+        addUserId: addUserId,
+        addTimeStamp: addTimeStamp,
       });
     } catch (status: any) {
       log.error('setUserMetadata error', status);
@@ -119,8 +127,8 @@ export default function UserMetadata() {
       await client.storage.updateUserMetadata(metadata.current, {
         userId: uid,
         majorRevision: majorRevision,
-        addUserId: true,
-        addTimeStamp: false,
+        addUserId: addUserId,
+        addTimeStamp: addTimeStamp,
       });
     } catch (status: any) {
       log.error('updateUserMetadata error', status);
@@ -145,8 +153,8 @@ export default function UserMetadata() {
         data: metadata.current,
         userId: uid,
         majorRevision: majorRevision,
-        addUserId: true,
-        addTimeStamp: false,
+        addUserId: addUserId,
+        addTimeStamp: addTimeStamp,
       });
     } catch (status: any) {
       log.error('removeUserMetadata error', status);
@@ -229,6 +237,21 @@ export default function UserMetadata() {
           }}
           label="revision"
           value={revision.toString()}
+        />
+        <AgoraDivider />
+        <AgoraSwitch
+          title="addTimeStamp"
+          value={addTimeStamp}
+          onValueChange={(v) => {
+            setAddTimeStamp(v);
+          }}
+        />
+        <AgoraSwitch
+          title="addUserId"
+          value={addUserId}
+          onValueChange={(v) => {
+            setAddUserId(v);
+          }}
         />
         <AgoraButton
           title={`setUserMetadata`}

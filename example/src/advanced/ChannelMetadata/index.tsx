@@ -11,6 +11,7 @@ import { ScrollView } from 'react-native';
 import BaseComponent from '../../components/BaseComponent';
 import {
   AgoraButton,
+  AgoraDivider,
   AgoraStyle,
   AgoraSwitch,
   AgoraTextInput,
@@ -29,6 +30,8 @@ export default function ChannelMetadata() {
   const [majorRevision, setMajorRevision] = useState<number>(-1);
   const [revision, setRevision] = useState<number>(-1);
   const [lockName, setLockName] = useState<string>('');
+  const [addTimeStamp, setAddTimeStamp] = useState<boolean>(true);
+  const [addUserId, setAddUserId] = useState<boolean>(true);
 
   const metadata = useRef<Metadata>(
     new Metadata({
@@ -93,8 +96,8 @@ export default function ChannelMetadata() {
         {
           majorRevision: majorRevision,
           lockName: lockName,
-          addTimeStamp: false,
-          addUserId: true,
+          addTimeStamp: addTimeStamp,
+          addUserId: addUserId,
         }
       );
       log.alert(`${uid} setChannelMetadata:`, `${JSON.stringify(result)}`);
@@ -156,8 +159,8 @@ export default function ChannelMetadata() {
         {
           majorRevision: majorRevision,
           lockName: lockName,
-          addTimeStamp: false,
-          addUserId: true,
+          addTimeStamp: addTimeStamp,
+          addUserId: addUserId,
         }
       );
       log.alert(`${uid} updateChannelMetadata:`, `${JSON.stringify(result)}`);
@@ -244,11 +247,26 @@ export default function ChannelMetadata() {
           label="lockName value"
           value={lockName}
         />
+        <AgoraDivider />
         <AgoraSwitch
           title="retry"
           value={retry}
           onValueChange={(v) => {
             setRetry(v);
+          }}
+        />
+        <AgoraSwitch
+          title="addTimeStamp"
+          value={addTimeStamp}
+          onValueChange={(v) => {
+            setAddTimeStamp(v);
+          }}
+        />
+        <AgoraSwitch
+          title="addUserId"
+          value={addUserId}
+          onValueChange={(v) => {
+            setAddUserId(v);
           }}
         />
         <AgoraButton

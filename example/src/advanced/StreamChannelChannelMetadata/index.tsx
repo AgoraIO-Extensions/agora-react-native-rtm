@@ -11,7 +11,13 @@ import React, { useCallback, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
-import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
+import {
+  AgoraButton,
+  AgoraDivider,
+  AgoraStyle,
+  AgoraSwitch,
+  AgoraTextInput,
+} from '../../components/ui';
 import Config from '../../config/agora.config';
 import * as log from '../../utils/log';
 
@@ -24,6 +30,8 @@ export default function StreamChannelChannelMetadata() {
   const [metadataKey, setMetadataKey] = useState<string>('channel notice');
   const [metadataValue, setMetadataValue] = useState<string>('rtm test');
   const [lockName, setLockName] = useState<string>('');
+  const [addTimeStamp, setAddTimeStamp] = useState<boolean>(true);
+  const [addUserId, setAddUserId] = useState<boolean>(true);
 
   const metadata = useRef<Metadata>(
     new Metadata({
@@ -114,8 +122,8 @@ export default function StreamChannelChannelMetadata() {
         {
           majorRevision: -1,
           lockName: lockName,
-          addTimeStamp: false,
-          addUserId: true,
+          addTimeStamp: addTimeStamp,
+          addUserId: addUserId,
         }
       );
       log.alert('setChannelMetadata result', `${JSON.stringify(result)}`);
@@ -159,8 +167,8 @@ export default function StreamChannelChannelMetadata() {
         {
           majorRevision: -1,
           lockName: lockName,
-          addTimeStamp: false,
-          addUserId: true,
+          addTimeStamp: addTimeStamp,
+          addUserId: addUserId,
         }
       );
       log.alert('updateChannelMetadata result', `${JSON.stringify(result)}`);
@@ -188,8 +196,8 @@ export default function StreamChannelChannelMetadata() {
         {
           majorRevision: -1,
           lockName: lockName,
-          addTimeStamp: false,
-          addUserId: true,
+          addTimeStamp: addTimeStamp,
+          addUserId: addUserId,
         }
       );
       log.alert('removeChannelMetadata result', `${JSON.stringify(result)}`);
@@ -226,6 +234,21 @@ export default function StreamChannelChannelMetadata() {
           title={`${joinSuccess ? 'leaveChannel' : 'joinChannel'}`}
           onPress={() => {
             joinSuccess ? leave() : join();
+          }}
+        />
+        <AgoraDivider />
+        <AgoraSwitch
+          title="addTimeStamp"
+          value={addTimeStamp}
+          onValueChange={(v) => {
+            setAddTimeStamp(v);
+          }}
+        />
+        <AgoraSwitch
+          title="addUserId"
+          value={addUserId}
+          onValueChange={(v) => {
+            setAddUserId(v);
           }}
         />
         <AgoraTextInput

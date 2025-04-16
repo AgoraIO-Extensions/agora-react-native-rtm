@@ -10,7 +10,13 @@ import React, { useCallback, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
-import { AgoraButton, AgoraStyle, AgoraTextInput } from '../../components/ui';
+import {
+  AgoraButton,
+  AgoraDivider,
+  AgoraStyle,
+  AgoraSwitch,
+  AgoraTextInput,
+} from '../../components/ui';
 import Config from '../../config/agora.config';
 import * as log from '../../utils/log';
 
@@ -24,6 +30,8 @@ export default function StreamChannelUserMetadata() {
   const [subscribeUid, setSubscribeUid] = useState<string>('123');
   const [metadataKey, setMetadataKey] = useState<string>('profile');
   const [metadataValue, setMetadataValue] = useState<string>('I am a student');
+  const [addTimeStamp, setAddTimeStamp] = useState<boolean>(true);
+  const [addUserId, setAddUserId] = useState<boolean>(true);
 
   const metadata = useRef<Metadata>(
     new Metadata({
@@ -110,8 +118,8 @@ export default function StreamChannelUserMetadata() {
       const result = await client.storage.setUserMetadata(metadata.current, {
         userId: uid,
         majorRevision: -1,
-        addTimeStamp: false,
-        addUserId: true,
+        addTimeStamp: addTimeStamp,
+        addUserId: addUserId,
       });
       log.alert('setUserMetadata result', `${JSON.stringify(result)}`);
     } catch (status: any) {
@@ -149,8 +157,8 @@ export default function StreamChannelUserMetadata() {
       const result = await client.storage.updateUserMetadata(metadata.current, {
         userId: uid,
         majorRevision: -1,
-        addTimeStamp: false,
-        addUserId: true,
+        addTimeStamp: addTimeStamp,
+        addUserId: addUserId,
       });
       log.alert('updateUserMetadata result', `${JSON.stringify(result)}`);
     } catch (status: any) {
@@ -174,8 +182,8 @@ export default function StreamChannelUserMetadata() {
       const result = await client.storage.removeUserMetadata({
         userId: uid,
         majorRevision: -1,
-        addTimeStamp: false,
-        addUserId: true,
+        addTimeStamp: addTimeStamp,
+        addUserId: addUserId,
       });
       log.alert('removeUserMetadata result', `${JSON.stringify(result)}`);
     } catch (status: any) {
@@ -237,6 +245,21 @@ export default function StreamChannelUserMetadata() {
           title={`${joinSuccess ? 'leaveChannel' : 'joinChannel'}`}
           onPress={async () => {
             joinSuccess ? await leave() : await join();
+          }}
+        />
+        <AgoraDivider />
+        <AgoraSwitch
+          title="addTimeStamp"
+          value={addTimeStamp}
+          onValueChange={(v) => {
+            setAddTimeStamp(v);
+          }}
+        />
+        <AgoraSwitch
+          title="addUserId"
+          value={addUserId}
+          onValueChange={(v) => {
+            setAddUserId(v);
           }}
         />
         <AgoraTextInput
