@@ -1,4 +1,5 @@
 import ChannelMetadata from './ChannelMetadata';
+import History from './History';
 import Lock from './Lock';
 import Presence from './Presence';
 import StreamChannelChannelMetadata from './StreamChannelChannelMetadata';
@@ -8,7 +9,6 @@ import UseRTC from './UseRTC';
 import UserMetadata from './UserMetadata';
 import PublishMessage from './publishMessage';
 import PublishTopicMessage from './publishTopicMessage';
-
 const Advanced = {
   title: 'Advanced',
   data: [
@@ -47,6 +47,10 @@ const Advanced = {
     {
       name: 'StreamChannelLock',
       component: StreamChannelLock,
+    },
+    {
+      name: 'History',
+      component: History,
     },
     {
       name: 'UseRTC',

@@ -1,21 +1,11 @@
-import { BaseResponse, ChannelType } from './common';
+import { RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
+import { GetHistoryMessagesOptions } from '../legacy/AgoraRtmBase';
+
+import { BaseResponse } from './common';
+
 /**
  *  The option to get history message.
  */
-export interface GetHistoryMessageOptions {
-  /**
-   * The maximum count of messages to get.
-   */
-  messageCount?: number;
-  /**
-   * The start timestamp of this query range.
-   */
-  start?: number;
-  /**
-   * The end timestamp of the query range.
-   */
-  end?: number;
-}
 export interface HistoryMessage {
   /**
    * The payload
@@ -38,18 +28,7 @@ export interface HistoryMessage {
    */
   timestamp: number;
 }
-/**@zh-cn
- * 历史消息频道类型。
- * - `MESSAGE`: MESSAGE CHANNEL 频道；
- * - `USEr`: 私密频道。
- */
-/**
- * History Channel type.
- * - `MESSAGE`: MESSAGE CHANNEL;
- * - `USEr`: PRIVATE CHANNEL.
- */
-export type HistoryChannelType = Exclude<ChannelType, 'STREAM'>;
-export interface GetMessagesResponse extends BaseResponse {
+export type GetMessagesResponse = BaseResponse & {
   /**
    *  The history message list.
    */
@@ -62,18 +41,11 @@ export interface GetMessagesResponse extends BaseResponse {
    * The timestamp of next history message. If newStart is 0, means there are no more history messages
    */
   newStart: number;
-}
+};
 export abstract class RTMHistory {
-  /**
-   * Get history message of the channel.
-   *
-   * @param channelName A channel that needs to be specified.
-   * @param HistoryChannelType channelType for this channel. See {@link HistoryChannelType}
-   * @param options Options for this metadata operation. See {@link GetHistoryMessageOptions}.
-   */
   abstract getMessages(
     channelName: string,
-    channelType: HistoryChannelType,
-    options?: GetHistoryMessageOptions
+    channelType: RTM_CHANNEL_TYPE,
+    options?: GetHistoryMessagesOptions
   ): Promise<GetMessagesResponse>;
 }
