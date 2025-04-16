@@ -1,16 +1,12 @@
 import {
-  IStreamChannel,
   JoinChannelOptions,
   Metadata,
   MetadataItem,
-  MetadataOptions,
+  RTMStreamChannel,
   RTM_CHANNEL_TYPE,
-  RTM_CONNECTION_CHANGE_REASON,
-  RTM_CONNECTION_STATE,
-  RTM_ERROR_CODE,
   useRtm,
 } from 'agora-react-native-rtm';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { ScrollView } from 'react-native';
 
@@ -22,13 +18,9 @@ import * as log from '../../utils/log';
 export default function StreamChannelChannelMetadata() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [joinSuccess, setJoinSuccess] = useState(false);
-  const [streamChannel, setStreamChannel] = useState<IStreamChannel>();
+  const [streamChannel, setStreamChannel] = useState<RTMStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
-  const getChannelMetadataRequestId = useRef<number>();
-  const setChannelMetadataRequestId = useRef<number>();
-  const removeChannelMetadataRequestId = useRef<number>();
-  const updateChannelMetadataRequestId = useRef<number>();
-  const [uid, setUid] = useState<string>(Config.uid);
+  const [uid] = useState<string>(Config.uid);
   const [metadataKey, setMetadataKey] = useState<string>('channel notice');
   const [metadataValue, setMetadataValue] = useState<string>('rtm test');
   const [lockName, setLockName] = useState<string>('');
@@ -36,153 +28,9 @@ export default function StreamChannelChannelMetadata() {
   const metadata = useRef<Metadata>(
     new Metadata({
       majorRevision: -1,
-      metadataItems: [],
-      metadataItemsSize: 0,
+      items: [],
+      itemCount: 0,
     })
-  );
-
-  const onJoinResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      userId: string,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onJoinResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'userId',
-        userId,
-        'errorCode',
-        errorCode
-      );
-      setJoinSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
-    },
-    []
-  );
-
-  const onGetChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      data: RtmMetadata,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onGetChannelMetadataResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'data',
-        data,
-        'errorCode',
-        errorCode
-      );
-      if (
-        requestId === getChannelMetadataRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        log.alert(`${channelName} metadata:`, `${JSON.stringify(data)}`);
-      }
-    },
-    []
-  );
-
-  const onSetChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onSetChannelMetadataResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'errorCode',
-        errorCode
-      );
-      if (
-        requestId === setChannelMetadataRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        log.alert(`setChannelMetadata success`, `channelName: ${channelName}`);
-      }
-    },
-    []
-  );
-
-  const onRemoveChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onRemoveChannelMetadataResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'errorCode',
-        errorCode
-      );
-      if (
-        requestId === removeChannelMetadataRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        log.alert(
-          `removeChannelMetadata success`,
-          `channelName: ${channelName}`
-        );
-      }
-    },
-    []
-  );
-
-  const onUpdateChannelMetadataResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onUpdateChannelMetadataResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'errorCode',
-        errorCode
-      );
-      if (
-        requestId === updateChannelMetadataRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        log.alert(
-          `updateChannelMetadata success`,
-          `channelName: ${channelName}`
-        );
-      }
-    },
-    []
   );
 
   /**
@@ -205,22 +53,36 @@ export default function StreamChannelChannelMetadata() {
   /**
    * Step 1-2 : join message channel
    */
-  const join = () => {
-    if (!streamChannel) {
-      log.error('please create streamChannel first');
-      return;
+  const join = async () => {
+    try {
+      if (!streamChannel) {
+        log.error('please create streamChannel first');
+        return;
+      }
+      await streamChannel.join(
+        new JoinChannelOptions({
+          token: Config.appId,
+        })
+      );
+      setJoinSuccess(true);
+    } catch (status: any) {
+      log.error('join error', status);
     }
-    streamChannel.join(
-      new JoinChannelOptions({ token: Config.appId, withMetadata: true })
-    );
   };
 
   /**
    * Step 1-3 : leave message channel
    */
-  const leave = () => {
-    if (streamChannel) {
-      streamChannel.leave(0);
+  const leave = async () => {
+    try {
+      if (!streamChannel) {
+        log.error('please create streamChannel first');
+        return;
+      }
+      await streamChannel.leave();
+      setJoinSuccess(false);
+    } catch (status: any) {
+      log.error('leave error', status);
     }
   };
 
@@ -235,182 +97,120 @@ export default function StreamChannelChannelMetadata() {
   /**
    * Step 2 : setChannelMetadata
    */
-  const setChannelMetadata = () => {
-    metadata.current.metadataItems = [
+  const setChannelMetadata = async () => {
+    metadata.current.items = [
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
         authorUserId: uid,
       }),
     ];
-    metadata.current.metadataItemsSize = 1;
-    setChannelMetadataRequestId.current = client
-      .getStorage()
-      .setChannelMetadata(
+    metadata.current.itemCount = 1;
+    try {
+      const result = await client.storage.setChannelMetadata(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        lockName
+        {
+          majorRevision: -1,
+          lockName: lockName,
+          addTimeStamp: false,
+          addUserId: true,
+        }
       );
+      log.alert('setChannelMetadata result', `${JSON.stringify(result)}`);
+    } catch (status: any) {
+      log.error('setChannelMetadata error', status);
+    }
   };
 
   /**
    * Step 3 : getChannelMetadata
    */
-  const getChannelMetadata = () => {
-    getChannelMetadataRequestId.current = client
-      .getStorage()
-      .getChannelMetadata(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM);
+  const getChannelMetadata = async () => {
+    try {
+      const result = await client.storage.getChannelMetadata(
+        cName,
+        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM
+      );
+      log.alert('getChannelMetadata result', `${JSON.stringify(result)}`);
+    } catch (status: any) {
+      log.error('getChannelMetadata error', status);
+    }
   };
 
   /**
    * Step 4 : updateChannelMetadata
    */
-  const updateChannelMetadata = () => {
-    metadata.current.metadataItems = [
+  const updateChannelMetadata = async () => {
+    metadata.current.items = [
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
         authorUserId: uid,
       }),
     ];
-    metadata.current.metadataItemsSize = 1;
-    updateChannelMetadataRequestId.current = client
-      .getStorage()
-      .updateChannelMetadata(
+    metadata.current.itemCount = 1;
+    try {
+      const result = await client.storage.updateChannelMetadata(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        lockName
+        {
+          majorRevision: -1,
+          lockName: lockName,
+          addTimeStamp: false,
+          addUserId: true,
+        }
       );
+      log.alert('updateChannelMetadata result', `${JSON.stringify(result)}`);
+    } catch (status: any) {
+      log.error('updateChannelMetadata error', status);
+    }
   };
 
   /**
    * Step 5 : removeChannelMetadata
    */
-  const removeChannelMetadata = () => {
-    metadata.current.metadataItems = [
+  const removeChannelMetadata = async () => {
+    metadata.current.items = [
       new MetadataItem({
         key: metadataKey,
         value: metadataValue,
         authorUserId: uid,
       }),
     ];
-    metadata.current.metadataItemsSize = 1;
-    removeChannelMetadataRequestId.current = client
-      .getStorage()
-      .removeChannelMetadata(
+    metadata.current.itemCount = 1;
+    try {
+      const result = await client.storage.removeChannelMetadata(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
-        metadata.current,
-        new MetadataOptions({ recordUserId: true }),
-        lockName
+        {
+          majorRevision: -1,
+          lockName: lockName,
+          addTimeStamp: false,
+          addUserId: true,
+        }
       );
+      log.alert('removeChannelMetadata result', `${JSON.stringify(result)}`);
+    } catch (status: any) {
+      log.error('removeChannelMetadata error', status);
+    }
   };
 
-  useEffect(() => {
-    client.addEventListener('onJoinResult', onJoinResult);
-    client.addEventListener(
-      'onSetChannelMetadataResult',
-      onSetChannelMetadataResult
-    );
-    client?.addEventListener(
-      'onGetChannelMetadataResult',
-      onGetChannelMetadataResult
-    );
-    client?.addEventListener(
-      'onRemoveChannelMetadataResult',
-      onRemoveChannelMetadataResult
-    );
-    client?.addEventListener(
-      'onUpdateChannelMetadataResult',
-      onUpdateChannelMetadataResult
-    );
-
-    return () => {
-      client.removeEventListener('onJoinResult', onJoinResult);
-      client.removeEventListener(
-        'onSetChannelMetadataResult',
-        onSetChannelMetadataResult
-      );
-      client?.removeEventListener(
-        'onGetChannelMetadataResult',
-        onGetChannelMetadataResult
-      );
-      client?.removeEventListener(
-        'onRemoveChannelMetadataResult',
-        onRemoveChannelMetadataResult
-      );
-      client?.removeEventListener(
-        'onUpdateChannelMetadataResult',
-        onUpdateChannelMetadataResult
-      );
-    };
-  }, [
-    client,
-    uid,
-    onJoinResult,
-    onSetChannelMetadataResult,
-    onGetChannelMetadataResult,
-    onRemoveChannelMetadataResult,
-    onUpdateChannelMetadataResult,
-  ]);
-
-  const onConnectionStateChanged = useCallback(
-    (
-      channelName: string,
-      state: RTM_CONNECTION_STATE,
-      reason: RTM_CONNECTION_CHANGE_REASON
-    ) => {
-      log.log(
-        'onConnectionStateChanged',
-        'channelName',
-        channelName,
-        'state',
-        state,
-        'reason',
-        reason
-      );
-      switch (state) {
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_CONNECTED:
-          setLoginSuccess(true);
-          break;
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_DISCONNECTED:
-          if (
-            reason ===
-            RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
-          ) {
-            setLoginSuccess(false);
-            destroyStreamChannel();
-          }
-          setJoinSuccess(false);
-          break;
-      }
-    },
-    [destroyStreamChannel]
-  );
-  useEffect(() => {
-    client?.addEventListener(
-      'onConnectionStateChanged',
-      onConnectionStateChanged
-    );
-
-    return () => {
-      client?.removeEventListener(
-        'onConnectionStateChanged',
-        onConnectionStateChanged
-      );
-    };
-  }, [client, uid, onConnectionStateChanged]);
-
+  const handleLoginStatus = useCallback((status: boolean) => {
+    setLoginSuccess(status);
+    if (!status) {
+      setJoinSuccess(false);
+      setStreamChannel(undefined);
+    }
+  }, []);
   return (
     <>
       <ScrollView style={AgoraStyle.fullSize}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
-          onUidChanged={(v) => setUid(v)}
+          onLoginStatusChanged={handleLoginStatus}
         />
         <AgoraButton
           disabled={!loginSuccess}

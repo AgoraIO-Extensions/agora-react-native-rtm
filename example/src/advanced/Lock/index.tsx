@@ -176,8 +176,8 @@ export default function Lock() {
         <AgoraButton
           disabled={!loginSuccess}
           title={`${subscribeSuccess ? 'unsubscribe' : 'subscribe'}`}
-          onPress={() => {
-            subscribeSuccess ? unsubscribe() : subscribe();
+          onPress={async () => {
+            subscribeSuccess ? await unsubscribe() : await subscribe();
           }}
         />
         <AgoraTextInput
@@ -213,15 +213,15 @@ export default function Lock() {
         <AgoraButton
           title={`acquireLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            acquireLock();
+          onPress={async () => {
+            await acquireLock();
           }}
         />
         <AgoraButton
           title={`releaseLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            releaseLock();
+          onPress={async () => {
+            await releaseLock();
           }}
         />
         <AgoraTextInput
@@ -234,22 +234,22 @@ export default function Lock() {
         <AgoraButton
           title={`revokeLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            revokeLock();
+          onPress={async () => {
+            await revokeLock();
           }}
         />
         <AgoraButton
           title={`removeLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            removeLock();
+          onPress={async () => {
+            await removeLock();
           }}
         />
         <AgoraButton
           title={`getLocks`}
           disabled={!loginSuccess}
-          onPress={() => {
-            getLocks();
+          onPress={async () => {
+            await getLocks();
           }}
         />
         <AgoraText>lockDetailList:</AgoraText>

@@ -164,7 +164,4 @@ export class RtmLockInternal extends RTMLock {
       throw handleError(error, operation);
     }
   }
-  constructor() {
-    super();
-  }
 }

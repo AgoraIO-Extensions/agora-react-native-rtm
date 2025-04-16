@@ -55,8 +55,6 @@ export type {
   GetChannelMetadataResponse,
   GetUserMetadataResponse,
   MetaDataDetail,
-  MetadataItem,
-  MetadataOptions,
   RTMStorage,
   RemoveChannelMetadataOptions,
   RemoveChannelMetadataResponse,
@@ -91,7 +89,6 @@ export type {
 export type {
   AcquireLockResponse,
   GetLockResponse,
-  LockDetail,
   LockOperationResponse,
   RTMLock,
   ReleaseLockResponse,
