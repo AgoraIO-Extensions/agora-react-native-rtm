@@ -2084,10 +2084,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  agora-react-native-rtm: 5b6bd3cd38f8072df0bde164e13f10bdb6e9fe54
+  agora-react-native-rtm: 6704b79b45963379ab8d56bc236c657758750fab
   AgoraInfra_iOS: 65e11a2183ab7836258768868d06058c22701b13
   AgoraIrisRTC_iOS: dd3d957c25be6bd2b2a5d03fe706ebe8a46909f0
-  AgoraIrisRTM_iOS: acaa5b7e234f6098fb795063db42b80629553437
+  AgoraIrisRTM_iOS: 45b88623e0512388cf15cfa85bfdbad6657daa13
   AgoraRtcEngine_iOS: 5092a058c7b2842db39d8ca614d451af6f84969a
   AgoraRtm: b480b23cf4756efbde6af18233afecd937a8d1c4
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
