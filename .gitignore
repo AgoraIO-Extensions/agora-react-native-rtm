@@ -23,7 +23,7 @@ build/
 xcuserdata
 *.xccheckout
 *.xcode.env.local
-**/.xcode.env.local
+**/**/.xcode.env.local
 *.moved-aside
 DerivedData
 *.hmap
