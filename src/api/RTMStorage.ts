@@ -1,7 +1,7 @@
 import { RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
 import { Metadata } from '../legacy/IAgoraRtmStorage';
 
-import { BaseResponse } from './common';
+import { BaseResponse } from './RTMClient';
 
 export type ChannelMetadataOperationResponse = BaseResponse & {
   channelName: string;

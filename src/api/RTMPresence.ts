@@ -6,7 +6,7 @@ import {
   UserState,
 } from '../legacy/AgoraRtmBase';
 
-import { BaseResponse } from './common';
+import { BaseResponse } from './RTMClient';
 
 export type WhoNowResponse = BaseResponse & {
   totalOccupancy: number;

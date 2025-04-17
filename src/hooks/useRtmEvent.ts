@@ -38,6 +38,10 @@ export function useRtmEvent<EventType extends keyof RTMClientEventMap>(
           listenerRef.current(...args);
         }
       });
+    } else {
+      return () => {
+        throw new Error('client is null');
+      };
     }
   }, [event, client]);
 }

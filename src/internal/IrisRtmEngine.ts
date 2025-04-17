@@ -5,7 +5,7 @@ import base64 from 'base64-js';
 import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
-import { BaseResponse, ErrorInfo } from '../api';
+import { BaseResponse, ErrorInfo } from '../api/RTMClient';
 import { RTMClientEventMap, processRTMClientEventMap } from '../api/RTMEvents';
 import AgoraRtmNg from '../specs';
 

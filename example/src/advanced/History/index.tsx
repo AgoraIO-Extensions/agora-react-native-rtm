@@ -8,9 +8,7 @@ import {
   AgoraButton,
   AgoraDivider,
   AgoraDropdown,
-  AgoraList,
   AgoraStyle,
-  AgoraText,
   AgoraTextInput,
 } from '../../components/ui';
 import Config from '../../config/agora.config';

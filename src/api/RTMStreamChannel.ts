@@ -5,9 +5,7 @@ import {
   TopicOptions,
 } from '../legacy/IAgoraStreamChannel';
 
-import { ErrorInfo } from './RTMClient';
-
-import { BaseResponse } from './common';
+import { BaseResponse, ErrorInfo } from './RTMClient';
 
 export type StreamChannelOperationResponse = (BaseResponse | ErrorInfo) & {
   topicName: string;

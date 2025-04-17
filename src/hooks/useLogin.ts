@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { RTMClient } from '../api';
+import { RTMClient } from '../api/RTMClient';
 import { LoginOptions } from '../api/RTMClient';
 
 export function useLogin(client: RTMClient, loginOptions: LoginOptions) {

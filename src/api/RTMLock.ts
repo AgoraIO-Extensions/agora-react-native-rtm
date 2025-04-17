@@ -1,6 +1,6 @@
 import { LockDetail, RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
 
-import { BaseResponse } from './common';
+import { BaseResponse } from './RTMClient';
 
 export interface GetLockResponse extends BaseResponse {
   totalLocks: number;

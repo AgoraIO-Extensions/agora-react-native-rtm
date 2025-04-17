@@ -6,7 +6,10 @@ import { RTMLock } from './RTMLock';
 import { RTMPresence } from './RTMPresence';
 import { RTMStorage } from './RTMStorage';
 import { RTMStreamChannel } from './RTMStreamChannel';
-import { BaseResponse } from './common';
+
+export interface BaseResponse {
+  timestamp: number;
+}
 
 export type ErrorInfo = {
   error: boolean;

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import React, { ReactNode, createContext } from 'react';
 
-import { RTMClient } from '../api/index';
+import { RTMClient } from '../api/RTMClient';
 
 export interface RTMProviderProps {
   readonly client: RTMClient;
