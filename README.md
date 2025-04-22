@@ -50,13 +50,6 @@ const engine = createAgoraRtmClient(
 
 - [API Ref](https://agoraio-extensions.github.io/agora-react-native-rtm/)
 
-## Using TypeScript
-
-We suggest you use TypeScript to develop, or use TypeScript eslint to lint your code.
-
-- [Getting Started with TypeScript](https://reactnative.dev/docs/typescript#getting-started-with-typescript)
-- [Adding TypeScript to an Existing Project](https://reactnative.dev/docs/typescript#adding-typescript-to-an-existing-project)
-
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
