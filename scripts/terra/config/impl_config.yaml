@@ -3,13 +3,13 @@ parsers:
     package: '@agoraio-extensions/cxx-parser'
     args:
       includeHeaderDirs:
-        - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include'
+        - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.4/include'
       parseFiles:
         include:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/*.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.4/include/*.h'
         exclude:
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraRtmService.h'
-          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.3/include/IAgoraService.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.4/include/IAgoraRtmService.h'
+          - '@agoraio-extensions/terra_shared_configs:headers/rtm_2.2.4/include/IAgoraService.h'
 
   - name: IrisApiIdParser
     package: '@agoraio-extensions/terra_shared_configs'
@@ -49,4 +49,4 @@ parsers:
 renderers:
   - path: ../impl.ts
 
-version: 2.2.3
+version: 2.2.4
