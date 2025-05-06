@@ -18,7 +18,6 @@ import * as log from '../../utils/log';
 export default function History() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
-  const [uid] = useState<string>(Config.uid);
 
   const [messageCount, setMessageCount] = useState<number>(100);
   const [start, setStart] = useState<number>(0);

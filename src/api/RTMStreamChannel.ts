@@ -51,15 +51,6 @@ export type GetSubscribedUserListResponse = StreamChannelOperationResponse & {
   subscribed: string[];
 };
 
-export interface JoinOptions {
-  token?: string;
-  withPresence?: boolean;
-
-  beQuiet?: boolean;
-  withMetadata?: boolean;
-  withLock?: boolean;
-}
-
 export interface joinTopicOptions {
   meta?: any;
 }
