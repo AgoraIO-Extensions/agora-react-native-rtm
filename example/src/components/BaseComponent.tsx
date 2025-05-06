@@ -6,7 +6,13 @@ import Config from '../config/agora.config';
 import * as log from '../utils/log';
 
 import { LogSink } from './LogSink';
-import { AgoraButton, AgoraStyle, AgoraTextInput, AgoraView } from './ui';
+import {
+  AgoraButton,
+  AgoraStyle,
+  AgoraText,
+  AgoraTextInput,
+  AgoraView,
+} from './ui';
 
 interface Props {
   onChannelNameChanged?: (value: string) => void;
@@ -22,7 +28,7 @@ export const Header = () => {
 
   return (
     <>
-      <AgoraButton title="Logs" onPress={toggleOverlay} />
+      <AgoraText onPress={toggleOverlay}>Logs</AgoraText>
       {visible && <LogSink onBackdropPress={toggleOverlay} />}
     </>
   );
@@ -57,10 +63,9 @@ export default function BaseComponent({
    */
   const login = async () => {
     try {
-      let result = await client.login({ token: Config.token });
+      await client.login({ token: Config.token });
       setLoginSuccess(true);
       onLoginStatusChanged?.(true);
-      log.info('login success', result);
     } catch (status: any) {
       log.error('login error', status);
     }
@@ -71,10 +76,9 @@ export default function BaseComponent({
    */
   const logout = async () => {
     try {
-      let result = await client.logout();
+      await client.logout();
       setLoginSuccess(false);
       onLoginStatusChanged?.(false);
-      log.info('logout success', result);
     } catch (status: any) {
       log.error('logout error', status);
     }
