@@ -45,6 +45,7 @@ export default function StreamChannelLock() {
     }
     let result = client.createStreamChannel(cName);
     setStreamChannel(result);
+    log.info('createStreamChannel success', result);
   };
 
   /**
@@ -56,12 +57,13 @@ export default function StreamChannelLock() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.join(
+      let result = await streamChannel.join(
         new JoinChannelOptions({
           token: Config.appId,
         })
       );
       setJoinSuccess(true);
+      log.info('join success', result);
     } catch (status: any) {
       log.error('join error', status);
     }
@@ -76,8 +78,9 @@ export default function StreamChannelLock() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.leave();
+      let result = await streamChannel.leave();
       setJoinSuccess(false);
+      log.info('leave success', result);
     } catch (status: any) {
       log.error('leave error', status);
     }
@@ -89,6 +92,7 @@ export default function StreamChannelLock() {
   const destroyStreamChannel = useCallback(() => {
     streamChannel?.release();
     setStreamChannel(undefined);
+    log.info('destroyStreamChannel success');
   }, [streamChannel]);
 
   /**
@@ -101,7 +105,7 @@ export default function StreamChannelLock() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM
       );
       setLockDetailList(result.lockDetails);
-      log.alert(`${uid} locks:`, `${JSON.stringify(result)}`);
+      log.info('getLocks success', result);
     } catch (status: any) {
       log.error('getLocks error', status);
     }
@@ -118,7 +122,7 @@ export default function StreamChannelLock() {
         lockName,
         { ttl }
       );
-      log.alert(`${uid} setLock:`, `${JSON.stringify(result)}`);
+      log.info('setLock success', result);
     } catch (status: any) {
       log.error('setLock error', status);
     }
@@ -135,7 +139,7 @@ export default function StreamChannelLock() {
         lockName,
         { retry: false }
       );
-      log.alert(`${uid} acquireLock:`, `${JSON.stringify(result)}`);
+      log.info('acquireLock success', result);
     } catch (status: any) {
       log.error('acquireLock error', status);
     }
@@ -151,7 +155,7 @@ export default function StreamChannelLock() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         lockName
       );
-      log.alert(`${uid} releaseLock:`, `${JSON.stringify(result)}`);
+      log.info('releaseLock success', result);
     } catch (status: any) {
       log.error('releaseLock error', status);
     }
@@ -168,7 +172,7 @@ export default function StreamChannelLock() {
         lockName,
         uid
       );
-      log.alert(`${uid} revokeLock:`, `${JSON.stringify(result)}`);
+      log.info('revokeLock success', result);
     } catch (status: any) {
       log.error('revokeLock error', status);
     }
@@ -184,7 +188,7 @@ export default function StreamChannelLock() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         lockName
       );
-      log.alert(`${uid} removeLock:`, `${JSON.stringify(result)}`);
+      log.info('removeLock success', result);
     } catch (status: any) {
       log.error('removeLock error', status);
     }

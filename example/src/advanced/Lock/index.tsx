@@ -36,13 +36,14 @@ export default function Lock() {
    */
   const subscribe = async () => {
     try {
-      await client.subscribe(cName, {
+      let result = await client.subscribe(cName, {
         withMessage: true,
         withMetadata: true,
         withPresence: true,
         withLock: true,
       });
       setSubscribeSuccess(true);
+      log.info('subscribe success', result);
     } catch (status: any) {
       log.error('subscribe error', status);
     }
@@ -53,8 +54,9 @@ export default function Lock() {
    */
   const unsubscribe = async () => {
     try {
-      await client.unsubscribe(cName);
+      let result = await client.unsubscribe(cName);
       setSubscribeSuccess(false);
+      log.info('unsubscribe success', result);
     } catch (status: any) {
       log.error('unsubscribe error', status);
     }
@@ -70,7 +72,7 @@ export default function Lock() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
       );
       setLockDetailList(result.lockDetails);
-      log.alert(`${uid} locks:`, `${JSON.stringify(result)}`);
+      log.info('getLocks success', result);
     } catch (status: any) {
       log.error('getLocks error', status);
     }
@@ -87,7 +89,7 @@ export default function Lock() {
         lockName,
         { ttl }
       );
-      log.alert(`${uid} setLock:`, `${JSON.stringify(result)}`);
+      log.info('setLock success', result);
     } catch (status: any) {
       log.error('setLock error', status);
     }
@@ -104,7 +106,7 @@ export default function Lock() {
         lockName,
         { retry }
       );
-      log.alert(`${uid} acquireLock:`, `${JSON.stringify(result)}`);
+      log.info('acquireLock success', result);
     } catch (status: any) {
       log.error('acquireLock error', status);
     }
@@ -120,7 +122,7 @@ export default function Lock() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         lockName
       );
-      log.alert(`${uid} releaseLock:`, `${JSON.stringify(result)}`);
+      log.info('releaseLock success', result);
     } catch (status: any) {
       log.error('releaseLock error', status);
     }
@@ -137,7 +139,7 @@ export default function Lock() {
         lockName,
         revokeOwner
       );
-      log.alert(`${uid} revokeLock:`, `${JSON.stringify(result)}`);
+      log.info('revokeLock success', result);
     } catch (status: any) {
       log.error('revokeLock error', status);
     }
@@ -153,7 +155,7 @@ export default function Lock() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         lockName
       );
-      log.alert(`${uid} removeLock:`, `${JSON.stringify(result)}`);
+      log.info('removeLock success', result);
     } catch (status: any) {
       log.error('removeLock error', status);
     }

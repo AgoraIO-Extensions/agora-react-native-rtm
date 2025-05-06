@@ -50,7 +50,7 @@ export default function PublishMessage() {
     async (msg: AgoraMessage, msgs: AgoraMessage[]) => {
       try {
         if (publishMessageByBuffer) {
-          await client.publish(
+          let result = await client.publish(
             cName,
             new Uint8Array(Buffer.from(msg.text)),
             new PublishOptions({
@@ -58,8 +58,9 @@ export default function PublishMessage() {
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
             })
           );
+          log.info('publish success', result);
         } else {
-          await client.publish(
+          let result = await client.publish(
             cName,
             msg.text,
             new PublishOptions({
@@ -67,6 +68,7 @@ export default function PublishMessage() {
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
             })
           );
+          log.info('publish success', result);
         }
         msg.sent = true;
         setMessages((previousMessages) =>
@@ -74,7 +76,7 @@ export default function PublishMessage() {
         );
       } catch (err) {
         msg.sent = false;
-        log.error(`CHANNEL_INVALID_MESSAGE: ${err}`);
+        log.error('publish error', err);
         return;
       }
     },
@@ -100,13 +102,14 @@ export default function PublishMessage() {
    */
   const subscribe = async () => {
     try {
-      await client.subscribe(cName, {
+      let result = await client.subscribe(cName, {
         withMessage: true,
         withMetadata: true,
         withPresence: true,
         withLock: true,
       });
       setSubscribeSuccess(true);
+      log.info('subscribe success', result);
     } catch (status: any) {
       log.error('subscribe error', status);
     }
@@ -117,8 +120,9 @@ export default function PublishMessage() {
    */
   const unsubscribe = async () => {
     try {
-      await client.unsubscribe(cName);
+      let result = await client.unsubscribe(cName);
       setSubscribeSuccess(false);
+      log.info('unsubscribe success', result);
     } catch (status: any) {
       log.error('unsubscribe error', status);
     }

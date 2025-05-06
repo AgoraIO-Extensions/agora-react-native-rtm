@@ -56,6 +56,7 @@ export default function StreamChannelChannelMetadata() {
     }
     let result = client.createStreamChannel(cName);
     setStreamChannel(result);
+    log.info('createStreamChannel success', result);
   };
 
   /**
@@ -67,12 +68,13 @@ export default function StreamChannelChannelMetadata() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.join(
+      let result = await streamChannel.join(
         new JoinChannelOptions({
           token: Config.appId,
         })
       );
       setJoinSuccess(true);
+      log.info('join success', result);
     } catch (status: any) {
       log.error('join error', status);
     }
@@ -87,8 +89,9 @@ export default function StreamChannelChannelMetadata() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.leave();
+      let result = await streamChannel.leave();
       setJoinSuccess(false);
+      log.info('leave success', result);
     } catch (status: any) {
       log.error('leave error', status);
     }
@@ -100,6 +103,7 @@ export default function StreamChannelChannelMetadata() {
   const destroyStreamChannel = useCallback(() => {
     streamChannel?.release();
     setStreamChannel(undefined);
+    log.info('destroyStreamChannel success');
   }, [streamChannel]);
 
   /**
@@ -115,7 +119,7 @@ export default function StreamChannelChannelMetadata() {
     ];
     metadata.current.itemCount = 1;
     try {
-      const result = await client.storage.setChannelMetadata(
+      let result = await client.storage.setChannelMetadata(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         metadata.current,
@@ -126,7 +130,7 @@ export default function StreamChannelChannelMetadata() {
           addUserId: addUserId,
         }
       );
-      log.alert('setChannelMetadata result', `${JSON.stringify(result)}`);
+      log.info('setChannelMetadata success', result);
     } catch (status: any) {
       log.error('setChannelMetadata error', status);
     }
@@ -137,11 +141,11 @@ export default function StreamChannelChannelMetadata() {
    */
   const getChannelMetadata = async () => {
     try {
-      const result = await client.storage.getChannelMetadata(
+      let result = await client.storage.getChannelMetadata(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM
       );
-      log.alert('getChannelMetadata result', `${JSON.stringify(result)}`);
+      log.info('getChannelMetadata success', result);
     } catch (status: any) {
       log.error('getChannelMetadata error', status);
     }
@@ -160,7 +164,7 @@ export default function StreamChannelChannelMetadata() {
     ];
     metadata.current.itemCount = 1;
     try {
-      const result = await client.storage.updateChannelMetadata(
+      let result = await client.storage.updateChannelMetadata(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         metadata.current,
@@ -171,7 +175,7 @@ export default function StreamChannelChannelMetadata() {
           addUserId: addUserId,
         }
       );
-      log.alert('updateChannelMetadata result', `${JSON.stringify(result)}`);
+      log.info('updateChannelMetadata success', result);
     } catch (status: any) {
       log.error('updateChannelMetadata error', status);
     }
@@ -190,7 +194,7 @@ export default function StreamChannelChannelMetadata() {
     ];
     metadata.current.itemCount = 1;
     try {
-      const result = await client.storage.removeChannelMetadata(
+      let result = await client.storage.removeChannelMetadata(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM,
         {
@@ -200,7 +204,7 @@ export default function StreamChannelChannelMetadata() {
           addUserId: addUserId,
         }
       );
-      log.alert('removeChannelMetadata result', `${JSON.stringify(result)}`);
+      log.info('removeChannelMetadata success', result);
     } catch (status: any) {
       log.error('removeChannelMetadata error', status);
     }

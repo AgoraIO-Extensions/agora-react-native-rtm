@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import { LinkStateEvent, useRtm, useRtmEvent } from 'agora-react-native-rtm';
 import React, { useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
+import { Header } from '../../components/BaseComponent';
 import { AgoraButton, AgoraStyle } from '../../components/ui';
 import Config from '../../config/agora.config';
 import * as log from '../../utils/log';
@@ -29,8 +31,9 @@ export default function Login() {
    */
   const login = async () => {
     try {
-      await client.login({ token: Config.token });
+      let result = await client.login({ token: Config.token });
       setLoginSuccess(true);
+      log.info('login success', result);
     } catch (status: any) {
       log.error('login error', status);
     }
@@ -41,8 +44,9 @@ export default function Login() {
    */
   const logout = async () => {
     try {
-      await client.logout();
+      let result = await client.logout();
       setLoginSuccess(false);
+      log.info('logout success', result);
     } catch (status: any) {
       log.error('logout error', status);
     }
@@ -53,7 +57,8 @@ export default function Login() {
    */
   const renewToken = async () => {
     try {
-      await client.renewToken(Config.token);
+      let result = await client.renewToken(Config.token);
+      log.info('renewToken success', result);
     } catch (status: any) {
       log.error('renewToken error', status);
     }
@@ -66,6 +71,13 @@ export default function Login() {
   useRtmEvent(client, 'tokenPrivilegeWillExpire', () => {
     log.info('tokenPrivilegeWillExpire');
   });
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const headerRight = () => <Header />;
+    navigation.setOptions({ headerRight });
+  }, [navigation]);
 
   return (
     <KeyboardAvoidingView

@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { useRtm } from 'agora-react-native-rtm';
 
 import React, { useEffect, useState } from 'react';
@@ -8,6 +9,8 @@ import {
   SDKBuildInfo,
   createAgoraRtcEngine,
 } from 'react-native-agora';
+
+import { Header } from '../../components/BaseComponent';
 
 import { AgoraButton, AgoraStyle, AgoraText } from '../../components/ui';
 import Config from '../../config/agora.config';
@@ -30,8 +33,9 @@ export default function UseRTC() {
    */
   const login = async () => {
     try {
-      await client.login({ token: Config.token });
+      let result = await client.login({ token: Config.token });
       setLoginSuccess(true);
+      log.info('login success', result);
     } catch (status: any) {
       log.error('login error', status);
     }
@@ -42,8 +46,9 @@ export default function UseRTC() {
    */
   const logout = async () => {
     try {
-      await client.logout();
+      let result = await client.logout();
       setLoginSuccess(false);
+      log.info('logout success', result);
     } catch (status: any) {
       log.error('logout error', status);
     }
@@ -61,6 +66,13 @@ export default function UseRTC() {
       engine.release();
     };
   }, []);
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const headerRight = () => <Header />;
+    navigation.setOptions({ headerRight });
+  }, [navigation]);
 
   return (
     <KeyboardAvoidingView

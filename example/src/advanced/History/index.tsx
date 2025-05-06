@@ -43,7 +43,7 @@ export default function History() {
         end,
         messageCount,
       });
-      log.alert(`${uid} getHistoryMessages:`, `${JSON.stringify(result)}`);
+      log.info('getHistoryMessages success', result);
     } catch (status: any) {
       log.error('getHistoryMessages error', status);
     }

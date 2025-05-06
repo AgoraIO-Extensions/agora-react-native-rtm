@@ -49,21 +49,23 @@ export default function PublishTopicMessage() {
     async (msg: IMessage, msgs: any[]) => {
       try {
         if (publishMessageByBuffer) {
-          await streamChannel?.publishTopicMessage(
+          let result = await streamChannel?.publishTopicMessage(
             topicName,
             new Uint8Array(Buffer.from(msg.text)),
             new TopicMessageOptions({
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
             })
           );
+          log.info('publish topic message success', result);
         } else {
-          await streamChannel?.publishTopicMessage(
+          let result = await streamChannel?.publishTopicMessage(
             topicName,
             msg.text,
             new TopicMessageOptions({
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
             })
           );
+          log.info('publish topic message success', result);
         }
 
         msg.sent = true;
@@ -98,7 +100,7 @@ export default function PublishTopicMessage() {
   const subscribe = async () => {
     try {
       let result = await streamChannel?.subscribeTopic(topicName);
-      console.log('subscribe result', result);
+      log.info('subscribe success', result);
       setSubscribeSuccess(true);
     } catch (status: any) {
       log.error('subscribe error', status);
@@ -111,7 +113,7 @@ export default function PublishTopicMessage() {
   const unsubscribe = async () => {
     try {
       let result = await streamChannel?.unsubscribeTopic(topicName);
-      console.log('unsubscribe result', result);
+      log.info('unsubscribe success', result);
       setSubscribeSuccess(false);
     } catch (status: any) {
       log.error('unsubscribe error', status);
@@ -128,6 +130,7 @@ export default function PublishTopicMessage() {
     }
     let result = client.createStreamChannel(cName);
     setStreamChannel(result);
+    log.info('createStreamChannel success', result);
   };
 
   /**
@@ -139,11 +142,12 @@ export default function PublishTopicMessage() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.join(
+      let result = await streamChannel.join(
         new JoinChannelOptions({
           token: Config.appId,
         })
       );
+      log.info('join success', result);
       setJoinSuccess(true);
     } catch (status: any) {
       log.error('join error', status);
@@ -159,8 +163,9 @@ export default function PublishTopicMessage() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.leave();
+      let result = await streamChannel.leave();
       setJoinSuccess(false);
+      log.info('leave success', result);
     } catch (status: any) {
       log.error('leave error', status);
     }
@@ -175,8 +180,12 @@ export default function PublishTopicMessage() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.joinTopic(topicName, new JoinTopicOptions());
+      let result = await streamChannel.joinTopic(
+        topicName,
+        new JoinTopicOptions()
+      );
       setJoinTopicSuccess(true);
+      log.info('join topic success', result);
     } catch (status: any) {
       log.error('join topic error', status);
     }
@@ -191,8 +200,9 @@ export default function PublishTopicMessage() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.leaveTopic(topicName);
+      let result = await streamChannel.leaveTopic(topicName);
       setJoinTopicSuccess(false);
+      log.info('leave topic success', result);
     } catch (status: any) {
       log.error('leave topic error', status);
     }
@@ -204,6 +214,7 @@ export default function PublishTopicMessage() {
   const destroyStreamChannel = useCallback(() => {
     streamChannel?.release();
     setStreamChannel(undefined);
+    log.info('destroyStreamChannel success');
   }, [streamChannel]);
 
   /**
@@ -212,7 +223,7 @@ export default function PublishTopicMessage() {
   const getSubscribedUserList = async () => {
     try {
       const result = await streamChannel?.getSubscribedUserList(topicName);
-      log.info('getSubscribedUserList', result);
+      log.info('getSubscribedUserList success', result);
     } catch (status: any) {
       log.error('getSubscribedUserList error', status);
     }

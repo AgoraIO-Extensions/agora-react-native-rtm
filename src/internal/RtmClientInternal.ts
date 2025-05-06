@@ -70,9 +70,7 @@ export class RtmClientInternal extends RTMClient {
     callIrisApi.call(this, 'RtmClient_create', jsonParams);
     this._rtmClientImpl.setParameters(
       JSON.stringify({
-        parameters: {
-          'rtm.app_type': 8,
-        },
+        'rtm.app_type': 8,
       })
     );
   }

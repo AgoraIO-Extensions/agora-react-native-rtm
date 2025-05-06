@@ -56,6 +56,7 @@ export default function StreamChannelUserMetadata() {
     }
     let result = client.createStreamChannel(cName);
     setStreamChannel(result);
+    log.info('createStreamChannel success', result);
   };
 
   /**
@@ -67,11 +68,12 @@ export default function StreamChannelUserMetadata() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.join(
+      let result = await streamChannel.join(
         new JoinChannelOptions({
           token: Config.appId,
         })
       );
+      log.info('join success', result);
       setJoinSuccess(true);
     } catch (status: any) {
       log.error('join error', status);
@@ -87,8 +89,9 @@ export default function StreamChannelUserMetadata() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.leave();
+      let result = await streamChannel.leave();
       setJoinSuccess(false);
+      log.info('leave success', result);
     } catch (status: any) {
       log.error('leave error', status);
     }
@@ -100,6 +103,7 @@ export default function StreamChannelUserMetadata() {
   const destroyStreamChannel = useCallback(() => {
     streamChannel?.release();
     setStreamChannel(undefined);
+    log.info('destroyStreamChannel success');
   }, [streamChannel]);
 
   /**
@@ -121,7 +125,7 @@ export default function StreamChannelUserMetadata() {
         addTimeStamp: addTimeStamp,
         addUserId: addUserId,
       });
-      log.alert('setUserMetadata result', `${JSON.stringify(result)}`);
+      log.info('setUserMetadata success', result);
     } catch (status: any) {
       log.error('setUserMetadata error', status);
     }
@@ -135,7 +139,7 @@ export default function StreamChannelUserMetadata() {
       const result = await client.storage.getUserMetadata({
         userId: uid,
       });
-      log.alert('getUserMetadata result', `${JSON.stringify(result)}`);
+      log.info('getUserMetadata success', result);
     } catch (status: any) {
       log.error('getUserMetadata error', status);
     }
@@ -160,7 +164,7 @@ export default function StreamChannelUserMetadata() {
         addTimeStamp: addTimeStamp,
         addUserId: addUserId,
       });
-      log.alert('updateUserMetadata result', `${JSON.stringify(result)}`);
+      log.info('updateUserMetadata success', result);
     } catch (status: any) {
       log.error('updateUserMetadata error', status);
     }
@@ -185,7 +189,7 @@ export default function StreamChannelUserMetadata() {
         addTimeStamp: addTimeStamp,
         addUserId: addUserId,
       });
-      log.alert('removeUserMetadata result', `${JSON.stringify(result)}`);
+      log.info('removeUserMetadata success', result);
     } catch (status: any) {
       log.error('removeUserMetadata error', status);
     }
@@ -197,7 +201,7 @@ export default function StreamChannelUserMetadata() {
   const subscribeUserMetadata = async () => {
     try {
       const result = await client.storage.subscribeUserMetadata(subscribeUid);
-      log.alert('subscribeUserMetadata result', `${JSON.stringify(result)}`);
+      log.info('subscribeUserMetadata success', result);
     } catch (status: any) {
       log.error('subscribeUserMetadata error', status);
     }
@@ -209,7 +213,7 @@ export default function StreamChannelUserMetadata() {
   const unsubscribeUserMetadata = async () => {
     try {
       const result = await client.storage.unsubscribeUserMetadata(subscribeUid);
-      log.alert('unsubscribeUserMetadata result', `${JSON.stringify(result)}`);
+      log.info('unsubscribeUserMetadata success', result);
       setSubscribeSuccess(false);
     } catch (status: any) {
       log.error('unsubscribeUserMetadata error', status);

@@ -33,6 +33,7 @@ export default function CreateStreamChannel() {
     }
     let result = client.createStreamChannel(cName);
     setStreamChannel(result);
+    log.info('createStreamChannel success', result);
   };
 
   /**
@@ -44,12 +45,13 @@ export default function CreateStreamChannel() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.join(
+      let result = await streamChannel.join(
         new JoinChannelOptions({
           token: Config.appId,
         })
       );
       setJoinSuccess(true);
+      log.info('join success', result);
     } catch (status: any) {
       log.error('join error', status);
     }
@@ -64,8 +66,9 @@ export default function CreateStreamChannel() {
         log.error('please create streamChannel first');
         return;
       }
-      await streamChannel.leave();
+      let result = await streamChannel.leave();
       setJoinSuccess(false);
+      log.info('leave success', result);
     } catch (status: any) {
       log.error('leave error', status);
     }
@@ -77,6 +80,7 @@ export default function CreateStreamChannel() {
   const destroyStreamChannel = useCallback(() => {
     streamChannel?.release();
     setStreamChannel(undefined);
+    log.info('destroyStreamChannel success');
   }, [streamChannel]);
 
   /**
@@ -84,9 +88,10 @@ export default function CreateStreamChannel() {
    */
   const renewToken = async () => {
     try {
-      await client.renewToken(Config.token, {
+      let result = await client.renewToken(Config.token, {
         channelName: cName,
       });
+      log.info('renewToken success', result);
     } catch (status: any) {
       log.error('renewToken error', status);
     }

@@ -54,6 +54,7 @@ export default function UserMetadata() {
         withLock: true,
       });
       setSubscribeSuccess(true);
+      log.info('subscribe success');
     } catch (status: any) {
       log.error('subscribe error', status);
     }
@@ -66,6 +67,7 @@ export default function UserMetadata() {
     try {
       await client.unsubscribe(cName);
       setSubscribeSuccess(false);
+      log.info('unsubscribe success');
     } catch (status: any) {
       log.error('unsubscribe error', status);
     }
@@ -91,6 +93,7 @@ export default function UserMetadata() {
         addUserId: addUserId,
         addTimeStamp: addTimeStamp,
       });
+      log.info('setUserMetadata success');
     } catch (status: any) {
       log.error('setUserMetadata error', status);
     }
@@ -104,7 +107,7 @@ export default function UserMetadata() {
       const result = await client.storage.getUserMetadata({
         userId: uid,
       });
-      log.alert('getUserMetadata', JSON.stringify(result));
+      log.info('getUserMetadata success', result);
     } catch (status: any) {
       log.error('getUserMetadata error', status);
     }
@@ -130,6 +133,7 @@ export default function UserMetadata() {
         addUserId: addUserId,
         addTimeStamp: addTimeStamp,
       });
+      log.info('updateUserMetadata success');
     } catch (status: any) {
       log.error('updateUserMetadata error', status);
     }
@@ -156,6 +160,7 @@ export default function UserMetadata() {
         addUserId: addUserId,
         addTimeStamp: addTimeStamp,
       });
+      log.info('removeUserMetadata success');
     } catch (status: any) {
       log.error('removeUserMetadata error', status);
     }
@@ -168,6 +173,7 @@ export default function UserMetadata() {
     try {
       await client.storage.subscribeUserMetadata(subscribeUid);
       setSubscribeUserMetadataSuccess(true);
+      log.info('subscribeUserMetadata success');
     } catch (status: any) {
       log.error('subscribeUserMetadata error', status);
     }
@@ -180,6 +186,7 @@ export default function UserMetadata() {
     try {
       await client.storage.unsubscribeUserMetadata(subscribeUid);
       setSubscribeUserMetadataSuccess(false);
+      log.info('unsubscribeUserMetadata success');
     } catch (status: any) {
       log.error('unsubscribeUserMetadata error', status);
     }

@@ -32,13 +32,14 @@ export default function Presence() {
    */
   const subscribe = async () => {
     try {
-      await client.subscribe(cName, {
+      let result = await client.subscribe(cName, {
         withMessage: true,
         withMetadata: true,
         withPresence: true,
         withLock: true,
       });
       setSubscribeSuccess(true);
+      log.info('subscribe success', result);
     } catch (status: any) {
       log.error('subscribe error', status);
     }
@@ -49,8 +50,9 @@ export default function Presence() {
    */
   const unsubscribe = async () => {
     try {
-      await client.unsubscribe(cName);
+      let result = await client.unsubscribe(cName);
       setSubscribeSuccess(false);
+      log.info('unsubscribe success', result);
     } catch (status: any) {
       log.error('unsubscribe error', status);
     }
@@ -66,7 +68,7 @@ export default function Presence() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         new PresenceOptions({ includeState: true, includeUserId: true })
       );
-      log.alert(`channel: ${cName} status`, `${JSON.stringify(result)}`);
+      log.info('whoNow success', result);
     } catch (status: any) {
       log.error('whoNow error', status);
     }
@@ -82,7 +84,7 @@ export default function Presence() {
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         new PresenceOptions({ includeState: true, includeUserId: true })
       );
-      log.alert(`channel: ${cName} status`, `${JSON.stringify(result)}`);
+      log.info('getOnlineUsers success', result);
     } catch (status: any) {
       log.error('getOnlineUsers error', status);
     }
@@ -94,7 +96,7 @@ export default function Presence() {
   const whereNow = async () => {
     try {
       let result = await client.presence.whereNow(searchUid);
-      log.alert(`${searchUid} is at`, `${JSON.stringify(result)}`);
+      log.info('whereNow success', result);
     } catch (status: any) {
       log.error('whereNow error', status);
     }
@@ -106,7 +108,7 @@ export default function Presence() {
   const getUserChannels = async () => {
     try {
       let result = await client.presence.getUserChannels(searchUid);
-      log.alert(`${searchUid} is at`, `${JSON.stringify(result)}`);
+      log.info('getUserChannels success', result);
     } catch (status: any) {
       log.error('getUserChannels error', status);
     }
@@ -117,11 +119,12 @@ export default function Presence() {
    */
   const setState = async () => {
     try {
-      await client.presence.setState(
+      let result = await client.presence.setState(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         new StateItem({ key: stateKey, value: stateValue })
       );
+      log.info('setState success', result);
     } catch (status: any) {
       log.error('setState error', status);
     }
@@ -137,7 +140,7 @@ export default function Presence() {
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
       );
-      log.alert(`${uid} state:`, `${JSON.stringify(result)}`);
+      log.info('getState success', result);
     } catch (status: any) {
       log.error('getState error', status);
     }
@@ -148,11 +151,12 @@ export default function Presence() {
    */
   const removeState = async () => {
     try {
-      await client.presence.removeState(
+      let result = await client.presence.removeState(
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
         { states: [stateKey] }
       );
+      log.info('removeState success', result);
     } catch (status: any) {
       log.error('removeState error', status);
     }

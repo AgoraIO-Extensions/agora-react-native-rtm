@@ -13,7 +13,7 @@ interface Props {
   onLoginStatusChanged?: (isLoggedIn: boolean) => void;
 }
 
-const Header = () => {
+export const Header = () => {
   const [visible, setVisible] = useState(false);
 
   const toggleOverlay = () => {
@@ -57,9 +57,10 @@ export default function BaseComponent({
    */
   const login = async () => {
     try {
-      await client.login({ token: Config.token });
+      let result = await client.login({ token: Config.token });
       setLoginSuccess(true);
       onLoginStatusChanged?.(true);
+      log.info('login success', result);
     } catch (status: any) {
       log.error('login error', status);
     }
@@ -70,9 +71,10 @@ export default function BaseComponent({
    */
   const logout = async () => {
     try {
-      await client.logout();
+      let result = await client.logout();
       setLoginSuccess(false);
       onLoginStatusChanged?.(false);
+      log.info('logout success', result);
     } catch (status: any) {
       log.error('logout error', status);
     }

@@ -12,52 +12,54 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import Advanced from './advanced';
 import Basic from './basic';
 import Client from './components/Client';
 import { ConfigHeader } from './config/ConfigHeader';
+import * as log from './utils/log';
 const RootStack = createNativeStackNavigator<any>();
 const DATA = [Basic, Advanced];
-
-setDebuggable(true);
 
 export default function App() {
   return (
     <NavigationContainer>
-      <SafeAreaView
-        style={styles.container}
-        onStartShouldSetResponder={(_) => {
-          Keyboard.dismiss();
-          return false;
-        }}
-      >
-        <RootStack.Navigator screenOptions={{ gestureEnabled: false }}>
-          <RootStack.Screen name={'APIExample'} component={Home} />
-          {DATA.map((value) =>
-            value.data.map(({ name, component }) => {
-              const RouteComponent = component;
-              return RouteComponent ? (
-                <RootStack.Screen
-                  name={name}
-                  children={() => (
-                    <Client>
-                      <RouteComponent />
-                    </Client>
-                  )}
-                />
-              ) : undefined;
-            })
-          )}
-        </RootStack.Navigator>
-        <TouchableOpacity
-          onPress={() => {
-            setDebuggable(!isDebuggable());
+      <GestureHandlerRootView>
+        <SafeAreaView
+          style={styles.container}
+          onStartShouldSetResponder={(_) => {
+            Keyboard.dismiss();
+            return false;
           }}
         >
-          <Text style={styles.version}>Powered by Agora RTM SDK</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
+          <RootStack.Navigator screenOptions={{ gestureEnabled: false }}>
+            <RootStack.Screen name={'APIExample'} component={Home} />
+            {DATA.map((value) =>
+              value.data.map(({ name, component }) => {
+                const RouteComponent = component;
+                return RouteComponent ? (
+                  <RootStack.Screen
+                    name={name}
+                    children={() => (
+                      <Client>
+                        <RouteComponent />
+                      </Client>
+                    )}
+                  />
+                ) : undefined;
+              })
+            )}
+          </RootStack.Navigator>
+          <TouchableOpacity
+            onPress={() => {
+              setDebuggable(!isDebuggable());
+            }}
+          >
+            <Text style={styles.version}>Powered by Agora RTM SDK</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </GestureHandlerRootView>
     </NavigationContainer>
   );
 }
@@ -87,7 +89,12 @@ const Item = ({
   navigation,
 }: Omit<StackScreenProps<any>, 'route'> & { item: any }) => (
   <View style={styles.item}>
-    <TouchableOpacity onPress={() => navigation.navigate(item.name)}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate(item.name);
+        log.logSink.clearData();
+      }}
+    >
       <Text style={styles.title}>{item.name}</Text>
     </TouchableOpacity>
   </View>

@@ -51,13 +51,14 @@ export default function ChannelMetadata() {
    */
   const subscribe = async () => {
     try {
-      await client.subscribe(cName, {
+      let result = await client.subscribe(cName, {
         withMessage: true,
         withMetadata: true,
         withPresence: true,
         withLock: true,
       });
       setSubscribeSuccess(true);
+      log.info('subscribe success', result);
     } catch (status: any) {
       log.error('subscribe error', status);
     }
@@ -68,8 +69,9 @@ export default function ChannelMetadata() {
    */
   const unsubscribe = async () => {
     try {
-      await client.unsubscribe(cName);
+      let result = await client.unsubscribe(cName);
       setSubscribeSuccess(false);
+      log.info('unsubscribe success', result);
     } catch (status: any) {
       log.error('unsubscribe error', status);
     }
@@ -100,7 +102,7 @@ export default function ChannelMetadata() {
           addUserId: addUserId,
         }
       );
-      log.alert(`${uid} setChannelMetadata:`, `${JSON.stringify(result)}`);
+      log.info('setChannelMetadata success', result);
     } catch (status: any) {
       log.error('setChannelMetadata error', status);
     }
@@ -115,7 +117,7 @@ export default function ChannelMetadata() {
         cName,
         RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
       );
-      log.alert(`${uid} getChannelMetadata:`, `${JSON.stringify(result)}`);
+      log.info('getChannelMetadata success', result);
     } catch (status: any) {
       log.error('getChannelMetadata error', status);
     }
@@ -132,7 +134,7 @@ export default function ChannelMetadata() {
         lockName,
         { retry }
       );
-      log.alert(`${uid} acquireLock:`, `${JSON.stringify(result)}`);
+      log.info('acquireLock success', result);
     } catch (status: any) {
       log.error('acquireLock error', status);
     }
@@ -163,7 +165,7 @@ export default function ChannelMetadata() {
           addUserId: addUserId,
         }
       );
-      log.alert(`${uid} updateChannelMetadata:`, `${JSON.stringify(result)}`);
+      log.info('updateChannelMetadata success', result);
     } catch (status: any) {
       log.error('updateChannelMetadata error', status);
     }
@@ -190,7 +192,7 @@ export default function ChannelMetadata() {
           data: metadata.current,
         }
       );
-      log.alert(`${uid} removeChannelMetadata:`, `${JSON.stringify(result)}`);
+      log.info('removeChannelMetadata success', result);
     } catch (status: any) {
       log.error('removeChannelMetadata error', status);
     }
