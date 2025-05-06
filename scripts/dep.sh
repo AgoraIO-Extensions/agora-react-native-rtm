@@ -57,11 +57,4 @@ else
   rm "$TEMP_FILE"
   echo "agora-react-native-rtm.podspec updated."
 
-  EXAMPLE_DEPENDENCIES=$(printf "%s\n%s" "$COCOAPODS_DEPENDENCIES" | sed 's/^/  /')
-  TEMP_FILE=$(mktemp)
-  echo "$EXAMPLE_DEPENDENCIES" > "$TEMP_FILE"
-  sed -i.bak -e '/#dependencies start/,/#dependencies end/{//!d;}' -e "/#dependencies start/r $TEMP_FILE" "$EXAMPLE_IOS_PODFILE_PATH"
-  rm "${EXAMPLE_IOS_PODFILE_PATH}.bak"
-  rm "$TEMP_FILE"
-  echo "example/ios/Podfile updated."
 fi
