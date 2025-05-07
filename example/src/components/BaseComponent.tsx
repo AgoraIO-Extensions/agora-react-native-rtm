@@ -1,5 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { useRtm } from 'agora-react-native-rtm';
+import {
+  LinkStateEvent,
+  LockEvent,
+  MessageEvent,
+  PresenceEvent,
+  StorageEvent,
+  useRtm,
+  useRtmEvent,
+} from 'agora-react-native-rtm';
 import React, { useEffect, useState } from 'react';
 
 import Config from '../config/agora.config';
@@ -17,6 +25,12 @@ import {
 interface Props {
   onChannelNameChanged?: (value: string) => void;
   onLoginStatusChanged?: (isLoggedIn: boolean) => void;
+  onLinkState?: (linkState: LinkStateEvent) => void;
+  onTokenPrivilegeWillExpire?: () => void;
+  onLock?: (lock: LockEvent) => void;
+  onMessage?: (message: MessageEvent) => void;
+  onPresence?: (presence: PresenceEvent) => void;
+  onStorage?: (storage: StorageEvent) => void;
 }
 
 export const Header = () => {
@@ -37,6 +51,12 @@ export const Header = () => {
 export default function BaseComponent({
   onChannelNameChanged,
   onLoginStatusChanged,
+  onLinkState,
+  onTokenPrivilegeWillExpire,
+  onLock,
+  onMessage,
+  onPresence,
+  onStorage,
 }: Props) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
@@ -83,6 +103,54 @@ export default function BaseComponent({
       log.error('logout error', status);
     }
   };
+
+  useRtmEvent(client, 'linkState', (linkState: LinkStateEvent) => {
+    if (onLinkState) {
+      onLinkState(linkState);
+    } else {
+      log.info('linkState', linkState);
+    }
+  });
+
+  useRtmEvent(client, 'tokenPrivilegeWillExpire', () => {
+    if (onTokenPrivilegeWillExpire) {
+      onTokenPrivilegeWillExpire();
+    } else {
+      log.info('tokenPrivilegeWillExpire');
+    }
+  });
+
+  useRtmEvent(client, 'lock', (lock: LockEvent) => {
+    if (onLock) {
+      onLock(lock);
+    } else {
+      log.info('lock', lock);
+    }
+  });
+
+  useRtmEvent(client, 'message', (message: MessageEvent) => {
+    if (onMessage) {
+      onMessage(message);
+    } else {
+      log.info('message', message);
+    }
+  });
+
+  useRtmEvent(client, 'presence', (presence: PresenceEvent) => {
+    if (onPresence) {
+      onPresence(presence);
+    } else {
+      log.info('presence', presence);
+    }
+  });
+
+  useRtmEvent(client, 'storage', (storage: StorageEvent) => {
+    if (onStorage) {
+      onStorage(storage);
+    } else {
+      log.info('storage', storage);
+    }
+  });
 
   return (
     <AgoraView style={AgoraStyle.fullWidth}>

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { LinkStateEvent, useRtm, useRtmEvent } from 'agora-react-native-rtm';
+import { useRtm } from 'agora-react-native-rtm';
 import React, { useEffect, useState } from 'react';
 
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
@@ -63,14 +63,6 @@ export default function Login() {
       log.error('renewToken error', status);
     }
   };
-
-  useRtmEvent(client, 'linkState', (linkState: LinkStateEvent) => {
-    log.info('linkState', linkState);
-  });
-
-  useRtmEvent(client, 'tokenPrivilegeWillExpire', () => {
-    log.info('tokenPrivilegeWillExpire');
-  });
 
   const navigation = useNavigation();
 

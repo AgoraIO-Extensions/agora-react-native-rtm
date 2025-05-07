@@ -1,15 +1,10 @@
 import {
   JoinChannelOptions,
-  LockEvent,
-  MessageEvent,
   Metadata,
   MetadataItem,
-  PresenceEvent,
   RTMStreamChannel,
   RTM_CHANNEL_TYPE,
-  StorageEvent,
   useRtm,
-  useRtmEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useRef, useState } from 'react';
 
@@ -278,22 +273,6 @@ export default function UserMetadata() {
       setStreamChannel(undefined);
     }
   }, []);
-
-  useRtmEvent(client, 'lock', (lock: LockEvent) => {
-    log.info('lock', lock);
-  });
-
-  useRtmEvent(client, 'message', (message: MessageEvent) => {
-    log.info('message', message);
-  });
-
-  useRtmEvent(client, 'presence', (presence: PresenceEvent) => {
-    log.info('presence', presence);
-  });
-
-  useRtmEvent(client, 'storage', (storage: StorageEvent) => {
-    log.info('storage', storage);
-  });
 
   return (
     <>

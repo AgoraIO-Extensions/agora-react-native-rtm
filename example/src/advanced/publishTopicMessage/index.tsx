@@ -6,10 +6,8 @@ import {
   MessageEvent,
   RTMStreamChannel,
   RTM_MESSAGE_TYPE,
-  TopicEvent,
   TopicMessageOptions,
   useRtm,
-  useRtmEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native';
@@ -229,8 +227,8 @@ export default function PublishTopicMessage() {
     }
   };
 
-  useRtmEvent(client, 'message', (message: MessageEvent) => {
-    log.info('message', message, 333);
+  const handleMessage = (message: MessageEvent) => {
+    log.info('message', message);
     setMessages((prevState) =>
       GiftedChat.append(prevState, [
         {
@@ -244,7 +242,7 @@ export default function PublishTopicMessage() {
         },
       ])
     );
-  });
+  };
 
   const handleLoginStatus = useCallback((status: boolean) => {
     setLoginSuccess(status);
@@ -256,10 +254,6 @@ export default function PublishTopicMessage() {
     }
   }, []);
 
-  useRtmEvent(client, 'topic', (topic: TopicEvent) => {
-    log.info('topic', topic);
-  });
-
   return (
     <>
       <AgoraView style={[AgoraStyle.fullSize]}>
@@ -267,6 +261,7 @@ export default function PublishTopicMessage() {
           <BaseComponent
             onChannelNameChanged={(v) => setCName(v)}
             onLoginStatusChanged={handleLoginStatus}
+            onMessage={handleMessage}
           />
           <AgoraButton
             disabled={!loginSuccess}

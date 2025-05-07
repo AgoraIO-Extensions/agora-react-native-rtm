@@ -1,15 +1,11 @@
 import { Buffer } from 'buffer';
 
 import {
-  LockEvent,
   MessageEvent,
-  PresenceEvent,
   PublishOptions,
   RTM_CHANNEL_TYPE,
   RTM_MESSAGE_TYPE,
-  StorageEvent,
   useRtm,
-  useRtmEvent,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useState } from 'react';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
@@ -20,6 +16,7 @@ import {
   AgoraDivider,
   AgoraDropdown,
   AgoraStyle,
+  AgoraSwitch,
   AgoraView,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
@@ -30,6 +27,7 @@ import * as log from '../../utils/log';
 export default function PublishMessage() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
+  const [storeInHistory, setStoreInHistory] = useState(false);
   const [publishMessageByBuffer, setPublishMessageByBuffer] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
   const [channelType, setChannelType] = useState<number>(
@@ -56,6 +54,7 @@ export default function PublishMessage() {
             new PublishOptions({
               channelType: channelType,
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
+              storeInHistory: storeInHistory,
             })
           );
           log.info('publish success', result);
@@ -66,6 +65,7 @@ export default function PublishMessage() {
             new PublishOptions({
               channelType: channelType,
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
+              storeInHistory: storeInHistory,
             })
           );
           log.info('publish success', result);
@@ -80,7 +80,7 @@ export default function PublishMessage() {
         return;
       }
     },
-    [cName, client, publishMessageByBuffer, channelType]
+    [cName, client, publishMessageByBuffer, channelType, storeInHistory]
   );
 
   const onSend = useCallback(
@@ -128,11 +128,7 @@ export default function PublishMessage() {
     }
   };
 
-  useRtmEvent(client, 'lock', (lock: LockEvent) => {
-    log.info('lock', lock);
-  });
-
-  useRtmEvent(client, 'message', (message: MessageEvent) => {
+  const handleMessage = (message: MessageEvent) => {
     log.info('message', message);
     setMessages((prevState) =>
       GiftedChat.append(prevState, [
@@ -147,15 +143,7 @@ export default function PublishMessage() {
         },
       ])
     );
-  });
-
-  useRtmEvent(client, 'presence', (presence: PresenceEvent) => {
-    log.info('presence', presence);
-  });
-
-  useRtmEvent(client, 'storage', (storage: StorageEvent) => {
-    log.info('storage', storage);
-  });
+  };
 
   const handleLoginStatus = useCallback((status: boolean) => {
     setLoginSuccess(status);
@@ -170,6 +158,7 @@ export default function PublishMessage() {
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
+          onMessage={handleMessage}
         />
         <AgoraDivider />
         <AgoraDropdown
@@ -186,6 +175,11 @@ export default function PublishMessage() {
           onPress={async () => {
             subscribeSuccess ? await unsubscribe() : await subscribe();
           }}
+        />
+        <AgoraSwitch
+          value={storeInHistory}
+          onValueChange={(v) => setStoreInHistory(v)}
+          title="storeInHistory"
         />
       </AgoraView>
       <AgoraButton
