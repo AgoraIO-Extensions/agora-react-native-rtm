@@ -32,7 +32,6 @@ export default function Lock() {
   );
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
-  const [uid] = useState<string>(Config.uid);
   const [lockDetailList, setLockDetailList] = useState<LockDetail[]>([]);
 
   const [lockName, setLockName] = useState<string>('lock-test');
