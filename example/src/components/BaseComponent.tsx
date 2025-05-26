@@ -5,6 +5,7 @@ import {
   MessageEvent,
   PresenceEvent,
   StorageEvent,
+  TopicEvent,
   useRtm,
   useRtmEvent,
 } from 'agora-react-native-rtm';
@@ -31,6 +32,7 @@ interface Props {
   onMessage?: (message: MessageEvent) => void;
   onPresence?: (presence: PresenceEvent) => void;
   onStorage?: (storage: StorageEvent) => void;
+  onTopic?: (topic: TopicEvent) => void;
 }
 
 export const Header = () => {
@@ -57,6 +59,7 @@ export default function BaseComponent({
   onMessage,
   onPresence,
   onStorage,
+  onTopic,
 }: Props) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
@@ -133,6 +136,14 @@ export default function BaseComponent({
       onMessage(message);
     } else {
       log.info('message', message);
+    }
+  });
+
+  useRtmEvent(client, 'topic', (topic: TopicEvent) => {
+    if (onTopic) {
+      onTopic(topic);
+    } else {
+      log.info('topic', topic);
     }
   });
 
