@@ -32,7 +32,7 @@ export class RtmPresenceInternal extends RTMPresence {
       const status = this._rtmPresenceImpl.whoNow(
         channelName,
         channelType,
-        options!
+        options ? options : new PresenceOptions()
       );
       let result = await wrapRtmResult(status, operation, callBack, true);
       return {
@@ -56,7 +56,7 @@ export class RtmPresenceInternal extends RTMPresence {
       const status = this._rtmPresenceImpl.getOnlineUsers(
         channelName,
         channelType,
-        options!
+        options ? options : new PresenceOptions()
       );
       let result = await wrapRtmResult(status, operation, callBack, true);
       return {

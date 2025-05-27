@@ -75,7 +75,7 @@ export abstract class RTMClient {
 
   abstract unsubscribe(channelName: string): Promise<UnsubscribeResponse>;
 
-  abstract createStreamChannel(channelName: string): RTMStreamChannel;
+  abstract createStreamChannel(channelName: string): Promise<RTMStreamChannel>;
 
   abstract renewToken(
     token: string,

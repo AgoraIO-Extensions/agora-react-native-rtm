@@ -4,13 +4,12 @@ import {
   JoinTopicResponse,
   LeaveChannelResponse,
   LeaveTopicResponse,
-  PublishTopicMessageOptions,
   PublishTopicMessageResponse,
   SubscribeTopicResponse,
   UnsubscribeTopicResponse,
-  joinTopicOptions,
 } from '../api/RTMStreamChannel';
-import { TopicOptions } from '../legacy/IAgoraStreamChannel';
+import { TopicMessageOptions } from '../legacy/AgoraRtmBase';
+import { JoinTopicOptions, TopicOptions } from '../legacy/IAgoraStreamChannel';
 import { JoinChannelOptions } from '../legacy/IAgoraStreamChannel';
 import { IStreamChannelImpl } from '../legacy/impl/IAgoraStreamChannelImpl';
 
@@ -53,12 +52,15 @@ export class StreamChannelInternal extends IStreamChannelImpl {
 
   async joinTopic(
     topicName: string,
-    options?: joinTopicOptions
+    options?: JoinTopicOptions
   ): Promise<JoinTopicResponse> {
     let operation = 'joinTopic';
     let callBack = 'onJoinTopicResult';
     try {
-      const status = super.joinTopic(topicName, options!);
+      const status = super.joinTopic(
+        topicName,
+        options ? options : new JoinTopicOptions()
+      );
       let result = await wrapRtmResult(status, operation, callBack);
       return {
         ...result,
@@ -72,12 +74,16 @@ export class StreamChannelInternal extends IStreamChannelImpl {
   async publishTopicMessage(
     topicName: string,
     message: string | Uint8Array,
-    options?: PublishTopicMessageOptions
+    options?: TopicMessageOptions
   ): Promise<PublishTopicMessageResponse> {
     let operation = 'publishTopicMessage';
     let callBack = 'onPublishTopicMessageResult';
     try {
-      const status = super.publishTopicMessage(topicName, message, options!);
+      const status = super.publishTopicMessage(
+        topicName,
+        message,
+        options ? options : new TopicMessageOptions()
+      );
       let result = await wrapRtmResult(status, operation, callBack);
       return {
         ...result,
@@ -108,10 +114,10 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     let operation = 'subscribeTopic';
     let callBack = 'onSubscribeTopicResult';
     try {
-      if (!options) {
-        options = {};
-      }
-      const status = super.subscribeTopic(topicName, options!);
+      const status = super.subscribeTopic(
+        topicName,
+        options ? options : new TopicOptions()
+      );
       let result = await wrapRtmResult(status, operation, callBack, true);
       return {
         succeedUsers: result.callBackResult?.succeedUsers,
@@ -130,7 +136,10 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     let operation = 'unsubscribeTopic';
     let callBack = 'onUnsubscribeTopicResult';
     try {
-      const status = super.unsubscribeTopic(topicName, options!);
+      const status = super.unsubscribeTopic(
+        topicName,
+        options ? options : new TopicOptions()
+      );
       let result = await wrapRtmResult(status, operation, callBack);
       return result;
     } catch (error) {

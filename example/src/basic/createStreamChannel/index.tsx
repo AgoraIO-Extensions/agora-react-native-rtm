@@ -26,14 +26,18 @@ export default function CreateStreamChannel() {
   /**
    * Step 2 : createStreamChannel
    */
-  const createStreamChannel = () => {
+  const createStreamChannel = async () => {
     if (joinSuccess) {
       log.error('already joined channel');
       return;
     }
-    let result = client.createStreamChannel(cName);
-    setStreamChannel(result);
-    log.info('createStreamChannel success', result);
+    try {
+      let result = await client.createStreamChannel(cName);
+      setStreamChannel(result);
+      log.info('createStreamChannel success', result);
+    } catch (status: any) {
+      log.error('createStreamChannel error', status);
+    }
   };
 
   /**
@@ -124,8 +128,10 @@ export default function CreateStreamChannel() {
           title={`${
             streamChannel ? 'destroyStreamChannel' : 'createStreamChannel'
           }`}
-          onPress={() => {
-            streamChannel ? destroyStreamChannel() : createStreamChannel();
+          onPress={async () => {
+            streamChannel
+              ? destroyStreamChannel()
+              : await createStreamChannel();
           }}
         />
         <AgoraButton

@@ -51,14 +51,6 @@ export type GetSubscribedUserListResponse = StreamChannelOperationResponse & {
   subscribed: string[];
 };
 
-export interface joinTopicOptions {
-  meta?: any;
-}
-
-export interface PublishTopicMessageOptions {
-  customType?: string;
-}
-
 export abstract class RTMStreamChannel {
   abstract join(options?: JoinChannelOptions): Promise<JoinChannelResponse>;
   abstract leave(): Promise<LeaveChannelResponse>;

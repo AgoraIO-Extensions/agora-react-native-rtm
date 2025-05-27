@@ -75,11 +75,21 @@ export class RtmClientInternal extends RTMClient {
     );
   }
 
-  createStreamChannel(channelName: string): RTMStreamChannel {
-    const streamChannel = new StreamChannelInternal(channelName);
-    RtmClientInternal._streamChannels.set(channelName, streamChannel);
-    this._rtmClientImpl.createStreamChannel(channelName);
-    return streamChannel;
+  async createStreamChannel(channelName: string): Promise<RTMStreamChannel> {
+    let operation = 'createStreamChannel';
+
+    try {
+      const status = this._rtmClientImpl.createStreamChannel(channelName);
+      if (status.result < 0) {
+        throw handleError(status, 'createStreamChannel');
+      } else {
+        const streamChannel = new StreamChannelInternal(channelName);
+        RtmClientInternal._streamChannels.set(channelName, streamChannel);
+        return streamChannel;
+      }
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
 
   release(): number {
@@ -162,7 +172,7 @@ export class RtmClientInternal extends RTMClient {
         channelName,
         message,
         message.length,
-        options!
+        options ? options : new PublishOptions()
       );
       let result = await wrapRtmResult(status, operation, callBack);
       return {
@@ -180,7 +190,10 @@ export class RtmClientInternal extends RTMClient {
     let operation = 'subscribe';
     let callBack = 'onSubscribeResult';
     try {
-      const status = this._rtmClientImpl.subscribe(channelName, options!);
+      const status = this._rtmClientImpl.subscribe(
+        channelName,
+        options ? options : new SubscribeOptions()
+      );
       let result = await wrapRtmResult(status, operation, callBack);
       return {
         ...result,

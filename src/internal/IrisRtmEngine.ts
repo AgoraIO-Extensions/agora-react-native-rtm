@@ -7,6 +7,7 @@ import { NativeEventEmitter } from 'react-native';
 
 import { BaseResponse, ErrorInfo } from '../api/RTMClient';
 import { RTMClientEventMap, processRTMClientEventMap } from '../api/RTMEvents';
+import { HistoryMessage, RTM_MESSAGE_TYPE } from '../legacy/AgoraRtmBase';
 import AgoraRtmNg from '../specs';
 
 import { RtmClientInternal } from './RtmClientInternal';
@@ -172,15 +173,24 @@ export const EVENT_PROCESSORS: EventProcessors = {
     type: () => EVENT_TYPE.RTMEvent,
     func: [processRTMClientEventMap],
     handlers: () => RtmClientInternal._event_handlers,
-    preprocess: (
-      event: string,
-      data: { event: { message?: string } },
-      buffers: Uint8Array[]
-    ) => {
+    preprocess: (event: string, data: any, buffers: Uint8Array[]) => {
       switch (event) {
         case 'onMessageEvent':
           console.log('onMessageEvent', data.event.message, buffers);
           data.event.message = buffers[0]?.toString();
+          break;
+        case 'onGetHistoryMessagesResult':
+          if (data?.messageList) {
+            data.messageList = data.messageList.map(
+              async (item: HistoryMessage) => {
+                const value = await AgoraRtmNg.readProcessMemory(item.message);
+                item.message = Buffer.from(value).toString();
+                debugger;
+                return item;
+              }
+            );
+          }
+          break;
       }
       return { event, data, buffers };
     },
