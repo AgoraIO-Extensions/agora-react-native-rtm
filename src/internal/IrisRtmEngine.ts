@@ -7,7 +7,7 @@ import { NativeEventEmitter } from 'react-native';
 
 import { BaseResponse, ErrorInfo } from '../api/RTMClient';
 import { RTMClientEventMap, processRTMClientEventMap } from '../api/RTMEvents';
-import { HistoryMessage, RTM_MESSAGE_TYPE } from '../legacy/AgoraRtmBase';
+import { HistoryMessage } from '../legacy/AgoraRtmBase';
 import AgoraRtmNg from '../specs';
 
 import { RtmClientInternal } from './RtmClientInternal';
@@ -181,14 +181,18 @@ export const EVENT_PROCESSORS: EventProcessors = {
           break;
         case 'onGetHistoryMessagesResult':
           if (data?.messageList) {
-            data.messageList = data.messageList.map(
-              async (item: HistoryMessage) => {
-                const value = await AgoraRtmNg.readProcessMemory(item.message);
-                item.message = Buffer.from(value).toString();
-                debugger;
-                return item;
+            data.messageList = data.messageList.map((item: HistoryMessage) => {
+              if (item.message) {
+                item.message = AgoraRtmNg.getValueFromPtr(
+                  //message_str is a string from iris, this is for very big number that can't be represented by c++ long type
+                  //@ts-ignore
+                  item.message_str,
+                  item.messageLength,
+                  item.messageType
+                );
               }
-            );
+              return item;
+            });
           }
           break;
       }

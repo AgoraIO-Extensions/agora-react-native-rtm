@@ -14,6 +14,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import io.agora.iris.rtm.IrisRtmEngine;
 import io.agora.iris.rtm.IrisRtmEventHandler;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONException;
@@ -122,4 +123,56 @@ public class AgoraRtmNgModule
         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
         .emit("AgoraRtmNg:onEvent", map);
   }
+
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public String getValueFromPtr(String ptr, double length, double datatype) {
+    synchronized (irisApiLock) {
+      try {
+        if (irisRtmEngine != null) {
+          long ptrAddress;
+          try {
+            ptrAddress = Long.parseLong(ptr);
+          } catch (NumberFormatException e) {
+            BigInteger bigInt = new BigInteger(ptr);
+            ptrAddress = bigInt.longValue();
+          }
+
+          return irisRtmEngine.CopyAsStringByAddress(ptrAddress, (int) length);
+        }
+        return "";
+      } catch (Exception e) {
+        e.printStackTrace();
+        return "";
+      }
+    }
+  }
+
+  // @ReactMethod(isBlockingSynchronousMethod = true)
+  // public WritableArray getBuffer(String ptr, double length, double datatype) {
+  //   synchronized (irisApiLock) {
+  //     try {
+  //       if (irisRtmEngine != null) {
+  //         long ptrAddress;
+  //         try {
+  //           ptrAddress = Long.parseLong(ptr);
+  //         } catch (NumberFormatException e) {
+  //           BigInteger bigInt = new BigInteger(ptr);
+  //           ptrAddress = bigInt.longValue();
+  //         }
+
+  //         WritableArray array = Arguments.createArray();
+  //         byte[] buffers = irisRtmEngine.CopyAsByteArrayByAddress(ptrAddress, (int) length);
+  //         for (byte buffer : buffers) {
+  //           array.pushString(Base64.encodeToString(buffer, Base64.DEFAULT));
+  //         }
+
+  //         return array;
+  //       }
+  //       return null;
+  //     } catch (Exception e) {
+  //       e.printStackTrace();
+  //       return null;
+  //     }
+  //   }
+  // }
 }
