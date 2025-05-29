@@ -6,7 +6,11 @@ import EventEmitter from 'eventemitter3';
 import { NativeEventEmitter } from 'react-native';
 
 import { BaseResponse, ErrorInfo } from '../api/RTMClient';
-import { RTMClientEventMap, processRTMClientEventMap } from '../api/RTMEvents';
+import {
+  RTMClientEventMap,
+  cleanIrisExtraData,
+  processRTMClientEventMap,
+} from '../api/RTMEvents';
 import { HistoryMessage } from '../legacy/AgoraRtmBase';
 import AgoraRtmNg from '../specs';
 
@@ -36,7 +40,7 @@ export class RequestQueue {
 
   public addRequest(
     callbackName: string,
-    timeoutMs: number = 10000,
+    timeoutMs: number,
     externalRequestId: number
   ): Promise<any> & { requestId: number } {
     const requestId = externalRequestId;
@@ -281,13 +285,14 @@ export function callIrisApi(this: any, funcName: string, params: any): any {
       funcName === 'StreamChannel_publishTopicMessage_a31773e'
     ) {
       if (typeof params.message === 'string') {
-        let buffer = base64.fromByteArray(
-          new Uint8Array(Buffer.from(params.message ?? ''))
-        );
+        let uint8Array = new Uint8Array(Buffer.from(params.message));
+        let buffer = base64.fromByteArray(uint8Array);
+        console.log(uint8Array, buffer);
         buffers.push(buffer);
         params.length = base64.byteLength(buffer);
       } else {
-        let buffer = base64.fromByteArray(params.message ?? Buffer.from(''));
+        let buffer = base64.fromByteArray(params.message);
+        console.log(params.message, buffer);
         buffers.push(buffer);
         params.length = base64.byteLength(buffer);
       }
@@ -366,11 +371,14 @@ export async function wrapRtmResult(
       errorCode: data.result,
     };
   } else {
-    const result = await RequestQueue.instance.addRequest(
+    let result = await RequestQueue.instance.addRequest(
       callbackName,
-      10000,
+      60000,
       data.requestId
     );
+    if (withCallbackResult) {
+      result = cleanIrisExtraData(result);
+    }
     return {
       timestamp: 0,
       ...(withCallbackResult ? { callBackResult: result } : {}),

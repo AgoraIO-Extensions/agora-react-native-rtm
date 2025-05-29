@@ -17,6 +17,25 @@ export interface RTMClientEventMap {
   linkState: (linkState: LinkStateEvent) => void;
 }
 
+/**
+ * @ignore
+ */
+export function cleanIrisExtraData(data: any): any {
+  if (data === null || typeof data !== 'object') {
+    return data;
+  }
+
+  if (Array.isArray(data)) {
+    return data.map((item) => cleanIrisExtraData(item));
+  }
+
+  return Object.fromEntries(
+    Object.entries(data)
+      .filter(([key]) => !key.endsWith('_str'))
+      .map(([key, value]) => [key, cleanIrisExtraData(value)])
+  );
+}
+
 export function processRTMClientEventMap(
   handler: RTMClientEventMap,
   event: string,
@@ -25,27 +44,27 @@ export function processRTMClientEventMap(
   switch (event) {
     case 'presence':
       if (handler.presence !== undefined) {
-        handler.presence(jsonParams.event);
+        handler.presence(cleanIrisExtraData(jsonParams.event));
       }
       break;
     case 'message':
       if (handler.message !== undefined) {
-        handler.message(jsonParams.event);
+        handler.message(cleanIrisExtraData(jsonParams.event));
       }
       break;
     case 'storage':
       if (handler.storage !== undefined) {
-        handler.storage(jsonParams.event);
+        handler.storage(cleanIrisExtraData(jsonParams.event));
       }
       break;
     case 'lock':
       if (handler.lock !== undefined) {
-        handler.lock(jsonParams.event);
+        handler.lock(cleanIrisExtraData(jsonParams.event));
       }
       break;
     case 'topic':
       if (handler.topic !== undefined) {
-        handler.topic(jsonParams.event);
+        handler.topic(cleanIrisExtraData(jsonParams.event));
       }
       break;
     case 'tokenPrivilegeWillExpire':
@@ -55,7 +74,7 @@ export function processRTMClientEventMap(
       break;
     case 'linkState':
       if (handler.linkState !== undefined) {
-        handler.linkState(jsonParams.event);
+        handler.linkState(cleanIrisExtraData(jsonParams.event));
       }
       break;
   }

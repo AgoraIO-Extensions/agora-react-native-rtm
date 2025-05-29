@@ -75,7 +75,8 @@ RCT_EXPORT_MODULE()
 - (instancetype)init {
   if (self = [super init]) {
     self.irisRtmEngine = nullptr;
-    self.eventHandler = new agora::iris::rtm::EventHandler((__bridge void *)self);
+    self.eventHandler =
+        new agora::iris::rtm::EventHandler((__bridge void *)self);
     instance = self;
   }
   return instance;
@@ -202,8 +203,9 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(callApi
   void *handler[1] = {self.eventHandler};
   if (bufferArray.count == 0) {
     std::smatch output;
-    std::regex pattern = std::regex("^.*(RtmClient_initialize|StreamChannel_"
-                                    "publishTopicMessage|RtmClient_publish)$");
+    std::regex pattern =
+        std::regex("(^.*(RtmClient_create|StreamChannel_publishTopicMessage|"
+                   "RtmClient_publish)(_[a-zA-Z0-9]*)?)$");
     std::string name = funcName.UTF8String;
     if (std::regex_match(name, output, pattern)) {
       param.buffer = handler;
@@ -259,5 +261,35 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(callApi
   return std::make_shared<facebook::react::NativeAgoraRtmNgSpecJSI>(params);
 }
 #endif
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getValueFromPtr
+                                       : (NSString *)ptr length
+                                       : (double)length datatype
+                                       : (double)datatype) {
+  @try {
+    if (ptr == nil || ptr.length == 0 || length <= 0) {
+      return @"";
+    }
+
+    // 将字符串转换为指针地址
+    unsigned long long ptrAddress = strtoull([ptr UTF8String], NULL, 10);
+    if (ptrAddress == 0) {
+      return @"";
+    }
+
+    // 直接从内存地址读取数据
+    void *memoryPtr = (void *)ptrAddress;
+    NSData *data = [NSData dataWithBytes:memoryPtr length:(NSUInteger)length];
+
+    // 转换为字符串
+    NSString *result = [[NSString alloc] initWithData:data
+                                             encoding:NSUTF8StringEncoding];
+    return result ? result : @"";
+
+  } @catch (NSException *exception) {
+    NSLog(@"getValueFromPtr error: %@", exception.reason);
+    return @"";
+  }
+}
 
 @end
