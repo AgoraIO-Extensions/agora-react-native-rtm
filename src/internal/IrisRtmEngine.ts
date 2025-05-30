@@ -61,7 +61,7 @@ export class RequestQueue {
         const item = this._requestMap.get(requestId);
         if (item) {
           this._requestMap.delete(requestId);
-          console.log(`请求超时: ${requestId}`);
+          console.log(`Request timeout: ${requestId}`);
           item.reject(
             new Error(`Request ${requestId} timed out after ${timeoutMs}ms`)
           );
@@ -87,20 +87,20 @@ export class RequestQueue {
   ): boolean {
     const request = this._requestMap.get(requestId);
     if (!request) {
-      console.log(`找不到请求 ${requestId}`);
+      console.log(`Request not found: ${requestId}`);
       return false;
     }
 
-    // 检查回调名称是否匹配
+    // Check if callback name matches
     if (request.callbackName !== callbackName) {
       console.log(
-        `回调名称不匹配: 期望 ${request.callbackName}, 实际 ${callbackName}`
+        `Callback name mismatch: expected ${request.callbackName}, actual ${callbackName}`
       );
       return false;
     }
 
     console.log(
-      `解析请求: ${requestId}, 回调: ${callbackName}, 错误码: ${errorCode}`
+      `Resolving request: ${requestId}, callback: ${callbackName}, error code: ${errorCode}`
     );
 
     if (request.timeout) {
@@ -183,22 +183,6 @@ export const EVENT_PROCESSORS: EventProcessors = {
           console.log('onMessageEvent', data.event.message, buffers);
           data.event.message = buffers[0]?.toString();
           break;
-        case 'onGetHistoryMessagesResult':
-          if (data?.messageList) {
-            data.messageList = data.messageList.map((item: HistoryMessage) => {
-              if (item.message) {
-                item.message = AgoraRtmNg.getValueFromPtr(
-                  //message_str is a string from iris, this is for very big number that can't be represented by c++ long type
-                  //@ts-ignore
-                  item.message_str,
-                  item.messageLength,
-                  item.messageType
-                );
-              }
-              return item;
-            });
-          }
-          break;
       }
       return { event, data, buffers };
     },
@@ -256,7 +240,6 @@ function handleEvent({ event, data, buffers }: any) {
     });
   }
 
-  // 处理请求解析
   const requestId = _data.requestId;
   if (requestId !== undefined && _data.errorCode !== undefined) {
     const requestQueue = RequestQueue.instance;

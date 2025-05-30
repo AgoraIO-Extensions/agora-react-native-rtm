@@ -15,10 +15,6 @@ public abstract class AgoraRtmNgSpec extends ReactContextBaseJavaModule {
 
   public abstract boolean destroyIrisRtmEngine();
 
-  public abstract String getValueFromPtr(String ptr, double length, double datatype);
-
-  // public abstract WritableArray getBuffer(String ptr, double length, double datatype);
-
   public abstract String callApi(ReadableMap arguments);
 
   public abstract void showRPSystemBroadcastPickerView(boolean showsMicrophoneButton,

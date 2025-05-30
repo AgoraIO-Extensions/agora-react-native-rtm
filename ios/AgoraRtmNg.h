@@ -15,4 +15,6 @@
 
 + (instancetype)shareInstance;
 
+- (NSString *)processEventData:(NSString *)event originalData:(NSString *)data;
+
 @end

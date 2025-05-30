@@ -33,14 +33,18 @@ public:
         [array addObject:base64Buffer];
       }
 
+      NSString *eventStr = [NSString stringWithUTF8String:event];
+      NSString *dataStr = [NSString stringWithUTF8String:data];
+      NSString *processedData = [plugin_ processEventData:eventStr
+                                             originalData:dataStr];
+
       if (plugin_.hasListeners) {
-        [plugin_
-            sendEventWithName:EVENT_NAME
-                         body:@{
-                           @"event" : [NSString stringWithUTF8String:event],
-                           @"data" : [NSString stringWithUTF8String:data],
-                           @"buffers" : array
-                         }];
+        [plugin_ sendEventWithName:EVENT_NAME
+                              body:@{
+                                @"event" : eventStr,
+                                @"data" : processedData,
+                                @"buffers" : array
+                              }];
       }
     }
   }
@@ -262,33 +266,84 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(callApi
 }
 #endif
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getValueFromPtr
-                                       : (NSString *)ptr length
-                                       : (double)length datatype
-                                       : (double)datatype) {
+- (NSString *)processEventData:(NSString *)event originalData:(NSString *)data {
   @try {
-    if (ptr == nil || ptr.length == 0 || length <= 0) {
-      return @"";
+    NSData *jsonData = [data dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSMutableDictionary *jsonObject =
+        [NSJSONSerialization JSONObjectWithData:jsonData
+                                        options:NSJSONReadingMutableContainers
+                                          error:&error];
+    if (error || !jsonObject) {
+      return data;
     }
 
-    // 将字符串转换为指针地址
-    unsigned long long ptrAddress = strtoull([ptr UTF8String], NULL, 10);
-    if (ptrAddress == 0) {
-      return @"";
+    if ([event containsString:@"onGetHistoryMessagesResult"]) {
+      NSArray *messageList = jsonObject[@"messageList"];
+      if (messageList && [messageList isKindOfClass:[NSArray class]]) {
+        NSMutableArray *processedMessageList = [NSMutableArray new];
+
+        for (NSDictionary *item in messageList) {
+          NSMutableDictionary *processedItem = [item mutableCopy];
+
+          id messagePtr = item[@"message"];
+          NSNumber *messageLength = item[@"messageLength"];
+
+          if (messagePtr && messageLength && [messageLength intValue] > 0) {
+            unsigned long long ptrAddress = 0;
+
+            // Safely handle large integer addresses, support both NSNumber and
+            // NSString
+            if ([messagePtr isKindOfClass:[NSNumber class]]) {
+              ptrAddress = [(NSNumber *)messagePtr unsignedLongLongValue];
+            } else if ([messagePtr isKindOfClass:[NSString class]]) {
+              // Use string to handle very large integers, similar to Android
+              // BigInt approach
+              NSScanner *scanner =
+                  [NSScanner scannerWithString:(NSString *)messagePtr];
+              [scanner scanUnsignedLongLong:&ptrAddress];
+            }
+
+            if (ptrAddress > 0) {
+              @try {
+                const char *str = reinterpret_cast<const char *>(ptrAddress);
+                // Add memory access safety check
+                if (str != NULL) {
+                  NSString *messageContent =
+                      [NSString stringWithUTF8String:str];
+                  if (messageContent) {
+                    processedItem[@"message"] = messageContent;
+                  }
+                }
+              } @catch (NSException *exception) {
+                NSLog(@"Memory access error for pointer address: 0x%llx, "
+                      @"error: %@",
+                      ptrAddress, exception.reason);
+              }
+            }
+          }
+
+          [processedMessageList addObject:processedItem];
+        }
+
+        jsonObject[@"messageList"] = processedMessageList;
+      }
     }
 
-    // 直接从内存地址读取数据
-    void *memoryPtr = (void *)ptrAddress;
-    NSData *data = [NSData dataWithBytes:memoryPtr length:(NSUInteger)length];
+    NSData *processedJsonData =
+        [NSJSONSerialization dataWithJSONObject:jsonObject
+                                        options:0
+                                          error:&error];
+    if (error) {
+      return data;
+    }
 
-    // 转换为字符串
-    NSString *result = [[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding];
-    return result ? result : @"";
+    return [[NSString alloc] initWithData:processedJsonData
+                                 encoding:NSUTF8StringEncoding];
 
   } @catch (NSException *exception) {
-    NSLog(@"getValueFromPtr error: %@", exception.reason);
-    return @"";
+    NSLog(@"processEventData error: %@", exception.reason);
+    return data;
   }
 }
 

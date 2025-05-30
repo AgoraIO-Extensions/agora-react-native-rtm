@@ -6,10 +6,6 @@ export interface Spec extends TurboModule {
 
   destroyIrisRtmEngine(): boolean;
 
-  getValueFromPtr(ptr: string, length: number, datatype: number): string;
-
-  // getBuffer(ptr: string, length: number, datatype: number): Uint8Array;
-
   callApi(args: {
     funcName: string;
     params: string;

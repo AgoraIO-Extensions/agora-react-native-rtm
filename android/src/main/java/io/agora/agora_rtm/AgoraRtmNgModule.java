@@ -110,7 +110,10 @@ public class AgoraRtmNgModule
   public void OnEvent(String event, String data, List<byte[]> buffers) {
     final WritableMap map = Arguments.createMap();
     map.putString("event", event);
-    map.putString("data", data);
+
+    String processedData = processEventData(event, data);
+    map.putString("data", processedData);
+
     if (buffers != null) {
       WritableArray array = Arguments.createArray();
       for (byte[] buffer : buffers) {
@@ -124,55 +127,52 @@ public class AgoraRtmNgModule
         .emit("AgoraRtmNg:onEvent", map);
   }
 
-  @ReactMethod(isBlockingSynchronousMethod = true)
-  public String getValueFromPtr(String ptr, double length, double datatype) {
-    synchronized (irisApiLock) {
-      try {
-        if (irisRtmEngine != null) {
-          long ptrAddress;
-          try {
-            ptrAddress = Long.parseLong(ptr);
-          } catch (NumberFormatException e) {
-            BigInteger bigInt = new BigInteger(ptr);
-            ptrAddress = bigInt.longValue();
-          }
+  private String processEventData(String event, String data) {
+    try {
+      if (event.contains("onGetHistoryMessagesResult")) {
+        JSONObject jsonObject = new JSONObject(data);
 
-          return irisRtmEngine.CopyAsStringByAddress(ptrAddress, (int) length);
+        if (jsonObject.has("messageList")) {
+          org.json.JSONArray messageList = jsonObject.getJSONArray("messageList");
+
+          for (int i = 0; i < messageList.length(); i++) {
+            JSONObject item = messageList.getJSONObject(i);
+
+            if (item.has("message") && item.has("messageLength")) {
+              String messageStr = item.getString("message_str");
+              int messageLength = item.getInt("messageLength");
+
+              if (messageLength > 0 && irisRtmEngine != null) {
+                try {
+                  long ptrAddress;
+                  try {
+                    ptrAddress = Long.parseLong(messageStr);
+                  } catch (NumberFormatException e) {
+                    BigInteger bigInt = new BigInteger(messageStr);
+                    ptrAddress = bigInt.longValue();
+                  }
+
+                  String messageContent = irisRtmEngine.CopyAsStringByAddress(ptrAddress, messageLength);
+                  if (messageContent != null && !messageContent.isEmpty()) {
+                    item.put("message", messageContent);
+                  }
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              }
+            }
+          }
         }
-        return "";
-      } catch (Exception e) {
-        e.printStackTrace();
-        return "";
+
+        return jsonObject.toString();
       }
+
+      return data;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return data;
     }
   }
 
-  // @ReactMethod(isBlockingSynchronousMethod = true)
-  // public WritableArray getBuffer(String ptr, double length, double datatype) {
-  //   synchronized (irisApiLock) {
-  //     try {
-  //       if (irisRtmEngine != null) {
-  //         long ptrAddress;
-  //         try {
-  //           ptrAddress = Long.parseLong(ptr);
-  //         } catch (NumberFormatException e) {
-  //           BigInteger bigInt = new BigInteger(ptr);
-  //           ptrAddress = bigInt.longValue();
-  //         }
-
-  //         WritableArray array = Arguments.createArray();
-  //         byte[] buffers = irisRtmEngine.CopyAsByteArrayByAddress(ptrAddress, (int) length);
-  //         for (byte buffer : buffers) {
-  //           array.pushString(Base64.encodeToString(buffer, Base64.DEFAULT));
-  //         }
-
-  //         return array;
-  //       }
-  //       return null;
-  //     } catch (Exception e) {
-  //       e.printStackTrace();
-  //       return null;
-  //     }
-  //   }
-  // }
 }
