@@ -11,7 +11,7 @@ import {
   cleanIrisExtraData,
   processRTMClientEventMap,
 } from '../api/RTMEvents';
-import { HistoryMessage } from '../legacy/AgoraRtmBase';
+
 import AgoraRtmNg from '../specs';
 
 import { RtmClientInternal } from './RtmClientInternal';
