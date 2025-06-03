@@ -64,8 +64,8 @@ export default function History() {
           title={'channelType'}
           items={enumToItems(RTM_CHANNEL_TYPE)}
           value={channelType}
-          onValueChange={(value, index) => {
-            setChannelType(enumToItems(RTM_CHANNEL_TYPE).at(index)?.value);
+          onValueChange={(value) => {
+            setChannelType(value);
           }}
         />
         <AgoraTextInput
