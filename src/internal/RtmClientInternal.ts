@@ -73,6 +73,21 @@ export class RtmClientInternal extends RTMClient {
         'rtm.app_type': 8,
       })
     );
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.link_address0': ['183.131.178.240', 9120],
+      })
+    );
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.link_address1': ['183.131.160.243', 9131],
+      })
+    );
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.link_encryption': false,
+      })
+    );
   }
 
   async createStreamChannel(channelName: string): Promise<RTMStreamChannel> {
