@@ -20,7 +20,13 @@ import { enumToItems } from '../utils/index';
 
 import Config from './agora.config';
 
-export const ConfigHeader = () => {
+export const ConfigHeader = ({
+  onShow,
+  onHide,
+}: {
+  onShow: () => void;
+  onHide: () => void;
+}) => {
   const [visible, setVisible] = useState(false);
   const [server, setServer] = useState(Config.server);
   const [port, setPort] = useState<number>(Config.port);
@@ -35,6 +41,7 @@ export const ConfigHeader = () => {
   );
 
   const toggleOverlay = () => {
+    onShow();
     setVisible(!visible);
   };
 
@@ -45,7 +52,10 @@ export const ConfigHeader = () => {
         <>
           <Overlay
             isVisible
-            onBackdropPress={() => setVisible(false)}
+            onBackdropPress={() => {
+              setVisible(false);
+              onHide();
+            }}
             overlayStyle={styles.overlay}
           >
             <ScrollView style={AgoraStyle.fullSize}>

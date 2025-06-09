@@ -67,7 +67,10 @@ export class RtmClientInternal extends RTMClient {
         };
       },
     };
-    callIrisApi.call(this, 'RtmClient_create', jsonParams);
+    let result = callIrisApi.call(this, 'RtmClient_create', jsonParams);
+    if (result.result < 0) {
+      throw handleError(result, 'RtmClient_create');
+    }
     this._rtmClientImpl.setParameters(
       JSON.stringify({
         'rtm.app_type': 8,
