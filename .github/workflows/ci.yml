@@ -110,7 +110,7 @@ jobs:
       - name: Modify APP ID
         run: |
           touch env_local.ts
-          echo "export default { appId: '${{ secrets.APP_ID_RTM }}', token: '${{ secrets.APP_ID_RTM }}' };" > env_local.ts
+          echo "export default { appId: '${{ secrets.APP_ID_RTM }}', token: '${{ secrets.APP_ID_RTM }}', uid: 12345, channelName: 'rtmtestrtm' };" > env_local.ts
         working-directory: example/src/config
 
       - name: Build example for Android
@@ -174,7 +174,7 @@ jobs:
       - name: Modify APP ID
         run: |
           touch env_local.ts
-          echo "export default { appId: '${{ secrets.APP_ID_RTM }}', token: '${{ secrets.APP_ID_RTM }}' };" > env_local.ts
+          echo "export default { appId: '${{ secrets.APP_ID_RTM }}', token: '${{ secrets.APP_ID_RTM }}', uid: 12345, channelName: 'rtmtestrtm' };" > env_local.ts
         working-directory: example/src/config
 
       - name: Build example for iOS
