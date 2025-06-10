@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>IRtmEventHandler | agora-react-native-rtm - v2.1.12</title><meta name="description" content="Documentation for agora-react-native-rtm"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>IRtmEventHandler | agora-react-native-rtm - v2.2.3-dev.1</title><meta name="description" content="Documentation for agora-react-native-rtm"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -6,7 +6,7 @@
 <div id="tsd-toolbar-links"></div></div>
 <ul class="results">
 <li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">agora-react-native-rtm - v2.1.12</a></div>
+<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">agora-react-native-rtm - v2.2.3-dev.1</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
 <div class="container container-main">
 <div class="col-content">
@@ -29,7 +29,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <ul class="tsd-hierarchy">
 <li><span class="target">IRtmEventHandler</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L367">IAgoraRtmClient.ts:367</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L491">legacy/IAgoraRtmClient.ts:491</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -40,26 +40,32 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <div class="tsd-index-list"><a href="IRtmEventHandler.html#onAcquireLockResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-2048"><rect fill="var(--color-icon-background)" stroke="#FF4DB8" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12"></rect><path d="M9.162 16V7.24H10.578L11.514 10.072C11.602 10.328 11.674 10.584 11.73 10.84C11.794 11.088 11.842 11.28 11.874 11.416C11.906 11.28 11.954 11.088 12.018 10.84C12.082 10.584 12.154 10.324 12.234 10.06L13.122 7.24H14.538V16H13.482V12.82C13.482 12.468 13.49 12.068 13.506 11.62C13.53 11.172 13.558 10.716 13.59 10.252C13.622 9.78 13.654 9.332 13.686 8.908C13.726 8.476 13.762 8.1 13.794 7.78L12.366 12.16H11.334L9.894 7.78C9.934 8.092 9.97 8.456 10.002 8.872C10.042 9.28 10.078 9.716 10.11 10.18C10.142 10.636 10.166 11.092 10.182 11.548C10.206 12.004 10.218 12.428 10.218 12.82V16H9.162Z" fill="var(--color-text)"></path></g></svg><span>on<wbr/>Acquire<wbr/>Lock<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onConnectionStateChanged" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Connection<wbr/>State<wbr/>Changed?</span></a>
 <a href="IRtmEventHandler.html#onGetChannelMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Channel<wbr/>Metadata<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onGetHistoryMessagesResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>History<wbr/>Messages<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onGetLocksResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Locks<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onGetOnlineUsersResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Online<wbr/>Users<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onGetSubscribedUserListResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Subscribed<wbr/>User<wbr/>List<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onGetUserChannelsResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>User<wbr/>Channels<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onGetUserMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>User<wbr/>Metadata<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onJoinResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Join<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onJoinTopicResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Join<wbr/>Topic<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onLeaveResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Leave<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onLeaveTopicResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Leave<wbr/>Topic<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onLinkStateEvent" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Link<wbr/>State<wbr/>Event?</span></a>
 <a href="IRtmEventHandler.html#onLockEvent" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Lock<wbr/>Event?</span></a>
 <a href="IRtmEventHandler.html#onLoginResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Login<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onLogoutResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Logout<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onMessageEvent" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Message<wbr/>Event?</span></a>
 <a href="IRtmEventHandler.html#onPresenceEvent" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Event?</span></a>
 <a href="IRtmEventHandler.html#onPresenceGetStateResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Get<wbr/>State<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onPresenceRemoveStateResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Remove<wbr/>State<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onPresenceSetStateResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Set<wbr/>State<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onPublishResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Publish<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onPublishTopicMessageResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Publish<wbr/>Topic<wbr/>Message<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onReleaseLockResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Release<wbr/>Lock<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onRemoveChannelMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Remove<wbr/>Channel<wbr/>Metadata<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onRemoveLockResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Remove<wbr/>Lock<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onRemoveUserMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Remove<wbr/>User<wbr/>Metadata<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onRenewTokenResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Renew<wbr/>Token<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onRevokeLockResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Revoke<wbr/>Lock<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onSetChannelMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Set<wbr/>Channel<wbr/>Metadata<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onSetLockResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Set<wbr/>Lock<wbr/>Result?</span></a>
@@ -70,6 +76,9 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <a href="IRtmEventHandler.html#onSubscribeUserMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Subscribe<wbr/>User<wbr/>Metadata<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onTokenPrivilegeWillExpire" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Token<wbr/>Privilege<wbr/>Will<wbr/>Expire?</span></a>
 <a href="IRtmEventHandler.html#onTopicEvent" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Topic<wbr/>Event?</span></a>
+<a href="IRtmEventHandler.html#onUnsubscribeResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Unsubscribe<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onUnsubscribeTopicResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Unsubscribe<wbr/>Topic<wbr/>Result?</span></a>
+<a href="IRtmEventHandler.html#onUnsubscribeUserMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Unsubscribe<wbr/>User<wbr/>Metadata<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onUpdateChannelMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Update<wbr/>Channel<wbr/>Metadata<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onUpdateUserMetadataResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Update<wbr/>User<wbr/>Metadata<wbr/>Result?</span></a>
 <a href="IRtmEventHandler.html#onWhereNowResult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Where<wbr/>Now<wbr/>Result?</span></a>
@@ -88,7 +97,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -110,18 +122,19 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">errorDetails</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5><span class="tsd-kind-parameter">errorDetails</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The details of error.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L692">IAgoraRtmClient.ts:692</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L925">legacy/IAgoraRtmClient.ts:925</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onConnectionStateChanged" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Connection<wbr/>State<wbr/>Changed</span><a href="#onConnectionStateChanged" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="onConnectionStateChanged.onConnectionStateChanged-1"><span class="tsd-kind-call-signature">on<wbr/>Connection<wbr/>State<wbr/>Changed</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">state</span>, <span class="tsd-kind-parameter">reason</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onConnectionStateChanged.onConnectionStateChanged-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Occurs when the connection state changes between rtm sdk and agora service.</p>
-</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -141,9 +154,12 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography">
+<h4>Deprecated</h4><p>This callback is deprecated. Use LinkStateEvent instead.
+Occurs when the connection state changes between rtm sdk and agora service.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L485">IAgoraRtmClient.ts:485</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L665">legacy/IAgoraRtmClient.ts:665</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onGetChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -170,7 +186,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h5>
+<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/Metadata.html" class="tsd-signature-type tsd-kind-class">Metadata</a></h5>
 <div class="tsd-comment tsd-typography"><p>The result metadata of getting operation.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
@@ -182,7 +198,46 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L571">IAgoraRtmClient.ts:571</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L786">legacy/IAgoraRtmClient.ts:786</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onGetHistoryMessagesResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>History<wbr/>Messages<wbr/>Result</span><a href="#onGetHistoryMessagesResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onGetHistoryMessagesResult.onGetHistoryMessagesResult-1"><span class="tsd-kind-call-signature">on<wbr/>Get<wbr/>History<wbr/>Messages<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">messageList</span>, <span class="tsd-kind-parameter">count</span>, <span class="tsd-kind-parameter">newStart</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onGetHistoryMessagesResult.onGetHistoryMessagesResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when get history messages</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">messageList</span>: <a href="../classes/HistoryMessage.html" class="tsd-signature-type tsd-kind-class">HistoryMessage</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>The history message list.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">count</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The message count.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">newStart</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The timestamp of next history message. If newStart is 0, means there are no more history messages</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L1065">legacy/IAgoraRtmClient.ts:1065</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetLocksResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>Locks<wbr/>Result</span><a href="#onGetLocksResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -194,7 +249,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -223,7 +281,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L724">IAgoraRtmClient.ts:724</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L959">legacy/IAgoraRtmClient.ts:959</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetOnlineUsersResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>Online<wbr/>Users<wbr/>Result</span><a href="#onGetOnlineUsersResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -247,7 +305,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">nextPage</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">nextPage</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The next page.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
 <div class="tsd-comment tsd-typography"><p>The error code.</p>
@@ -256,7 +317,46 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L755">IAgoraRtmClient.ts:755</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L992">legacy/IAgoraRtmClient.ts:992</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onGetSubscribedUserListResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>Subscribed<wbr/>User<wbr/>List<wbr/>Result</span><a href="#onGetSubscribedUserListResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onGetSubscribedUserListResult.onGetSubscribedUserListResult-1"><span class="tsd-kind-call-signature">on<wbr/>Get<wbr/>Subscribed<wbr/>User<wbr/>List<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">topic</span>, <span class="tsd-kind-parameter">users</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onGetSubscribedUserListResult.onGetSubscribedUserListResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user call get subscribe user list.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">users</span>: <a href="../classes/UserList.html" class="tsd-signature-type tsd-kind-class">UserList</a></h5>
+<div class="tsd-comment tsd-typography"><p>The subscribed user list.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L650">legacy/IAgoraRtmClient.ts:650</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetUserChannelsResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>User<wbr/>Channels<wbr/>Result</span><a href="#onGetUserChannelsResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -290,7 +390,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L784">IAgoraRtmClient.ts:784</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L1021">legacy/IAgoraRtmClient.ts:1021</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onGetUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Get<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onGetUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -312,7 +412,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/RtmMetadata.html" class="tsd-signature-type tsd-kind-class">RtmMetadata</a></h5>
+<h5><span class="tsd-kind-parameter">data</span>: <a href="../classes/Metadata.html" class="tsd-signature-type tsd-kind-class">Metadata</a></h5>
 <div class="tsd-comment tsd-typography"><p>The result metadata of getting operation.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
@@ -324,7 +424,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L622">IAgoraRtmClient.ts:622</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L837">legacy/IAgoraRtmClient.ts:837</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onJoinResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Join<wbr/>Result</span><a href="#onJoinResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -336,7 +436,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -355,7 +458,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L406">IAgoraRtmClient.ts:406</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L537">legacy/IAgoraRtmClient.ts:537</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onJoinTopicResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Join<wbr/>Topic<wbr/>Result</span><a href="#onJoinTopicResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -367,7 +470,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -396,7 +502,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L434">IAgoraRtmClient.ts:434</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L581">legacy/IAgoraRtmClient.ts:581</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLeaveResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Leave<wbr/>Result</span><a href="#onLeaveResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -408,7 +514,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -427,7 +536,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L419">IAgoraRtmClient.ts:419</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L551">legacy/IAgoraRtmClient.ts:551</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLeaveTopicResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Leave<wbr/>Topic<wbr/>Result</span><a href="#onLeaveTopicResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -439,7 +548,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -468,7 +580,26 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L451">IAgoraRtmClient.ts:451</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L599">legacy/IAgoraRtmClient.ts:599</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onLinkStateEvent" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Link<wbr/>State<wbr/>Event</span><a href="#onLinkStateEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onLinkStateEvent.onLinkStateEvent-1"><span class="tsd-kind-call-signature">on<wbr/>Link<wbr/>State<wbr/>Event</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLinkStateEvent.onLinkStateEvent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when link state change</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">event</span>: <a href="../classes/LinkStateEvent.html" class="tsd-signature-type tsd-kind-class">LinkStateEvent</a></h5>
+<div class="tsd-comment tsd-typography"><p>details of link state event</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L497">legacy/IAgoraRtmClient.ts:497</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLockEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Lock<wbr/>Event</span><a href="#onLockEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -487,17 +618,22 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L392">IAgoraRtmClient.ts:392</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L522">legacy/IAgoraRtmClient.ts:522</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onLoginResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Login<wbr/>Result</span><a href="#onLoginResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="onLoginResult.onLoginResult-1"><span class="tsd-kind-call-signature">on<wbr/>Login<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLoginResult.onLoginResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="onLoginResult.onLoginResult-1"><span class="tsd-kind-call-signature">on<wbr/>Login<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLoginResult.onLoginResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Occurs when user login.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
 <div class="tsd-comment tsd-typography"><p>The error code.</p>
@@ -506,7 +642,31 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L519">IAgoraRtmClient.ts:519</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L713">legacy/IAgoraRtmClient.ts:713</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onLogoutResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Logout<wbr/>Result</span><a href="#onLogoutResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onLogoutResult.onLogoutResult-1"><span class="tsd-kind-call-signature">on<wbr/>Logout<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onLogoutResult.onLogoutResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user logout.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L720">legacy/IAgoraRtmClient.ts:720</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onMessageEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Message<wbr/>Event</span><a href="#onMessageEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -525,7 +685,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L373">IAgoraRtmClient.ts:373</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L503">legacy/IAgoraRtmClient.ts:503</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Event</span><a href="#onPresenceEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -544,7 +704,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L379">IAgoraRtmClient.ts:379</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L509">legacy/IAgoraRtmClient.ts:509</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceGetStateResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Get<wbr/>State<wbr/>Result</span><a href="#onPresenceGetStateResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -570,7 +730,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L814">IAgoraRtmClient.ts:814</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L1051">legacy/IAgoraRtmClient.ts:1051</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceRemoveStateResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Remove<wbr/>State<wbr/>Result</span><a href="#onPresenceRemoveStateResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -594,7 +754,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L803">IAgoraRtmClient.ts:803</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L1040">legacy/IAgoraRtmClient.ts:1040</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPresenceSetStateResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Presence<wbr/>Set<wbr/>State<wbr/>Result</span><a href="#onPresenceSetStateResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -618,7 +778,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L796">IAgoraRtmClient.ts:796</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L1033">legacy/IAgoraRtmClient.ts:1033</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onPublishResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Publish<wbr/>Result</span><a href="#onPublishResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -642,7 +802,41 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L513">IAgoraRtmClient.ts:513</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L706">legacy/IAgoraRtmClient.ts:706</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onPublishTopicMessageResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Publish<wbr/>Topic<wbr/>Message<wbr/>Result</span><a href="#onPublishTopicMessageResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onPublishTopicMessageResult.onPublishTopicMessageResult-1"><span class="tsd-kind-call-signature">on<wbr/>Publish<wbr/>Topic<wbr/>Message<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">topic</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onPublishTopicMessageResult.onPublishTopicMessageResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user publish topic message.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L565">legacy/IAgoraRtmClient.ts:565</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onReleaseLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Release<wbr/>Lock<wbr/>Result</span><a href="#onReleaseLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -654,7 +848,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -678,7 +875,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L677">IAgoraRtmClient.ts:677</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L908">legacy/IAgoraRtmClient.ts:908</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRemoveChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Remove<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onRemoveChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -712,7 +909,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L556">IAgoraRtmClient.ts:556</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L771">legacy/IAgoraRtmClient.ts:771</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRemoveLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Remove<wbr/>Lock<wbr/>Result</span><a href="#onRemoveLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -724,7 +921,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -748,7 +948,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L662">IAgoraRtmClient.ts:662</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L892">legacy/IAgoraRtmClient.ts:892</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRemoveUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Remove<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onRemoveUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -777,7 +977,41 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L609">IAgoraRtmClient.ts:609</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L824">legacy/IAgoraRtmClient.ts:824</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onRenewTokenResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Renew<wbr/>Token<wbr/>Result</span><a href="#onRenewTokenResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onRenewTokenResult.onRenewTokenResult-1"><span class="tsd-kind-call-signature">on<wbr/>Renew<wbr/>Token<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">serverType</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onRenewTokenResult.onRenewTokenResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user renew token.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user renew token.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">serverType</span>: <a href="../enums/RTM_SERVICE_TYPE.html" class="tsd-signature-type tsd-kind-enum">RTM_SERVICE_TYPE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The type of server.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L729">legacy/IAgoraRtmClient.ts:729</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onRevokeLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Revoke<wbr/>Lock<wbr/>Result</span><a href="#onRevokeLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -789,7 +1023,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -813,7 +1050,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L708">IAgoraRtmClient.ts:708</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L942">legacy/IAgoraRtmClient.ts:942</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSetChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Set<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onSetChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -847,7 +1084,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L528">IAgoraRtmClient.ts:528</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L743">legacy/IAgoraRtmClient.ts:743</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSetLockResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Set<wbr/>Lock<wbr/>Result</span><a href="#onSetLockResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -859,7 +1096,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -883,7 +1123,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L647">IAgoraRtmClient.ts:647</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L876">legacy/IAgoraRtmClient.ts:876</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSetUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Set<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onSetUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -912,7 +1152,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L585">IAgoraRtmClient.ts:585</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L800">legacy/IAgoraRtmClient.ts:800</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onStorageEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Storage<wbr/>Event</span><a href="#onStorageEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -931,7 +1171,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L398">IAgoraRtmClient.ts:398</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L528">legacy/IAgoraRtmClient.ts:528</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSubscribeResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Subscribe<wbr/>Result</span><a href="#onSubscribeResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -943,7 +1183,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -957,7 +1200,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L502">IAgoraRtmClient.ts:502</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L683">legacy/IAgoraRtmClient.ts:683</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSubscribeTopicResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Subscribe<wbr/>Topic<wbr/>Result</span><a href="#onSubscribeTopicResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -969,7 +1212,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
@@ -1000,7 +1246,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L469">IAgoraRtmClient.ts:469</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L618">legacy/IAgoraRtmClient.ts:618</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onSubscribeUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Subscribe<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onSubscribeUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -1012,7 +1258,10 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The id of the user.</p>
@@ -1026,7 +1275,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L634">IAgoraRtmClient.ts:634</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L850">legacy/IAgoraRtmClient.ts:850</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onTokenPrivilegeWillExpire" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Token<wbr/>Privilege<wbr/>Will<wbr/>Expire</span><a href="#onTokenPrivilegeWillExpire" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -1045,7 +1294,7 @@ time-consuming tasks or calling blocking APIs, otherwise the SDK may not work pr
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L495">IAgoraRtmClient.ts:495</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L675">legacy/IAgoraRtmClient.ts:675</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onTopicEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Topic<wbr/>Event</span><a href="#onTopicEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -1065,7 +1314,99 @@ got snapshot of topics in this channel</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L386">IAgoraRtmClient.ts:386</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L516">legacy/IAgoraRtmClient.ts:516</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onUnsubscribeResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Unsubscribe<wbr/>Result</span><a href="#onUnsubscribeResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onUnsubscribeResult.onUnsubscribeResult-1"><span class="tsd-kind-call-signature">on<wbr/>Unsubscribe<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onUnsubscribeResult.onUnsubscribeResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when unsubscribe a channel</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user unsubscribe.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L695">legacy/IAgoraRtmClient.ts:695</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onUnsubscribeTopicResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Unsubscribe<wbr/>Topic<wbr/>Result</span><a href="#onUnsubscribeTopicResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onUnsubscribeTopicResult.onUnsubscribeTopicResult-1"><span class="tsd-kind-call-signature">on<wbr/>Unsubscribe<wbr/>Topic<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">channelName</span>, <span class="tsd-kind-parameter">topic</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onUnsubscribeTopicResult.onUnsubscribeTopicResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user call unsubscribe topic.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">channelName</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the channel.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">topic</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the topic.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L635">legacy/IAgoraRtmClient.ts:635</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="onUnsubscribeUserMetadataResult" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Unsubscribe<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onUnsubscribeUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="onUnsubscribeUserMetadataResult.onUnsubscribeUserMetadataResult-1"><span class="tsd-kind-call-signature">on<wbr/>Unsubscribe<wbr/>User<wbr/>Metadata<wbr/>Result</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">requestId</span>, <span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">errorCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#onUnsubscribeUserMetadataResult.onUnsubscribeUserMetadataResult-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Occurs when user unsubscribe a user metadata</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">requestId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The related request id when user perform this operation</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The id of the user.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
+<div class="tsd-comment tsd-typography"><p>The error code.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L862">legacy/IAgoraRtmClient.ts:862</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onUpdateChannelMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Update<wbr/>Channel<wbr/>Metadata<wbr/>Result</span><a href="#onUpdateChannelMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -1099,7 +1440,7 @@ got snapshot of topics in this channel</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L542">IAgoraRtmClient.ts:542</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L757">legacy/IAgoraRtmClient.ts:757</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onUpdateUserMetadataResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Update<wbr/>User<wbr/>Metadata<wbr/>Result</span><a href="#onUpdateUserMetadataResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -1128,7 +1469,7 @@ got snapshot of topics in this channel</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L597">IAgoraRtmClient.ts:597</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L812">legacy/IAgoraRtmClient.ts:812</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onWhereNowResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Where<wbr/>Now<wbr/>Result</span><a href="#onWhereNowResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -1162,7 +1503,7 @@ got snapshot of topics in this channel</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L770">IAgoraRtmClient.ts:770</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L1007">legacy/IAgoraRtmClient.ts:1007</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="onWhoNowResult" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>on<wbr/>Who<wbr/>Now<wbr/>Result</span><a href="#onWhoNowResult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -1186,7 +1527,10 @@ got snapshot of topics in this channel</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">nextPage</span>: <span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-parameter">nextPage</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The next page.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
 <h5><span class="tsd-kind-parameter">errorCode</span>: <a href="../enums/RTM_ERROR_CODE.html" class="tsd-signature-type tsd-kind-enum">RTM_ERROR_CODE</a></h5>
 <div class="tsd-comment tsd-typography"><p>The error code.</p>
@@ -1195,7 +1539,7 @@ got snapshot of topics in this channel</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/0b344fe/src/IAgoraRtmClient.ts#L740">IAgoraRtmClient.ts:740</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-react-native-rtm/blob/6dd17fd/src/legacy/IAgoraRtmClient.ts#L976">legacy/IAgoraRtmClient.ts:976</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -1218,26 +1562,32 @@ got snapshot of topics in this channel</p>
 <li><a href="#onAcquireLockResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Acquire<wbr/>Lock<wbr/>Result</span></a></li>
 <li><a href="#onConnectionStateChanged" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Connection<wbr/>State<wbr/>Changed</span></a></li>
 <li><a href="#onGetChannelMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Channel<wbr/>Metadata<wbr/>Result</span></a></li>
+<li><a href="#onGetHistoryMessagesResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>History<wbr/>Messages<wbr/>Result</span></a></li>
 <li><a href="#onGetLocksResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Locks<wbr/>Result</span></a></li>
 <li><a href="#onGetOnlineUsersResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Online<wbr/>Users<wbr/>Result</span></a></li>
+<li><a href="#onGetSubscribedUserListResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>Subscribed<wbr/>User<wbr/>List<wbr/>Result</span></a></li>
 <li><a href="#onGetUserChannelsResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>User<wbr/>Channels<wbr/>Result</span></a></li>
 <li><a href="#onGetUserMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Get<wbr/>User<wbr/>Metadata<wbr/>Result</span></a></li>
 <li><a href="#onJoinResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Join<wbr/>Result</span></a></li>
 <li><a href="#onJoinTopicResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Join<wbr/>Topic<wbr/>Result</span></a></li>
 <li><a href="#onLeaveResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Leave<wbr/>Result</span></a></li>
 <li><a href="#onLeaveTopicResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Leave<wbr/>Topic<wbr/>Result</span></a></li>
+<li><a href="#onLinkStateEvent" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Link<wbr/>State<wbr/>Event</span></a></li>
 <li><a href="#onLockEvent" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Lock<wbr/>Event</span></a></li>
 <li><a href="#onLoginResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Login<wbr/>Result</span></a></li>
+<li><a href="#onLogoutResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Logout<wbr/>Result</span></a></li>
 <li><a href="#onMessageEvent" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Message<wbr/>Event</span></a></li>
 <li><a href="#onPresenceEvent" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Event</span></a></li>
 <li><a href="#onPresenceGetStateResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Get<wbr/>State<wbr/>Result</span></a></li>
 <li><a href="#onPresenceRemoveStateResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Remove<wbr/>State<wbr/>Result</span></a></li>
 <li><a href="#onPresenceSetStateResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Presence<wbr/>Set<wbr/>State<wbr/>Result</span></a></li>
 <li><a href="#onPublishResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Publish<wbr/>Result</span></a></li>
+<li><a href="#onPublishTopicMessageResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Publish<wbr/>Topic<wbr/>Message<wbr/>Result</span></a></li>
 <li><a href="#onReleaseLockResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Release<wbr/>Lock<wbr/>Result</span></a></li>
 <li><a href="#onRemoveChannelMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Remove<wbr/>Channel<wbr/>Metadata<wbr/>Result</span></a></li>
 <li><a href="#onRemoveLockResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Remove<wbr/>Lock<wbr/>Result</span></a></li>
 <li><a href="#onRemoveUserMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Remove<wbr/>User<wbr/>Metadata<wbr/>Result</span></a></li>
+<li><a href="#onRenewTokenResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Renew<wbr/>Token<wbr/>Result</span></a></li>
 <li><a href="#onRevokeLockResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Revoke<wbr/>Lock<wbr/>Result</span></a></li>
 <li><a href="#onSetChannelMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Set<wbr/>Channel<wbr/>Metadata<wbr/>Result</span></a></li>
 <li><a href="#onSetLockResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Set<wbr/>Lock<wbr/>Result</span></a></li>
@@ -1248,12 +1598,15 @@ got snapshot of topics in this channel</p>
 <li><a href="#onSubscribeUserMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Subscribe<wbr/>User<wbr/>Metadata<wbr/>Result</span></a></li>
 <li><a href="#onTokenPrivilegeWillExpire" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Token<wbr/>Privilege<wbr/>Will<wbr/>Expire</span></a></li>
 <li><a href="#onTopicEvent" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Topic<wbr/>Event</span></a></li>
+<li><a href="#onUnsubscribeResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Unsubscribe<wbr/>Result</span></a></li>
+<li><a href="#onUnsubscribeTopicResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Unsubscribe<wbr/>Topic<wbr/>Result</span></a></li>
+<li><a href="#onUnsubscribeUserMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Unsubscribe<wbr/>User<wbr/>Metadata<wbr/>Result</span></a></li>
 <li><a href="#onUpdateChannelMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Update<wbr/>Channel<wbr/>Metadata<wbr/>Result</span></a></li>
 <li><a href="#onUpdateUserMetadataResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Update<wbr/>User<wbr/>Metadata<wbr/>Result</span></a></li>
 <li><a href="#onWhereNowResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Where<wbr/>Now<wbr/>Result</span></a></li>
 <li><a href="#onWhoNowResult" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>on<wbr/>Who<wbr/>Now<wbr/>Result</span></a></li></ul></div></details></div>
 <div class="site-menu">
-<nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>agora-<wbr/>react-<wbr/>native-<wbr/>rtm -<wbr/> v2.1.12</span></a>
+<nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>agora-<wbr/>react-<wbr/>native-<wbr/>rtm -<wbr/> v2.2.3-<wbr/>dev.1</span></a>
 <ul class="tsd-small-nested-navigation">
 <li><a href="../modules.html#default"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-8388608"><rect fill="var(--color-icon-background)" stroke="#FF4D82" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12"></rect><path d="M10.354 17V8.24H13.066C13.586 8.24 14.042 8.348 14.434 8.564C14.826 8.772 15.13 9.064 15.346 9.44C15.562 9.816 15.67 10.256 15.67 10.76C15.67 11.352 15.514 11.86 15.202 12.284C14.898 12.708 14.482 13 13.954 13.16L15.79 17H14.518L12.838 13.28H11.434V17H10.354ZM11.434 12.308H13.066C13.514 12.308 13.874 12.168 14.146 11.888C14.418 11.6 14.554 11.224 14.554 10.76C14.554 10.288 14.418 9.912 14.146 9.632C13.874 9.352 13.514 9.212 13.066 9.212H11.434V12.308Z" fill="var(--color-text)"></path></g></svg><span>default</span></a></li>
 <li><a href="../enums/RTM_AREA_CODE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-8"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-enum)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.45 16V7.24H14.49V8.224H10.518V10.936H14.07V11.908H10.518V15.016H14.49V16H9.45Z" fill="var(--color-text)"></path></g></svg><span>RTM_<wbr/>AREA_<wbr/>CODE</span></a></li>
@@ -1262,18 +1615,26 @@ got snapshot of topics in this channel</p>
 <li><a href="../enums/RTM_CONNECTION_STATE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>CONNECTION_<wbr/>STATE</span></a></li>
 <li><a href="../enums/RTM_ENCRYPTION_MODE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>ENCRYPTION_<wbr/>MODE</span></a></li>
 <li><a href="../enums/RTM_ERROR_CODE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>ERROR_<wbr/>CODE</span></a></li>
+<li><a href="../enums/RTM_LINK_OPERATION.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>LINK_<wbr/>OPERATION</span></a></li>
+<li><a href="../enums/RTM_LINK_STATE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>LINK_<wbr/>STATE</span></a></li>
+<li><a href="../enums/RTM_LINK_STATE_CHANGE_REASON.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>LINK_<wbr/>STATE_<wbr/>CHANGE_<wbr/>REASON</span></a></li>
 <li><a href="../enums/RTM_LOCK_EVENT_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>LOCK_<wbr/>EVENT_<wbr/>TYPE</span></a></li>
 <li><a href="../enums/RTM_LOG_LEVEL.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>LOG_<wbr/>LEVEL</span></a></li>
 <li><a href="../enums/RTM_MESSAGE_PRIORITY.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>MESSAGE_<wbr/>PRIORITY</span></a></li>
 <li><a href="../enums/RTM_MESSAGE_QOS.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>MESSAGE_<wbr/>QOS</span></a></li>
 <li><a href="../enums/RTM_MESSAGE_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>MESSAGE_<wbr/>TYPE</span></a></li>
 <li><a href="../enums/RTM_PRESENCE_EVENT_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>PRESENCE_<wbr/>EVENT_<wbr/>TYPE</span></a></li>
+<li><a href="../enums/RTM_PROTOCOL_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>PROTOCOL_<wbr/>TYPE</span></a></li>
 <li><a href="../enums/RTM_PROXY_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>PROXY_<wbr/>TYPE</span></a></li>
+<li><a href="../enums/RTM_SERVICE_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>SERVICE_<wbr/>TYPE</span></a></li>
 <li><a href="../enums/RTM_STORAGE_EVENT_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>STORAGE_<wbr/>EVENT_<wbr/>TYPE</span></a></li>
 <li><a href="../enums/RTM_STORAGE_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>STORAGE_<wbr/>TYPE</span></a></li>
 <li><a href="../enums/RTM_TOPIC_EVENT_TYPE.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>RTM_<wbr/>TOPIC_<wbr/>EVENT_<wbr/>TYPE</span></a></li>
+<li><a href="../enums/SubscribeTopicErrorCode.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg><span>Subscribe<wbr/>Topic<wbr/>Error<wbr/>Code</span></a></li>
 <li><a href="../classes/ChannelInfo.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-128"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)"></path></g></svg><span>Channel<wbr/>Info</span></a></li>
+<li><a href="../classes/GetHistoryMessagesOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Get<wbr/>History<wbr/>Messages<wbr/>Options</span></a></li>
 <li><a href="../classes/GetOnlineUsersOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Get<wbr/>Online<wbr/>Users<wbr/>Options</span></a></li>
+<li><a href="../classes/HistoryMessage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>History<wbr/>Message</span></a></li>
 <li><a href="../classes/IRtmClient.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>IRtm<wbr/>Client</span></a></li>
 <li><a href="../classes/IRtmLock.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>IRtm<wbr/>Lock</span></a></li>
 <li><a href="../classes/IRtmPresence.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>IRtm<wbr/>Presence</span></a></li>
@@ -1282,19 +1643,27 @@ got snapshot of topics in this channel</p>
 <li><a href="../classes/IntervalInfo.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Interval<wbr/>Info</span></a></li>
 <li><a href="../classes/JoinChannelOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Join<wbr/>Channel<wbr/>Options</span></a></li>
 <li><a href="../classes/JoinTopicOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Join<wbr/>Topic<wbr/>Options</span></a></li>
+<li><a href="../classes/LinkStateEvent.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Link<wbr/>State<wbr/>Event</span></a></li>
 <li><a href="../classes/LockDetail.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Lock<wbr/>Detail</span></a></li>
 <li><a href="../classes/LockEvent.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Lock<wbr/>Event</span></a></li>
 <li><a href="../classes/MessageEvent.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Message<wbr/>Event</span></a></li>
+<li><a href="../classes/Metadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Metadata</span></a></li>
 <li><a href="../classes/MetadataItem.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Metadata<wbr/>Item</span></a></li>
 <li><a href="../classes/MetadataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Metadata<wbr/>Options</span></a></li>
 <li><a href="../classes/PresenceEvent.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Presence<wbr/>Event</span></a></li>
 <li><a href="../classes/PresenceOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Presence<wbr/>Options</span></a></li>
 <li><a href="../classes/PublishOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Publish<wbr/>Options</span></a></li>
 <li><a href="../classes/PublisherInfo.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Publisher<wbr/>Info</span></a></li>
+<li><a href="../classes/RTMClient.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>RTMClient</span></a></li>
+<li><a href="../classes/RTMHistory.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>RTMHistory</span></a></li>
+<li><a href="../classes/RTMLock.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>RTMLock</span></a></li>
+<li><a href="../classes/RTMPresence.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>RTMPresence</span></a></li>
+<li><a href="../classes/RTMStorage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>RTMStorage</span></a></li>
+<li><a href="../classes/RTMStreamChannel.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>RTMStream<wbr/>Channel</span></a></li>
 <li><a href="../classes/RtmConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rtm<wbr/>Config</span></a></li>
 <li><a href="../classes/RtmEncryptionConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rtm<wbr/>Encryption<wbr/>Config</span></a></li>
 <li><a href="../classes/RtmLogConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rtm<wbr/>Log<wbr/>Config</span></a></li>
-<li><a href="../classes/RtmMetadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rtm<wbr/>Metadata</span></a></li>
+<li><a href="../classes/RtmPrivateConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rtm<wbr/>Private<wbr/>Config</span></a></li>
 <li><a href="../classes/RtmProxyConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rtm<wbr/>Proxy<wbr/>Config</span></a></li>
 <li><a href="../classes/SnapshotInfo.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Snapshot<wbr/>Info</span></a></li>
 <li><a href="../classes/StateItem.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>State<wbr/>Item</span></a></li>
@@ -1306,9 +1675,73 @@ got snapshot of topics in this channel</p>
 <li><a href="../classes/TopicOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Topic<wbr/>Options</span></a></li>
 <li><a href="../classes/UserList.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>User<wbr/>List</span></a></li>
 <li><a href="../classes/UserState.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>User<wbr/>State</span></a></li>
-<li><a href="IRtmEventHandler.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg><span>IRtm<wbr/>Event<wbr/>Handler</span></a></li>
-<li><a href="../functions/callIrisApi.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>call<wbr/>Iris<wbr/>Api</span></a></li>
+<li><a href="AcquireLockOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg><span>Acquire<wbr/>Lock<wbr/>Options</span></a></li>
+<li><a href="BaseResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Base<wbr/>Response</span></a></li>
+<li><a href="GetLockResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Get<wbr/>Lock<wbr/>Response</span></a></li>
+<li><a href="GetUserMetadataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Get<wbr/>User<wbr/>Metadata<wbr/>Options</span></a></li>
+<li><a href="IMetadataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>IMetadata<wbr/>Options</span></a></li>
+<li><a href="IRtmEventHandler.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>IRtm<wbr/>Event<wbr/>Handler</span></a></li>
+<li><a href="LoginOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Login<wbr/>Options</span></a></li>
+<li><a href="RTMClientEventMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>RTMClient<wbr/>Event<wbr/>Map</span></a></li>
+<li><a href="RTMProviderProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>RTMProvider<wbr/>Props</span></a></li>
+<li><a href="RemoveChannelMetadataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Remove<wbr/>Channel<wbr/>Metadata<wbr/>Options</span></a></li>
+<li><a href="RemoveStateOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Remove<wbr/>State<wbr/>Options</span></a></li>
+<li><a href="RemoveUserMetadataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Remove<wbr/>User<wbr/>Metadata<wbr/>Options</span></a></li>
+<li><a href="RenewTokenOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Renew<wbr/>Token<wbr/>Options</span></a></li>
+<li><a href="SetLockOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Set<wbr/>Lock<wbr/>Options</span></a></li>
+<li><a href="SetOrUpdateUserMetadataOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>Set<wbr/>Or<wbr/>Update<wbr/>User<wbr/>Metadata<wbr/>Options</span></a></li>
+<li><a href="../types/AcquireLockResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4194304"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-type-alias)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)"></path></g></svg><span>Acquire<wbr/>Lock<wbr/>Response</span></a></li>
+<li><a href="../types/ChannelMetadataOperationResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Channel<wbr/>Metadata<wbr/>Operation<wbr/>Response</span></a></li>
+<li><a href="../types/ErrorInfo.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Error<wbr/>Info</span></a></li>
+<li><a href="../types/GetChannelMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Get<wbr/>Channel<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/GetMessagesResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Get<wbr/>Messages<wbr/>Response</span></a></li>
+<li><a href="../types/GetOnlineUsersResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Get<wbr/>Online<wbr/>Users<wbr/>Response</span></a></li>
+<li><a href="../types/GetStateResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Get<wbr/>State<wbr/>Response</span></a></li>
+<li><a href="../types/GetSubscribedUserListResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Get<wbr/>Subscribed<wbr/>User<wbr/>List<wbr/>Response</span></a></li>
+<li><a href="../types/GetUserChannelsResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Get<wbr/>User<wbr/>Channels<wbr/>Response</span></a></li>
+<li><a href="../types/GetUserMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Get<wbr/>User<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/JoinChannelResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Join<wbr/>Channel<wbr/>Response</span></a></li>
+<li><a href="../types/JoinTopicResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Join<wbr/>Topic<wbr/>Response</span></a></li>
+<li><a href="../types/LeaveChannelResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Leave<wbr/>Channel<wbr/>Response</span></a></li>
+<li><a href="../types/LeaveTopicResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Leave<wbr/>Topic<wbr/>Response</span></a></li>
+<li><a href="../types/LockOperationResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Lock<wbr/>Operation<wbr/>Response</span></a></li>
+<li><a href="../types/LoginResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Login<wbr/>Response</span></a></li>
+<li><a href="../types/LogoutResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Logout<wbr/>Response</span></a></li>
+<li><a href="../types/PublishResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Publish<wbr/>Response</span></a></li>
+<li><a href="../types/PublishTopicMessageResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Publish<wbr/>Topic<wbr/>Message<wbr/>Response</span></a></li>
+<li><a href="../types/RTMOperationResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>RTMOperation<wbr/>Response</span></a></li>
+<li><a href="../types/ReleaseLockResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Release<wbr/>Lock<wbr/>Response</span></a></li>
+<li><a href="../types/RemoveChannelMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Remove<wbr/>Channel<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/RemoveLockResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Remove<wbr/>Lock<wbr/>Response</span></a></li>
+<li><a href="../types/RemoveStateResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Remove<wbr/>State<wbr/>Response</span></a></li>
+<li><a href="../types/RemoveUserMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Remove<wbr/>User<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/RenewTokenResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Renew<wbr/>Token<wbr/>Response</span></a></li>
+<li><a href="../types/RevokeLockResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Revoke<wbr/>Lock<wbr/>Response</span></a></li>
+<li><a href="../types/SetChannelMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Set<wbr/>Channel<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/SetLockResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Set<wbr/>Lock<wbr/>Response</span></a></li>
+<li><a href="../types/SetStateResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Set<wbr/>State<wbr/>Response</span></a></li>
+<li><a href="../types/SetUserMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Set<wbr/>User<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/StreamChannelOperationResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Stream<wbr/>Channel<wbr/>Operation<wbr/>Response</span></a></li>
+<li><a href="../types/SubscribeResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Subscribe<wbr/>Response</span></a></li>
+<li><a href="../types/SubscribeTopicResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Subscribe<wbr/>Topic<wbr/>Response</span></a></li>
+<li><a href="../types/SubscribeUserMetaResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Subscribe<wbr/>User<wbr/>Meta<wbr/>Response</span></a></li>
+<li><a href="../types/UnsubscribeResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Unsubscribe<wbr/>Response</span></a></li>
+<li><a href="../types/UnsubscribeTopicResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Unsubscribe<wbr/>Topic<wbr/>Response</span></a></li>
+<li><a href="../types/UnsubscribeUserMetaResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Unsubscribe<wbr/>User<wbr/>Meta<wbr/>Response</span></a></li>
+<li><a href="../types/UpdateChannelMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Update<wbr/>Channel<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/UpdateConfigResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Update<wbr/>Config<wbr/>Response</span></a></li>
+<li><a href="../types/UpdateUserMetadataResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Update<wbr/>User<wbr/>Metadata<wbr/>Response</span></a></li>
+<li><a href="../types/UserMetadataOperationResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>User<wbr/>Metadata<wbr/>Operation<wbr/>Response</span></a></li>
+<li><a href="../types/WhereNowResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Where<wbr/>Now<wbr/>Response</span></a></li>
+<li><a href="../types/WhoNowResponse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Who<wbr/>Now<wbr/>Response</span></a></li>
+<li><a href="../variables/AgoraRTMContext.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-32"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-variable)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.106 16L8.85 7.24H9.966L11.454 13.192C11.558 13.608 11.646 13.996 11.718 14.356C11.79 14.708 11.842 14.976 11.874 15.16C11.906 14.976 11.954 14.708 12.018 14.356C12.09 13.996 12.178 13.608 12.282 13.192L13.758 7.24H14.85L12.582 16H11.106Z" fill="var(--color-text)"></path></g></svg><span>AgoraRTMContext</span></a></li>
+<li><a href="../functions/RTMProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>RTMProvider</span></a></li>
+<li><a href="../functions/callIrisApi.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>call<wbr/>Iris<wbr/>Api</span></a></li>
 <li><a href="../functions/createAgoraRtmClient.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>create<wbr/>Agora<wbr/>Rtm<wbr/>Client</span></a></li>
 <li><a href="../functions/isDebuggable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>Debuggable</span></a></li>
-<li><a href="../functions/setDebuggable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>set<wbr/>Debuggable</span></a></li></ul></nav></div></div></div>
+<li><a href="../functions/processRTMClientEventMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>processRTMClient<wbr/>Event<wbr/>Map</span></a></li>
+<li><a href="../functions/setDebuggable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>set<wbr/>Debuggable</span></a></li>
+<li><a href="../functions/useLogin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Login</span></a></li>
+<li><a href="../functions/useRtm.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Rtm</span></a></li>
+<li><a href="../functions/useRtmEvent.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Rtm<wbr/>Event</span></a></li></ul></nav></div></div></div>
 <div class="overlay"></div></body></html>
