@@ -1,4 +1,4 @@
-package io.agora.agora_rtm;
+package io.agora.rtm.ng.react;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +21,7 @@ public class AgoraRtmNgPackage extends TurboReactPackage {
   @Nullable
   @Override
   public NativeModule getModule(String name,
-                                ReactApplicationContext reactContext) {
+      ReactApplicationContext reactContext) {
     if (name.equals(AgoraRtmNgModule.NAME)) {
       return new AgoraRtmNgModule(reactContext);
     } else {
@@ -35,22 +35,21 @@ public class AgoraRtmNgPackage extends TurboReactPackage {
       final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
       boolean isTurboModule = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
       moduleInfos.put(AgoraRtmNgModule.NAME,
-                      new ReactModuleInfo(AgoraRtmNgModule.NAME,
-                                          AgoraRtmNgModule.NAME,
-                                          false, // canOverrideExistingModule
-                                          false, // needsEagerInit
-                                          true,  // hasConstants
-                                          false, // isCxxModule
-                                          isTurboModule // isTurboModule
-                                          ));
+          new ReactModuleInfo(AgoraRtmNgModule.NAME,
+              AgoraRtmNgModule.NAME,
+              false, // canOverrideExistingModule
+              false, // needsEagerInit
+              true, // hasConstants
+              false, // isCxxModule
+              isTurboModule // isTurboModule
+      ));
       return moduleInfos;
     };
   }
 
   @NonNull
   @Override
-  public List<ViewManager>
-  createViewManagers(ReactApplicationContext reactContext) {
+  public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
     List<ViewManager> viewManagers = new ArrayList<>();
     return viewManagers;
   }

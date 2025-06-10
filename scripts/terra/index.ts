@@ -61,7 +61,7 @@ export default function (
           let input_params: string[] = [];
           method.asMemberFunction().parameters.map((param) => {
             if (param.is_output) {
-              input_params.push(`${param.name}?: ${param.type.name}`);
+              // input_params.push(`${param.name}?: ${param.type.name}`);
               output_params.push(`${param.name}: ${param.type.name}`);
             } else {
               if (param.default_value) {

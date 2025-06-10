@@ -1,31 +1,38 @@
-import { IRtmClient } from './IAgoraRtmClient';
-
+import { RTMClient } from './api/RTMClient';
 import { RtmClientInternal } from './internal/RtmClientInternal';
+import { RtmConfig } from './legacy/IAgoraRtmClient';
 
-export * from './AgoraRtmBase';
-export * from './IAgoraRtmClient';
-export * from './IAgoraRtmLock';
-export * from './IAgoraRtmPresence';
-export * from './IAgoraRtmStorage';
-export * from './IAgoraStreamChannel';
+export * from './legacy/AgoraRtmBase';
+export * from './legacy/IAgoraRtmClient';
+export * from './legacy/IAgoraRtmLock';
+export * from './legacy/IAgoraRtmPresence';
+export * from './legacy/IAgoraRtmStorage';
+export * from './legacy/IAgoraStreamChannel';
+export * from './hooks';
+export * from './api/RTMClient';
+export * from './api/RTMEvents';
+export * from './api/RTMStreamChannel';
+export * from './api/RTMStorage';
+export * from './api/RTMPresence';
+export * from './api/RTMLock';
+export * from './api/RTMHistory';
+
 export {
   isDebuggable,
   setDebuggable,
   callIrisApi,
 } from './internal/IrisRtmEngine';
 
-const instance = new RtmClientInternal();
-
 /**
- * Creates one IRtmClient object.
+ * Creates one RTMClient object.
  *
- * Currently, the Agora RTM SDK v2.x supports creating only one IRtmClient object for each app.
+ * Currently, the Agora RTM SDK v2.x supports creating only one RTMClient object for each app.
  *
  * @returns
- * One IRtmClient object.
+ * One RTMClient object.
  */
-export function createAgoraRtmClient(): IRtmClient {
-  return instance;
+export function createAgoraRtmClient(config: RtmConfig): RTMClient {
+  return new RtmClientInternal(config);
 }
 
 export default createAgoraRtmClient;

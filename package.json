@@ -1,6 +1,6 @@
 {
   "name": "agora-react-native-rtm",
-  "version": "2.1.12",
+  "version": "2.2.3-dev.1",
   "description": "React Native around the Agora RTM SDKs for Android and iOS agora",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -30,6 +30,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "example": "yarn workspace agora-react-native-rtm-example",
     "terra": "cd scripts/terra && yarn terra",
     "test": "jest",
     "typecheck": "tsc --noEmit",
@@ -59,7 +60,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@react-native/eslint-config": "^0.72.2",
+    "@react-native/eslint-config": "^0.77.1",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
     "@types/react": "~17.0.21",
@@ -71,10 +72,10 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.1.1",
-    "pod-install": "^0.1.0",
-    "prettier": "^2.0.5",
-    "react": "18.2.0",
-    "react-native": "0.72.5",
+    "pod-install": "^0.2.0",
+    "prettier": "^2.8.8",
+    "react": "18.3.1",
+    "react-native": "0.77.1",
     "react-native-builder-bob": "^0.20.0",
     "release-it": "^15.0.0",
     "turbo": "^1.10.7",
@@ -82,7 +83,7 @@
     "typescript": "5.1.6"
   },
   "resolutions": {
-    "@types/react": "17.0.21",
+    "@types/react": "18.3.1",
     "eslint@^8.4.1": "patch:eslint@npm%3A8.53.0#./.yarn/patches/eslint-npm-8.53.0-2fc5c501d2.patch",
     "eslint-plugin-auto-import@^0.1.1": "patch:eslint-plugin-auto-import@patch%3Aeslint-plugin-auto-import@npm%253A0.1.1%23./.yarn/patches/eslint-plugin-auto-import-npm-0.1.1-79fd8c84dd.patch%3A%3Aversion=0.1.1&hash=92ca79&locator=agora-react-native-rtm%2540workspace%253A.#./.yarn/patches/eslint-plugin-auto-import-patch-fcaa39e038.patch"
   },
@@ -146,10 +147,10 @@
   },
   "codegenConfig": {
     "name": "AgoraRtmNgSpec",
-    "type": "all",
+    "type": "modules",
     "jsSrcsDir": "src/specs",
     "android": {
-      "javaPackageName": "io.agora.agora_rtm"
+      "javaPackageName": "io.agora.rtm.ng.react"
     }
   }
 }

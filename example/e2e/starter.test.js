@@ -2,7 +2,8 @@ import { by, device, element, expect } from 'detox';
 
 describe('Example', () => {
   beforeAll(async () => {
-    await device.launchApp();
+    const permissions = { camera: 'YES', microphone: 'YES' };
+    await device.launchApp({ permissions });
   });
 
   beforeEach(async () => {
@@ -13,13 +14,13 @@ describe('Example', () => {
     await expect(element(by.text('APIExample'))).toBeVisible();
   });
 
-  it('should show JoinChannelAudio screen after tap', async () => {
-    await element(by.text('JoinChannelAudio')).tap();
-    await expect(element(by.text('JoinChannelAudio'))).toBeVisible();
+  it('should show Login screen after tap', async () => {
+    await element(by.text('Login')).tap();
+    await expect(element(by.text('Login'))).toBeVisible();
   });
 
-  it('should show JoinChannelVideo screen after tap', async () => {
-    await element(by.text('JoinChannelVideo')).tap();
-    await expect(element(by.text('JoinChannelVideo'))).toBeVisible();
+  it('should show CreateStreamChannel screen after tap', async () => {
+    await element(by.text('CreateStreamChannel')).tap();
+    await expect(element(by.text('CreateStreamChannel'))).toBeVisible();
   });
 });

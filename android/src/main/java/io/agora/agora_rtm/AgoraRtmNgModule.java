@@ -1,4 +1,4 @@
-package io.agora.agora_rtm;
+package io.agora.rtm.ng.react;
 
 import android.util.Base64;
 import androidx.annotation.NonNull;
@@ -14,6 +14,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import io.agora.iris.rtm.IrisRtmEngine;
 import io.agora.iris.rtm.IrisRtmEventHandler;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONException;
@@ -23,9 +24,12 @@ import org.json.JSONObject;
 public class AgoraRtmNgModule
     extends AgoraRtmNgSpec implements IrisRtmEventHandler {
   public static final String NAME = "AgoraRtmNg";
+  public final Object irisApiLock = new Object();
   public IrisRtmEngine irisRtmEngine;
 
-  AgoraRtmNgModule(ReactApplicationContext context) { super(context); }
+  AgoraRtmNgModule(ReactApplicationContext context) {
+    super(context);
+  }
 
   @Override
   @NonNull
@@ -35,70 +39,81 @@ public class AgoraRtmNgModule
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public boolean newIrisRtmEngine() {
-    if (irisRtmEngine == null) {
-      IrisRtmEngine.enableUseJsonArray(true);
-      irisRtmEngine = new IrisRtmEngine(getReactApplicationContext());
-      irisRtmEngine.setEventHandler(this);
-      return true;
+    synchronized (irisApiLock) {
+      if (irisRtmEngine == null) {
+        IrisRtmEngine.enableUseJsonArray(true);
+        irisRtmEngine = new IrisRtmEngine(getReactApplicationContext());
+        irisRtmEngine.setEventHandler(this);
+        return true;
+      }
     }
     return false;
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public boolean destroyIrisRtmEngine() {
-    if (irisRtmEngine != null) {
-      irisRtmEngine.setEventHandler(null);
-      irisRtmEngine.destroy();
-      irisRtmEngine = null;
-      return true;
+    synchronized (irisApiLock) {
+      if (irisRtmEngine != null) {
+        irisRtmEngine.setEventHandler(null);
+        irisRtmEngine.destroy();
+        irisRtmEngine = null;
+        return true;
+      }
     }
     return false;
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public String callApi(ReadableMap args) {
-    String funcName = args.getString("funcName");
-    String params = args.getString("params");
-    List<byte[]> buffers = null;
+    synchronized (irisApiLock) {
+      String funcName = args.getString("funcName");
+      String params = args.getString("params");
+      List<byte[]> buffers = null;
 
-    ReadableArray array = args.getArray("buffers");
-    if (array != null) {
-      buffers = new ArrayList<>();
-      for (int i = 0; i < array.size(); i++) {
-        buffers.add(Base64.decode(array.getString(i), Base64.DEFAULT));
+      ReadableArray array = args.getArray("buffers");
+      if (array != null) {
+        buffers = new ArrayList<>();
+        for (int i = 0; i < array.size(); i++) {
+          buffers.add(Base64.decode(array.getString(i), Base64.DEFAULT));
+        }
       }
-    }
 
-    try {
-      newIrisRtmEngine();
-      return irisRtmEngine.callIrisApi(funcName, params, buffers);
-    } catch (Exception e) {
-      e.printStackTrace();
       try {
-        return new JSONObject().put("result", e.getMessage()).toString();
-      } catch (JSONException ex) {
-        throw new RuntimeException(ex);
+        newIrisRtmEngine();
+        return irisRtmEngine.callIrisApi(funcName, params, buffers);
+      } catch (Exception e) {
+        e.printStackTrace();
+        try {
+          return new JSONObject().put("result", e.getMessage()).toString();
+        } catch (JSONException ex) {
+          throw new RuntimeException(ex);
+        }
       }
     }
   }
 
   @ReactMethod
   public void showRPSystemBroadcastPickerView(boolean showsMicrophoneButton,
-                                              Promise promise) {
+      Promise promise) {
     promise.reject("", "not support");
   }
 
   @ReactMethod
-  public void addListener(String eventName) {}
+  public void addListener(String eventName) {
+  }
 
   @ReactMethod
-  public void removeListeners(double count) {}
+  public void removeListeners(double count) {
+  }
 
   @Override
   public void OnEvent(String event, String data, List<byte[]> buffers) {
     final WritableMap map = Arguments.createMap();
     map.putString("event", event);
-    map.putString("data", data);
+
+    String processedData = processEventData(event, data);
+    map.putString("data", processedData);
+
     if (buffers != null) {
       WritableArray array = Arguments.createArray();
       for (byte[] buffer : buffers) {
@@ -111,4 +126,53 @@ public class AgoraRtmNgModule
         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
         .emit("AgoraRtmNg:onEvent", map);
   }
+
+  private String processEventData(String event, String data) {
+    try {
+      if (event.contains("onGetHistoryMessagesResult")) {
+        JSONObject jsonObject = new JSONObject(data);
+
+        if (jsonObject.has("messageList")) {
+          org.json.JSONArray messageList = jsonObject.getJSONArray("messageList");
+
+          for (int i = 0; i < messageList.length(); i++) {
+            JSONObject item = messageList.getJSONObject(i);
+
+            if (item.has("message") && item.has("messageLength")) {
+              String messageStr = item.getString("message_str");
+              int messageLength = item.getInt("messageLength");
+
+              if (messageLength > 0 && irisRtmEngine != null) {
+                try {
+                  long ptrAddress;
+                  try {
+                    ptrAddress = Long.parseLong(messageStr);
+                  } catch (NumberFormatException e) {
+                    BigInteger bigInt = new BigInteger(messageStr);
+                    ptrAddress = bigInt.longValue();
+                  }
+
+                  String messageContent = irisRtmEngine.CopyAsStringByAddress(ptrAddress, messageLength);
+                  if (messageContent != null && !messageContent.isEmpty()) {
+                    item.put("message", messageContent);
+                  }
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              }
+            }
+          }
+        }
+
+        return jsonObject.toString();
+      }
+
+      return data;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return data;
+    }
+  }
+
 }

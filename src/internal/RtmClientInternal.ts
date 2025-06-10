@@ -1,58 +1,113 @@
-import { IRtmEventHandler } from '../IAgoraRtmClient';
-import { IRtmLock } from '../IAgoraRtmLock';
-import { IRtmPresence } from '../IAgoraRtmPresence';
-import { IRtmStorage } from '../IAgoraRtmStorage';
-import { IStreamChannel } from '../IAgoraStreamChannel';
-import { IRtmClientEvent } from '../extensions/IAgoraRtmClientExtension';
-import { IRtmClientImpl } from '../impl/IAgoraRtmClientImpl';
+import {
+  LoginOptions,
+  LoginResponse,
+  LogoutResponse,
+  PublishResponse,
+  RTMClient,
+  RenewTokenOptions,
+  RenewTokenResponse,
+  SubscribeResponse,
+  UnsubscribeResponse,
+} from '../api/RTMClient';
+import { RTMClientEventMap } from '../api/RTMEvents';
+import { RTMHistory } from '../api/RTMHistory';
+import { RTMLock } from '../api/RTMLock';
+import { RTMPresence } from '../api/RTMPresence';
+import { RTMStorage } from '../api/RTMStorage';
+import { RTMStreamChannel } from '../api/RTMStreamChannel';
+import { PublishOptions, SubscribeOptions } from '../legacy/AgoraRtmBase';
+import { RtmConfig } from '../legacy/IAgoraRtmClient';
+import { IRtmClientImpl } from '../legacy/impl/IAgoraRtmClientImpl';
 
 import {
   DeviceEventEmitter,
   EVENT_TYPE,
   EventProcessor,
+  callIrisApi,
+  handleError,
+  wrapRtmResult,
 } from './IrisRtmEngine';
+import { RtmHistoryInternal } from './RtmHistoryInternal';
 import { RtmLockInternal } from './RtmLockInternal';
 import { RtmPresenceInternal } from './RtmPresenceInternal';
 import { RtmStorageInternal } from './RtmStorageInternal';
 import { StreamChannelInternal } from './StreamChannelInternal';
 
-export class RtmClientInternal extends IRtmClientImpl {
-  static _event_handlers: IRtmEventHandler[] = [];
+export class RtmClientInternal extends RTMClient {
+  private _rtmClientImpl: IRtmClientImpl = new IRtmClientImpl();
+  static _event_handlers: RTMClientEventMap[] = [];
+  public presence: RTMPresence = new RtmPresenceInternal();
+  public storage: RTMStorage = new RtmStorageInternal();
+  public lock: RTMLock = new RtmLockInternal();
+  public history: RTMHistory = new RtmHistoryInternal();
+  static _streamChannels: Map<string, StreamChannelInternal> = new Map();
 
-  protected getApiTypeFromPublishWithBuffer(): string {
-    return 'RtmClient_publish';
+  private event_name_map = {
+    linkState: 'onLinkStateEvent',
+    presence: 'onPresenceEvent',
+    message: 'onMessageEvent',
+    storage: 'onStorageEvent',
+    lock: 'onLockEvent',
+    topic: 'onTopicEvent',
+    tokenPrivilegeWillExpire: 'onTokenPrivilegeWillExpire',
+  };
+
+  constructor(config: RtmConfig) {
+    super();
+    if (config?.eventHandler) {
+      Object.entries(config.eventHandler).forEach(([key, value]) => {
+        this.addEventListener(key as keyof RTMClientEventMap, value);
+      });
+    }
+    const jsonParams = {
+      config: config,
+      toJSON: () => {
+        return {
+          config: config,
+        };
+      },
+    };
+    let result = callIrisApi.call(this, 'RtmClient_create', jsonParams);
+    if (result.result < 0) {
+      throw handleError(result, 'RtmClient_create');
+    }
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.app_type': 8,
+      })
+    );
   }
 
-  override createStreamChannel(channelName: string): IStreamChannel {
-    super.createStreamChannel(channelName);
-    return new StreamChannelInternal(channelName);
+  async createStreamChannel(channelName: string): Promise<RTMStreamChannel> {
+    let operation = 'createStreamChannel';
+
+    try {
+      const status = this._rtmClientImpl.createStreamChannel(channelName);
+      if (status.result < 0) {
+        throw handleError(status, 'createStreamChannel');
+      } else {
+        const streamChannel = new StreamChannelInternal(channelName);
+        RtmClientInternal._streamChannels.set(channelName, streamChannel);
+        return streamChannel;
+      }
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
 
-  override getPresence(): IRtmPresence {
-    return new RtmPresenceInternal();
-  }
-
-  override getStorage(): IRtmStorage {
-    return new RtmStorageInternal();
-  }
-
-  override getLock(): IRtmLock {
-    return new RtmLockInternal();
-  }
-
-  override release(): number {
+  release(): number {
     RtmClientInternal._event_handlers = [];
     this.removeAllListeners();
-    const ret = super.release();
+    const ret = this._rtmClientImpl.release();
     return ret;
   }
 
-  addEventListener<EventType extends keyof IRtmClientEvent>(
+  addEventListener<EventType extends keyof RTMClientEventMap>(
     eventType: EventType,
-    listener: IRtmClientEvent[EventType]
+    listener: RTMClientEventMap[EventType]
   ): void {
     const callback = (eventProcessor: EventProcessor<any>, data: any) => {
-      if (eventProcessor.type(data) !== EVENT_TYPE.IRtmClient) {
+      if (eventProcessor.type(data) !== EVENT_TYPE.RTMEvent) {
         return;
       }
       eventProcessor.func.map((it) => {
@@ -61,12 +116,13 @@ export class RtmClientInternal extends IRtmClientImpl {
     };
     // @ts-ignore
     listener!.agoraCallback = callback;
-    DeviceEventEmitter.addListener(eventType, callback);
+    const eventName = this.event_name_map[eventType] || eventType;
+    DeviceEventEmitter.addListener(eventName, callback);
   }
 
-  removeEventListener<EventType extends keyof IRtmClientEvent>(
+  removeEventListener<EventType extends keyof RTMClientEventMap>(
     eventType: EventType,
-    listener?: IRtmClientEvent[EventType]
+    listener?: RTMClientEventMap[EventType]
   ) {
     DeviceEventEmitter.removeListener(
       eventType,
@@ -75,10 +131,123 @@ export class RtmClientInternal extends IRtmClientImpl {
     );
   }
 
-  removeAllListeners<EventType extends keyof IRtmClientEvent>(
+  removeAllListeners<EventType extends keyof RTMClientEventMap>(
     eventType?: EventType
   ) {
     RtmClientInternal._event_handlers = [];
     DeviceEventEmitter.removeAllListeners(eventType);
+  }
+
+  async login(options?: LoginOptions): Promise<LoginResponse> {
+    const token = options?.token || '';
+    let operation = 'login';
+    let callBack = 'onLoginResult';
+    try {
+      const status = this._rtmClientImpl.login(token);
+      let result = await wrapRtmResult(status, operation, callBack);
+      return result;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
+  }
+
+  async logout(): Promise<LogoutResponse> {
+    let operation = 'logout';
+    let callBack = 'onLogoutResult';
+    try {
+      const status = this._rtmClientImpl.logout();
+      let result = await wrapRtmResult(status, operation, callBack);
+      return result;
+    } catch (error) {
+      throw handleError(error, operation);
+    }
+  }
+
+  async publish(
+    channelName: string,
+    message: string | Uint8Array,
+    options?: PublishOptions
+  ): Promise<PublishResponse> {
+    let operation = 'publish';
+    let callBack = 'onPublishResult';
+    try {
+      const status = this._rtmClientImpl.publish(
+        channelName,
+        message,
+        message.length,
+        options ? options : new PublishOptions()
+      );
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        channelName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
+  }
+  async subscribe(
+    channelName: string,
+    options?: SubscribeOptions
+  ): Promise<SubscribeResponse> {
+    let operation = 'subscribe';
+    let callBack = 'onSubscribeResult';
+    try {
+      const status = this._rtmClientImpl.subscribe(
+        channelName,
+        options ? options : new SubscribeOptions()
+      );
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        channelName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
+  }
+  async unsubscribe(channelName: string): Promise<UnsubscribeResponse> {
+    let operation = 'unsubscribe';
+    let callBack = 'onUnsubscribeResult';
+    try {
+      const status = this._rtmClientImpl.unsubscribe(channelName);
+      let result = await wrapRtmResult(status, operation, callBack);
+      return {
+        ...result,
+        channelName,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
+  }
+  async renewToken(
+    token: string,
+    options?: RenewTokenOptions
+  ): Promise<RenewTokenResponse> {
+    let operation = 'renewToken';
+    let callBack = 'onRenewTokenResult';
+
+    try {
+      if (!options) {
+        const status = this._rtmClientImpl.renewToken(token);
+        let result = await wrapRtmResult(status, operation, callBack);
+        return result;
+      } else {
+        const channelName = options.channelName;
+        if (!channelName) {
+          throw handleError(new Error('Channel name is required'), operation);
+        }
+        if (!RtmClientInternal._streamChannels.has(channelName)) {
+          throw handleError(new Error('Stream channel not found'), operation);
+        }
+        const status = RtmClientInternal._streamChannels
+          .get(channelName)!
+          .renewToken(token);
+        let result = await wrapRtmResult(status, operation, callBack);
+        return result;
+      }
+    } catch (error) {
+      throw handleError(error, operation);
+    }
   }
 }

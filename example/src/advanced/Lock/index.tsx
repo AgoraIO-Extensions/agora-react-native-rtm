@@ -1,37 +1,37 @@
 import {
+  JoinChannelOptions,
   LockDetail,
+  RTMStreamChannel,
   RTM_CHANNEL_TYPE,
-  RTM_CONNECTION_CHANGE_REASON,
-  RTM_CONNECTION_STATE,
-  RTM_ERROR_CODE,
+  useRtm,
 } from 'agora-react-native-rtm';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { ScrollView } from 'react-native';
 
 import BaseComponent from '../../components/BaseComponent';
 import {
   AgoraButton,
+  AgoraDivider,
+  AgoraDropdown,
   AgoraStyle,
   AgoraSwitch,
   AgoraText,
   AgoraTextInput,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
+import { enumToItems } from '../../utils';
 import * as log from '../../utils/log';
 
 export default function Lock() {
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [joinSuccess, setJoinSuccess] = useState(false);
+  const [streamChannel, setStreamChannel] = useState<RTMStreamChannel>();
+  const [channelType, setChannelType] = useState<number>(
+    RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
+  );
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
-  const acquireLockRequestId = useRef<number>();
-  const setLockRequestId = useRef<number>();
-  const getLocksRequestId = useRef<number>();
-  const releaseLockRequestId = useRef<number>();
-  const revokeLockRequestId = useRef<number>();
-  const removeLockRequestId = useRef<number>();
-  const [uid, setUid] = useState<string>(Config.uid);
   const [lockDetailList, setLockDetailList] = useState<LockDetail[]>([]);
 
   const [lockName, setLockName] = useState<string>('lock-test');
@@ -39,376 +39,275 @@ export default function Lock() {
   const [retry, setRetry] = useState<boolean>(false);
   const [revokeOwner, setRevokeOwner] = useState<string>('');
 
-  const onSubscribeResult = useCallback(
-    (requestId: number, channelName: string, errorCode: RTM_ERROR_CODE) => {
-      log.log(
-        'onSubscribeResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'errorCode',
-        errorCode
-      );
-      setSubscribeSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
-    },
-    []
-  );
-
-  const onAcquireLockResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      _lockName: string,
-      errorCode: RTM_ERROR_CODE,
-      errorDetails: string
-    ) => {
-      log.info(
-        'onAcquireLockResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'lockName',
-        _lockName,
-        'errorCode',
-        errorCode,
-        'errorDetails',
-        errorDetails
-      );
-      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
-        log.error(`acquire lock failed: errorCode: ${errorCode}`);
-      }
-    },
-    []
-  );
-
-  const onReleaseLockResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      _lockName: string,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onReleaseLockResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'lockName',
-        _lockName,
-        'errorCode',
-        errorCode
-      );
-    },
-    []
-  );
-
-  const onSetLockResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      _lockName: string,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onSetLockResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'errorCode',
-        'lockName',
-        _lockName,
-        'errorCode',
-        errorCode
-      );
-      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
-        log.error(`setLock failed: errorCode: ${errorCode}`);
-      }
-    },
-    []
-  );
-
-  const onRevokeLockResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      _lockName: string,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onRevokeLockResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'lockName',
-        _lockName,
-        'errorCode',
-        errorCode
-      );
-      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
-        log.error(`revokeLock failed: errorCode: ${errorCode}`);
-      }
-    },
-    []
-  );
-
-  const onRemoveLockResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      _lockName: string,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.info(
-        'onRemoveLockResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'lockName',
-        _lockName,
-        'errorCode',
-        errorCode
-      );
-      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
-        log.error(`removeLock failed: errorCode: ${errorCode}`);
-      }
-    },
-    []
-  );
-
-  const onGetLocksResult = useCallback(
-    (
-      requestId: number,
-      channelName: string,
-      channelType: RTM_CHANNEL_TYPE,
-      _lockDetailList: LockDetail[],
-      count: number,
-      errorCode: RTM_ERROR_CODE
-    ) => {
-      log.log(
-        'onGetLocksResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'channelType',
-        channelType,
-        'lockDetailList',
-        _lockDetailList,
-        'count',
-        count,
-        'errorCode',
-        errorCode
-      );
-      if (
-        requestId === getLocksRequestId.current &&
-        errorCode === RTM_ERROR_CODE.RTM_ERROR_OK
-      ) {
-        setLockDetailList(_lockDetailList);
-      }
-    },
-    []
-  );
+  const [withMessage, setWithMessage] = useState<boolean>(true);
+  const [withMetadata, setWithMetadata] = useState<boolean>(true);
+  const [withPresence, setWithPresence] = useState<boolean>(true);
+  const [withLock, setWithLock] = useState<boolean>(true);
 
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
+
+  /**
+   * createStreamChannel
+   */
+  const createStreamChannel = async () => {
+    if (joinSuccess) {
+      log.error('already joined channel');
+      return;
+    }
+    try {
+      let result = await client.createStreamChannel(cName);
+      setStreamChannel(result);
+      log.info('createStreamChannel success', result);
+    } catch (status: any) {
+      log.error('createStreamChannel error', status);
+    }
+  };
+
+  const join = async () => {
+    try {
+      if (!streamChannel) {
+        log.error('please create streamChannel first');
+        return;
+      }
+      let result = await streamChannel.join(
+        new JoinChannelOptions({
+          token: Config.appId,
+          withPresence: withPresence,
+          withLock: withLock,
+          withMetadata: withMetadata,
+        })
+      );
+      log.info('join success', result);
+      setJoinSuccess(true);
+    } catch (status: any) {
+      log.error('join error', status);
+    }
+  };
+
+  const leave = async () => {
+    try {
+      if (!streamChannel) {
+        log.error('please create streamChannel first');
+        return;
+      }
+      let result = await streamChannel.leave();
+      setJoinSuccess(false);
+      log.info('leave success', result);
+    } catch (status: any) {
+      log.error('leave error', status);
+    }
+  };
+
+  const destroyStreamChannel = useCallback(() => {
+    streamChannel?.release();
+    setStreamChannel(undefined);
+    log.info('destroyStreamChannel success');
+  }, [streamChannel]);
 
   /**
    * Step 1-1(optional) : subscribe message channel
    */
-  const subscribe = () => {
-    client.subscribe(cName, {
-      withMessage: true,
-      withMetadata: true,
-      withPresence: true,
-      withLock: true,
-    });
+  const subscribe = async () => {
+    try {
+      let result = await client.subscribe(cName, {
+        withMessage: withMessage,
+        withMetadata: withMetadata,
+        withPresence: withPresence,
+        withLock: withLock,
+      });
+      setSubscribeSuccess(true);
+      log.info('subscribe success', result);
+    } catch (status: any) {
+      log.error('subscribe error', status);
+    }
   };
 
   /**
    * Step 1-2 : unsubscribe message channel
    */
-  const unsubscribe = () => {
-    client.unsubscribe(cName);
-    setSubscribeSuccess(false);
+  const unsubscribe = async () => {
+    try {
+      let result = await client.unsubscribe(cName);
+      setSubscribeSuccess(false);
+      log.info('unsubscribe success', result);
+    } catch (status: any) {
+      log.error('unsubscribe error', status);
+    }
   };
 
   /**
    * Step 1-3 : getLocks
    */
-  const getLocks = () => {
-    getLocksRequestId.current = client
-      .getLock()
-      .getLocks(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE);
+  const getLocks = async () => {
+    try {
+      let result = await client.lock.getLock(cName, channelType);
+      setLockDetailList(result.lockDetails);
+      log.info('getLocks success', result);
+    } catch (status: any) {
+      log.error('getLocks error', status);
+    }
   };
 
   /**
    * Step 2 : setLock
    */
-  const setLock = () => {
-    setLockRequestId.current = client
-      .getLock()
-      .setLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE, lockName, ttl);
+  const setLock = async () => {
+    try {
+      let result = await client.lock.setLock(cName, channelType, lockName, {
+        ttl,
+      });
+      log.info('setLock success', result);
+    } catch (status: any) {
+      log.error('setLock error', status);
+    }
   };
 
   /**
    * Step 3 : acquireLock
    */
-  const acquireLock = () => {
-    acquireLockRequestId.current = client
-      .getLock()
-      .acquireLock(
-        cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
-        lockName,
-        retry
-      );
+  const acquireLock = async () => {
+    try {
+      let result = await client.lock.acquireLock(cName, channelType, lockName, {
+        retry,
+      });
+      log.info('acquireLock success', result);
+    } catch (status: any) {
+      log.error('acquireLock error', status);
+    }
   };
 
   /**
    * Step 4 : releaseLock
    */
-  const releaseLock = () => {
-    releaseLockRequestId.current = client
-      .getLock()
-      .releaseLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE, lockName);
+  const releaseLock = async () => {
+    try {
+      let result = await client.lock.releaseLock(cName, channelType, lockName);
+      log.info('releaseLock success', result);
+    } catch (status: any) {
+      log.error('releaseLock error', status);
+    }
   };
 
   /**
    * Step 5 : revokeLock
    */
-  const revokeLock = () => {
-    revokeLockRequestId.current = client
-      .getLock()
-      .revokeLock(
+  const revokeLock = async () => {
+    try {
+      let result = await client.lock.revokeLock(
         cName,
-        RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE,
+        channelType,
         lockName,
         revokeOwner
       );
+      log.info('revokeLock success', result);
+    } catch (status: any) {
+      log.error('revokeLock error', status);
+    }
   };
 
   /**
    * Step 5 : removeLock
    */
-  const removeLock = () => {
-    removeLockRequestId.current = client
-      .getLock()
-      .removeLock(cName, RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE, lockName);
+  const removeLock = async () => {
+    try {
+      let result = await client.lock.removeLock(cName, channelType, lockName);
+      log.info('removeLock success', result);
+    } catch (status: any) {
+      log.error('removeLock error', status);
+    }
   };
 
-  useEffect(() => {
-    client.addEventListener('onSubscribeResult', onSubscribeResult);
-    client.addEventListener('onSetLockResult', onSetLockResult);
-    client?.addEventListener('onAcquireLockResult', onAcquireLockResult);
-    client?.addEventListener('onReleaseLockResult', onReleaseLockResult);
-    client?.addEventListener('onRevokeLockResult', onRevokeLockResult);
-    client?.addEventListener('onRemoveLockResult', onRemoveLockResult);
-    client?.addEventListener('onGetLocksResult', onGetLocksResult);
-
-    return () => {
-      client.removeEventListener('onSubscribeResult', onSubscribeResult);
-      client.removeEventListener('onSetLockResult', onSetLockResult);
-      client?.removeEventListener('onAcquireLockResult', onAcquireLockResult);
-      client?.removeEventListener('onReleaseLockResult', onReleaseLockResult);
-      client?.removeEventListener('onRevokeLockResult', onRevokeLockResult);
-      client?.removeEventListener('onRemoveLockResult', onRemoveLockResult);
-      client?.removeEventListener('onGetLocksResult', onGetLocksResult);
-    };
-  }, [
-    client,
-    uid,
-    onSubscribeResult,
-    onSetLockResult,
-    onAcquireLockResult,
-    onReleaseLockResult,
-    onRevokeLockResult,
-    onRemoveLockResult,
-    onGetLocksResult,
-  ]);
-
-  const onConnectionStateChanged = useCallback(
-    (
-      channelName: string,
-      state: RTM_CONNECTION_STATE,
-      reason: RTM_CONNECTION_CHANGE_REASON
-    ) => {
-      log.log(
-        'onConnectionStateChanged',
-        'channelName',
-        channelName,
-        'state',
-        state,
-        'reason',
-        reason
-      );
-      switch (state) {
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_CONNECTED:
-          setLoginSuccess(true);
-          break;
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_DISCONNECTED:
-          if (
-            reason ===
-            RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
-          ) {
-            setLoginSuccess(false);
-          }
-          setSubscribeSuccess(false);
-          break;
-      }
-    },
-    []
-  );
-  useEffect(() => {
-    client?.addEventListener(
-      'onConnectionStateChanged',
-      onConnectionStateChanged
-    );
-
-    return () => {
-      client?.removeEventListener(
-        'onConnectionStateChanged',
-        onConnectionStateChanged
-      );
-    };
-  }, [client, uid, onConnectionStateChanged]);
+  const handleLoginStatus = useCallback((status: boolean) => {
+    setLoginSuccess(status);
+    if (!status) {
+      setJoinSuccess(false);
+      setSubscribeSuccess(false);
+      setStreamChannel(undefined);
+    }
+  }, []);
 
   return (
     <>
       <ScrollView style={AgoraStyle.fullSize}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
-          onUidChanged={(v) => setUid(v)}
+          onLoginStatusChanged={handleLoginStatus}
         />
-        <AgoraButton
-          disabled={!loginSuccess}
-          title={`${subscribeSuccess ? 'unsubscribe' : 'subscribe'}`}
-          onPress={() => {
-            subscribeSuccess ? unsubscribe() : subscribe();
+        {channelType === RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM && (
+          <>
+            <AgoraButton
+              disabled={!loginSuccess}
+              title={`${
+                streamChannel ? 'destroyStreamChannel' : 'createStreamChannel'
+              }`}
+              onPress={async () => {
+                streamChannel
+                  ? destroyStreamChannel()
+                  : await createStreamChannel();
+              }}
+            />
+            <AgoraButton
+              disabled={!loginSuccess || !streamChannel}
+              title={`${joinSuccess ? 'leaveChannel' : 'joinChannel'}`}
+              onPress={async () => {
+                joinSuccess ? await leave() : await join();
+              }}
+            />
+          </>
+        )}
+        <AgoraDivider />
+        <AgoraDropdown
+          items={enumToItems(RTM_CHANNEL_TYPE)}
+          onValueChange={(v) => {
+            setChannelType(v);
+          }}
+          title="select channelType"
+          value={channelType}
+        />
+        <AgoraDivider />
+        <AgoraSwitch
+          title="withMetadata"
+          value={withMetadata}
+          onValueChange={(v) => {
+            setWithMetadata(v);
           }}
         />
+        <AgoraSwitch
+          title="withPresence"
+          value={withPresence}
+          onValueChange={(v) => {
+            setWithPresence(v);
+          }}
+        />
+        <AgoraSwitch
+          title="withLock"
+          value={withLock}
+          onValueChange={(v) => {
+            setWithLock(v);
+          }}
+        />
+        {channelType === RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE && (
+          <>
+            <AgoraDivider />
+            <AgoraSwitch
+              title="withMessage"
+              value={withMessage}
+              onValueChange={(v) => {
+                setWithMessage(v);
+              }}
+            />
+            <AgoraButton
+              disabled={!loginSuccess}
+              title={`${subscribeSuccess ? 'unsubscribe' : 'subscribe'}`}
+              onPress={async () => {
+                subscribeSuccess ? await unsubscribe() : await subscribe();
+              }}
+            />
+          </>
+        )}
         <AgoraTextInput
           onChangeText={(text) => {
             setLockName(text);
@@ -442,15 +341,15 @@ export default function Lock() {
         <AgoraButton
           title={`acquireLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            acquireLock();
+          onPress={async () => {
+            await acquireLock();
           }}
         />
         <AgoraButton
           title={`releaseLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            releaseLock();
+          onPress={async () => {
+            await releaseLock();
           }}
         />
         <AgoraTextInput
@@ -463,22 +362,22 @@ export default function Lock() {
         <AgoraButton
           title={`revokeLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            revokeLock();
+          onPress={async () => {
+            await revokeLock();
           }}
         />
         <AgoraButton
           title={`removeLock`}
           disabled={!loginSuccess}
-          onPress={() => {
-            removeLock();
+          onPress={async () => {
+            await removeLock();
           }}
         />
         <AgoraButton
           title={`getLocks`}
           disabled={!loginSuccess}
-          onPress={() => {
-            getLocks();
+          onPress={async () => {
+            await getLocks();
           }}
         />
         <AgoraText>lockDetailList:</AgoraText>

@@ -33,14 +33,18 @@ public:
         [array addObject:base64Buffer];
       }
 
+      NSString *eventStr = [NSString stringWithUTF8String:event];
+      NSString *dataStr = [NSString stringWithUTF8String:data];
+      NSString *processedData = [plugin_ processEventData:eventStr
+                                             originalData:dataStr];
+
       if (plugin_.hasListeners) {
-        [plugin_
-            sendEventWithName:EVENT_NAME
-                         body:@{
-                           @"event" : [NSString stringWithUTF8String:event],
-                           @"data" : [NSString stringWithUTF8String:data],
-                           @"buffers" : array
-                         }];
+        [plugin_ sendEventWithName:EVENT_NAME
+                              body:@{
+                                @"event" : eventStr,
+                                @"data" : processedData,
+                                @"buffers" : array
+                              }];
       }
     }
   }
@@ -75,7 +79,8 @@ RCT_EXPORT_MODULE()
 - (instancetype)init {
   if (self = [super init]) {
     self.irisRtmEngine = nullptr;
-    self.eventHandler = new agora::iris::rtm::EventHandler((__bridge void *)self);
+    self.eventHandler =
+        new agora::iris::rtm::EventHandler((__bridge void *)self);
     instance = self;
   }
   return instance;
@@ -202,8 +207,9 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(callApi
   void *handler[1] = {self.eventHandler};
   if (bufferArray.count == 0) {
     std::smatch output;
-    std::regex pattern = std::regex("^.*(RtmClient_initialize|StreamChannel_"
-                                    "publishTopicMessage|RtmClient_publish)$");
+    std::regex pattern =
+        std::regex("(^.*(RtmClient_create|StreamChannel_publishTopicMessage|"
+                   "RtmClient_publish)(_[a-zA-Z0-9]*)?)$");
     std::string name = funcName.UTF8String;
     if (std::regex_match(name, output, pattern)) {
       param.buffer = handler;
@@ -259,5 +265,86 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(callApi
   return std::make_shared<facebook::react::NativeAgoraRtmNgSpecJSI>(params);
 }
 #endif
+
+- (NSString *)processEventData:(NSString *)event originalData:(NSString *)data {
+  @try {
+    NSData *jsonData = [data dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSMutableDictionary *jsonObject =
+        [NSJSONSerialization JSONObjectWithData:jsonData
+                                        options:NSJSONReadingMutableContainers
+                                          error:&error];
+    if (error || !jsonObject) {
+      return data;
+    }
+
+    if ([event containsString:@"onGetHistoryMessagesResult"]) {
+      NSArray *messageList = jsonObject[@"messageList"];
+      if (messageList && [messageList isKindOfClass:[NSArray class]]) {
+        NSMutableArray *processedMessageList = [NSMutableArray new];
+
+        for (NSDictionary *item in messageList) {
+          NSMutableDictionary *processedItem = [item mutableCopy];
+
+          id messagePtr = item[@"message"];
+          NSNumber *messageLength = item[@"messageLength"];
+
+          if (messagePtr && messageLength && [messageLength intValue] > 0) {
+            unsigned long long ptrAddress = 0;
+
+            // Safely handle large integer addresses, support both NSNumber and
+            // NSString
+            if ([messagePtr isKindOfClass:[NSNumber class]]) {
+              ptrAddress = [(NSNumber *)messagePtr unsignedLongLongValue];
+            } else if ([messagePtr isKindOfClass:[NSString class]]) {
+              // Use string to handle very large integers, similar to Android
+              // BigInt approach
+              NSScanner *scanner =
+                  [NSScanner scannerWithString:(NSString *)messagePtr];
+              [scanner scanUnsignedLongLong:&ptrAddress];
+            }
+
+            if (ptrAddress > 0) {
+              @try {
+                const char *str = reinterpret_cast<const char *>(ptrAddress);
+                // Add memory access safety check
+                if (str != NULL) {
+                  NSString *messageContent =
+                      [NSString stringWithUTF8String:str];
+                  if (messageContent) {
+                    processedItem[@"message"] = messageContent;
+                  }
+                }
+              } @catch (NSException *exception) {
+                NSLog(@"Memory access error for pointer address: 0x%llx, "
+                      @"error: %@",
+                      ptrAddress, exception.reason);
+              }
+            }
+          }
+
+          [processedMessageList addObject:processedItem];
+        }
+
+        jsonObject[@"messageList"] = processedMessageList;
+      }
+    }
+
+    NSData *processedJsonData =
+        [NSJSONSerialization dataWithJSONObject:jsonObject
+                                        options:0
+                                          error:&error];
+    if (error) {
+      return data;
+    }
+
+    return [[NSString alloc] initWithData:processedJsonData
+                                 encoding:NSUTF8StringEncoding];
+
+  } @catch (NSException *exception) {
+    NSLog(@"processEventData error: %@", exception.reason);
+    return data;
+  }
+}
 
 @end

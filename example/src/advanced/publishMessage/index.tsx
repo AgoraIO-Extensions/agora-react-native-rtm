@@ -4,14 +4,11 @@ import {
   MessageEvent,
   PublishOptions,
   RTM_CHANNEL_TYPE,
-  RTM_CONNECTION_CHANGE_REASON,
-  RTM_CONNECTION_STATE,
-  RTM_ERROR_CODE,
   RTM_MESSAGE_TYPE,
-  RTM_PROXY_TYPE,
+  useRtm,
 } from 'agora-react-native-rtm';
-import React, { useCallback, useEffect, useState } from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import React, { useCallback, useState } from 'react';
+import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 
 import BaseComponent from '../../components/BaseComponent';
 import {
@@ -19,135 +16,81 @@ import {
   AgoraDivider,
   AgoraDropdown,
   AgoraStyle,
+  AgoraSwitch,
   AgoraView,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
-import { useRtmClient } from '../../hooks/useRtmClient';
 import { AgoraMessage } from '../../types';
-import * as log from '../../utils/log';
 import { enumToItems } from '../../utils';
+import * as log from '../../utils/log';
 
 export default function PublishMessage() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
+  const [storeInHistory, setStoreInHistory] = useState(false);
   const [publishMessageByBuffer, setPublishMessageByBuffer] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
   const [channelType, setChannelType] = useState<number>(
     RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
   );
-  const [uid, setUid] = useState<string>(Config.uid);
+  const [uid] = useState<string>(Config.uid);
   const [messages, setMessages] = useState<AgoraMessage[]>([]);
-
-  const onSubscribeResult = useCallback(
-    (requestId: number, channelName: string, errorCode: RTM_ERROR_CODE) => {
-      log.log(
-        'onSubscribeResult',
-        'requestId',
-        requestId,
-        'channelName',
-        channelName,
-        'errorCode',
-        errorCode
-      );
-      setSubscribeSuccess(errorCode === RTM_ERROR_CODE.RTM_ERROR_OK);
-    },
-    []
-  );
-
-  const onPublishResult = useCallback(
-    (requestId: number, errorCode: RTM_ERROR_CODE) => {
-      log.log(
-        'onPublishResult',
-        'requestId',
-        requestId,
-        'errorCode',
-        errorCode
-      );
-      if (errorCode !== RTM_ERROR_CODE.RTM_ERROR_OK) {
-        log.error(`CHANNEL_INVALID_MESSAGE: ${errorCode}`);
-      } else {
-        messages.map((message) => {
-          if (message.requestId === requestId) {
-            message.sent = true;
-          }
-        });
-      }
-    },
-    [messages]
-  );
-
-  const onMessageEvent = useCallback(
-    (event: MessageEvent) => {
-      log.log('onMessageEvent', 'event', event);
-      setMessages((prevState) =>
-        GiftedChat.append(prevState, [
-          {
-            _id: +new Date(),
-            text: event.message!,
-            user: {
-              _id: +new Date(),
-              name: event.publisher || uid.slice(-1),
-            },
-            createdAt: new Date(),
-          },
-        ])
-      );
-    },
-    [uid]
-  );
 
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
    */
-  const client = useRtmClient();
+  const client = useRtm();
 
   /**
    * Step 2 : publish message to message channel
    */
   const publish = useCallback(
-    (msg: AgoraMessage, msgs: AgoraMessage[]) => {
+    async (msg: AgoraMessage, msgs: AgoraMessage[]) => {
       try {
         if (publishMessageByBuffer) {
-          msg.requestId = client.publishWithBuffer(
+          let result = await client.publish(
             cName,
-            Buffer.from(msg.text),
-            msg.text?.length,
+            new Uint8Array(Buffer.from(msg.text)),
             new PublishOptions({
               channelType: channelType,
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
+              storeInHistory: storeInHistory,
             })
           );
+          log.info('publish success', result);
         } else {
-          msg.requestId = client.publish(
+          let result = await client.publish(
             cName,
             msg.text,
-            msg.text?.length,
             new PublishOptions({
               channelType: channelType,
               messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
+              storeInHistory: storeInHistory,
             })
           );
+          log.info('publish success', result);
         }
-        msg.sent = false;
+        msg.sent = true;
         setMessages((previousMessages) =>
           GiftedChat.append(previousMessages, msgs)
         );
       } catch (err) {
-        log.error(err);
+        msg.sent = false;
+        log.error('publish error', err);
         return;
       }
     },
-    [cName, client, publishMessageByBuffer, channelType]
+    [cName, client, publishMessageByBuffer, channelType, storeInHistory]
   );
 
   const onSend = useCallback(
-    (msgs = []) => {
+    (msgs: IMessage[] = []) => {
       if (!loginSuccess) {
         log.error('please login first');
         return;
       }
 
-      msgs.forEach((message: AgoraMessage) => {
+      msgs.forEach((message: IMessage) => {
         publish(message, msgs);
       });
     },
@@ -157,88 +100,67 @@ export default function PublishMessage() {
   /**
    * Step 3(optional) : subscribe message channel
    */
-  const subscribe = () => {
-    client.subscribe(cName, {
-      withMessage: true,
-      withMetadata: true,
-      withPresence: true,
-      withLock: true,
-    });
+  const subscribe = async () => {
+    try {
+      let result = await client.subscribe(cName, {
+        withMessage: true,
+        withMetadata: true,
+        withPresence: true,
+        withLock: true,
+      });
+      setSubscribeSuccess(true);
+      log.info('subscribe success', result);
+    } catch (status: any) {
+      log.error('subscribe error', status);
+    }
   };
 
   /**
    * Step 4 : unsubscribe message channel
    */
-  const unsubscribe = () => {
-    client.unsubscribe(cName);
-    setSubscribeSuccess(false);
+  const unsubscribe = async () => {
+    try {
+      let result = await client.unsubscribe(cName);
+      setSubscribeSuccess(false);
+      log.info('unsubscribe success', result);
+    } catch (status: any) {
+      log.error('unsubscribe error', status);
+    }
   };
 
-  useEffect(() => {
-    client.addEventListener('onSubscribeResult', onSubscribeResult);
-    client.addEventListener('onMessageEvent', onMessageEvent);
-    client.addEventListener('onPublishResult', onPublishResult);
-
-    return () => {
-      client.removeEventListener('onSubscribeResult', onSubscribeResult);
-      client.removeEventListener('onMessageEvent', onMessageEvent);
-      client.removeEventListener('onPublishResult', onPublishResult);
-    };
-  }, [client, uid, onSubscribeResult, onMessageEvent, onPublishResult]);
-
-  const onConnectionStateChanged = useCallback(
-    (
-      channelName: string,
-      state: RTM_CONNECTION_STATE,
-      reason: RTM_CONNECTION_CHANGE_REASON
-    ) => {
-      log.log(
-        'onConnectionStateChanged',
-        'channelName',
-        channelName,
-        'state',
-        state,
-        'reason',
-        reason
-      );
-      switch (state) {
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_CONNECTED:
-          setLoginSuccess(true);
-          break;
-        case RTM_CONNECTION_STATE.RTM_CONNECTION_STATE_DISCONNECTED:
-          if (
-            reason ===
-            RTM_CONNECTION_CHANGE_REASON.RTM_CONNECTION_CHANGED_LOGOUT
-          ) {
-            setLoginSuccess(false);
-          }
-          setSubscribeSuccess(false);
-          break;
-      }
-    },
-    []
-  );
-  useEffect(() => {
-    client?.addEventListener(
-      'onConnectionStateChanged',
-      onConnectionStateChanged
+  const handleMessage = (message: MessageEvent) => {
+    log.info('message', message);
+    setMessages((prevState) =>
+      GiftedChat.append(prevState, [
+        {
+          _id: +new Date(),
+          text: message.message!,
+          user: {
+            _id: +new Date(),
+            name: message.publisher || uid.slice(-1),
+          },
+          createdAt: new Date(),
+        },
+      ])
     );
-    return () => {
-      client?.removeEventListener(
-        'onConnectionStateChanged',
-        onConnectionStateChanged
-      );
-    };
-  }, [client, uid, onConnectionStateChanged]);
+  };
+
+  const handleLoginStatus = useCallback((status: boolean) => {
+    setLoginSuccess(status);
+    if (!status) {
+      setSubscribeSuccess(false);
+    }
+  }, []);
 
   return (
     <>
       <AgoraView style={AgoraStyle.fullWidth}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
-          onUidChanged={(v) => setUid(v)}
+          onLoginStatusChanged={handleLoginStatus}
+          onMessage={handleMessage}
         />
-        <AgoraDivider/>
+        <AgoraDivider />
         <AgoraDropdown
           items={enumToItems(RTM_CHANNEL_TYPE)}
           onValueChange={(v) => {
@@ -250,9 +172,14 @@ export default function PublishMessage() {
         <AgoraButton
           disabled={!loginSuccess}
           title={`${subscribeSuccess ? 'unsubscribe' : 'subscribe'}`}
-          onPress={() => {
-            subscribeSuccess ? unsubscribe() : subscribe();
+          onPress={async () => {
+            subscribeSuccess ? await unsubscribe() : await subscribe();
           }}
+        />
+        <AgoraSwitch
+          value={storeInHistory}
+          onValueChange={(v) => setStoreInHistory(v)}
+          title="storeInHistory"
         />
       </AgoraView>
       <AgoraButton

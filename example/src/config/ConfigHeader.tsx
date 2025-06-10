@@ -7,9 +7,7 @@ import {
 } from 'agora-react-native-rtm';
 import React, { useState } from 'react';
 
-import { StyleSheet } from 'react-native';
-
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import {
   AgoraButton,
@@ -22,10 +20,17 @@ import { enumToItems } from '../utils/index';
 
 import Config from './agora.config';
 
-export const ConfigHeader = () => {
+export const ConfigHeader = ({
+  onShow,
+  onHide,
+}: {
+  onShow: () => void;
+  onHide: () => void;
+}) => {
   const [visible, setVisible] = useState(false);
   const [server, setServer] = useState(Config.server);
   const [port, setPort] = useState<number>(Config.port);
+  const [userId, setUserId] = useState<string>(Config.uid);
   const [areaCode, setAreaCode] = useState<number>(Config.areaCode);
   const [proxyType, setProxyType] = useState<RTM_PROXY_TYPE>(Config.proxyType);
   const [encryptionMode, setEncryptionMode] = useState<number>(
@@ -36,6 +41,7 @@ export const ConfigHeader = () => {
   );
 
   const toggleOverlay = () => {
+    onShow();
     setVisible(!visible);
   };
 
@@ -46,10 +52,23 @@ export const ConfigHeader = () => {
         <>
           <Overlay
             isVisible
-            onBackdropPress={() => setVisible(false)}
+            onBackdropPress={() => {
+              setVisible(false);
+              onHide();
+            }}
             overlayStyle={styles.overlay}
           >
             <ScrollView style={AgoraStyle.fullSize}>
+              <AgoraTextInput
+                onChangeText={(text) => {
+                  setUserId(text);
+                  Config.uid = text;
+                }}
+                placeholder="please input userId"
+                label="userId"
+                value={userId}
+              />
+              <AgoraDivider />
               <AgoraDropdown
                 items={enumToItems(RTM_PROXY_TYPE)}
                 onValueChange={(v) => {

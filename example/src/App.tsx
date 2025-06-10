@@ -1,10 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
-import {
-  StackScreenProps,
-  createStackNavigator,
-} from '@react-navigation/stack';
-import { isDebuggable, setDebuggable } from 'agora-react-native-rtm';
-import React, { useEffect } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StackScreenProps } from '@react-navigation/stack';
+import createAgoraRtmClient, {
+  RTMClient,
+  RTMProvider,
+  RtmConfig,
+  RtmEncryptionConfig,
+  RtmProxyConfig,
+  isDebuggable,
+  setDebuggable,
+} from 'agora-react-native-rtm';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
   Keyboard,
   SafeAreaView,
@@ -14,50 +20,124 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import Advanced from './advanced';
 import Basic from './basic';
-import Client from './components/Client';
+
 import { ConfigHeader } from './config/ConfigHeader';
-const RootStack = createStackNavigator<any>();
+import Config from './config/agora.config';
+import * as log from './utils/log';
+const RootStack = createNativeStackNavigator<any>();
 const DATA = [Basic, Advanced];
 
+type ClientContextType = {
+  createClient: () => void;
+  releaseClient: () => void;
+};
+
+const ClientContext = React.createContext<ClientContextType>({
+  createClient: () => {},
+  releaseClient: () => {},
+});
+
 export default function App() {
+  const [client, setClient] = useState<RTMClient | undefined>(undefined);
+
+  const createClient = useCallback(() => {
+    try {
+      setClient((prevClient) => {
+        if (prevClient) {
+          prevClient.release();
+        }
+        return undefined;
+      });
+
+      const newClient = createAgoraRtmClient(
+        new RtmConfig({
+          userId: Config.uid,
+          appId: Config.appId,
+          areaCode: Config.areaCode,
+          proxyConfig: new RtmProxyConfig({
+            proxyType: Config.proxyType,
+            server: Config.server,
+            port: Config.port,
+            account: Config.account,
+            password: Config.password,
+          }),
+          encryptionConfig: new RtmEncryptionConfig({
+            encryptionMode: Config.encryptionMode,
+            encryptionKey: Config.encryptionKey,
+            encryptionSalt: Config.encryptionSalt,
+          }),
+        })
+      );
+      setClient(newClient);
+    } catch (error: any) {
+      log.alert(`createAgoraRtmClient error: ${JSON.stringify(error.reason)}`);
+    }
+  }, []);
+
+  const releaseClient = useCallback(() => {
+    setClient((prevClient) => {
+      if (prevClient) {
+        prevClient.release();
+      }
+      return undefined;
+    });
+  }, []);
+
+  useEffect(() => {
+    createClient();
+
+    return () => {};
+  }, [createClient]);
+
+  const contextValue: ClientContextType = {
+    createClient,
+    releaseClient,
+  };
+
   return (
     <NavigationContainer>
-      <SafeAreaView
-        style={styles.container}
-        onStartShouldSetResponder={(_) => {
-          Keyboard.dismiss();
-          return false;
-        }}
-      >
-        <RootStack.Navigator screenOptions={{ gestureEnabled: false }}>
-          <RootStack.Screen name={'APIExample'} component={Home} />
-          {DATA.map((value) =>
-            value.data.map(({ name, component }) => {
-              const RouteComponent = component;
-              return RouteComponent ? (
-                <RootStack.Screen
-                  name={name}
-                  children={() => (
-                    <Client>
-                      <RouteComponent />
-                    </Client>
-                  )}
-                />
-              ) : undefined;
-            })
-          )}
-        </RootStack.Navigator>
-        <TouchableOpacity
-          onPress={() => {
-            setDebuggable(!isDebuggable());
+      <GestureHandlerRootView>
+        <SafeAreaView
+          style={styles.container}
+          onStartShouldSetResponder={(_) => {
+            Keyboard.dismiss();
+            return false;
           }}
         >
-          <Text style={styles.version}>Powered by Agora RTM SDK</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
+          <ClientContext.Provider value={contextValue}>
+            <RootStack.Navigator screenOptions={{ gestureEnabled: false }}>
+              <RootStack.Screen name={'APIExample'} component={Home} />
+              {client &&
+                DATA.map((value) =>
+                  value.data.map(({ name, component }) => {
+                    const RouteComponent = component;
+                    return RouteComponent ? (
+                      <RootStack.Screen
+                        name={name}
+                        children={() => (
+                          <RTMProvider client={client}>
+                            <RouteComponent />
+                          </RTMProvider>
+                        )}
+                      />
+                    ) : undefined;
+                  })
+                )}
+            </RootStack.Navigator>
+          </ClientContext.Provider>
+          <TouchableOpacity
+            onPress={() => {
+              setDebuggable(!isDebuggable());
+            }}
+          >
+            <Text style={styles.version}>Powered by Agora RTM SDK</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </GestureHandlerRootView>
     </NavigationContainer>
   );
 }
@@ -65,10 +145,25 @@ export default function App() {
 const AppSectionList = SectionList<any>;
 
 const Home = ({ navigation }: StackScreenProps<any>) => {
+  const { createClient, releaseClient } = useContext(ClientContext);
+
+  // Wrap state update functions in event handlers with useCallback to stabilize references
+  const handleShow = useCallback(() => {
+    releaseClient();
+  }, [releaseClient]);
+
+  const handleHide = useCallback(() => {
+    createClient();
+  }, [createClient]);
+
+  // Use useEffect to set navigation options, avoiding render-time updates
   useEffect(() => {
-    const headerRight = () => <ConfigHeader />;
+    const headerRight = () => (
+      <ConfigHeader onShow={handleShow} onHide={handleHide} />
+    );
+
     navigation.setOptions({ headerRight });
-  }, [navigation]);
+  }, [navigation, handleShow, handleHide]);
 
   return (
     <AppSectionList
@@ -87,7 +182,12 @@ const Item = ({
   navigation,
 }: Omit<StackScreenProps<any>, 'route'> & { item: any }) => (
   <View style={styles.item}>
-    <TouchableOpacity onPress={() => navigation.navigate(item.name)}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate(item.name);
+        log.logSink.clearData();
+      }}
+    >
       <Text style={styles.title}>{item.name}</Text>
     </TouchableOpacity>
   </View>
