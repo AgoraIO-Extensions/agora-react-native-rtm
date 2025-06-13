@@ -180,18 +180,22 @@ const Home = ({ navigation }: StackScreenProps<any>) => {
 const Item = ({
   item,
   navigation,
-}: Omit<StackScreenProps<any>, 'route'> & { item: any }) => (
-  <View style={styles.item}>
-    <TouchableOpacity
-      onPress={() => {
-        navigation.navigate(item.name);
-        log.logSink.clearData();
-      }}
-    >
-      <Text style={styles.title}>{item.name}</Text>
-    </TouchableOpacity>
-  </View>
-);
+}: Omit<StackScreenProps<any>, 'route'> & { item: any }) => {
+  const { createClient } = useContext(ClientContext);
+  return (
+    <View style={styles.item}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(item.name);
+          log.logSink.clearData();
+          createClient();
+        }}
+      >
+        <Text style={styles.title}>{item.name}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
