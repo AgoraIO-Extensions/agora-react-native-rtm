@@ -5,37 +5,37 @@ import { TopicMessageOptions, UserList } from './AgoraRtmBase';
 /**
  * The qos of rtm message.
  */
-export enum RTM_MESSAGE_QOS {
+export enum RtmMessageQos {
   /**
    * Will not ensure that messages arrive in order.
    */
-  RTM_MESSAGE_QOS_UNORDERED = 0,
+  unordered = 0,
   /**
    * Will ensure that messages arrive in order.
    */
-  RTM_MESSAGE_QOS_ORDERED = 1,
+  ordered = 1,
 }
 
 /**
  * The priority of rtm message.
  */
-export enum RTM_MESSAGE_PRIORITY {
+export enum RtmMessagePriority {
   /**
    * The highest priority
    */
-  RTM_MESSAGE_PRIORITY_HIGHEST = 0,
+  highest = 0,
   /**
    * The high priority
    */
-  RTM_MESSAGE_PRIORITY_HIGH = 1,
+  high = 1,
   /**
    * The normal priority (Default)
    */
-  RTM_MESSAGE_PRIORITY_NORMAL = 4,
+  normal = 4,
   /**
    * The low priority
    */
-  RTM_MESSAGE_PRIORITY_LOW = 8,
+  low = 8,
 }
 
 /**
@@ -84,12 +84,11 @@ export class JoinTopicOptions {
   /**
    * The qos of rtm message.
    */
-  qos?: RTM_MESSAGE_QOS = RTM_MESSAGE_QOS.RTM_MESSAGE_QOS_UNORDERED;
+  qos?: RtmMessageQos = RtmMessageQos.unordered;
   /**
    * The priority of rtm message.
    */
-  priority?: RTM_MESSAGE_PRIORITY =
-    RTM_MESSAGE_PRIORITY.RTM_MESSAGE_PRIORITY_NORMAL;
+  priority?: RtmMessagePriority = RtmMessagePriority.normal;
   /**
    * The metaData of topic.
    */
@@ -100,8 +99,8 @@ export class JoinTopicOptions {
   syncWithMedia?: boolean = false;
   constructor(
     props?: Partial<{
-      qos?: RTM_MESSAGE_QOS;
-      priority?: RTM_MESSAGE_PRIORITY;
+      qos?: RtmMessageQos;
+      priority?: RtmMessagePriority;
       meta?: string;
       syncWithMedia?: boolean;
     }>

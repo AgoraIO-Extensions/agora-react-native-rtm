@@ -1,7 +1,7 @@
 import {
   GetOnlineUsersOptions,
   PresenceOptions,
-  RTM_CHANNEL_TYPE,
+  RtmChannelType,
   StateItem,
 } from './AgoraRtmBase';
 
@@ -26,7 +26,7 @@ export abstract class IRtmPresence {
    */
   abstract whoNow(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options: PresenceOptions
   ): number;
   /**
@@ -53,7 +53,7 @@ export abstract class IRtmPresence {
    */
   abstract setState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     items: StateItem[],
     count: number
   ): number;
@@ -71,7 +71,7 @@ export abstract class IRtmPresence {
    */
   abstract removeState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     keys: string[],
     count: number
   ): number;
@@ -88,7 +88,7 @@ export abstract class IRtmPresence {
    */
   abstract getState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     userId: string
   ): number;
   /**
@@ -104,7 +104,7 @@ export abstract class IRtmPresence {
    */
   abstract getOnlineUsers(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options: GetOnlineUsersOptions
   ): number;
   /**

@@ -2,7 +2,7 @@ import { callIrisApi } from '../../internal/IrisRtmEngine';
 import {
   GetOnlineUsersOptions,
   PresenceOptions,
-  RTM_CHANNEL_TYPE,
+  RtmChannelType,
   StateItem,
 } from '../AgoraRtmBase';
 import { IRtmPresence } from '../IAgoraRtmPresence';
@@ -11,7 +11,7 @@ import { IRtmPresence } from '../IAgoraRtmPresence';
 export class IRtmPresenceImpl implements IRtmPresence {
   whoNow(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options: PresenceOptions
   ): any {
     const apiType = this.getApiTypeFromWhoNow(
@@ -36,7 +36,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   protected getApiTypeFromWhoNow(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options: PresenceOptions
   ): string {
     return 'RtmPresence_whoNow_f7f61d1';
@@ -61,7 +61,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   setState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     items: StateItem[],
     count: number
   ): any {
@@ -90,7 +90,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   protected getApiTypeFromSetState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     items: StateItem[],
     count: number
   ): string {
@@ -99,7 +99,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   removeState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     keys: string[],
     count: number
   ): any {
@@ -128,7 +128,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   protected getApiTypeFromRemoveState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     keys: string[],
     count: number
   ): string {
@@ -137,7 +137,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   getState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     userId: string
   ): any {
     const apiType = this.getApiTypeFromGetState(
@@ -162,7 +162,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   protected getApiTypeFromGetState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     userId: string
   ): string {
     return 'RtmPresence_getState_4ffa44d';
@@ -170,7 +170,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   getOnlineUsers(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options: GetOnlineUsersOptions
   ): any {
     const apiType = this.getApiTypeFromGetOnlineUsers(
@@ -195,7 +195,7 @@ export class IRtmPresenceImpl implements IRtmPresence {
 
   protected getApiTypeFromGetOnlineUsers(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options: GetOnlineUsersOptions
   ): string {
     return 'RtmPresence_getOnlineUsers_ce2d8e8';

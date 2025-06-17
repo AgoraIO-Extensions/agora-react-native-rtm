@@ -50,13 +50,21 @@ export function getDefaultValue(node: Struct, member_variable: MemberVariable) {
           //去掉特例
           if (!specialConstructList.includes(value)) {
             if (key === 0) {
+              let valueStr = convertToCamelCase(
+                value.replace(new RegExp('^(.*)::(.*)'), '$2')
+              ).replace(convertToCamelCase(initializer.type), '');
               default_value += `=${
                 member_variable.type.name.match(/boolean|number|string/g)
                   ? ''
                   : member_variable.type.name + '.'
-              }${value.replace(new RegExp('^(.*)::(.*)'), '$2')}`;
+              }${valueStr.charAt(0).toLowerCase() + valueStr.slice(1)}`;
             } else {
-              default_value += `||${value}`;
+              let valueStr = convertToCamelCase(
+                value.replace(new RegExp('^(.*)::(.*)'), '$2')
+              ).replace(convertToCamelCase(initializer.type), '');
+              default_value += `||${
+                valueStr.charAt(0).toLowerCase() + valueStr.slice(1)
+              }`;
             }
           }
         });
@@ -118,4 +126,42 @@ export function findStruct(value: string, parseResult: ParseResult) {
       return file.nodes.filter((node) => node.__TYPE === CXXTYPE.Struct);
     }) as Struct[]
   ).filter((struct: Struct) => struct.name === value);
+}
+
+export function convertToCamelCase(str: string, upperCamelCase = true): string {
+  //change RTM_ERROR_CODE to ERROR_CODE globally
+  if (str.includes('RTM_ERROR_CODE')) {
+    str = str.replace('RTM_ERROR_CODE', 'ERROR_CODE');
+  }
+  if (/^[A-Z]+$/.test(str)) {
+    return str
+      .split(' ')
+      .map(
+        (word: string) =>
+          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      )
+      .join('');
+  }
+
+  if (str.indexOf('_') === -1) {
+    if (!upperCamelCase) {
+      return lowerFirstWord(str);
+    } else {
+      return str;
+    }
+  }
+  let words = str.replace(/[-_]/g, ' ').split(' ');
+
+  let camelCaseStr = words
+    .map(
+      (word: string) =>
+        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    )
+    .join('');
+
+  if (!upperCamelCase) {
+    camelCaseStr = lowerFirstWord(camelCaseStr);
+  }
+
+  return camelCaseStr;
 }

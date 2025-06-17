@@ -1,4 +1,4 @@
-import { LockDetail, RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
+import { LockDetail, RtmChannelType } from '../legacy/AgoraRtmBase';
 
 import { BaseResponse } from './RTMClient';
 
@@ -6,12 +6,12 @@ export interface GetLockResponse extends BaseResponse {
   totalLocks: number;
   lockDetails: LockDetail[];
   channelName: string;
-  channelType: RTM_CHANNEL_TYPE;
+  channelType: RtmChannelType;
 }
 
 export type LockOperationResponse = BaseResponse & {
   channelName: string;
-  channelType: RTM_CHANNEL_TYPE;
+  channelType: RtmChannelType;
   lockName: string;
 };
 export type SetLockResponse = LockOperationResponse;
@@ -35,39 +35,39 @@ export interface AcquireLockOptions {
 export abstract class RTMLock {
   abstract setLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     options?: SetLockOptions
   ): Promise<SetLockResponse>;
 
   abstract removeLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): Promise<RemoveLockResponse>;
 
   abstract acquireLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     options?: AcquireLockOptions // 默认false
   ): Promise<AcquireLockResponse>;
 
   abstract releaseLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): Promise<ReleaseLockResponse>;
 
   abstract revokeLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     owner: string
   ): Promise<RevokeLockResponse>;
 
   abstract getLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): Promise<GetLockResponse>;
 }

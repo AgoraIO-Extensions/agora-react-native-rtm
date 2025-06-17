@@ -16,6 +16,7 @@ import {
 } from '@agoraio-extensions/terra_shared_configs';
 
 import {
+  convertToCamelCase,
   deepClone,
   findClazz,
   findEnumz,
@@ -94,10 +95,11 @@ export function impl(parseResult: ParseResult) {
           // method.return_type.name = convertToCamelCase(method.return_type.name);
           method.asMemberFunction().parameters.map((param) => {
             let variableUserData: VariableUserData = {
-              name: param.name,
+              name: convertToCamelCase(param.name, false),
+              ...param.user_data,
             };
-            let typeName = param.type.name;
-            let default_value = param.default_value;
+            let typeName = convertToCamelCase(param.type.name);
+            let default_value = convertToCamelCase(param.default_value);
             param.user_data = variableUserData;
             if (!param.is_output) {
               let member = `${variableUserData.name}: ${typeName}`;

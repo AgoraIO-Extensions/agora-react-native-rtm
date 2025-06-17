@@ -3,7 +3,7 @@ import {
   Metadata,
   MetadataItem,
   RTMStreamChannel,
-  RTM_CHANNEL_TYPE,
+  RtmChannelType,
   useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useRef, useState } from 'react';
@@ -32,7 +32,7 @@ export default function UserMetadata() {
   const [streamChannel, setStreamChannel] = useState<RTMStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
   const [channelType, setChannelType] = useState<number>(
-    RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
+    RtmChannelType.message
   );
   const [uid] = useState<string>(Config.uid);
   const [subscribeUid, setSubscribeUid] = useState<string>('123');
@@ -285,7 +285,7 @@ export default function UserMetadata() {
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
         />
-        {channelType === RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM && (
+        {channelType === RtmChannelType.stream && (
           <>
             <AgoraButton
               disabled={!loginSuccess}
@@ -309,7 +309,7 @@ export default function UserMetadata() {
         )}
         <AgoraDivider />
         <AgoraDropdown
-          items={enumToItems(RTM_CHANNEL_TYPE)}
+          items={enumToItems(RtmChannelType)}
           onValueChange={(v) => {
             setChannelType(v);
           }}
@@ -338,7 +338,7 @@ export default function UserMetadata() {
             setWithLock(v);
           }}
         />
-        {channelType === RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE && (
+        {channelType === RtmChannelType.message && (
           <>
             <AgoraDivider />
             <AgoraSwitch

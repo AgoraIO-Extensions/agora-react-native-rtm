@@ -1,7 +1,7 @@
 import {
   ChannelInfo,
   PresenceOptions,
-  RTM_CHANNEL_TYPE,
+  RtmChannelType,
   StateItem,
   UserState,
 } from '../legacy/AgoraRtmBase';
@@ -34,12 +34,12 @@ export interface RemoveStateOptions {
 export abstract class RTMPresence {
   abstract whoNow(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: PresenceOptions
   ): Promise<WhoNowResponse>;
   abstract getOnlineUsers(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: PresenceOptions
   ): Promise<GetOnlineUsersResponse>;
 
@@ -48,19 +48,19 @@ export abstract class RTMPresence {
 
   abstract setState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     state: StateItem
   ): Promise<SetStateResponse>;
 
   abstract getState(
     userId: string,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): Promise<GetStateResponse>;
 
   abstract removeState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     // 传入 state key, 不传代表全部删除
     options?: RemoveStateOptions
   ): Promise<RemoveStateResponse>;

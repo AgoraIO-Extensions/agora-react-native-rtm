@@ -16,7 +16,7 @@ import {
   UpdateChannelMetadataResponse,
   UpdateUserMetadataResponse,
 } from '../api/RTMStorage';
-import { RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
+import { RtmChannelType } from '../legacy/AgoraRtmBase';
 import { Metadata } from '../legacy/IAgoraRtmStorage';
 import { MetadataOptions } from '../legacy/IAgoraRtmStorage';
 import { IRtmStorageImpl } from '../legacy/impl/IAgoraRtmStorageImpl';
@@ -28,7 +28,7 @@ export class RtmStorageInternal extends RTMStorage {
 
   async setChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options?: IMetadataOptions
   ): Promise<SetChannelMetadataResponse> {
@@ -57,7 +57,7 @@ export class RtmStorageInternal extends RTMStorage {
   }
   async getChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): Promise<GetChannelMetadataResponse> {
     let operation = 'getChannelMetadata';
     let callBack = 'onGetChannelMetadataResult';
@@ -81,7 +81,7 @@ export class RtmStorageInternal extends RTMStorage {
   }
   async removeChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: RemoveChannelMetadataOptions
   ): Promise<RemoveChannelMetadataResponse> {
     let operation = 'removeChannelMetadata';
@@ -109,7 +109,7 @@ export class RtmStorageInternal extends RTMStorage {
   }
   async updateChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options?: IMetadataOptions
   ): Promise<UpdateChannelMetadataResponse> {

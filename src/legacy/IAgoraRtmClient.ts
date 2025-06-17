@@ -1,28 +1,28 @@
 import {
   ChannelInfo,
+  ErrorCode,
   HistoryMessage,
   LockDetail,
   PublishOptions,
-  RTM_AREA_CODE,
-  RTM_CHANNEL_TYPE,
-  RTM_CONNECTION_CHANGE_REASON,
-  RTM_CONNECTION_STATE,
-  RTM_ERROR_CODE,
-  RTM_LINK_OPERATION,
-  RTM_LINK_STATE,
-  RTM_LINK_STATE_CHANGE_REASON,
-  RTM_LOCK_EVENT_TYPE,
-  RTM_MESSAGE_TYPE,
-  RTM_PRESENCE_EVENT_TYPE,
-  RTM_PROTOCOL_TYPE,
-  RTM_SERVICE_TYPE,
-  RTM_STORAGE_EVENT_TYPE,
-  RTM_STORAGE_TYPE,
-  RTM_TOPIC_EVENT_TYPE,
+  RtmAreaCode,
+  RtmChannelType,
+  RtmConnectionChangeReason,
+  RtmConnectionState,
   RtmEncryptionConfig,
+  RtmLinkOperation,
+  RtmLinkState,
+  RtmLinkStateChangeReason,
+  RtmLockEventType,
   RtmLogConfig,
+  RtmMessageType,
+  RtmPresenceEventType,
   RtmPrivateConfig,
+  RtmProtocolType,
   RtmProxyConfig,
+  RtmServiceType,
+  RtmStorageEventType,
+  RtmStorageType,
+  RtmTopicEventType,
   StateItem,
   SubscribeOptions,
   TopicInfo,
@@ -58,12 +58,11 @@ export class RtmConfig {
    * After specifying the region, the SDK connects to the Agora servers within
    * that region.
    */
-  areaCode?: RTM_AREA_CODE = RTM_AREA_CODE.RTM_AREA_CODE_GLOB;
+  areaCode?: RtmAreaCode = RtmAreaCode.glob;
   /**
    * The protocol used for connecting to the Agora RTM service.
    */
-  protocolType?: RTM_PROTOCOL_TYPE =
-    RTM_PROTOCOL_TYPE.RTM_PROTOCOL_TYPE_TCP_UDP;
+  protocolType?: RtmProtocolType = RtmProtocolType.tcpUdp;
   /**
    * Presence timeout in seconds, specify the timeout value when you lost connection between sdk
    * and rtm service.
@@ -113,8 +112,8 @@ export class RtmConfig {
     props?: Partial<{
       appId?: string;
       userId?: string;
-      areaCode?: RTM_AREA_CODE;
-      protocolType?: RTM_PROTOCOL_TYPE;
+      areaCode?: RtmAreaCode;
+      protocolType?: RtmProtocolType;
       presenceTimeout?: number;
       heartbeatInterval?: number;
       context?: any;
@@ -135,23 +134,23 @@ export class LinkStateEvent {
   /**
    * The current link state
    */
-  currentState?: RTM_LINK_STATE;
+  currentState?: RtmLinkState;
   /**
    * The previous link state
    */
-  previousState?: RTM_LINK_STATE;
+  previousState?: RtmLinkState;
   /**
    * The service type
    */
-  serviceType?: RTM_SERVICE_TYPE;
+  serviceType?: RtmServiceType;
   /**
    * The operation which trigger this event
    */
-  operation?: RTM_LINK_OPERATION;
+  operation?: RtmLinkOperation;
   /**
    * The reason code of this state change event
    */
-  reasonCode?: RTM_LINK_STATE_CHANGE_REASON;
+  reasonCode?: RtmLinkStateChangeReason;
   /**
    * The reason of this state change event
    */
@@ -182,11 +181,11 @@ export class LinkStateEvent {
   timestamp?: number;
   constructor(
     props?: Partial<{
-      currentState?: RTM_LINK_STATE;
-      previousState?: RTM_LINK_STATE;
-      serviceType?: RTM_SERVICE_TYPE;
-      operation?: RTM_LINK_OPERATION;
-      reasonCode?: RTM_LINK_STATE_CHANGE_REASON;
+      currentState?: RtmLinkState;
+      previousState?: RtmLinkState;
+      serviceType?: RtmServiceType;
+      operation?: RtmLinkOperation;
+      reasonCode?: RtmLinkStateChangeReason;
       reason?: string;
       affectedChannels?: string[];
       affectedChannelCount?: number;
@@ -202,19 +201,19 @@ export class LinkStateEvent {
 
 export class MessageEvent {
   /**
-   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
+   * Which channel type, RtmChannelType_STREAM or message
    */
-  channelType?: RTM_CHANNEL_TYPE;
+  channelType?: RtmChannelType;
   /**
    * Message type
    */
-  messageType?: RTM_MESSAGE_TYPE;
+  messageType?: RtmMessageType;
   /**
    * The channel which the message was published
    */
   channelName?: string;
   /**
-   * If the channelType is RTM_CHANNEL_TYPE_STREAM, which topic the message came from. only for RTM_CHANNEL_TYPE_STREAM
+   * If the channelType is RtmChannelType_STREAM, which topic the message came from. only for RtmChannelType_STREAM
    */
   channelTopic?: string;
   /**
@@ -239,8 +238,8 @@ export class MessageEvent {
   timestamp?: number;
   constructor(
     props?: Partial<{
-      channelType?: RTM_CHANNEL_TYPE;
-      messageType?: RTM_MESSAGE_TYPE;
+      channelType?: RtmChannelType;
+      messageType?: RtmMessageType;
       channelName?: string;
       channelTopic?: string;
       message?: string;
@@ -292,7 +291,7 @@ export class TopicEvent {
   /**
    * Indicate topic event type
    */
-  type?: RTM_TOPIC_EVENT_TYPE;
+  type?: RtmTopicEventType;
   /**
    * The channel which the topic event was triggered
    */
@@ -315,7 +314,7 @@ export class TopicEvent {
   timestamp?: number;
   constructor(
     props?: Partial<{
-      type?: RTM_TOPIC_EVENT_TYPE;
+      type?: RtmTopicEventType;
       channelName?: string;
       publisher?: string;
       topicInfos?: TopicInfo[];
@@ -350,11 +349,11 @@ export class PresenceEvent {
   /**
    * Indicate presence event type
    */
-  type?: RTM_PRESENCE_EVENT_TYPE;
+  type?: RtmPresenceEventType;
   /**
-   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
+   * Which channel type, RtmChannelType_STREAM or message
    */
-  channelType?: RTM_CHANNEL_TYPE;
+  channelType?: RtmChannelType;
   /**
    * The channel which the presence event was triggered
    */
@@ -385,8 +384,8 @@ export class PresenceEvent {
   timestamp?: number;
   constructor(
     props?: Partial<{
-      type?: RTM_PRESENCE_EVENT_TYPE;
-      channelType?: RTM_CHANNEL_TYPE;
+      type?: RtmPresenceEventType;
+      channelType?: RtmChannelType;
       channelName?: string;
       publisher?: string;
       stateItems?: StateItem[];
@@ -402,13 +401,13 @@ export class PresenceEvent {
 
 export class LockEvent {
   /**
-   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
+   * Which channel type, RtmChannelType_STREAM or message
    */
-  channelType?: RTM_CHANNEL_TYPE;
+  channelType?: RtmChannelType;
   /**
    * Lock event type, indicate lock states
    */
-  eventType?: RTM_LOCK_EVENT_TYPE;
+  eventType?: RtmLockEventType;
   /**
    * The channel which the lock event was triggered
    */
@@ -427,8 +426,8 @@ export class LockEvent {
   timestamp?: number;
   constructor(
     props?: Partial<{
-      channelType?: RTM_CHANNEL_TYPE;
-      eventType?: RTM_LOCK_EVENT_TYPE;
+      channelType?: RtmChannelType;
+      eventType?: RtmLockEventType;
       channelName?: string;
       lockDetailList?: LockDetail[];
       count?: number;
@@ -441,17 +440,17 @@ export class LockEvent {
 
 export class StorageEvent {
   /**
-   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
+   * Which channel type, RtmChannelType_STREAM or message
    */
-  channelType?: RTM_CHANNEL_TYPE;
+  channelType?: RtmChannelType;
   /**
    * Storage type, RTM_STORAGE_TYPE_USER or RTM_STORAGE_TYPE_CHANNEL
    */
-  storageType?: RTM_STORAGE_TYPE;
+  storageType?: RtmStorageType;
   /**
    * Indicate storage event type
    */
-  eventType?: RTM_STORAGE_EVENT_TYPE;
+  eventType?: RtmStorageEventType;
   /**
    * The target name of user or channel, depends on the RTM_STORAGE_TYPE
    */
@@ -466,9 +465,9 @@ export class StorageEvent {
   timestamp?: number;
   constructor(
     props?: Partial<{
-      channelType?: RTM_CHANNEL_TYPE;
-      storageType?: RTM_STORAGE_TYPE;
-      eventType?: RTM_STORAGE_EVENT_TYPE;
+      channelType?: RtmChannelType;
+      storageType?: RtmStorageType;
+      eventType?: RtmStorageEventType;
       target?: string;
       data?: Metadata;
       timestamp?: number;
@@ -538,7 +537,7 @@ export interface IRtmEventHandler {
     requestId: number,
     channelName: string,
     userId: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user leave a stream channel.
@@ -552,7 +551,7 @@ export interface IRtmEventHandler {
     requestId: number,
     channelName: string,
     userId: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user publish topic message.
@@ -566,7 +565,7 @@ export interface IRtmEventHandler {
     requestId: number,
     channelName: string,
     topic: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user join topic.
@@ -584,7 +583,7 @@ export interface IRtmEventHandler {
     userId: string,
     topic: string,
     meta: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user leave topic.
@@ -602,7 +601,7 @@ export interface IRtmEventHandler {
     userId: string,
     topic: string,
     meta: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user subscribe topic.
@@ -622,7 +621,7 @@ export interface IRtmEventHandler {
     topic: string,
     succeedUsers: UserList,
     failedUsers: UserList,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user call unsubscribe topic.
@@ -636,7 +635,7 @@ export interface IRtmEventHandler {
     requestId: number,
     channelName: string,
     topic: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user call get subscribe user list.
@@ -652,7 +651,7 @@ export interface IRtmEventHandler {
     channelName: string,
     topic: string,
     users: UserList,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * @deprecated This callback is deprecated. Use LinkStateEvent instead.
@@ -664,8 +663,8 @@ export interface IRtmEventHandler {
    */
   onConnectionStateChanged?(
     channelName: string,
-    state: RTM_CONNECTION_STATE,
-    reason: RTM_CONNECTION_CHANGE_REASON
+    state: RtmConnectionState,
+    reason: RtmConnectionChangeReason
   ): void;
   /**
    * Occurs when token will expire in 30 seconds.
@@ -683,7 +682,7 @@ export interface IRtmEventHandler {
   onSubscribeResult?(
     requestId: number,
     channelName: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when unsubscribe a channel
@@ -695,7 +694,7 @@ export interface IRtmEventHandler {
   onUnsubscribeResult?(
     requestId: number,
     channelName: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user publish message.
@@ -703,21 +702,21 @@ export interface IRtmEventHandler {
    * @param requestId The related request id when user publish message
    * @param errorCode The error code.
    */
-  onPublishResult?(requestId: number, errorCode: RTM_ERROR_CODE): void;
+  onPublishResult?(requestId: number, errorCode: ErrorCode): void;
   /**
    * Occurs when user login.
    *
    * @param requestId The related request id when user perform this operation
    * @param errorCode The error code.
    */
-  onLoginResult?(requestId: number, errorCode: RTM_ERROR_CODE): void;
+  onLoginResult?(requestId: number, errorCode: ErrorCode): void;
   /**
    * Occurs when user logout.
    *
    * @param requestId The related request id when user perform this operation.
    * @param errorCode The error code.
    */
-  onLogoutResult?(requestId: number, errorCode: RTM_ERROR_CODE): void;
+  onLogoutResult?(requestId: number, errorCode: ErrorCode): void;
   /**
    * Occurs when user renew token.
    *
@@ -728,9 +727,9 @@ export interface IRtmEventHandler {
    */
   onRenewTokenResult?(
     requestId: number,
-    serverType: RTM_SERVICE_TYPE,
+    serverType: RtmServiceType,
     channelName: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user setting the channel metadata
@@ -743,8 +742,8 @@ export interface IRtmEventHandler {
   onSetChannelMetadataResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
-    errorCode: RTM_ERROR_CODE
+    channelType: RtmChannelType,
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user updating the channel metadata
@@ -757,8 +756,8 @@ export interface IRtmEventHandler {
   onUpdateChannelMetadataResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
-    errorCode: RTM_ERROR_CODE
+    channelType: RtmChannelType,
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user removing the channel metadata
@@ -771,8 +770,8 @@ export interface IRtmEventHandler {
   onRemoveChannelMetadataResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
-    errorCode: RTM_ERROR_CODE
+    channelType: RtmChannelType,
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user try to get the channel metadata
@@ -786,9 +785,9 @@ export interface IRtmEventHandler {
   onGetChannelMetadataResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user setting the user metadata
@@ -800,7 +799,7 @@ export interface IRtmEventHandler {
   onSetUserMetadataResult?(
     requestId: number,
     userId: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user updating the user metadata
@@ -812,7 +811,7 @@ export interface IRtmEventHandler {
   onUpdateUserMetadataResult?(
     requestId: number,
     userId: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user removing the user metadata
@@ -824,7 +823,7 @@ export interface IRtmEventHandler {
   onRemoveUserMetadataResult?(
     requestId: number,
     userId: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user try to get the user metadata
@@ -838,7 +837,7 @@ export interface IRtmEventHandler {
     requestId: number,
     userId: string,
     data: Metadata,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user subscribe a user metadata
@@ -850,7 +849,7 @@ export interface IRtmEventHandler {
   onSubscribeUserMetadataResult?(
     requestId: number,
     userId: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user unsubscribe a user metadata
@@ -862,7 +861,7 @@ export interface IRtmEventHandler {
   onUnsubscribeUserMetadataResult?(
     requestId: number,
     userId: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user set a lock
@@ -876,9 +875,9 @@ export interface IRtmEventHandler {
   onSetLockResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user delete a lock
@@ -892,9 +891,9 @@ export interface IRtmEventHandler {
   onRemoveLockResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user release a lock
@@ -908,9 +907,9 @@ export interface IRtmEventHandler {
   onReleaseLockResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user acquire a lock
@@ -925,9 +924,9 @@ export interface IRtmEventHandler {
   onAcquireLockResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
-    errorCode: RTM_ERROR_CODE,
+    errorCode: ErrorCode,
     errorDetails: string
   ): void;
   /**
@@ -942,9 +941,9 @@ export interface IRtmEventHandler {
   onRevokeLockResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when user try to get locks from the channel
@@ -959,10 +958,10 @@ export interface IRtmEventHandler {
   onGetLocksResult?(
     requestId: number,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockDetailList: LockDetail[],
     count: number,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when query who joined this channel
@@ -978,7 +977,7 @@ export interface IRtmEventHandler {
     userStateList: UserState[],
     count: number,
     nextPage: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when query who joined this channel
@@ -994,7 +993,7 @@ export interface IRtmEventHandler {
     userStateList: UserState[],
     count: number,
     nextPage: string,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when query which channels the user joined
@@ -1008,7 +1007,7 @@ export interface IRtmEventHandler {
     requestId: number,
     channels: ChannelInfo[],
     count: number,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when query which channels the user joined
@@ -1022,7 +1021,7 @@ export interface IRtmEventHandler {
     requestId: number,
     channels: ChannelInfo[],
     count: number,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when set user presence
@@ -1030,17 +1029,14 @@ export interface IRtmEventHandler {
    * @param requestId The related request id when user perform this operation
    * @param errorCode The error code.
    */
-  onPresenceSetStateResult?(requestId: number, errorCode: RTM_ERROR_CODE): void;
+  onPresenceSetStateResult?(requestId: number, errorCode: ErrorCode): void;
   /**
    * Occurs when delete user presence
    *
    * @param requestId The related request id when user perform this operation
    * @param errorCode The error code.
    */
-  onPresenceRemoveStateResult?(
-    requestId: number,
-    errorCode: RTM_ERROR_CODE
-  ): void;
+  onPresenceRemoveStateResult?(requestId: number, errorCode: ErrorCode): void;
   /**
    * Occurs when get user presence
    *
@@ -1051,7 +1047,7 @@ export interface IRtmEventHandler {
   onPresenceGetStateResult?(
     requestId: number,
     state: UserState,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
   /**
    * Occurs when get history messages
@@ -1067,7 +1063,7 @@ export interface IRtmEventHandler {
     messageList: HistoryMessage[],
     count: number,
     newStart: number,
-    errorCode: RTM_ERROR_CODE
+    errorCode: ErrorCode
   ): void;
 }
 
