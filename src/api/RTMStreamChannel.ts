@@ -23,23 +23,6 @@ export type PublishTopicMessageResponse =
   | StreamChannelOperationResponse
   | ErrorInfo;
 
-export const enum SubscribeTopicErrorCode {
-  NO_ERROR = 0,
-  PARTIALLY_SUCCESSFUL = 1,
-  ALL_FAILED = 2,
-  UNKNOWN_ERROR = 3,
-  INVALID_PARAMS = 4,
-  REMOTE_USER_IS_NOT_PUBLISHED = 5,
-  INVALID_REMOTE_USER = 6,
-  TIMEOUT = 7,
-
-  ALREADY_SUBSCRIBED_USER = 20001,
-
-  SUB_USER_EXCEED_LIMITATION = 20003,
-
-  NOT_SUBSCRIBED_USER = 20004,
-}
-
 export type SubscribeTopicResponse = StreamChannelOperationResponse & {
   succeedUsers: string[];
   failedUsers: string[];
