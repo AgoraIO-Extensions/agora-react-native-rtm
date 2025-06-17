@@ -1,4 +1,4 @@
-import { HistoryMessage, RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
+import { HistoryMessage, RtmChannelType } from '../legacy/AgoraRtmBase';
 import { GetHistoryMessagesOptions } from '../legacy/AgoraRtmBase';
 
 import { BaseResponse } from './RTMClient';
@@ -20,7 +20,7 @@ export type GetMessagesResponse = BaseResponse & {
 export abstract class RTMHistory {
   abstract getMessages(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: GetHistoryMessagesOptions
   ): Promise<GetMessagesResponse>;
 }

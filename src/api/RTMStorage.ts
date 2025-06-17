@@ -1,11 +1,11 @@
-import { RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
+import { RtmChannelType } from '../legacy/AgoraRtmBase';
 import { Metadata } from '../legacy/IAgoraRtmStorage';
 
 import { BaseResponse } from './RTMClient';
 
 export type ChannelMetadataOperationResponse = BaseResponse & {
   channelName: string;
-  channelType: RTM_CHANNEL_TYPE;
+  channelType: RtmChannelType;
 };
 
 export type UserMetadataOperationResponse = BaseResponse & {
@@ -60,22 +60,22 @@ export interface GetUserMetadataOptions {
 export abstract class RTMStorage {
   abstract setChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options?: IMetadataOptions
   ): Promise<SetChannelMetadataResponse>;
   abstract getChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): Promise<GetChannelMetadataResponse>;
   abstract removeChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: RemoveChannelMetadataOptions
   ): Promise<RemoveChannelMetadataResponse>;
   abstract updateChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options?: IMetadataOptions
   ): Promise<UpdateChannelMetadataResponse>;

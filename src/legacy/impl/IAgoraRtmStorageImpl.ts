@@ -1,12 +1,12 @@
 import { callIrisApi } from '../../internal/IrisRtmEngine';
-import { RTM_CHANNEL_TYPE } from '../AgoraRtmBase';
+import { RtmChannelType } from '../AgoraRtmBase';
 import { IRtmStorage, Metadata, MetadataOptions } from '../IAgoraRtmStorage';
 
 // @ts-ignore
 export class IRtmStorageImpl implements IRtmStorage {
   setChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options: MetadataOptions,
     lockName: string
@@ -39,7 +39,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   protected getApiTypeFromSetChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options: MetadataOptions,
     lockName: string
@@ -49,7 +49,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   updateChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options: MetadataOptions,
     lockName: string
@@ -82,7 +82,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   protected getApiTypeFromUpdateChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options: MetadataOptions,
     lockName: string
@@ -92,7 +92,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   removeChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options: MetadataOptions,
     lockName: string
@@ -125,7 +125,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   protected getApiTypeFromRemoveChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     data: Metadata,
     options: MetadataOptions,
     lockName: string
@@ -133,7 +133,7 @@ export class IRtmStorageImpl implements IRtmStorage {
     return 'RtmStorage_removeChannelMetadata_55e6d00';
   }
 
-  getChannelMetadata(channelName: string, channelType: RTM_CHANNEL_TYPE): any {
+  getChannelMetadata(channelName: string, channelType: RtmChannelType): any {
     const apiType = this.getApiTypeFromGetChannelMetadata(
       channelName,
       channelType
@@ -153,7 +153,7 @@ export class IRtmStorageImpl implements IRtmStorage {
 
   protected getApiTypeFromGetChannelMetadata(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): string {
     return 'RtmStorage_getChannelMetadata_ad8568b';
   }

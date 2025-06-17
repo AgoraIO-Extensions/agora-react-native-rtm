@@ -9,7 +9,7 @@ import {
 
 import { renderWithConfiguration } from '@agoraio-extensions/terra_shared_configs';
 
-import { getDefaultValue, isMatch } from './utils';
+import { convertToCamelCase, getDefaultValue, isMatch } from './utils';
 
 interface CXXFileUserData {
   fileName: string;
@@ -53,6 +53,7 @@ export default function (
       let isCallback = isMatch(node.name, 'isCallback');
       if (node.__TYPE === CXXTYPE.Clazz) {
         node.asClazz().methods.map((method) => {
+          method.return_type.name = convertToCamelCase(method.return_type.name);
           const clazzMethodUserData: ClazzMethodUserData = {
             output: '',
             input: '',
@@ -60,6 +61,8 @@ export default function (
           let output_params: string[] = [];
           let input_params: string[] = [];
           method.asMemberFunction().parameters.map((param) => {
+            param.name = convertToCamelCase(param.name, false);
+            param.type.name = convertToCamelCase(param.type.name);
             if (param.is_output) {
               // input_params.push(`${param.name}?: ${param.type.name}`);
               output_params.push(`${param.name}: ${param.type.name}`);
@@ -92,14 +95,24 @@ export default function (
       }
 
       if (node.__TYPE === CXXTYPE.Enumz) {
+        node.name = convertToCamelCase(node.name);
         node.asEnumz().enum_constants.map((enum_constant) => {
+          enum_constant.name = enum_constant.name.replace('RTM_ERROR', '');
+          enum_constant.name = convertToCamelCase(enum_constant.name);
+          enum_constant.name = enum_constant.name.replace(node.name, '');
           enum_constant.name =
-            enum_constant.name.charAt(0).toUpperCase() +
+            enum_constant.name.charAt(0).toLowerCase() +
             enum_constant.name.slice(1);
         });
       }
 
       if (node.__TYPE === CXXTYPE.Struct) {
+        node.name = convertToCamelCase(node.name);
+        node.asStruct().member_variables.map((member_variable) => {
+          member_variable.type.name = convertToCamelCase(
+            member_variable.type.name
+          );
+        });
         node.asStruct().member_variables.map((member_variable) => {
           const structMemberVariableUserData: StructMemberVariableUserData = {
             defaultValue: getDefaultValue(node.asStruct(), member_variable),

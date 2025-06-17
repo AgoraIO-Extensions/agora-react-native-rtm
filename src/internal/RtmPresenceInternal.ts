@@ -11,7 +11,7 @@ import {
 } from '../api/RTMPresence';
 import {
   PresenceOptions,
-  RTM_CHANNEL_TYPE,
+  RtmChannelType,
   StateItem,
 } from '../legacy/AgoraRtmBase';
 import { IRtmPresenceImpl } from '../legacy/impl/IAgoraRtmPresenceImpl';
@@ -23,7 +23,7 @@ export class RtmPresenceInternal extends RTMPresence {
 
   async whoNow(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: PresenceOptions
   ): Promise<WhoNowResponse> {
     let operation = 'whoNow';
@@ -47,7 +47,7 @@ export class RtmPresenceInternal extends RTMPresence {
   }
   async getOnlineUsers(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: PresenceOptions
   ): Promise<GetOnlineUsersResponse> {
     let operation = 'getOnlineUsers';
@@ -101,7 +101,7 @@ export class RtmPresenceInternal extends RTMPresence {
   }
   async setState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     state: StateItem
   ): Promise<SetStateResponse> {
     let operation = 'setState';
@@ -122,7 +122,7 @@ export class RtmPresenceInternal extends RTMPresence {
   async getState(
     userId: string,
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): Promise<GetStateResponse> {
     let operation = 'getState';
     let callBack = 'onPresenceGetStateResult';
@@ -145,7 +145,7 @@ export class RtmPresenceInternal extends RTMPresence {
   }
   async removeState(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: RemoveStateOptions
   ): Promise<RemoveStateResponse> {
     let operation = 'removeState';

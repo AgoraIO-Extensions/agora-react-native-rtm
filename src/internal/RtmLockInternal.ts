@@ -9,7 +9,7 @@ import {
   SetLockOptions,
   SetLockResponse,
 } from '../api/RTMLock';
-import { RTM_CHANNEL_TYPE } from '../legacy/AgoraRtmBase';
+import { RtmChannelType } from '../legacy/AgoraRtmBase';
 import { IRtmLockImpl } from '../legacy/impl/IAgoraRtmLockImpl';
 
 import { handleError } from './IrisRtmEngine';
@@ -20,7 +20,7 @@ export class RtmLockInternal extends RTMLock {
 
   async setLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     options?: SetLockOptions
   ): Promise<SetLockResponse> {
@@ -46,7 +46,7 @@ export class RtmLockInternal extends RTMLock {
   }
   async removeLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): Promise<RemoveLockResponse> {
     let operation = 'removeLock';
@@ -70,7 +70,7 @@ export class RtmLockInternal extends RTMLock {
   }
   async acquireLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     options?: AcquireLockOptions
   ): Promise<AcquireLockResponse> {
@@ -96,7 +96,7 @@ export class RtmLockInternal extends RTMLock {
   }
   async releaseLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): Promise<ReleaseLockResponse> {
     let operation = 'releaseLock';
@@ -120,7 +120,7 @@ export class RtmLockInternal extends RTMLock {
   }
   async revokeLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     owner: string
   ): Promise<RevokeLockResponse> {
@@ -146,7 +146,7 @@ export class RtmLockInternal extends RTMLock {
   }
   async getLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): Promise<GetLockResponse> {
     let operation = 'getLock';
     let callBack = 'onGetLocksResult';

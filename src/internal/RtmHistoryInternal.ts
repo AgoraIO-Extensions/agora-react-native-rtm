@@ -1,7 +1,7 @@
 import { GetMessagesResponse, RTMHistory } from '../api/RTMHistory';
 import {
   GetHistoryMessagesOptions,
-  RTM_CHANNEL_TYPE,
+  RtmChannelType,
 } from '../legacy/AgoraRtmBase';
 import { IRtmHistoryImpl } from '../legacy/impl/IAgoraRtmHistoryImpl';
 
@@ -11,7 +11,7 @@ export class RtmHistoryInternal extends RTMHistory {
 
   async getMessages(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     options?: GetHistoryMessagesOptions
   ): Promise<GetMessagesResponse> {
     let operation = 'getMessages';

@@ -1,12 +1,12 @@
 import { callIrisApi } from '../../internal/IrisRtmEngine';
-import { RTM_CHANNEL_TYPE } from '../AgoraRtmBase';
+import { RtmChannelType } from '../AgoraRtmBase';
 import { IRtmLock } from '../IAgoraRtmLock';
 
 // @ts-ignore
 export class IRtmLockImpl implements IRtmLock {
   setLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     ttl: number
   ): any {
@@ -35,14 +35,14 @@ export class IRtmLockImpl implements IRtmLock {
 
   protected getApiTypeFromSetLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     ttl: number
   ): string {
     return 'RtmLock_setLock_89e5672';
   }
 
-  getLocks(channelName: string, channelType: RTM_CHANNEL_TYPE): any {
+  getLocks(channelName: string, channelType: RtmChannelType): any {
     const apiType = this.getApiTypeFromGetLocks(channelName, channelType);
     const jsonParams = {
       channelName: channelName,
@@ -59,14 +59,14 @@ export class IRtmLockImpl implements IRtmLock {
 
   protected getApiTypeFromGetLocks(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE
+    channelType: RtmChannelType
   ): string {
     return 'RtmLock_getLocks_ad8568b';
   }
 
   removeLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): any {
     const apiType = this.getApiTypeFromRemoveLock(
@@ -91,7 +91,7 @@ export class IRtmLockImpl implements IRtmLock {
 
   protected getApiTypeFromRemoveLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): string {
     return 'RtmLock_removeLock_4ffa44d';
@@ -99,7 +99,7 @@ export class IRtmLockImpl implements IRtmLock {
 
   acquireLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     retry: boolean
   ): any {
@@ -128,7 +128,7 @@ export class IRtmLockImpl implements IRtmLock {
 
   protected getApiTypeFromAcquireLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     retry: boolean
   ): string {
@@ -137,7 +137,7 @@ export class IRtmLockImpl implements IRtmLock {
 
   releaseLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): any {
     const apiType = this.getApiTypeFromReleaseLock(
@@ -162,7 +162,7 @@ export class IRtmLockImpl implements IRtmLock {
 
   protected getApiTypeFromReleaseLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string
   ): string {
     return 'RtmLock_releaseLock_4ffa44d';
@@ -170,7 +170,7 @@ export class IRtmLockImpl implements IRtmLock {
 
   revokeLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     owner: string
   ): any {
@@ -199,7 +199,7 @@ export class IRtmLockImpl implements IRtmLock {
 
   protected getApiTypeFromRevokeLock(
     channelName: string,
-    channelType: RTM_CHANNEL_TYPE,
+    channelType: RtmChannelType,
     lockName: string,
     owner: string
   ): string {

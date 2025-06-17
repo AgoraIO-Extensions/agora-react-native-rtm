@@ -1,4 +1,4 @@
-import { RTM_CHANNEL_TYPE, useRtm } from 'agora-react-native-rtm';
+import { RtmChannelType, useRtm } from 'agora-react-native-rtm';
 import React, { useCallback, useState } from 'react';
 
 import { ScrollView } from 'react-native';
@@ -22,8 +22,8 @@ export default function History() {
   const [messageCount, setMessageCount] = useState<number>(100);
   const [start, setStart] = useState<number>(0);
   const [end, setEnd] = useState<number>(100);
-  const [channelType, setChannelType] = useState<RTM_CHANNEL_TYPE>(
-    RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
+  const [channelType, setChannelType] = useState<RtmChannelType>(
+    RtmChannelType.message
   );
 
   /**
@@ -62,7 +62,7 @@ export default function History() {
         <AgoraDivider />
         <AgoraDropdown
           title={'channelType'}
-          items={enumToItems(RTM_CHANNEL_TYPE)}
+          items={enumToItems(RtmChannelType)}
           value={channelType}
           onValueChange={(value) => {
             setChannelType(value);

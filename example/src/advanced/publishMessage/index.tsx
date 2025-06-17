@@ -3,8 +3,8 @@ import { Buffer } from 'buffer';
 import {
   MessageEvent,
   PublishOptions,
-  RTM_CHANNEL_TYPE,
-  RTM_MESSAGE_TYPE,
+  RtmChannelType,
+  RtmMessageType,
   useRtm,
 } from 'agora-react-native-rtm';
 import React, { useCallback, useState } from 'react';
@@ -31,7 +31,7 @@ export default function PublishMessage() {
   const [publishMessageByBuffer, setPublishMessageByBuffer] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
   const [channelType, setChannelType] = useState<number>(
-    RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
+    RtmChannelType.message
   );
   const [uid] = useState<string>(Config.uid);
   const [messages, setMessages] = useState<AgoraMessage[]>([]);
@@ -53,7 +53,7 @@ export default function PublishMessage() {
             new Uint8Array(Buffer.from(msg.text)),
             new PublishOptions({
               channelType: channelType,
-              messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
+              messageType: RtmMessageType.binary,
               storeInHistory: storeInHistory,
             })
           );
@@ -64,7 +64,7 @@ export default function PublishMessage() {
             msg.text,
             new PublishOptions({
               channelType: channelType,
-              messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
+              messageType: RtmMessageType.string,
               storeInHistory: storeInHistory,
             })
           );
@@ -162,7 +162,7 @@ export default function PublishMessage() {
         />
         <AgoraDivider />
         <AgoraDropdown
-          items={enumToItems(RTM_CHANNEL_TYPE)}
+          items={enumToItems(RtmChannelType)}
           onValueChange={(v) => {
             setChannelType(v);
           }}

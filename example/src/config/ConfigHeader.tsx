@@ -1,9 +1,9 @@
 import { Overlay } from '@rneui/themed';
 
 import {
-  RTM_AREA_CODE,
-  RTM_ENCRYPTION_MODE,
-  RTM_PROXY_TYPE,
+  RtmAreaCode,
+  RtmEncryptionMode,
+  RtmProxyType,
 } from 'agora-react-native-rtm';
 import React, { useState } from 'react';
 
@@ -32,7 +32,7 @@ export const ConfigHeader = ({
   const [port, setPort] = useState<number>(Config.port);
   const [userId, setUserId] = useState<string>(Config.uid);
   const [areaCode, setAreaCode] = useState<number>(Config.areaCode);
-  const [proxyType, setProxyType] = useState<RTM_PROXY_TYPE>(Config.proxyType);
+  const [proxyType, setProxyType] = useState<RtmProxyType>(Config.proxyType);
   const [encryptionMode, setEncryptionMode] = useState<number>(
     Config.encryptionMode
   );
@@ -70,7 +70,7 @@ export const ConfigHeader = ({
               />
               <AgoraDivider />
               <AgoraDropdown
-                items={enumToItems(RTM_PROXY_TYPE)}
+                items={enumToItems(RtmProxyType)}
                 onValueChange={(v) => {
                   setProxyType(v);
                   Config.proxyType = v;
@@ -101,7 +101,7 @@ export const ConfigHeader = ({
               />
               <AgoraDivider />
               <AgoraDropdown
-                items={enumToItems(RTM_AREA_CODE)}
+                items={enumToItems(RtmAreaCode)}
                 onValueChange={(v) => {
                   setAreaCode(v);
                   Config.areaCode = v;
@@ -111,7 +111,7 @@ export const ConfigHeader = ({
               />
               <AgoraDivider />
               <AgoraDropdown
-                items={enumToItems(RTM_ENCRYPTION_MODE)}
+                items={enumToItems(RtmEncryptionMode)}
                 onValueChange={(v) => {
                   setEncryptionMode(v);
                   Config.encryptionMode = v;

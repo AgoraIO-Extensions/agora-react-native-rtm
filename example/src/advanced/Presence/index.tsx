@@ -2,7 +2,7 @@ import {
   JoinChannelOptions,
   PresenceOptions,
   RTMStreamChannel,
-  RTM_CHANNEL_TYPE,
+  RtmChannelType,
   StateItem,
   useRtm,
 } from 'agora-react-native-rtm';
@@ -30,7 +30,7 @@ export default function Presence() {
   const [streamChannel, setStreamChannel] = useState<RTMStreamChannel>();
   const [cName, setCName] = useState<string>(Config.channelName);
   const [channelType, setChannelType] = useState<number>(
-    RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE
+    RtmChannelType.message
   );
   const [uid] = useState<string>(Config.uid);
   const [searchUid, setSearchUid] = useState<string>(Config.uid);
@@ -249,7 +249,7 @@ export default function Presence() {
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
         />
-        {channelType === RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_STREAM && (
+        {channelType === RtmChannelType.stream && (
           <>
             <AgoraButton
               disabled={!loginSuccess}
@@ -273,7 +273,7 @@ export default function Presence() {
         )}
         <AgoraDivider />
         <AgoraDropdown
-          items={enumToItems(RTM_CHANNEL_TYPE)}
+          items={enumToItems(RtmChannelType)}
           onValueChange={(v) => {
             setChannelType(v);
           }}
@@ -302,7 +302,7 @@ export default function Presence() {
             setWithLock(v);
           }}
         />
-        {channelType === RTM_CHANNEL_TYPE.RTM_CHANNEL_TYPE_MESSAGE && (
+        {channelType === RtmChannelType.message && (
           <>
             <AgoraDivider />
             <AgoraSwitch

@@ -5,7 +5,7 @@ import {
   JoinTopicOptions,
   MessageEvent,
   RTMStreamChannel,
-  RTM_MESSAGE_TYPE,
+  RtmMessageType,
   TopicMessageOptions,
   useRtm,
 } from 'agora-react-native-rtm';
@@ -51,7 +51,7 @@ export default function PublishTopicMessage() {
             topicName,
             new Uint8Array(Buffer.from(msg.text)),
             new TopicMessageOptions({
-              messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_BINARY,
+              messageType: RtmMessageType.binary,
             })
           );
           log.info('publish topic message success', result);
@@ -60,7 +60,7 @@ export default function PublishTopicMessage() {
             topicName,
             msg.text,
             new TopicMessageOptions({
-              messageType: RTM_MESSAGE_TYPE.RTM_MESSAGE_TYPE_STRING,
+              messageType: RtmMessageType.string,
             })
           );
           log.info('publish topic message success', result);
