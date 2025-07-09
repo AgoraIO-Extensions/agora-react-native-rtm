@@ -1,5 +1,7 @@
 
 
+## [2.2.4](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/compare/v2.2.4-rc.1...v2.2.4) (2025-07-09)
+
 ## [2.2.4-rc.1](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/compare/2.1.12...v2.2.4-rc.1) (2025-07-03)
 
 
