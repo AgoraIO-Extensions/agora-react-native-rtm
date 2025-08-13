@@ -38,6 +38,11 @@ export function processIRtmEventHandler(
         handler.onStorageEvent(jsonParams.event);
       }
       break;
+    case 'onTokenEvent':
+      if (handler.onTokenEvent !== undefined) {
+        handler.onTokenEvent(jsonParams.event);
+      }
+      break;
     case 'onJoinResult':
       if (handler.onJoinResult !== undefined) {
         handler.onJoinResult(

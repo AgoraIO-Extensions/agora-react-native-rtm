@@ -234,6 +234,15 @@ export abstract class IStreamChannel {
    */
   abstract getSubscribedUserList(topic: string, requestId: number): UserList[];
   /**
+   * Set parameters of the stream channel
+   *
+   * @param [in] parameters The parameters in json format
+   * @return
+   * - 0: Success.
+   * - < 0: Failure.
+   */
+  abstract setParameters(parameters: string): number;
+  /**
    * Release the stream channel instance.
    *
    * @return
