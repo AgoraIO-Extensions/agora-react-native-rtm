@@ -167,4 +167,8 @@ export class StreamChannelInternal extends IStreamChannelImpl {
     const ret = super.release();
     return ret;
   }
+
+  setParameters(parameters: string): number {
+    return super.setParameters(parameters);
+  }
 }

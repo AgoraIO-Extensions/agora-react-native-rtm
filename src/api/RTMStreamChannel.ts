@@ -59,4 +59,5 @@ export abstract class RTMStreamChannel {
     topicName: string
   ): Promise<GetSubscribedUserListResponse>;
   abstract release(): number;
+  abstract setParameters(parameters: string): number;
 }

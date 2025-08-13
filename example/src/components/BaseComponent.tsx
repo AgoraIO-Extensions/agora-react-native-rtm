@@ -5,6 +5,7 @@ import {
   MessageEvent,
   PresenceEvent,
   StorageEvent,
+  TokenEvent,
   TopicEvent,
   useRtm,
   useRtmEvent,
@@ -33,6 +34,7 @@ interface Props {
   onPresence?: (presence: PresenceEvent) => void;
   onStorage?: (storage: StorageEvent) => void;
   onTopic?: (topic: TopicEvent) => void;
+  onToken?: (e: TokenEvent) => void;
 }
 
 export const Header = () => {
@@ -60,11 +62,12 @@ export default function BaseComponent({
   onPresence,
   onStorage,
   onTopic,
+  onToken,
 }: Props) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
   const navigation = useNavigation();
-
+  const [param, setParam] = useState<string>('');
   useEffect(() => {
     const headerRight = () => <Header />;
     navigation.setOptions({ headerRight });
@@ -163,6 +166,14 @@ export default function BaseComponent({
     }
   });
 
+  useRtmEvent(client, 'token', (e: TokenEvent) => {
+    if (onToken) {
+      onToken(e);
+    } else {
+      log.info('token', e);
+    }
+  });
+
   return (
     <AgoraView style={AgoraStyle.fullWidth}>
       <AgoraButton
@@ -180,6 +191,21 @@ export default function BaseComponent({
         placeholder="please input channelName"
         value={cName}
         disabled={loginSuccess}
+      />
+      <AgoraTextInput
+        onChangeText={(text) => {
+          setParam(text);
+        }}
+        label="param"
+        placeholder="please input param"
+        value={param}
+      />
+      <AgoraButton
+        title={`setParameters`}
+        onPress={() => {
+          let result = client.setParameters(param);
+          log.info('setParameters', result);
+        }}
       />
     </AgoraView>
   );

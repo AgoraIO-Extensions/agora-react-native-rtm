@@ -50,6 +50,7 @@ export class RtmClientInternal extends RTMClient {
     lock: 'onLockEvent',
     topic: 'onTopicEvent',
     tokenPrivilegeWillExpire: 'onTokenPrivilegeWillExpire',
+    token: 'onTokenEvent',
   };
 
   constructor(config: RtmConfig) {
@@ -74,6 +75,26 @@ export class RtmClientInternal extends RTMClient {
     this._rtmClientImpl.setParameters(
       JSON.stringify({
         'rtm.app_type': 8,
+      })
+    );
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.reg_ap_address': ['114.236.137.40', 8443],
+      })
+    );
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.link_address0': ['114.236.137.18', 9120],
+      })
+    );
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.link_address1': ['114.236.137.18', 9131],
+      })
+    );
+    this._rtmClientImpl.setParameters(
+      JSON.stringify({
+        'rtm.link_encryption': false,
       })
     );
   }
@@ -249,5 +270,9 @@ export class RtmClientInternal extends RTMClient {
     } catch (error) {
       throw handleError(error, operation);
     }
+  }
+
+  setParameters(parameters: string): number {
+    return this._rtmClientImpl.setParameters(parameters);
   }
 }
