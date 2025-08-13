@@ -201,6 +201,23 @@ export class IStreamChannelImpl implements IStreamChannel {
     return 'StreamChannel_getSubscribedUserList_1fa04dd';
   }
 
+  setParameters(parameters: string): any {
+    const apiType = this.getApiTypeFromSetParameters(parameters);
+    const jsonParams = {
+      parameters: parameters,
+      toJSON: () => {
+        return {
+          parameters: parameters,
+        };
+      },
+    };
+    return callIrisApi.call(this, apiType, jsonParams);
+  }
+
+  protected getApiTypeFromSetParameters(parameters: string): string {
+    return 'StreamChannel_setParameters_3a2037f';
+  }
+
   release(): any {
     const apiType = this.getApiTypeFromRelease();
     const jsonParams = {};

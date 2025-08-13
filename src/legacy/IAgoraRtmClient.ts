@@ -1,4 +1,5 @@
 import {
+  AffectedResources,
   ChannelInfo,
   ErrorCode,
   HistoryMessage,
@@ -22,6 +23,7 @@ import {
   RtmServiceType,
   RtmStorageEventType,
   RtmStorageType,
+  RtmTokenEventType,
   RtmTopicEventType,
   StateItem,
   SubscribeOptions,
@@ -67,12 +69,12 @@ export class RtmConfig {
    * Presence timeout in seconds, specify the timeout value when you lost connection between sdk
    * and rtm service.
    */
-  presenceTimeout?: number;
+  presenceTimeout?: number = 300;
   /**
    * Heartbeat interval in seconds, specify the interval value of sending heartbeat between sdk
    * and rtm service.
    */
-  heartbeatInterval?: number;
+  heartbeatInterval?: number = 5;
   /**
    * - For Android, it is the context of Activity or Application.
    * - For Windows, it is the window handle of app. Once set, this parameter enables you to plug
@@ -88,6 +90,12 @@ export class RtmConfig {
    * Whether to enable multipath, introduced from 2.2.0, for now , only effect on stream channel.
    */
   multipath?: boolean = false;
+  /**
+   * iot devices may be restricted by isp, need to enable this feature to connect to server by domain.
+   * -true: connect to servers restricted by isp
+   * -false: (Default) connect to servers with no limit
+   */
+  ispPolicyEnabled?: boolean = false;
   /**
    * The callbacks handler
    */
@@ -119,6 +127,7 @@ export class RtmConfig {
       context?: any;
       useStringUserId?: boolean;
       multipath?: boolean;
+      ispPolicyEnabled?: boolean;
       eventHandler?: IRtmEventHandler;
       logConfig?: RtmLogConfig;
       proxyConfig?: RtmProxyConfig;
@@ -201,7 +210,7 @@ export class LinkStateEvent {
 
 export class MessageEvent {
   /**
-   * Which channel type, RtmChannelType_STREAM or message
+   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
    */
   channelType?: RtmChannelType;
   /**
@@ -213,7 +222,7 @@ export class MessageEvent {
    */
   channelName?: string;
   /**
-   * If the channelType is RtmChannelType_STREAM, which topic the message came from. only for RtmChannelType_STREAM
+   * If the channelType is RTM_CHANNEL_TYPE_STREAM, which topic the message came from. only for RTM_CHANNEL_TYPE_STREAM
    */
   channelTopic?: string;
   /**
@@ -351,7 +360,7 @@ export class PresenceEvent {
    */
   type?: RtmPresenceEventType;
   /**
-   * Which channel type, RtmChannelType_STREAM or message
+   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
    */
   channelType?: RtmChannelType;
   /**
@@ -401,7 +410,7 @@ export class PresenceEvent {
 
 export class LockEvent {
   /**
-   * Which channel type, RtmChannelType_STREAM or message
+   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
    */
   channelType?: RtmChannelType;
   /**
@@ -440,7 +449,7 @@ export class LockEvent {
 
 export class StorageEvent {
   /**
-   * Which channel type, RtmChannelType_STREAM or message
+   * Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE
    */
   channelType?: RtmChannelType;
   /**
@@ -470,6 +479,35 @@ export class StorageEvent {
       eventType?: RtmStorageEventType;
       target?: string;
       data?: Metadata;
+      timestamp?: number;
+    }>
+  ) {
+    Object.assign(this, props);
+  }
+}
+
+export class TokenEvent {
+  /**
+   * The type of token event
+   */
+  eventType?: RtmTokenEventType;
+  /**
+   * The reason of the token event, description of token event type
+   */
+  reason?: string;
+  /**
+   * The affected resources
+   */
+  affectedResources?: AffectedResources;
+  /**
+   * RTM server UTC time
+   */
+  timestamp?: number;
+  constructor(
+    props?: Partial<{
+      eventType?: RtmTokenEventType;
+      reason?: string;
+      affectedResources?: AffectedResources;
       timestamp?: number;
     }>
   ) {
@@ -525,6 +563,12 @@ export interface IRtmEventHandler {
    * @param event details of storage event.
    */
   onStorageEvent?(event: StorageEvent): void;
+  /**
+   * Occurs when receive token event
+   *
+   * @param event details of token event.
+   */
+  onTokenEvent?(event: TokenEvent): void;
   /**
    * Occurs when user join a stream channel.
    *
