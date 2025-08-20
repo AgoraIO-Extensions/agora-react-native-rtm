@@ -1,7 +1,7 @@
 PODS:
   - agora-react-native-rtm (2.2.4):
     - AgoraIrisRTM_iOS (= 2.2.5.1-dev.1)
-    - AgoraRtm (= 2.2.6-dev.1)
+    - AgoraRtm (= 2.2.6-dev.2)
     - DoubleConversion
     - glog
     - hermes-engine
@@ -65,7 +65,7 @@ PODS:
   - AgoraRtcEngine_iOS/VideoCodecEnc (4.5.1)
   - AgoraRtcEngine_iOS/VirtualBackground (4.5.1)
   - AgoraRtcEngine_iOS/VQA (4.5.1)
-  - AgoraRtm (2.2.6-dev.1)
+  - AgoraRtm (2.2.6-dev.2)
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
   - fast_float (6.1.4)
@@ -2202,12 +2202,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  agora-react-native-rtm: fc5f70b744fe2eaa52aacaaba90a1f9165ae1b3f
+  agora-react-native-rtm: b4aa1a8ce012fb95f7901e4a31898a63f214fc6f
   AgoraInfra_iOS: 65e11a2183ab7836258768868d06058c22701b13
   AgoraIrisRTC_iOS: dd3d957c25be6bd2b2a5d03fe706ebe8a46909f0
   AgoraIrisRTM_iOS: 752eb7cb22c611f2bb332e5df8d50953078d653d
   AgoraRtcEngine_iOS: 5092a058c7b2842db39d8ca614d451af6f84969a
-  AgoraRtm: 548a5d9ac814f6848b704cb8096b695690143c08
+  AgoraRtm: 75c9b2c7f3d0dfdcfe8f5eb2890f40912a438d15
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   fast_float: 06eeec4fe712a76acc9376682e4808b05ce978b6
