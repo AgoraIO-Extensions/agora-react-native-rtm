@@ -248,6 +248,7 @@ export default function Presence() {
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
+          streamChannel={streamChannel}
         />
         {channelType === RtmChannelType.stream && (
           <>

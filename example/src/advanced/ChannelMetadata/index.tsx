@@ -278,6 +278,7 @@ export default function ChannelMetadata() {
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
+          streamChannel={streamChannel}
         />
         {channelType === RtmChannelType.stream && (
           <>

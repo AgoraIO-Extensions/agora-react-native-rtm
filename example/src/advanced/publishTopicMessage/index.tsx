@@ -266,6 +266,7 @@ export default function PublishTopicMessage() {
             onChannelNameChanged={(v) => setCName(v)}
             onLoginStatusChanged={handleLoginStatus}
             onMessage={handleMessage}
+            streamChannel={streamChannel}
           />
           <AgoraButton
             disabled={!loginSuccess}

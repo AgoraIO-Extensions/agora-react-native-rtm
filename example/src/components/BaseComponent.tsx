@@ -4,6 +4,7 @@ import {
   LockEvent,
   MessageEvent,
   PresenceEvent,
+  RTMStreamChannel,
   StorageEvent,
   TokenEvent,
   TopicEvent,
@@ -35,6 +36,7 @@ interface Props {
   onStorage?: (storage: StorageEvent) => void;
   onTopic?: (topic: TopicEvent) => void;
   onToken?: (e: TokenEvent) => void;
+  streamChannel?: RTMStreamChannel;
 }
 
 export const Header = () => {
@@ -63,11 +65,14 @@ export default function BaseComponent({
   onStorage,
   onTopic,
   onToken,
+  streamChannel,
 }: Props) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
   const navigation = useNavigation();
   const [param, setParam] = useState<string>('');
+  const [token, setToken] = useState<string>('');
+
   useEffect(() => {
     const headerRight = () => <Header />;
     navigation.setOptions({ headerRight });
@@ -107,6 +112,25 @@ export default function BaseComponent({
       onLoginStatusChanged?.(false);
     } catch (status: any) {
       log.error('logout error', status);
+    }
+  };
+
+  /**
+   * Step 5: renew token
+   */
+  const renewToken = async () => {
+    if (!token) {
+      log.error('token is empty');
+      return;
+    }
+
+    try {
+      let result = await client.renewToken(token, {
+        channelName: cName,
+      });
+      log.info('renewToken success', result);
+    } catch (status: any) {
+      log.error('renewToken error', status);
     }
   };
 
@@ -207,6 +231,23 @@ export default function BaseComponent({
           log.info('setParameters', result);
         }}
       />
+      {streamChannel && (
+        <>
+          <AgoraTextInput
+            onChangeText={(text) => {
+              setToken(text);
+            }}
+            label="token"
+            placeholder="please input token"
+            value={token}
+          />
+          <AgoraButton
+            title="renewToken"
+            onPress={renewToken}
+            disabled={!loginSuccess}
+          />
+        </>
+      )}
     </AgoraView>
   );
 }

@@ -77,26 +77,6 @@ export class RtmClientInternal extends RTMClient {
         'rtm.app_type': 8,
       })
     );
-    this._rtmClientImpl.setParameters(
-      JSON.stringify({
-        'rtm.reg_ap_address': ['114.236.137.40', 8443],
-      })
-    );
-    this._rtmClientImpl.setParameters(
-      JSON.stringify({
-        'rtm.link_address0': ['114.236.137.18', 9120],
-      })
-    );
-    this._rtmClientImpl.setParameters(
-      JSON.stringify({
-        'rtm.link_address1': ['114.236.137.18', 9131],
-      })
-    );
-    this._rtmClientImpl.setParameters(
-      JSON.stringify({
-        'rtm.link_encryption': false,
-      })
-    );
   }
 
   async createStreamChannel(channelName: string): Promise<RTMStreamChannel> {

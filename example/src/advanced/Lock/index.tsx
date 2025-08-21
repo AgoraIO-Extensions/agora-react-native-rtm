@@ -235,6 +235,7 @@ export default function Lock() {
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
+          streamChannel={streamChannel}
         />
         {channelType === RtmChannelType.stream && (
           <>
