@@ -101,6 +101,11 @@ jobs:
         run: |
           brew install fastlane
 
+      - name: Switch Xcode
+        run: |
+          #https://github.com/actions/runner-images/issues/12758
+          sudo xcode-select --switch /Applications/Xcode_16.4.app
+
       - name: Cache turborepo for iOS
         uses: actions/cache@v3
         with:
