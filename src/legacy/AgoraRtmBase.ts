@@ -1305,7 +1305,7 @@ export class LockDetail {
   /**
    * The ttl of the lock.
    */
-  ttl?: number = 0;
+  ttl?: number;
   constructor(
     props?: Partial<{
       lockName?: string;
@@ -1476,7 +1476,7 @@ export class TopicMessageOptions {
    * The time to calibrate data with media,
    * only valid when user join topic with syncWithMedia in stream channel
    */
-  sendTs?: number = 0;
+  sendTs?: number;
   /**
    * The custom type of the message, up to 32 bytes for customize
    */
@@ -1534,7 +1534,7 @@ export class RtmProxyConfig {
   /**
    * The Proxy server port.
    */
-  port?: number = 0;
+  port?: number;
   /**
    * The Proxy user account.
    */
@@ -1617,15 +1617,15 @@ export class GetHistoryMessagesOptions {
   /**
    * The maximum count of messages to get.
    */
-  messageCount?: number = 100;
+  messageCount?: number;
   /**
    * The start timestamp of this query range.
    */
-  start?: number = 0;
+  start?: number;
   /**
    * The end timestamp of this query range.
    */
-  end?: number = 0;
+  end?: number;
   constructor(
     props?: Partial<{
       messageCount?: number;
@@ -1664,7 +1664,7 @@ export class HistoryMessage {
   /**
    * Timestamp of the message received by rtm server
    */
-  timestamp?: number = 0;
+  timestamp?: number;
   constructor(
     props?: Partial<{
       messageType?: RtmMessageType;

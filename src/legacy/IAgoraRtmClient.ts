@@ -69,12 +69,23 @@ export class RtmConfig {
    * Presence timeout in seconds, specify the timeout value when you lost connection between sdk
    * and rtm service.
    */
-  presenceTimeout?: number = 300;
+  presenceTimeout?: number;
   /**
    * Heartbeat interval in seconds, specify the interval value of sending heartbeat between sdk
    * and rtm service.
    */
-  heartbeatInterval?: number = 5;
+  heartbeatInterval?: number;
+  /**
+   * Reconnection timeout in seconds, specify the timeout value for login and reconnection operations.
+   *
+   * Timeout behavior and callbacks:
+   * - Login timeout: Triggers onLoginResult and onLinkStateChanged
+   * - Reconnection timeout: Triggers onLinkStateChanged
+   *
+   * Default: 0 seconds, never timeout, keep retrying.
+   * Range: [15, 3600]
+   */
+  reconnectTimeout?: number;
   /**
    * - For Android, it is the context of Activity or Application.
    * - For Windows, it is the window handle of app. Once set, this parameter enables you to plug
@@ -124,6 +135,7 @@ export class RtmConfig {
       protocolType?: RtmProtocolType;
       presenceTimeout?: number;
       heartbeatInterval?: number;
+      reconnectTimeout?: number;
       context?: any;
       useStringUserId?: boolean;
       multipath?: boolean;

@@ -146,7 +146,7 @@ export default function PublishTopicMessage() {
       }
       let result = await streamChannel.join(
         new JoinChannelOptions({
-          token: Config.appId,
+          token: Config.token,
         })
       );
       log.info('join success', result);
@@ -266,7 +266,6 @@ export default function PublishTopicMessage() {
             onChannelNameChanged={(v) => setCName(v)}
             onLoginStatusChanged={handleLoginStatus}
             onMessage={handleMessage}
-            streamChannel={streamChannel}
           />
           <AgoraButton
             disabled={!loginSuccess}

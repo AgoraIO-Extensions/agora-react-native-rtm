@@ -152,7 +152,7 @@ export default function PublishMessage() {
    */
   const renewToken = async () => {
     try {
-      let result = await client.renewToken(Config.token);
+      let result = await client.renewToken(token);
       log.info('renewToken success', result);
     } catch (status: any) {
       log.error('renewToken error', status);
@@ -171,6 +171,7 @@ export default function PublishMessage() {
       <AgoraTextInput
         onChangeText={(text) => {
           setToken(text);
+          Config.token = text;
         }}
         label="token"
         placeholder="please input token"

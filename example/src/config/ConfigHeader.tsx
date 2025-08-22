@@ -41,6 +41,9 @@ export const ConfigHeader = ({
     Config.encryptionKey
   );
   const [appId, setAppId] = useState<string>(Config.appId);
+  const [reconnectTimeout, setReconnectTimeout] = useState<number>(
+    Config.reconnectTimeout
+  );
   const toggleOverlay = () => {
     onShow();
     setVisible(!visible);
@@ -149,6 +152,17 @@ export const ConfigHeader = ({
                 placeholder="please input encryptionKey"
                 label="encryptionKey"
                 value={encryptionKey}
+              />
+              <AgoraDivider />
+              <AgoraTextInput
+                onChangeText={(text) => {
+                  if (!text) return;
+                  setReconnectTimeout(parseInt(text, 10));
+                  Config.reconnectTimeout = parseInt(text, 10);
+                }}
+                placeholder="please input reconnectTimeout"
+                label="reconnectTimeout"
+                value={reconnectTimeout?.toString()}
               />
               <AgoraDivider />
             </ScrollView>

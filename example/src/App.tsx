@@ -70,6 +70,7 @@ export default function App() {
             encryptionKey: Config.encryptionKey,
             encryptionSalt: Config.encryptionSalt,
           }),
+          reconnectTimeout: Config.reconnectTimeout,
         })
       );
       setClient(newClient);

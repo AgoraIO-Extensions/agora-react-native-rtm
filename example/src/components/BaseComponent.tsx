@@ -36,7 +36,6 @@ interface Props {
   onStorage?: (storage: StorageEvent) => void;
   onTopic?: (topic: TopicEvent) => void;
   onToken?: (e: TokenEvent) => void;
-  streamChannel?: RTMStreamChannel;
 }
 
 export const Header = () => {
@@ -65,7 +64,6 @@ export default function BaseComponent({
   onStorage,
   onTopic,
   onToken,
-  streamChannel,
 }: Props) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
@@ -231,23 +229,20 @@ export default function BaseComponent({
           log.info('setParameters', result);
         }}
       />
-      {streamChannel && (
-        <>
-          <AgoraTextInput
-            onChangeText={(text) => {
-              setToken(text);
-            }}
-            label="token"
-            placeholder="please input token"
-            value={token}
-          />
-          <AgoraButton
-            title="renewToken"
-            onPress={renewToken}
-            disabled={!loginSuccess}
-          />
-        </>
-      )}
+      <AgoraTextInput
+        onChangeText={(text) => {
+          setToken(text);
+          Config.token = text;
+        }}
+        label="token"
+        placeholder="please input token"
+        value={token}
+      />
+      <AgoraButton
+        title="renewToken"
+        onPress={renewToken}
+        disabled={!loginSuccess}
+      />
     </AgoraView>
   );
 }

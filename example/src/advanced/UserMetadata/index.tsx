@@ -85,7 +85,7 @@ export default function UserMetadata() {
       }
       let result = await streamChannel.join(
         new JoinChannelOptions({
-          token: Config.appId,
+          token: Config.token,
           withPresence: withPresence,
           withLock: withLock,
           withMetadata: withMetadata,
@@ -284,7 +284,6 @@ export default function UserMetadata() {
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
-          streamChannel={streamChannel}
         />
         {channelType === RtmChannelType.stream && (
           <>

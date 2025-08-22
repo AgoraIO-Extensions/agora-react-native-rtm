@@ -47,7 +47,7 @@ export default function CreateStreamChannel() {
       }
       let result = await streamChannel.join(
         new JoinChannelOptions({
-          token: Config.appId,
+          token: Config.token,
         })
       );
       setJoinSuccess(true);
@@ -100,7 +100,6 @@ export default function CreateStreamChannel() {
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}
           onLoginStatusChanged={handleLoginStatus}
-          streamChannel={streamChannel}
         />
         <AgoraButton
           disabled={!loginSuccess}

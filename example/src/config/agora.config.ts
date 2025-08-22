@@ -28,6 +28,7 @@ const config = {
   encryptionMode: RtmEncryptionMode.none,
   encryptionKey: '',
   encryptionSalt: new Array(32).fill(1, 0, 32),
+  reconnectTimeout: 0,
 };
 
 export default config;
