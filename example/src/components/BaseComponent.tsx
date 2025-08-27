@@ -4,7 +4,6 @@ import {
   LockEvent,
   MessageEvent,
   PresenceEvent,
-  RTMStreamChannel,
   StorageEvent,
   TokenEvent,
   TopicEvent,
