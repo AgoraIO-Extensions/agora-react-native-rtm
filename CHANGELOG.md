@@ -1,5 +1,12 @@
 
 
+## [2.2.6](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/compare/v2.2.4...v2.2.6) (2025-08-28)
+
+
+### Features
+
+* support native 2.2.6 ([#32](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/issues/32)) ([7a16191](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/7a16191d35ce8aa1164f33a9370414701d1a7a13)), closes [#31](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/issues/31)
+
 ## [2.2.4](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/compare/v2.2.4-rc.1...v2.2.4) (2025-07-09)
 
 ## [2.2.4-rc.1](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/compare/2.1.12...v2.2.4-rc.1) (2025-07-03)
