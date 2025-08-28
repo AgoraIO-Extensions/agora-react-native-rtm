@@ -74,7 +74,7 @@ export default function Lock() {
       }
       let result = await streamChannel.join(
         new JoinChannelOptions({
-          token: Config.appId,
+          token: Config.token,
           withPresence: withPresence,
           withLock: withLock,
           withMetadata: withMetadata,

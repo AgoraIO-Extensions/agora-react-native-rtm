@@ -5,6 +5,7 @@ import {
   MessageEvent,
   PresenceEvent,
   StorageEvent,
+  TokenEvent,
   TopicEvent,
   useRtm,
   useRtmEvent,
@@ -33,6 +34,7 @@ interface Props {
   onPresence?: (presence: PresenceEvent) => void;
   onStorage?: (storage: StorageEvent) => void;
   onTopic?: (topic: TopicEvent) => void;
+  onToken?: (e: TokenEvent) => void;
 }
 
 export const Header = () => {
@@ -60,10 +62,13 @@ export default function BaseComponent({
   onPresence,
   onStorage,
   onTopic,
+  onToken,
 }: Props) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [cName, setCName] = useState<string>(Config.channelName);
   const navigation = useNavigation();
+  const [param, setParam] = useState<string>('');
+  const [token, setToken] = useState<string>('');
 
   useEffect(() => {
     const headerRight = () => <Header />;
@@ -104,6 +109,25 @@ export default function BaseComponent({
       onLoginStatusChanged?.(false);
     } catch (status: any) {
       log.error('logout error', status);
+    }
+  };
+
+  /**
+   * Step 5: renew token
+   */
+  const renewToken = async () => {
+    if (!token) {
+      log.error('token is empty');
+      return;
+    }
+
+    try {
+      let result = await client.renewToken(token, {
+        channelName: cName,
+      });
+      log.info('renewToken success', result);
+    } catch (status: any) {
+      log.error('renewToken error', status);
     }
   };
 
@@ -163,6 +187,14 @@ export default function BaseComponent({
     }
   });
 
+  useRtmEvent(client, 'token', (e: TokenEvent) => {
+    if (onToken) {
+      onToken(e);
+    } else {
+      log.info('token', e);
+    }
+  });
+
   return (
     <AgoraView style={AgoraStyle.fullWidth}>
       <AgoraButton
@@ -180,6 +212,35 @@ export default function BaseComponent({
         placeholder="please input channelName"
         value={cName}
         disabled={loginSuccess}
+      />
+      <AgoraTextInput
+        onChangeText={(text) => {
+          setParam(text);
+        }}
+        label="param"
+        placeholder="please input param"
+        value={param}
+      />
+      <AgoraButton
+        title={`setParameters`}
+        onPress={() => {
+          let result = client.setParameters(param);
+          log.info('setParameters', result);
+        }}
+      />
+      <AgoraTextInput
+        onChangeText={(text) => {
+          setToken(text);
+          Config.token = text;
+        }}
+        label="token"
+        placeholder="please input token"
+        value={token}
+      />
+      <AgoraButton
+        title="renewToken"
+        onPress={renewToken}
+        disabled={!loginSuccess}
       />
     </AgoraView>
   );

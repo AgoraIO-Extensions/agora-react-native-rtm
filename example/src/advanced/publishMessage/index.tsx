@@ -17,6 +17,7 @@ import {
   AgoraDropdown,
   AgoraStyle,
   AgoraSwitch,
+  AgoraTextInput,
   AgoraView,
 } from '../../components/ui';
 import Config from '../../config/agora.config';
@@ -35,6 +36,7 @@ export default function PublishMessage() {
   );
   const [uid] = useState<string>(Config.uid);
   const [messages, setMessages] = useState<AgoraMessage[]>([]);
+  const [token, setToken] = useState<string>('');
 
   /**
    * Step 1: getRtmClient and initialize rtm client from BaseComponent
@@ -145,6 +147,18 @@ export default function PublishMessage() {
     );
   };
 
+  /**
+   * Step 5: renew token
+   */
+  const renewToken = async () => {
+    try {
+      let result = await client.renewToken(token);
+      log.info('renewToken success', result);
+    } catch (status: any) {
+      log.error('renewToken error', status);
+    }
+  };
+
   const handleLoginStatus = useCallback((status: boolean) => {
     setLoginSuccess(status);
     if (!status) {
@@ -154,6 +168,20 @@ export default function PublishMessage() {
 
   return (
     <>
+      <AgoraTextInput
+        onChangeText={(text) => {
+          setToken(text);
+          Config.token = text;
+        }}
+        label="token"
+        placeholder="please input token"
+        value={token}
+      />
+      <AgoraButton
+        title="renewToken"
+        onPress={renewToken}
+        disabled={!loginSuccess}
+      />
       <AgoraView style={AgoraStyle.fullWidth}>
         <BaseComponent
           onChannelNameChanged={(v) => setCName(v)}

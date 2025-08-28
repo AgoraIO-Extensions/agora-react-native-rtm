@@ -87,7 +87,7 @@ export abstract class IRtmStorage {
    * Set the metadata of a specified channel.
    *
    * @param [in] channelName The name of the channel.
-   * @param [in] channelType Which channel type, RtmChannelType_STREAM or message.
+   * @param [in] channelType Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE.
    * @param [in] data Metadata data.
    * @param [in] options The options of operate metadata.
    * @param [in] lock lock for operate channel metadata.
@@ -108,7 +108,7 @@ export abstract class IRtmStorage {
    * Update the metadata of a specified channel.
    *
    * @param [in] channelName The channel Name of the specified channel.
-   * @param [in] channelType Which channel type, RtmChannelType_STREAM or message.
+   * @param [in] channelType Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE.
    * @param [in] data Metadata data.
    * @param [in] options The options of operate metadata.
    * @param [in] lock lock for operate channel metadata.
@@ -129,7 +129,7 @@ export abstract class IRtmStorage {
    * Remove the metadata of a specified channel.
    *
    * @param [in] channelName The channel Name of the specified channel.
-   * @param [in] channelType Which channel type, RtmChannelType_STREAM or message.
+   * @param [in] channelType Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE.
    * @param [in] data Metadata data.
    * @param [in] options The options of operate metadata.
    * @param [in] lock lock for operate channel metadata.
@@ -150,7 +150,7 @@ export abstract class IRtmStorage {
    * Get the metadata of a specified channel.
    *
    * @param [in] channelName The channel Name of the specified channel.
-   * @param [in] channelType Which channel type, RtmChannelType_STREAM or message.
+   * @param [in] channelType Which channel type, RTM_CHANNEL_TYPE_STREAM or RTM_CHANNEL_TYPE_MESSAGE.
    * @param requestId The unique ID of this request.
    *
    * @return

@@ -85,7 +85,7 @@ export default function UserMetadata() {
       }
       let result = await streamChannel.join(
         new JoinChannelOptions({
-          token: Config.appId,
+          token: Config.token,
           withPresence: withPresence,
           withLock: withLock,
           withMetadata: withMetadata,

@@ -1,9 +1,5 @@
 import type { RTMStreamChannel } from 'agora-react-native-rtm';
-import {
-  JoinChannelOptions,
-  useRtm,
-  useRtmEvent,
-} from 'agora-react-native-rtm';
+import { JoinChannelOptions, useRtm } from 'agora-react-native-rtm';
 import React, { useCallback, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
@@ -51,7 +47,7 @@ export default function CreateStreamChannel() {
       }
       let result = await streamChannel.join(
         new JoinChannelOptions({
-          token: Config.appId,
+          token: Config.token,
         })
       );
       setJoinSuccess(true);
@@ -86,24 +82,6 @@ export default function CreateStreamChannel() {
     setStreamChannel(undefined);
     log.info('destroyStreamChannel success');
   }, [streamChannel]);
-
-  /**
-   * Step 6: renew token
-   */
-  const renewToken = async () => {
-    try {
-      let result = await client.renewToken(Config.token, {
-        channelName: cName,
-      });
-      log.info('renewToken success', result);
-    } catch (status: any) {
-      log.error('renewToken error', status);
-    }
-  };
-
-  useRtmEvent(client, 'tokenPrivilegeWillExpire', () => {
-    log.info('tokenPrivilegeWillExpire');
-  });
 
   const handleLoginStatus = useCallback((status: boolean) => {
     setLoginSuccess(status);
@@ -140,11 +118,6 @@ export default function CreateStreamChannel() {
           onPress={async () => {
             joinSuccess ? await leave() : await join();
           }}
-        />
-        <AgoraButton
-          disabled={!loginSuccess || !streamChannel}
-          title="renewToken"
-          onPress={renewToken}
         />
       </ScrollView>
     </KeyboardAvoidingView>

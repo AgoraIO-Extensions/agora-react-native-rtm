@@ -56,7 +56,6 @@ export default function UseRTC() {
 
   useEffect(() => {
     let engine = createAgoraRtcEngine();
-    console.log(engine.getVersion());
     engine.initialize({
       appId: Config.appId,
       channelProfile: ChannelProfileType.ChannelProfileLiveBroadcasting,

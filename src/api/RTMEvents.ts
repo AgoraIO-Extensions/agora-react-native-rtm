@@ -4,6 +4,7 @@ import {
   MessageEvent,
   PresenceEvent,
   StorageEvent,
+  TokenEvent,
   TopicEvent,
 } from '../legacy/IAgoraRtmClient';
 
@@ -15,6 +16,7 @@ export interface RTMClientEventMap {
   topic: (topicEvent: TopicEvent) => void;
   tokenPrivilegeWillExpire: (channelName: string) => void;
   linkState: (linkState: LinkStateEvent) => void;
+  token: (event: TokenEvent) => void;
 }
 
 /**
@@ -75,6 +77,11 @@ export function processRTMClientEventMap(
     case 'linkState':
       if (handler.linkState !== undefined) {
         handler.linkState(cleanIrisExtraData(jsonParams.event));
+      }
+      break;
+    case 'token':
+      if (handler.token !== undefined) {
+        handler.token(cleanIrisExtraData(jsonParams.event));
       }
       break;
   }

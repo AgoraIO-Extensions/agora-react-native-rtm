@@ -81,4 +81,6 @@ export abstract class RTMClient {
     token: string,
     options?: RenewTokenOptions
   ): Promise<RenewTokenResponse>;
+
+  abstract setParameters(parameters: string): number;
 }

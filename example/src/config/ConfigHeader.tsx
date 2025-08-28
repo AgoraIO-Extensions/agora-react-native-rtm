@@ -31,6 +31,7 @@ export const ConfigHeader = ({
   const [server, setServer] = useState(Config.server);
   const [port, setPort] = useState<number>(Config.port);
   const [userId, setUserId] = useState<string>(Config.uid);
+  const [token, setToken] = useState<string>(Config.token);
   const [areaCode, setAreaCode] = useState<number>(Config.areaCode);
   const [proxyType, setProxyType] = useState<RtmProxyType>(Config.proxyType);
   const [encryptionMode, setEncryptionMode] = useState<number>(
@@ -39,7 +40,10 @@ export const ConfigHeader = ({
   const [encryptionKey, setEncryptionKey] = useState<string>(
     Config.encryptionKey
   );
-
+  const [appId, setAppId] = useState<string>(Config.appId);
+  const [reconnectTimeout, setReconnectTimeout] = useState<number>(
+    Config.reconnectTimeout
+  );
   const toggleOverlay = () => {
     onShow();
     setVisible(!visible);
@@ -61,12 +65,32 @@ export const ConfigHeader = ({
             <ScrollView style={AgoraStyle.fullSize}>
               <AgoraTextInput
                 onChangeText={(text) => {
+                  setAppId(text);
+                  Config.appId = text;
+                }}
+                placeholder="please input appId"
+                label="appId"
+                value={appId}
+              />
+              <AgoraDivider />
+              <AgoraTextInput
+                onChangeText={(text) => {
                   setUserId(text);
                   Config.uid = text;
                 }}
                 placeholder="please input userId"
                 label="userId"
                 value={userId}
+              />
+              <AgoraDivider />
+              <AgoraTextInput
+                onChangeText={(text) => {
+                  setToken(text);
+                  Config.token = text;
+                }}
+                placeholder="please input token"
+                label="token"
+                value={token}
               />
               <AgoraDivider />
               <AgoraDropdown
@@ -128,6 +152,17 @@ export const ConfigHeader = ({
                 placeholder="please input encryptionKey"
                 label="encryptionKey"
                 value={encryptionKey}
+              />
+              <AgoraDivider />
+              <AgoraTextInput
+                onChangeText={(text) => {
+                  if (!text) return;
+                  setReconnectTimeout(parseInt(text, 10));
+                  Config.reconnectTimeout = parseInt(text, 10);
+                }}
+                placeholder="please input reconnectTimeout"
+                label="reconnectTimeout"
+                value={reconnectTimeout?.toString()}
               />
               <AgoraDivider />
             </ScrollView>

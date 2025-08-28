@@ -50,6 +50,7 @@ export class RtmClientInternal extends RTMClient {
     lock: 'onLockEvent',
     topic: 'onTopicEvent',
     tokenPrivilegeWillExpire: 'onTokenPrivilegeWillExpire',
+    token: 'onTokenEvent',
   };
 
   constructor(config: RtmConfig) {
@@ -249,5 +250,9 @@ export class RtmClientInternal extends RTMClient {
     } catch (error) {
       throw handleError(error, operation);
     }
+  }
+
+  setParameters(parameters: string): number {
+    return this._rtmClientImpl.setParameters(parameters);
   }
 }
