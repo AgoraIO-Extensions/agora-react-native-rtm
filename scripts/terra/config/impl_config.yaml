@@ -49,4 +49,4 @@ parsers:
 renderers:
   - path: ../impl.ts
 
-s'cversion: 2.2.6
+version: 2.2.6
