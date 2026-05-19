@@ -78,7 +78,7 @@
     "react-native": "0.77.1",
     "react-native-builder-bob": "^0.20.0",
     "release-it": "^15.0.0",
-    "turbo": "^1.10.7",
+    "turbo": "^2.9.14",
     "typedoc": "^0.24.1",
     "typescript": "5.1.6"
   },
