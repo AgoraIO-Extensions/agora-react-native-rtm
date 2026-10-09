@@ -1,5 +1,6 @@
 import ChannelMetadata from './ChannelMetadata';
 import History from './History';
+import ListenerLifecycle from './ListenerLifecycle';
 import Lock from './Lock';
 import Presence from './Presence';
 import UseRTC from './UseRTC';
@@ -9,6 +10,10 @@ import PublishTopicMessage from './publishTopicMessage';
 const Advanced = {
   title: 'Advanced',
   data: [
+    {
+      name: 'ListenerLifecycle',
+      component: ListenerLifecycle,
+    },
     {
       name: 'PublishMessage',
       component: PublishMessage,
