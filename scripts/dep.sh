@@ -16,6 +16,26 @@ INPUT=$1
 MAVEN_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "Android") | .maven[]')
 IRIS_MAVEN_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "Android") | .iris_maven[]')
 DEP_VERSION=$(echo "$INPUT" | jq -r '.[] | select(.platform == "Android") | .version')
+COCOAPODS_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "iOS") | .cocoapods[]')
+IRIS_COCOAPODS_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "iOS") | .iris_cocoapods[]')
+
+# A Native ZIP is not a Maven/Pods dependency. Reject incomplete input before
+# touching either platform, rather than deleting the existing Native dependency.
+for PLATFORM in Android iOS; do
+  NATIVE_URL=$(echo "$INPUT" | jq -r --arg platform "$PLATFORM" '.[] | select(.platform == $platform) | .cdn[]')
+  if [ "$PLATFORM" = Android ]; then
+    NATIVE_DEPENDENCIES="$MAVEN_DEPENDENCIES"
+    IRIS_DEPENDENCIES="$IRIS_MAVEN_DEPENDENCIES"
+  else
+    NATIVE_DEPENDENCIES="$COCOAPODS_DEPENDENCIES"
+    IRIS_DEPENDENCIES="$IRIS_COCOAPODS_DEPENDENCIES"
+  fi
+  if { [ -n "$NATIVE_URL" ] || [ -n "$NATIVE_DEPENDENCIES" ] || [ -n "$IRIS_DEPENDENCIES" ]; } &&
+     { [ -z "$NATIVE_DEPENDENCIES" ] || [ -z "$IRIS_DEPENDENCIES" ]; }; then
+    echo "Both Native and Iris package dependencies are required for $PLATFORM." >&2
+    exit 1
+  fi
+done
 
 # Function to modify dependencies
 modify_dependencies() {
@@ -33,7 +53,6 @@ modify_dependencies() {
 
 if [ -z "$MAVEN_DEPENDENCIES" ] && [ -z "$IRIS_MAVEN_DEPENDENCIES" ]; then
   echo "No Android maven dependencies need to change."
-  exit 0
 else
   ALL_DEPENDENCIES=$(printf "%s\n%s" "$MAVEN_DEPENDENCIES" "$IRIS_MAVEN_DEPENDENCIES" | sed 's/^/  /')
   ALL_DEPENDENCIES=$(modify_dependencies "$ALL_DEPENDENCIES")
@@ -45,12 +64,8 @@ else
   echo "android/build.gradle updated."
 fi
 
-COCOAPODS_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "iOS") | .cocoapods[]')
-IRIS_COCOAPODS_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "iOS") | .iris_cocoapods[]')
-
 if [ -z "$COCOAPODS_DEPENDENCIES" ] && [ -z "$IRIS_COCOAPODS_DEPENDENCIES" ]; then
   echo "No iOS cocoapods dependencies need to change."
-  exit 0
 else
   ALL_DEPENDENCIES=$(printf "%s\n%s" "$COCOAPODS_DEPENDENCIES" "$IRIS_COCOAPODS_DEPENDENCIES" | sed 's/^pod /s.dependency /' | sed 's/^/  /')
   TEMP_FILE=$(mktemp)

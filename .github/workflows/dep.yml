@@ -22,8 +22,10 @@ jobs:
           dependencies-content: ${{ inputs.dependencies-content }}
 
       - name: Update dependencies
+        env:
+          DEPENDENCIES_JSON: ${{ steps.dep.outputs.matches }}
         run: |
-          sh scripts/dep.sh ${{ steps.dep.outputs.matches }}
+          bash scripts/dep.sh "$DEPENDENCIES_JSON"
 
       - name: Setup
         uses: ./.github/actions/setup
