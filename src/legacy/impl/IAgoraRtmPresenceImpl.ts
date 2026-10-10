@@ -217,4 +217,21 @@ export class IRtmPresenceImpl implements IRtmPresence {
   protected getApiTypeFromGetUserChannels(userId: string): string {
     return 'RtmPresence_getUserChannels_1fa04dd';
   }
+
+  getUserOnlineStatus(userId: string): any {
+    const apiType = this.getApiTypeFromGetUserOnlineStatus(userId);
+    const jsonParams = {
+      userId: userId,
+      toJSON: () => {
+        return {
+          userId: userId,
+        };
+      },
+    };
+    return callIrisApi.call(this, apiType, jsonParams);
+  }
+
+  protected getApiTypeFromGetUserOnlineStatus(userId: string): string {
+    return 'RtmPresence_getUserOnlineStatus_1fa04dd';
+  }
 }

@@ -2,6 +2,7 @@ import {
   GetOnlineUsersResponse,
   GetStateResponse,
   GetUserChannelsResponse,
+  GetUserOnlineStatusResponse,
   RTMPresence,
   RemoveStateOptions,
   RemoveStateResponse,
@@ -99,6 +100,28 @@ export class RtmPresenceInternal extends RTMPresence {
       throw handleError(error, operation);
     }
   }
+  async getUserOnlineStatus(
+    userId: string
+  ): Promise<GetUserOnlineStatusResponse> {
+    const operation = 'getUserOnlineStatus';
+    try {
+      const status = this._rtmPresenceImpl.getUserOnlineStatus(userId);
+      const result = await wrapRtmResult(
+        status,
+        operation,
+        'onGetUserOnlineStatusResult',
+        true
+      );
+      return {
+        timestamp: result.timestamp,
+        userId: result.callBackResult?.status.userId,
+        online: result.callBackResult?.status.online,
+      };
+    } catch (error) {
+      throw handleError(error, operation);
+    }
+  }
+
   async setState(
     channelName: string,
     channelType: RtmChannelType,

@@ -191,6 +191,15 @@ export default function Presence() {
     }
   };
 
+  const getUserOnlineStatus = async () => {
+    try {
+      const result = await client.presence.getUserOnlineStatus(searchUid);
+      log.info('getUserOnlineStatus success', result);
+    } catch (status: any) {
+      log.error('getUserOnlineStatus error', status);
+    }
+  };
+
   /**
    * Step 4 : setState
    */
@@ -351,6 +360,12 @@ export default function Presence() {
           onPress={async () => {
             await getUserChannels();
           }}
+        />
+
+        <AgoraButton
+          disabled={!loginSuccess}
+          title="getUserOnlineStatus"
+          onPress={getUserOnlineStatus}
         />
 
         <AgoraTextInput

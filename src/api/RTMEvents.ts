@@ -6,7 +6,7 @@ import {
   StorageEvent,
   TokenEvent,
   TopicEvent,
-} from '../legacy/IAgoraRtmClient';
+} from '../legacy/IAgoraRtmEventHandler';
 
 export interface RTMClientEventMap {
   presence: (presenceData: PresenceEvent) => void;

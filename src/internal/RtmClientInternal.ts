@@ -15,8 +15,11 @@ import { RTMLock } from '../api/RTMLock';
 import { RTMPresence } from '../api/RTMPresence';
 import { RTMStorage } from '../api/RTMStorage';
 import { RTMStreamChannel } from '../api/RTMStreamChannel';
-import { PublishOptions, SubscribeOptions } from '../legacy/AgoraRtmBase';
-import { RtmConfig } from '../legacy/IAgoraRtmClient';
+import {
+  PublishOptions,
+  RtmConfig,
+  SubscribeOptions,
+} from '../legacy/AgoraRtmBase';
 import { IRtmClientImpl } from '../legacy/impl/IAgoraRtmClientImpl';
 
 import {

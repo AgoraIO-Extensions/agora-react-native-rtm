@@ -1,9 +1,10 @@
 import { RTMClient } from './api/RTMClient';
 import { RtmClientInternal } from './internal/RtmClientInternal';
-import { RtmConfig } from './legacy/IAgoraRtmClient';
+import { RtmConfig } from './legacy/AgoraRtmBase';
 
 export * from './legacy/AgoraRtmBase';
 export * from './legacy/IAgoraRtmClient';
+export * from './legacy/IAgoraRtmEventHandler';
 export * from './legacy/IAgoraRtmLock';
 export * from './legacy/IAgoraRtmPresence';
 export * from './legacy/IAgoraRtmStorage';
