@@ -17,7 +17,9 @@ runs:
 
     - name: Setup by gem
       if: ${{ runner.os == 'macOS' }}
-      run: gem install 'activesupport:7.0.8' 'xcodeproj:1.25.1'
+      run: |
+        gem install i18n -v 1.14.8 --no-document
+        gem install 'activesupport:7.0.8' 'xcodeproj:1.25.1' --no-document
       shell: bash
 
     - name: Setup Cocoapods
