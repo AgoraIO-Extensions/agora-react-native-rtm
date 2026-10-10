@@ -1,5 +1,5 @@
 PODS:
-  - agora-react-native-rtm (2.2.4):
+  - agora-react-native-rtm (2.2.6):
     - AgoraIrisRTM_iOS (= 2.2.6-build.1)
     - AgoraRtm (= 2.2.6)
     - DoubleConversion
@@ -2206,10 +2206,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  agora-react-native-rtm: fb37e26438bdf7e9f04e513e7620a4fc06b10ccc
+  agora-react-native-rtm: aa68c94d71c213cb3861f0a3cec5886639f28b04
   AgoraInfra_iOS: 65e11a2183ab7836258768868d06058c22701b13
   AgoraIrisRTC_iOS: dd3d957c25be6bd2b2a5d03fe706ebe8a46909f0
-  AgoraIrisRTM_iOS: 97d25ad95fd91509a9a2a24b72e840b7c0ac8eea
+  AgoraIrisRTM_iOS: 0a2d1de847cb1ce402a887bb19b774ff9998d5de
   AgoraRtcEngine_iOS: 5092a058c7b2842db39d8ca614d451af6f84969a
   AgoraRtm: bd7a04a21f8063f7105540da0243e6b0a93c116e
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
@@ -2292,4 +2292,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 578a3f1fa7bb78297607d80548dc634106ac15a5
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.13.0
