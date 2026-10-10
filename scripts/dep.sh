@@ -11,7 +11,7 @@ TERRA_CONFIG_PATH2="${PROJECT_ROOT}/scripts/terra/config/impl_config.yaml"
 if [ "$#" -lt 1 ]; then
     exit 1
 fi
-INPUT=$1
+INPUT=$(printf '%s' "$1" | jq -c 'if type == "string" then fromjson else . end')
 
 MAVEN_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "Android") | .maven[]')
 IRIS_MAVEN_DEPENDENCIES=$(echo "$INPUT" | jq -r '.[] | select(.platform == "Android") | .iris_maven[]')
