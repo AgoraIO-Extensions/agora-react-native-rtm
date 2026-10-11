@@ -24,9 +24,8 @@ target 'AgoraRtmNgExample' do
   )
 
   pre_install do |installer|
-    rtm_pod_path = File.join(installer.sandbox.root, 'AgoraRtm')
-
-    aosl_xcframework_path = File.join(rtm_pod_path, 'aosl.xcframework')
+    # RTM bundles the newer aosl; use it for both RTM and RTC in this demo.
+    aosl_xcframework_path = File.join(installer.sandbox.root, 'AgoraInfra_iOS', 'aosl.xcframework')
 
     if File.exist?(aosl_xcframework_path)
       puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
@@ -46,4 +45,3 @@ target 'AgoraRtmNgExample' do
     )
   end
 end
-
