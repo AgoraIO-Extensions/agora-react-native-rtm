@@ -41,8 +41,8 @@ Pod::Spec.new do |s|
   end
 
   #dependencies start
-  s.dependency 'ShengwangRtm_iOS', '2.3.1-dev.3'
-  s.dependency 'AgoraIrisRTM_iOS', '2.3.1-dev.3'
+  s.dependency 'ShengwangRtm_iOS', '2.3.1-dev.4'
+  s.dependency 'AgoraIrisRTM_iOS', '2.3.1-dev.4'
   #dependencies end
   s.libraries = 'stdc++'
   s.framework = 'ReplayKit'
