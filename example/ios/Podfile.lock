@@ -1,6 +1,6 @@
 PODS:
   - agora-react-native-rtm (2.2.6):
-    - AgoraIrisRTM_iOS (= 2.3.1-dev.3)
+    - AgoraIrisRTM_iOS (= 2.3.1-dev.4)
     - DoubleConversion
     - glog
     - hermes-engine
@@ -20,11 +20,11 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - ShengwangRtm_iOS (= 2.3.1-dev.3)
+    - ShengwangRtm_iOS (= 2.3.1-dev.4)
     - Yoga
   - AgoraInfra_iOS (1.2.13)
   - AgoraIrisRTC_iOS (4.5.1-build.1)
-  - AgoraIrisRTM_iOS (2.3.1-dev.3)
+  - AgoraIrisRTM_iOS (2.3.1-dev.4)
   - AgoraRtcEngine_iOS (4.5.1):
     - AgoraRtcEngine_iOS/AIAEC (= 4.5.1)
     - AgoraRtcEngine_iOS/AIAECLL (= 4.5.1)
@@ -1950,7 +1950,7 @@ PODS:
     - Yoga
   - RNVectorIcons (9.2.0):
     - React-Core
-  - ShengwangRtm_iOS (2.3.1-dev.3)
+  - ShengwangRtm_iOS (2.3.1-dev.4)
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
 
@@ -2202,10 +2202,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  agora-react-native-rtm: 5589382664d54279454c20e85eb618eda8ae1765
+  agora-react-native-rtm: d956554c5b781a692a1fb2d1af3bde5bd5ddca14
   AgoraInfra_iOS: 65e11a2183ab7836258768868d06058c22701b13
   AgoraIrisRTC_iOS: dd3d957c25be6bd2b2a5d03fe706ebe8a46909f0
-  AgoraIrisRTM_iOS: 4fb456124748be9e4adfb63138b57b44de83ff28
+  AgoraIrisRTM_iOS: 01f8b52e343407be13e1c2da686975c2db70419e
   AgoraRtcEngine_iOS: 5092a058c7b2842db39d8ca614d451af6f84969a
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
@@ -2282,7 +2282,7 @@ SPEC CHECKSUMS:
   RNScreens: 991214b4e69016c1ae32830d9cea31c9c9422367
   RNSVG: cb725f4400af94396beaeab55098e0a57f2ee020
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
-  ShengwangRtm_iOS: f957e781d9fee40f6237182fb6d245bc0dde8639
+  ShengwangRtm_iOS: 096f82228e6f57ef6752be2af2ac53e65f001340
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 2957d0e744897870b5a377f26522e3f08cadd7ac
 
