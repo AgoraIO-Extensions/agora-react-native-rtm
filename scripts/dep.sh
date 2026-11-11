@@ -42,7 +42,7 @@ modify_dependencies() {
   local dependencies="$1"
   local modified_dependencies=""
   while IFS= read -r line; do
-    if [[ "$line" == *"agora-rtm"* ]]; then
+    if [[ "$line" == *"agora-rtm"* || "$line" == *"io.agora.rtm:rtm-sdk:"* ]]; then
       modified_dependencies+="${line/implementation/api}"$'\n'
     else
       modified_dependencies+="$line"$'\n'

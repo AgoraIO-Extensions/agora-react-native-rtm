@@ -6,6 +6,11 @@ concurrency:
 
 on:
   workflow_dispatch:
+    inputs:
+      send-notification:
+        description: Send the Demo build notification
+        type: boolean
+        default: false
 
 jobs:
   build-android:
@@ -185,6 +190,7 @@ jobs:
           if-no-files-found: error
 
   notification:
+    if: ${{ inputs.send-notification }}
     runs-on: ubuntu-latest
     needs: [build-android, build-ios]
     steps:
