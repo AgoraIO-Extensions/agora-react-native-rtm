@@ -1,6 +1,7 @@
 PODS:
   - agora-react-native-rtm (2.2.6):
-    - AgoraIrisRTM_iOS (= 2.3.1-dev.4)
+    - Agora-Rtm/RtmKit (= 2.3.1)
+    - AgoraIrisRTM_iOS (= 2.3.1)
     - DoubleConversion
     - glog
     - hermes-engine
@@ -20,11 +21,11 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - ShengwangRtm_iOS (= 2.3.1-dev.4)
     - Yoga
+  - Agora-Rtm/RtmKit (2.3.1)
   - AgoraInfra_iOS (1.2.13)
   - AgoraIrisRTC_iOS (4.5.1-build.1)
-  - AgoraIrisRTM_iOS (2.3.1-dev.4)
+  - AgoraIrisRTM_iOS (2.3.1)
   - AgoraRtcEngine_iOS (4.5.1):
     - AgoraRtcEngine_iOS/AIAEC (= 4.5.1)
     - AgoraRtcEngine_iOS/AIAECLL (= 4.5.1)
@@ -1950,7 +1951,6 @@ PODS:
     - Yoga
   - RNVectorIcons (9.2.0):
     - React-Core
-  - ShengwangRtm_iOS (2.3.1-dev.4)
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
 
@@ -2036,12 +2036,13 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
+  https://download.agora.io/cocoapods/:
+    - Agora-Rtm
+    - AgoraIrisRTM_iOS
   trunk:
     - AgoraInfra_iOS
     - AgoraIrisRTC_iOS
-    - AgoraIrisRTM_iOS
     - AgoraRtcEngine_iOS
-    - ShengwangRtm_iOS
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -2202,10 +2203,11 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  agora-react-native-rtm: d956554c5b781a692a1fb2d1af3bde5bd5ddca14
+  agora-react-native-rtm: d54ce8515471c2d8d1b14ba0ad5c560d9c8f9d0c
+  Agora-Rtm: b3297e2c598ad8c7af35c5cbceb52dd2fef146f0
   AgoraInfra_iOS: 65e11a2183ab7836258768868d06058c22701b13
   AgoraIrisRTC_iOS: dd3d957c25be6bd2b2a5d03fe706ebe8a46909f0
-  AgoraIrisRTM_iOS: 01f8b52e343407be13e1c2da686975c2db70419e
+  AgoraIrisRTM_iOS: f59d4b8526b4c72229906ff75edd74aba1cb782e
   AgoraRtcEngine_iOS: 5092a058c7b2842db39d8ca614d451af6f84969a
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
@@ -2282,10 +2284,9 @@ SPEC CHECKSUMS:
   RNScreens: 991214b4e69016c1ae32830d9cea31c9c9422367
   RNSVG: cb725f4400af94396beaeab55098e0a57f2ee020
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
-  ShengwangRtm_iOS: 096f82228e6f57ef6752be2af2ac53e65f001340
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 2957d0e744897870b5a377f26522e3f08cadd7ac
 
-PODFILE CHECKSUM: d6b93484268a7b7bd86cfe56f22b0fc67b0218fc
+PODFILE CHECKSUM: dc80e7231897785e8ff26d117d21f7c3e72850d8
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.16.2
