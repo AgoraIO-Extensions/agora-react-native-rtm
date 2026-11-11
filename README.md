@@ -27,6 +27,14 @@ or
 npm i --save agora-react-native-rtm
 ```
 
+For the RTM 2.3.1 dependencies, add the Agora specs source alongside the public
+source at the top of your **ios/Podfile**:
+
+```ruby
+source 'https://download.agora.io/cocoapods/'
+source 'https://cdn.cocoapods.org/'
+```
+
 Go to your **ios** folder and run:
 
 ```shell script
