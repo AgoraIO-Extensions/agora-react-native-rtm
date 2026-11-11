@@ -1,3 +1,6 @@
+source 'https://download.agora.io/cocoapods/'
+source 'https://cdn.cocoapods.org/'
+
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
@@ -22,18 +25,6 @@ target 'AgoraRtmNgExample' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-
-  pre_install do |installer|
-    # RTM bundles the newer aosl; use it for both RTM and RTC in this demo.
-    aosl_xcframework_path = File.join(installer.sandbox.root, 'AgoraInfra_iOS', 'aosl.xcframework')
-
-    if File.exist?(aosl_xcframework_path)
-      puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
-      FileUtils.rm_rf(aosl_xcframework_path)
-    else
-      puts "aosl.xcframework not found, skipping deletion."
-    end
-  end
 
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202

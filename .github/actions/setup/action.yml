@@ -21,6 +21,8 @@ runs:
         gem install i18n -v 1.14.8 --no-document
         gem install ffi -v 1.17.4 --platform ruby --no-document
         gem install 'activesupport:7.0.8' 'xcodeproj:1.25.1' --no-document
+        # Newer nap requires Ruby 3.3; keep the pinned Ruby 2.7 toolchain working.
+        gem install nap -v 1.1.1 --no-document
       shell: bash
 
     - name: Setup Cocoapods
