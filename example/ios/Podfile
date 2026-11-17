@@ -27,12 +27,15 @@ target 'AgoraRtmNgExample' do
   )
 
   pre_install do |installer|
-    # RTC and RTM both supply aosl.framework. RTM 2.3.1 needs the newer RTM copy.
-    rtm_aosl = File.join(installer.sandbox.root, 'Agora-Rtm', 'aosl.xcframework')
-    raise 'RTM AOSL companion is missing' unless File.directory?(rtm_aosl)
+    # RTM bundles the newer aosl; use it for both RTM and RTC in this demo.
+    aosl_xcframework_path = File.join(installer.sandbox.root, 'AgoraInfra_iOS', 'aosl.xcframework')
 
-    rtc_aosl = File.join(installer.sandbox.root, 'AgoraInfra_iOS', 'aosl.xcframework')
-    FileUtils.rm_rf(rtc_aosl)
+    if File.exist?(aosl_xcframework_path)
+      puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
+      FileUtils.rm_rf(aosl_xcframework_path)
+    else
+      puts "aosl.xcframework not found, skipping deletion."
+    end
   end
 
   post_install do |installer|

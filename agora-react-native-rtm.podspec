@@ -41,12 +41,9 @@ Pod::Spec.new do |s|
   end
 
   #dependencies start
-  s.dependency 'Agora-Rtm/RtmKit', '2.3.1'
+  s.dependency 'Agora-Rtm', '2.3.1'
   s.dependency 'AgoraIrisRTM_iOS', '2.3.1'
   #dependencies end
-  # Keep RTM's AOSL companion aligned when dependency automation updates RtmKit.
-  rtm_kit = s.dependencies.find { |dependency| dependency.name == 'Agora-Rtm/RtmKit' }
-  s.dependency 'Agora-Rtm/RtmBasic', rtm_kit.requirement.to_s if rtm_kit
   s.libraries = 'stdc++'
   s.framework = 'ReplayKit'
 end

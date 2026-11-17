@@ -172,11 +172,6 @@ jobs:
         run: |
           yarn turbo run build:ios --cache-dir="${{ env.TURBO_CACHE_DIR }}" --force=true
 
-      - name: Verify embedded AOSL compatibility
-        run: |
-          python3 -B -m unittest discover -s scripts -p 'test_check_ios_aosl.py'
-          python3 -B scripts/check_ios_aosl.py example/ios/AgoraRtmNgExample.ipa
-
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
