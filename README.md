@@ -35,6 +35,9 @@ source 'https://download.agora.io/cocoapods/'
 source 'https://cdn.cocoapods.org/'
 ```
 
+RTM includes its matching AOSL companion. When integrating RTC alongside RTM,
+embed only the RTM copy of AOSL; see the example Podfile's `pre_install` hook.
+
 Go to your **ios** folder and run:
 
 ```shell script
