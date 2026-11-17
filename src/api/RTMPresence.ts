@@ -52,10 +52,11 @@ export abstract class RTMPresence {
     userId: string
   ): Promise<GetUserOnlineStatusResponse>;
 
+  /** Sets one or more state items in a single request. Single-item calls remain supported. */
   abstract setState(
     channelName: string,
     channelType: RtmChannelType,
-    state: StateItem
+    state: StateItem | StateItem[]
   ): Promise<SetStateResponse>;
 
   abstract getState(

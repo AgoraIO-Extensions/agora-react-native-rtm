@@ -1,4 +1,9 @@
-import createAgoraRtmClient, { RtmConfig } from '../src';
+import createAgoraRtmClient, {
+  RTMPresence,
+  RtmChannelType,
+  RtmConfig,
+  StateItem,
+} from '../src';
 import { RtmPresenceInternal } from '../src/internal/RtmPresenceInternal';
 
 const mockCallApi = jest.fn();
@@ -89,4 +94,53 @@ it('passes initialization parameters through the public client factory', () => {
   });
   expect(listener).toHaveBeenCalledWith({ interval: { totalOccupancy: 12 } });
   client.release();
+});
+
+const stateItems = [
+  new StateItem({ key: 'mood', value: 'pumped' }),
+  new StateItem({ key: 'role', value: 'host' }),
+];
+
+it.each([
+  {
+    label: 'a legacy single item',
+    state: stateItems[0]!,
+    items: [stateItems[0]!],
+  },
+  { label: 'multiple items', state: stateItems, items: stateItems },
+])('sets $label in one native request', async ({ state, items }) => {
+  const presence: RTMPresence = new RtmPresenceInternal();
+  const result = presence.setState('room', RtmChannelType.message, state);
+  expect(mockCallApi).toHaveBeenCalledTimes(1);
+  expect(mockCallApi).toHaveBeenCalledWith({
+    funcName: 'RtmPresence_setState_b73723a',
+    params: JSON.stringify({
+      channelName: 'room',
+      channelType: RtmChannelType.message,
+      items,
+      count: items.length,
+    }),
+    buffers: [],
+  });
+  mockOnEvent({
+    event: 'RtmEventHandler_onPresenceSetStateResult',
+    data: JSON.stringify({ requestId: 42, errorCode: 0 }),
+  });
+  await expect(result).resolves.toMatchObject({ timestamp: 0 });
+});
+
+it('rejects a failed batch setState callback', async () => {
+  const result = new RtmPresenceInternal().setState(
+    'room',
+    RtmChannelType.message,
+    stateItems
+  );
+  mockOnEvent({
+    event: 'RtmEventHandler_onPresenceSetStateResult',
+    data: JSON.stringify({ requestId: 42, errorCode: -10002 }),
+  });
+  await expect(result).rejects.toMatchObject({
+    operation: 'setState',
+    errorCode: -10002,
+  });
 });
