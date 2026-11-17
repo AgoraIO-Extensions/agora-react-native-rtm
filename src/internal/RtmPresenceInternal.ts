@@ -125,16 +125,17 @@ export class RtmPresenceInternal extends RTMPresence {
   async setState(
     channelName: string,
     channelType: RtmChannelType,
-    state: StateItem
+    state: StateItem | StateItem[]
   ): Promise<SetStateResponse> {
     let operation = 'setState';
     let callBack = 'onPresenceSetStateResult';
     try {
+      const items = Array.isArray(state) ? state : [state];
       const status = this._rtmPresenceImpl.setState(
         channelName,
         channelType,
-        [state],
-        1
+        items,
+        items.length
       );
       let result = await wrapRtmResult(status, operation, callBack, true);
       return result;
