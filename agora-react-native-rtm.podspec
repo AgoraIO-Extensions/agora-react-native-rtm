@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
   end
 
   #dependencies start
-  s.dependency 'Agora-Rtm/RtmKit', '2.3.1'
+  s.dependency 'Agora-Rtm', '2.3.1'
   s.dependency 'AgoraIrisRTM_iOS', '2.3.1'
   #dependencies end
   s.libraries = 'stdc++'
