@@ -44,6 +44,7 @@ export const ConfigHeader = ({
   const [reconnectTimeout, setReconnectTimeout] = useState<number>(
     Config.reconnectTimeout
   );
+  const [parameters, setParameters] = useState(Config.parameters);
   const toggleOverlay = () => {
     onShow();
     setVisible(!visible);
@@ -163,6 +164,16 @@ export const ConfigHeader = ({
                 placeholder="please input reconnectTimeout"
                 label="reconnectTimeout"
                 value={reconnectTimeout?.toString()}
+              />
+              <AgoraDivider />
+              <AgoraTextInput
+                onChangeText={(text) => {
+                  setParameters(text);
+                  Config.parameters = text;
+                }}
+                placeholder="optional JSON parameters"
+                label="parameters"
+                value={parameters}
               />
               <AgoraDivider />
             </ScrollView>

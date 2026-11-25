@@ -71,6 +71,7 @@ export default function App() {
             encryptionSalt: Config.encryptionSalt,
           }),
           reconnectTimeout: Config.reconnectTimeout,
+          parameters: Config.parameters || undefined,
         })
       );
       setClient(newClient);

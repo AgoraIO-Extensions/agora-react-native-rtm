@@ -10,7 +10,7 @@ on:
 
 jobs:
   update-dependencies:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,11 +22,38 @@ jobs:
           dependencies-content: ${{ inputs.dependencies-content }}
 
       - name: Update dependencies
+        env:
+          DEPENDENCIES_JSON: ${{ steps.dep.outputs.matches }}
         run: |
-          sh scripts/dep.sh ${{ steps.dep.outputs.matches }}
+          bash scripts/dep.sh "$DEPENDENCIES_JSON"
 
       - name: Setup
         uses: ./.github/actions/setup
+
+      - name: Select Terra toolchain
+        run: sudo xcode-select --switch /Applications/Xcode_15.4.app
+
+      - name: Generate code and header comments by terra
+        uses: AgoraIO-Extensions/actions/.github/actions/generate@main
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          generate-code: true
+          generate-comment: false
+          # Header comments are rendered with the types; no separate doc renderer.
+          generate-comment-command: ':'
+          generate-code-command: |
+            export PATH="$(brew --prefix llvm@15)/bin:$PATH"
+            bash generate-prepare.sh
+            bash generate-code.sh 2>&1 | tee "$RUNNER_TEMP/rtm-terra.log"
+            if grep -Eq '\[libclang\].*\[error\]|errors generated\.' "$RUNNER_TEMP/rtm-terra.log"; then
+              echo 'Terra reported C++ parsing errors.' >&2
+              exit 1
+            fi
+
+      - name: Validate SDK integration and demo
+        run: |
+          yarn typecheck
+          yarn test --runInBand
 
       - name: Update example
         run: |

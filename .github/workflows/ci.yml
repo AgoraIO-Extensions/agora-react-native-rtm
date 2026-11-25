@@ -149,13 +149,16 @@ jobs:
     strategy:
       matrix:
         newArch: [1, 0]
-    runs-on: macos-latest
+    runs-on: macos-15
     env:
       TURBO_CACHE_DIR: .turbo/ios
       RCT_NEW_ARCH_ENABLED: ${{ matrix.newArch }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Switch Xcode
+        run: sudo xcode-select --switch /Applications/Xcode_16.4.app
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -169,7 +172,7 @@ jobs:
         run: |
           npm i -g detox-cli react-native-cli
           brew tap wix/brew
-          brew install applesimutils
+          brew install wix/brew/applesimutils
 
       - name: Modify APP ID
         run: |
@@ -183,7 +186,8 @@ jobs:
 
       - uses: futureware-tech/simulator-action@v4
         with:
-          model: 'iPhone 15'
+          model: 'iPhone 16'
+          os_version: '18.5'
 
       - name: Run e2e tests
         # https://github.com/wix/Detox/issues/3720#issuecomment-1347855162
@@ -192,4 +196,4 @@ jobs:
         run: |
           detox clean-framework-cache
           detox build-framework-cache
-          detox test -c ios.sim.release
+          detox test -c ios.sim.release --device-name 'iPhone 16'

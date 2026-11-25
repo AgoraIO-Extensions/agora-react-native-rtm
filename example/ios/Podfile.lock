@@ -1,7 +1,7 @@
 PODS:
-  - agora-react-native-rtm (2.2.4):
-    - AgoraIrisRTM_iOS (= 2.2.6-build.1)
-    - AgoraRtm (= 2.2.6)
+  - agora-react-native-rtm (2.2.6):
+    - Agora-Rtm (= 2.3.1)
+    - AgoraIrisRTM_iOS (= 2.3.1)
     - DoubleConversion
     - glog
     - hermes-engine
@@ -22,9 +22,14 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - Agora-Rtm (2.3.1):
+    - Agora-Rtm/RtmBasic (= 2.3.1)
+    - Agora-Rtm/RtmKit (= 2.3.1)
+  - Agora-Rtm/RtmBasic (2.3.1)
+  - Agora-Rtm/RtmKit (2.3.1)
   - AgoraInfra_iOS (1.2.13)
   - AgoraIrisRTC_iOS (4.5.1-build.1)
-  - AgoraIrisRTM_iOS (2.2.6-build.1)
+  - AgoraIrisRTM_iOS (2.3.1)
   - AgoraRtcEngine_iOS (4.5.1):
     - AgoraRtcEngine_iOS/AIAEC (= 4.5.1)
     - AgoraRtcEngine_iOS/AIAECLL (= 4.5.1)
@@ -65,11 +70,6 @@ PODS:
   - AgoraRtcEngine_iOS/VideoCodecEnc (4.5.1)
   - AgoraRtcEngine_iOS/VirtualBackground (4.5.1)
   - AgoraRtcEngine_iOS/VQA (4.5.1)
-  - AgoraRtm (2.2.6):
-    - AgoraRtm/RtmBasic (= 2.2.6)
-    - AgoraRtm/RtmKit (= 2.2.6)
-  - AgoraRtm/RtmBasic (2.2.6)
-  - AgoraRtm/RtmKit (2.2.6)
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
   - fast_float (6.1.4)
@@ -2040,12 +2040,13 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
+  https://download.agora.io/cocoapods/:
+    - Agora-Rtm
+    - AgoraIrisRTM_iOS
   trunk:
     - AgoraInfra_iOS
     - AgoraIrisRTC_iOS
-    - AgoraIrisRTM_iOS
     - AgoraRtcEngine_iOS
-    - AgoraRtm
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -2206,12 +2207,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  agora-react-native-rtm: fb37e26438bdf7e9f04e513e7620a4fc06b10ccc
+  agora-react-native-rtm: 372bb3774ff34e7b7c84250431697a4a3fccff53
+  Agora-Rtm: b3297e2c598ad8c7af35c5cbceb52dd2fef146f0
   AgoraInfra_iOS: 65e11a2183ab7836258768868d06058c22701b13
   AgoraIrisRTC_iOS: dd3d957c25be6bd2b2a5d03fe706ebe8a46909f0
-  AgoraIrisRTM_iOS: 97d25ad95fd91509a9a2a24b72e840b7c0ac8eea
+  AgoraIrisRTM_iOS: f59d4b8526b4c72229906ff75edd74aba1cb782e
   AgoraRtcEngine_iOS: 5092a058c7b2842db39d8ca614d451af6f84969a
-  AgoraRtm: bd7a04a21f8063f7105540da0243e6b0a93c116e
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   fast_float: 06eeec4fe712a76acc9376682e4808b05ce978b6
@@ -2290,6 +2291,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 2957d0e744897870b5a377f26522e3f08cadd7ac
 
-PODFILE CHECKSUM: 578a3f1fa7bb78297607d80548dc634106ac15a5
+PODFILE CHECKSUM: 013b91f78e34522ad9da59ec77757d017fd2474b
 
 COCOAPODS: 1.16.2

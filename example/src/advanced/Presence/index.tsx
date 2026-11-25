@@ -35,7 +35,10 @@ export default function Presence() {
   const [uid] = useState<string>(Config.uid);
   const [searchUid, setSearchUid] = useState<string>(Config.uid);
   const [stateKey, setStateKey] = useState<string>('test state');
-  const [stateValue, setStateValue] = useState<string>('test state value');
+  const [stateItems, setStateItems] = useState<StateItem[]>([
+    new StateItem({ key: 'test state', value: 'test state value' }),
+    new StateItem({ key: 'role', value: 'host' }),
+  ]);
   const [withMessage, setWithMessage] = useState<boolean>(true);
   const [withMetadata, setWithMetadata] = useState<boolean>(true);
   const [withPresence, setWithPresence] = useState<boolean>(true);
@@ -191,6 +194,15 @@ export default function Presence() {
     }
   };
 
+  const getUserOnlineStatus = async () => {
+    try {
+      const result = await client.presence.getUserOnlineStatus(searchUid);
+      log.info('getUserOnlineStatus success', result);
+    } catch (status: any) {
+      log.error('getUserOnlineStatus error', status);
+    }
+  };
+
   /**
    * Step 4 : setState
    */
@@ -199,7 +211,7 @@ export default function Presence() {
       let result = await client.presence.setState(
         cName,
         channelType,
-        new StateItem({ key: stateKey, value: stateValue })
+        stateItems
       );
       log.info('setState success', result);
     } catch (status: any) {
@@ -353,22 +365,56 @@ export default function Presence() {
           }}
         />
 
-        <AgoraTextInput
-          label="input state key"
-          value={stateKey}
-          onChangeText={(text) => {
-            setStateKey(text);
-          }}
+        <AgoraButton
+          disabled={!loginSuccess}
+          title="getUserOnlineStatus"
+          onPress={getUserOnlineStatus}
         />
-        <AgoraTextInput
-          onChangeText={(text) => {
-            setStateValue(text);
-          }}
-          label="input state value"
-          value={stateValue}
+
+        {stateItems.map((item, index) => (
+          <React.Fragment key={index}>
+            <AgoraTextInput
+              label={`state ${index + 1} key`}
+              value={item.key}
+              onChangeText={(key) =>
+                setStateItems((items) =>
+                  items.map((state, i) =>
+                    i === index ? { ...state, key } : state
+                  )
+                )
+              }
+            />
+            <AgoraTextInput
+              label={`state ${index + 1} value`}
+              value={item.value}
+              onChangeText={(value) =>
+                setStateItems((items) =>
+                  items.map((state, i) =>
+                    i === index ? { ...state, value } : state
+                  )
+                )
+              }
+            />
+            <AgoraButton
+              title={`remove input row ${index + 1}`}
+              disabled={stateItems.length === 1}
+              onPress={() =>
+                setStateItems((items) => items.filter((_, i) => i !== index))
+              }
+            />
+          </React.Fragment>
+        ))}
+        <AgoraButton
+          title="add state item"
+          onPress={() =>
+            setStateItems((items) => [
+              ...items,
+              new StateItem({ key: '', value: '' }),
+            ])
+          }
         />
         <AgoraButton
-          title={`setState`}
+          title="setState (all items)"
           onPress={async () => {
             await setState();
           }}
@@ -378,6 +424,11 @@ export default function Presence() {
           onPress={async () => {
             await getState();
           }}
+        />
+        <AgoraTextInput
+          label="state key to remove"
+          value={stateKey}
+          onChangeText={setStateKey}
         />
         <AgoraButton
           title={`removeState`}

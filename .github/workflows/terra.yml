@@ -16,12 +16,14 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Generate code and comment by terra
+      - name: Generate code and header comments by terra
         uses: AgoraIO-Extensions/actions/.github/actions/generate@main
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           generate-code: true
-          generate-comment: true
+          generate-comment: false
+          # Header comments are rendered with the types; no separate doc renderer.
+          generate-comment-command: ':'
           generate-code-command: |
             sh generate-prepare.sh
             sh generate-code.sh

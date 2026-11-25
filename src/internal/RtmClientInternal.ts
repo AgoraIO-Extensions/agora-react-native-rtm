@@ -15,8 +15,11 @@ import { RTMLock } from '../api/RTMLock';
 import { RTMPresence } from '../api/RTMPresence';
 import { RTMStorage } from '../api/RTMStorage';
 import { RTMStreamChannel } from '../api/RTMStreamChannel';
-import { PublishOptions, SubscribeOptions } from '../legacy/AgoraRtmBase';
-import { RtmConfig } from '../legacy/IAgoraRtmClient';
+import {
+  PublishOptions,
+  RtmConfig,
+  SubscribeOptions,
+} from '../legacy/AgoraRtmBase';
 import { IRtmClientImpl } from '../legacy/impl/IAgoraRtmClientImpl';
 
 import {
@@ -125,8 +128,9 @@ export class RtmClientInternal extends RTMClient {
     eventType: EventType,
     listener?: RTMClientEventMap[EventType]
   ) {
+    const eventName = this.event_name_map[eventType] || eventType;
     DeviceEventEmitter.removeListener(
-      eventType,
+      eventName,
       // @ts-ignore
       listener?.agoraCallback ?? listener
     );
@@ -136,7 +140,10 @@ export class RtmClientInternal extends RTMClient {
     eventType?: EventType
   ) {
     RtmClientInternal._event_handlers = [];
-    DeviceEventEmitter.removeAllListeners(eventType);
+    const eventName = eventType
+      ? this.event_name_map[eventType] || eventType
+      : undefined;
+    DeviceEventEmitter.removeAllListeners(eventName);
   }
 
   async login(options?: LoginOptions): Promise<LoginResponse> {

@@ -117,4 +117,11 @@ export abstract class IRtmPresence {
    * - < 0: Failure.
    */
   abstract getUserChannels(userId: string): number;
+  /**
+   * Queries whether a user has an active RTM login connection.
+   *
+   * @param [in] userId The ID of the user to query.
+   * @param [out] requestId The related request ID of this operation.
+   */
+  abstract getUserOnlineStatus(userId: string): number;
 }

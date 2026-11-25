@@ -3,6 +3,7 @@ import {
   PresenceOptions,
   RtmChannelType,
   StateItem,
+  UserOnlineStatus,
   UserState,
 } from '../legacy/AgoraRtmBase';
 
@@ -21,6 +22,8 @@ export type WhereNowResponse = BaseResponse & {
 };
 
 export type GetUserChannelsResponse = WhereNowResponse;
+
+export type GetUserOnlineStatusResponse = BaseResponse & UserOnlineStatus;
 
 export type SetStateResponse = BaseResponse;
 
@@ -45,11 +48,15 @@ export abstract class RTMPresence {
 
   abstract whereNow(userId: string): Promise<WhereNowResponse>;
   abstract getUserChannels(userId: string): Promise<GetUserChannelsResponse>;
+  abstract getUserOnlineStatus(
+    userId: string
+  ): Promise<GetUserOnlineStatusResponse>;
 
+  /** Sets one or more state items in a single request. Single-item calls remain supported. */
   abstract setState(
     channelName: string,
     channelType: RtmChannelType,
-    state: StateItem
+    state: StateItem | StateItem[]
   ): Promise<SetStateResponse>;
 
   abstract getState(
