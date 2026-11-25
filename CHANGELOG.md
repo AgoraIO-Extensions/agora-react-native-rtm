@@ -1,5 +1,27 @@
 
 
+## [2.3.1](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/compare/v2.2.6...v2.3.1) (2026-11-25)
+
+
+### Bug Fixes
+
+* allow existing Terra Git dependencies in Yarn ([806387a](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/806387afe99010868e4121163f1e1c22c6f495f7))
+* decode dependency action JSON output before validation ([8185cc2](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/8185cc2f9ba10fd5e5d12995464361fdbc9b7654))
+* deduplicate demo aosl using the RTM bundled framework ([ec4f9d7](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/ec4f9d76b8ba29d47c438c7f6ff70b09f3ef63d7))
+* map RTM event names when removing listeners ([cdc1712](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/cdc17125fd2f2cd20953ec31b82a11ce9d893521))
+* pin i18n compatible with Ruby 2.7 in CI ([578b69b](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/578b69b09d15ef8046d6367085dad1855aa26725))
+* reject incomplete Native and Iris dependency updates ([f3a64a3](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/f3a64a3e9820368f58d2212db2d039f9ce87d0e5))
+* resolve RTM preview packages from Agora Maven repository ([c1650ad](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/c1650ad1398fca0607a7425f02aa555da637c6c8))
+* restore iOS Demo RTM AOSL packaging ([#71](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/issues/71)) ([#72](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/issues/72)) ([820e3b1](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/820e3b14e1c2869fcb0461f34912a01c478657e4))
+* support batch presence state and update demo ([#69](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/issues/69)) ([a7b8fd1](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/a7b8fd10315e345469cafeac1c275a7726ee8ec9))
+* upgrade Terra Yarn for current Git clone arguments ([3ee4c49](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/3ee4c4902685891e9a4374056fc4dfe371861fdf))
+* use Ruby 2.7 compatible ffi for CocoaPods ([16d0424](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/16d0424bf8df6c90d2214bb3d7d024ff481dbc68))
+
+
+### Features
+
+* integrate RTM 2.3.1 APIs and update demo ([896c30b](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/commit/896c30baff2fa9b2fa6d2a54886e081afd8d8009))
+
 ## [2.2.6](https://github.com/AgoraIO-Extensions/agora-react-native-rtm/compare/v2.2.4...v2.2.6) (2025-08-28)
 
 
