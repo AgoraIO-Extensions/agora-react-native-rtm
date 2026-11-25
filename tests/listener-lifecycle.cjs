@@ -4,8 +4,9 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const ts = require('typescript');
+
 const EventEmitter = require('eventemitter3');
+const ts = require('typescript');
 
 const emitter = new EventEmitter();
 const filename = path.join(__dirname, '../src/internal/RtmClientInternal.ts');
